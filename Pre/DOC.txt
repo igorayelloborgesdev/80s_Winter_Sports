@@ -1,0 +1,101 @@
+C:\Users\igor8\AppData\Roaming\Godot\app_userdata\WinterSports
+
+Países
+
+.Austria
+.Italy
+.France
+.Netherlands
+.Sweden
+.Finland
+.Norway
+.Switzerland
+.West Germany	
+.Japan
+.East Germany
+.Czechoslovakia	
+.Great Britain
+.United States
+.Canada
+.Soviet Union
+
+Esportes
+
+.Downhill 
+.Slalom
+.Giant slalom 
+.Super G 
+.Speed skating 500 metres 
+.Speed skating 1500 metres 
+.Biathlon 
+.Luge 
+.Bobsleigh 
+.Ski jumping 
+.Ice Hockey 
+.Cross Country
+
+------------------------------------------------
+
+..Cenario
+..Personagem
+..Gameplay
+..UI
+..Banco de dados
+..Carregar
+
+.Main Menu
+..Practice
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.Speed skating 500 metres 
+..Arquibancada<-	
+..Camera  personagem
+..Animação personagem
+..Personagem seguir trilho
+..Cada comando ganha velocidade
+..UI tempo
+..UI tempo Final
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+.Speed skating 1500 metres 
+.Biathlon 
+.Luge 
+.Bobsleigh 
+.Ski jumping 
+.Cross Country
+.Ice Hockey 
+
+.Main Menu
+..Winter Sports Games
+...Country
+...Difficult
+....Games
+.Downhill 
+.Slalom
+.Giant slalom 
+.Super G
+.Speed skating 500 metres 
+.Speed skating 1500 metres 
+.Biathlon 
+.Luge 
+.Bobsleigh 
+.Ski jumping 
+.Ice Hockey
+.Cross Country
+
+.load
+..load
+..delete
+
+.Tutorial
+..Downhill
+..Giant slalom
+..Speed skating 500 metres
+..Speed skating 1500 metres
+..Biathlon
+..Luge
+..Bobsleigh
+..Ski jumping
+..Ice Hockey

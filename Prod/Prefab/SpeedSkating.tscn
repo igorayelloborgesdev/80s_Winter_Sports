@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvlblyf48iagl"]
+
+[ext_resource type="PackedScene" uid="uid://dvgx51e3j12kk" path="res://Art/3d/SpeedSkatingTrack.glb" id="1_msd0w"]
+[ext_resource type="Texture2D" uid="uid://bv7rs6v7haum3" path="res://Art/3d/SpeedSkatingTrackFloor.png" id="2_jyeui"]
+[ext_resource type="Texture2D" uid="uid://dpx8b1mnbs8m2" path="res://Art/3d/SpeedSkatingTrack_GrandStand.png" id="3_qykws"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw0us"]
+shading_mode = 0
+albedo_texture = ExtResource("2_jyeui")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgb35"]
+shading_mode = 0
+albedo_color = Color(0.12549, 0.211765, 0.792157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fgw3"]
+shading_mode = 0
+albedo_texture = ExtResource("3_qykws")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx634"]
+shading_mode = 0
+albedo_color = Color(0.172549, 0.164706, 0.247059, 1)
+
+[node name="SpeedSkatingTrack" instance=ExtResource("1_msd0w")]
+
+[node name="Track" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_yw0us")
+
+[node name="TrackWall" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sgb35")
+
+[node name="Grandstand" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3fgw3")
+
+[node name="GymWallRoof" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rx634")

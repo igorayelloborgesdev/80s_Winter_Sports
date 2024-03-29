@@ -1,0 +1,439 @@
+[gd_scene load_steps=14 format=3 uid="uid://b25qr0ntq7ns2"]
+
+[ext_resource type="PackedScene" uid="uid://dyc2ihlu1s18b" path="res://Prefab/sky.tscn" id="1_356u1"]
+[ext_resource type="Script" path="res://Scripts/View/GameplayView.cs" id="1_p3jv1"]
+[ext_resource type="PackedScene" uid="uid://c7unrelaoyecc" path="res://Prefab/character_v4.tscn" id="2_d2t50"]
+[ext_resource type="PackedScene" uid="uid://b7itcmeqrxwd7" path="res://Prefab/bg.tscn" id="2_xwheb"]
+[ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="10_canv2"]
+[ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="10_kdmjr"]
+[ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="11_12gco"]
+[ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="13_18oum"]
+[ext_resource type="Texture2D" uid="uid://b2t8m1llbty4e" path="res://Art/UI/RectNeutral.png" id="14_8vguo"]
+[ext_resource type="Texture2D" uid="uid://bk2csh7gf8tsr" path="res://Art/2d/flags/AUT.png" id="15_sg524"]
+
+[sub_resource type="Theme" id="Theme_l04wb"]
+default_font = ExtResource("10_kdmjr")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_rb25c"]
+default_font = ExtResource("10_kdmjr")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_bdmbr"]
+default_font = ExtResource("10_kdmjr")
+default_font_size = 24
+
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 1.0
+offset_bottom = 1.0
+script = ExtResource("1_p3jv1")
+characterPackedScene = ExtResource("2_d2t50")
+pauseScreen = NodePath("CanvasLayer/PauseControl")
+backMenuButton = NodePath("CanvasLayer/PauseControl/BackToMainMenuButton")
+returnMenuButton = NodePath("CanvasLayer/PauseControl/BackMenuButton")
+resetMenuButton = NodePath("CanvasLayer/PauseControl/ResetMenuButton")
+timeLabel = NodePath("CanvasLayer/HUD/Time")
+speedNinePatchRect = NodePath("CanvasLayer/HUD/HUDBGSpeed/SpeedNinePatchRect")
+readySetGoControl = NodePath("CanvasLayer/ReadySetGoControl")
+readySetGoLabel = NodePath("CanvasLayer/ReadySetGoControl/ReadySetGoLabel")
+countryCodeLabel = NodePath("CanvasLayer/HUD/CountryCode")
+countryFlagTextureRect = NodePath("CanvasLayer/HUD/CountryFlag")
+
+[node name="SceneSki" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="BG" parent="SceneSki" instance=ExtResource("2_xwheb")]
+transform = Transform3D(900, 0, 0, 0, 450, 0, 0, 0, 900, 0, 1.54601, 0)
+
+[node name="Sky" parent="SceneSki" instance=ExtResource("1_356u1")]
+transform = Transform3D(200, 0, 0, 0, 100.003, 0, 0, 0, 200, -19.7879, 164.571, -6.84518)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUDBG" type="NinePatchRect" parent="CanvasLayer/HUD"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 612.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -564.0
+offset_top = -82.0
+offset_right = -471.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -465.0
+offset_top = -85.0
+offset_right = -345.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.5
+offset_top = -84.0
+offset_right = -136.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.5
+offset_top = -84.0
+offset_right = 105.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.5
+offset_top = -84.0
+offset_right = 319.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUDBGSpeed" type="NinePatchRect" parent="CanvasLayer/HUD"]
+modulate = Color(0.764706, 0.890196, 0.964706, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 985.0
+offset_top = 644.0
+offset_right = -56.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="HUDBGSpeed2" type="NinePatchRect" parent="CanvasLayer/HUD/HUDBGSpeed"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="SpeedNinePatchRect" type="NinePatchRect" parent="CanvasLayer/HUD/HUDBGSpeed"]
+modulate = Color(0.921569, 0.639216, 0.152941, 1)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 231.0
+offset_bottom = 37.0
+texture = ExtResource("14_8vguo")
+
+[node name="ReadySetGoControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReadySetGoBG" type="NinePatchRect" parent="CanvasLayer/ReadySetGoControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -187.0
+offset_right = 138.0
+offset_bottom = -101.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ReadySetGoLabel" type="Label" parent="CanvasLayer/ReadySetGoControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -187.0
+offset_right = 138.0
+offset_bottom = -101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "Ready"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseControl" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/PauseControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_canv2")
+expand_mode = 1
+
+[node name="PauseTitle" type="NinePatchRect" parent="CanvasLayer/PauseControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 49.0
+offset_right = 262.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("11_12gco")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="PauseTitleLabel" type="Label" parent="CanvasLayer/PauseControl/PauseTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rb25c")
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackToMainMenuButton" type="Button" parent="CanvasLayer/PauseControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 438.0
+offset_right = 260.0
+offset_bottom = 494.0
+grow_horizontal = 2
+
+[node name="BackToMainMenuNinePatchRect" type="NinePatchRect" parent="CanvasLayer/PauseControl/BackToMainMenuButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToMainMenuTitleLabel" type="Label" parent="CanvasLayer/PauseControl/BackToMainMenuButton/BackToMainMenuNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Quit to main menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackMenuButton" type="Button" parent="CanvasLayer/PauseControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 366.0
+offset_right = 260.0
+offset_bottom = 422.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/PauseControl/BackMenuButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackTitleLabel" type="Label" parent="CanvasLayer/PauseControl/BackMenuButton/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResetMenuButton" type="Button" parent="CanvasLayer/PauseControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 294.0
+offset_right = 260.0
+offset_bottom = 350.0
+grow_horizontal = 2
+
+[node name="ResetNinePatchRect" type="NinePatchRect" parent="CanvasLayer/PauseControl/ResetMenuButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ResetTitleLabel" type="Label" parent="CanvasLayer/PauseControl/ResetMenuButton/ResetNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Reset"
+horizontal_alignment = 1
+vertical_alignment = 1
