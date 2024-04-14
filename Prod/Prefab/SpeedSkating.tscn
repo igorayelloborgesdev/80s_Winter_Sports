@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvlblyf48iagl"]
+[gd_scene load_steps=15 format=3 uid="uid://bvlblyf48iagl"]
 
 [ext_resource type="PackedScene" uid="uid://dvgx51e3j12kk" path="res://Art/3d/SpeedSkatingTrack.glb" id="1_msd0w"]
 [ext_resource type="Texture2D" uid="uid://bv7rs6v7haum3" path="res://Art/3d/SpeedSkatingTrackFloor.png" id="2_jyeui"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dpx8b1mnbs8m2" path="res://Art/3d/SpeedSkatingTrack_GrandStand.png" id="3_qykws"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/GrandstandSpeedSkating.cs" id="4_xht8y"]
 [ext_resource type="PackedScene" uid="uid://cdfwvxn7ilqfy" path="res://Prefab/suporter_SpeedSkating.tscn" id="5_8ctgt"]
-[ext_resource type="PackedScene" uid="uid://c7unrelaoyecc" path="res://Prefab/character_v4.tscn" id="7_qe7qc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw0us"]
 shading_mode = 0
@@ -443,12 +442,12 @@ visible = false
 mesh = SubResource("CylinderMesh_gxi3n")
 
 [node name="InitPoint1" type="MeshInstance3D" parent="." index="5"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.411, 0.149, 11.197)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.411, 0.4, 11.197)
 visible = false
 mesh = SubResource("BoxMesh_n7ots")
 
 [node name="InitPoint2" type="MeshInstance3D" parent="." index="6"]
-transform = Transform3D(0.986918, 0, -0.161225, 0, 1, 0, 0.161225, 0, 0.986918, -4.443, 0.149, -13.033)
+transform = Transform3D(0.986918, 0, -0.161225, 0, 1, 0, 0.161225, 0, 0.986918, -4.443, 0.4, -13.033)
 visible = false
 mesh = SubResource("BoxMesh_n7ots")
 
@@ -460,6 +459,3 @@ transform = Transform3D(1.63, 0, 0, 0, 1, 0, 0, 0, 0.125, 4.87257, 0.418191, -9.
 [node name="FinishMeshInstance3D" type="MeshInstance3D" parent="FinishArea3D/FinishCollisionShape3D" index="0"]
 visible = false
 mesh = SubResource("BoxMesh_jebi6")
-
-[node name="Character" parent="." index="8" instance=ExtResource("7_qe7qc")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.411, 0.149, 11.197)

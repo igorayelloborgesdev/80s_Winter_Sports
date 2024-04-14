@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=9 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
@@ -15,7 +15,9 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_50ng8"]
 
-[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D") instance=ExtResource("1_7hd1l")]
+[sub_resource type="BoxMesh" id="BoxMesh_k83uh"]
+
+[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski") instance=ExtResource("1_7hd1l")]
 script = ExtResource("2_51ifc")
 animationPlayer = NodePath("AnimationPlayer")
 bodyMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Body_004")]
@@ -24,6 +26,10 @@ handsAndHeadMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LHand"), NodePat
 legsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LLeg_035"), NodePath("Armature_002/Skeleton3D/LLeg_036"), NodePath("Armature_002/Skeleton3D/LLeg_037"), NodePath("Armature_002/Skeleton3D/LLeg_038"), NodePath("Armature_002/Skeleton3D/LLeg_039"), NodePath("Armature_002/Skeleton3D/LLeg_040"), NodePath("Armature_002/Skeleton3D/LLeg_041"), NodePath("Armature_002/Skeleton3D/LLeg_042"), NodePath("Armature_002/Skeleton3D/LLeg_043"), NodePath("Armature_002/Skeleton3D/LLeg_044"), NodePath("Armature_002/Skeleton3D/Hip_004")]
 bootsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LFoot_007"), NodePath("Armature_002/Skeleton3D/LFoot_008")]
 hairMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Hair_004")]
+cameraRef = [NodePath("CameraRef1"), NodePath("CameraRef2")]
+camera3D = NodePath("Camera3D")
+skiPole = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D2/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D/SkiPole")]
+ski = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D3/Ski")]
 
 [node name="Armature_002" parent="." index="0"]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.04, 0)
@@ -183,3 +189,13 @@ transform = Transform3D(-1, -1.39958e-14, 8.74228e-08, 2.01665e-08, 0.97303, 0.2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.0502603, 0)
 shape = SubResource("CylinderShape3D_50ng8")
+
+[node name="CameraRef1" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(-0.05, -7.05298e-10, 7.34617e-09, 1.00832e-09, 0.0486515, 0.0115339, -7.31074e-09, 0.0115339, -0.0486515, 0, 0.132272, -0.419788)
+visible = false
+mesh = SubResource("BoxMesh_k83uh")
+
+[node name="CameraRef2" type="MeshInstance3D" parent="." index="5"]
+transform = Transform3D(-0.05, -3.11529e-09, 6.69019e-09, 1.00833e-09, 0.0420179, 0.0271015, -7.31074e-09, 0.0271015, -0.0420179, 0, 0.285028, -0.419788)
+visible = false
+mesh = SubResource("BoxMesh_k83uh")

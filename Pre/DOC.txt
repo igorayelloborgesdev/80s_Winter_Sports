@@ -49,10 +49,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Speed skating 500 metres 
-..Camera personagem<-
-..Esconder skis
-
-..Animação personagem
+..Animação personagem<-
 ..Personagem seguir trilho
 ..Cada comando ganha velocidade
 ..Contagem regressiva

@@ -18,12 +18,19 @@ public partial class Character : CharacterBody3D
     [Export] MeshInstance3D[] legsMeshInstance3D = null;
     [Export] MeshInstance3D[] bootsMeshInstance3D = null;
     [Export] MeshInstance3D[] hairMeshInstance3D = null;
+    [Export] MeshInstance3D[] cameraRef = null;
+    [Export] Node3D camera3D = null;
+    [Export] Node3D[] skiPole = null;
+    [Export] Node3D[] ski = null;
     #endregion    
     #region Variables    
     private IPlayerInput playerInput = null;
     private SceneTree sceneTree = null;
     private Control pauseScreen = null;
     private string prefabName = String.Empty;
+    #endregion
+    #region Constant
+    private float[] scaleFactorArray = { 1.0f, 1.5f };
     #endregion
     #region Sport Ski
     [Export] Area3D startGate = null;
@@ -44,7 +51,7 @@ public partial class Character : CharacterBody3D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Init();
+        Init();        
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
@@ -116,6 +123,20 @@ public partial class Character : CharacterBody3D
     {
         playerInput.UnPause();
     }
+    private void MoveCameraPositionRotation(int id)
+    {
+        camera3D.Position = cameraRef[id].Position;
+        camera3D.Rotation = cameraRef[id].Rotation;        
+    }
+    private void ReScaleCharacter(int id)
+    {
+        this.Scale = new Vector3(scaleFactorArray[id], scaleFactorArray[id], scaleFactorArray[id]);
+    }
+    public void MoveAndReScaleCharacter(int id)
+    {
+        MoveCameraPositionRotation(id);
+        ReScaleCharacter(id);
+    }
     #endregion
     #region Get Set
     public Control SetPauseScreen
@@ -184,6 +205,30 @@ public partial class Character : CharacterBody3D
         get
         {
             return playerInput.GetMaxSpeed();
+        }
+    }
+    public void ShowHideSkiItems()
+    {
+        foreach (var item in skiPole)
+        {
+            item.Show();
+        }
+        foreach (var item in ski)
+        {
+            item.Show();
+        }
+    }
+    #endregion
+    #region Speed Skating
+    public void ShowHideSpeedSkatingItems()
+    {
+        foreach (var item in skiPole)
+        {
+            item.Hide();
+        }
+        foreach (var item in ski)
+        {
+            item.Hide();
         }
     }
     #endregion

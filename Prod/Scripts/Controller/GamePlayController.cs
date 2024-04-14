@@ -43,7 +43,7 @@ namespace WinterSports.Scripts.Controller
             if (prefabName == "skiTrack")
                 InitSki();
             if (prefabName == "SpeedSkating")
-                GD.Print(prefabName);//<-
+                InitSpeedSkating();//<-
 
         }
         public void Update(double delta)
@@ -151,6 +151,16 @@ namespace WinterSports.Scripts.Controller
                 timeLabel.Text = "DSQ";
             }            
         }
+        private void InitTimer()
+        {
+            timerController = new TimerController();
+            timerController.Init();
+            timerGamePlayController = new TimerController();
+            timerGamePlayController.Init();
+            timerResetController = new TimerController();
+            timerResetController.Init();
+            timerGamePlayController.StartTimer();
+        }
         #endregion
         #region Speed
         public void SetSpeedLabel(string prefabName, NinePatchRect speedNinePatchRect)
@@ -195,20 +205,25 @@ namespace WinterSports.Scripts.Controller
         {
             this.character.SetStartGate = gateStart.GetArea3D();
             this.character.SetFinishGate = gateFinish.GetArea3D();
+            this.character.MoveAndReScaleCharacter(0);
+            this.character.ShowHideSkiItems();
         }
-
         private void InitSki()
         {
-            timerController = new TimerController();
-            timerController.Init();
-            timerGamePlayController = new TimerController();
-            timerGamePlayController.Init();
-            timerResetController = new TimerController();
-            timerResetController.Init();
-            timerGamePlayController.StartTimer();
+            InitTimer();
             SkiStatic.Reset();
         }
-
+        #endregion
+        #region Speed Skating
+        public void SetCharacterSpeedSkating()
+        {                        
+            this.character.MoveAndReScaleCharacter(1);
+            this.character.ShowHideSpeedSkatingItems();
+        }
+        private void InitSpeedSkating()
+        {
+            InitTimer();            
+        }
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu

@@ -63,14 +63,14 @@ public partial class GameplayView : Control
         gamePlayController.SetReadySetGoControl(prefabName, readySetGoControl, readySetGoLabel);
         gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
         InstantiateCharacter();
-        //ReturnMenu();//<-
+        ReturnMenu();//<-
     }
     private void InstantiateCharacter()
     {        
         if (prefabName == "skiTrack")
             InstantiateCharacterSki();
         if (prefabName == "SpeedSkating")
-            InstantiateCharacterSpeedSkating();//<-
+            InstantiateCharacterSpeedSkating();
     }
     private void InstantiateCharacterSki()
     {
@@ -79,16 +79,16 @@ public partial class GameplayView : Control
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
-        gamePlayController.SetPauseScreen(pauseScreen);
+        gamePlayController.SetPauseScreen(pauseScreen);        
         this.AddChild(character);
     }
     private void InstantiateCharacterSpeedSkating()
     {
         character = characterPackedScene.Instantiate<Character>();
         character.SetPrefabName = prefabName;
-        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);//<-
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         gamePlayController.SetCharacter(character);
-        //gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
+        gamePlayController.SetCharacterSpeedSkating();
         gamePlayController.SetPauseScreen(pauseScreen);
         this.AddChild(character);        
     }
@@ -124,10 +124,8 @@ public partial class GameplayView : Control
     private void InstantiateLevelSpeedSkating(PackedScene prefabScene, int id)
     {
         speedSkatingTrack = prefabScene.Instantiate<SpeedSkating>();
-        initPoint = speedSkatingTrack.GetInitPoint(id);
-        //gateStart = skiTrack.GetStart(id);
-        //gateFinish = skiTrack.GetFinish(id);
-        //skiTrack.ShowGate(id);
+        initPoint = speedSkatingTrack.GetInitPoint(id);        
+        //gateFinish = skiTrack.GetFinish(id);//<-
         AddChild(speedSkatingTrack);        
     }
     #endregion
