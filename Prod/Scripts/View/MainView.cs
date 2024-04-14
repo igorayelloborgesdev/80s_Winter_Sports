@@ -246,7 +246,6 @@ public partial class MainView : Control
     }
     private void SelectSport(int id)
     {
-        GD.Print(id);
         mainController.SelectSport(id);        
     }
     private void GoToSportsSelection()

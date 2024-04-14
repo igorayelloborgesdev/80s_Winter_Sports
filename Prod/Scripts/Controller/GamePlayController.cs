@@ -38,16 +38,13 @@ namespace WinterSports.Scripts.Controller
         private const string flagResource = "res://Art//2d//flags//";
         #endregion
         #region Methods
-        public void Init()
-        {            
-            timerController = new TimerController();            
-            timerController.Init();
-            timerGamePlayController = new TimerController();
-            timerGamePlayController.Init();
-            timerResetController = new TimerController();
-            timerResetController.Init();
-            timerGamePlayController.StartTimer();
-            SkiStatic.Reset();
+        public void Init(string prefabName)
+        {
+            if (prefabName == "skiTrack")
+                InitSki();
+            if (prefabName == "SpeedSkating")
+                GD.Print(prefabName);//<-
+
         }
         public void Update(double delta)
         {            
@@ -99,7 +96,6 @@ namespace WinterSports.Scripts.Controller
                 timerResetController.ResetTimer();
             }            
         }
-
         public void SetCharacter(Character character)
         {            
             this.character = character;
@@ -139,9 +135,10 @@ namespace WinterSports.Scripts.Controller
         }
         #endregion
         #region Timer
-        public void SetTimerLabel(Label timeLabel)
+        public void SetTimerLabel(string prefabName, Label timeLabel)
         {
-            this.timeLabel = timeLabel;
+            if (prefabName == "skiTrack")
+                this.timeLabel = timeLabel;
         }
         public void updateTimer()
         {
@@ -156,9 +153,10 @@ namespace WinterSports.Scripts.Controller
         }
         #endregion
         #region Speed
-        public void SetSpeedLabel(NinePatchRect speedNinePatchRect)
+        public void SetSpeedLabel(string prefabName, NinePatchRect speedNinePatchRect)
         {
-            this.speedNinePatchRect = speedNinePatchRect;
+            if (prefabName == "skiTrack")
+                this.speedNinePatchRect = speedNinePatchRect;
         }
         public void UpdateSpeedLabel()
         {
@@ -167,8 +165,13 @@ namespace WinterSports.Scripts.Controller
         }
         #endregion
         #region Country
-        public void SetCountryUI(Label countryCodeLabel, TextureRect countryFlagTextureRect)
-        { 
+        public void SetCountryUI(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
+        {
+            if (prefabName == "skiTrack")
+                SetCountryUISki(countryCodeLabel, countryFlagTextureRect);
+        }
+        private void SetCountryUISki(Label countryCodeLabel, TextureRect countryFlagTextureRect)
+        {            
             this.countryCodeLabel = countryCodeLabel;
             this.countryCodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
             this.countryFlagTextureRect = countryFlagTextureRect;
@@ -178,10 +181,13 @@ namespace WinterSports.Scripts.Controller
         }
         #endregion
         #region Warning
-        public void SetReadySetGoControl(Control readySetGoControl, Label readySetGoLabel)
+        public void SetReadySetGoControl(string prefabName, Control readySetGoControl, Label readySetGoLabel)
         {
-            this.readySetGoControl = readySetGoControl;
-            this.readySetGoLabel = readySetGoLabel;
+            if (prefabName == "skiTrack")
+            {
+                this.readySetGoControl = readySetGoControl;
+                this.readySetGoLabel = readySetGoLabel;
+            }            
         }
         #endregion
         #region Ski
@@ -190,6 +196,19 @@ namespace WinterSports.Scripts.Controller
             this.character.SetStartGate = gateStart.GetArea3D();
             this.character.SetFinishGate = gateFinish.GetArea3D();
         }
+
+        private void InitSki()
+        {
+            timerController = new TimerController();
+            timerController.Init();
+            timerGamePlayController = new TimerController();
+            timerGamePlayController.Init();
+            timerResetController = new TimerController();
+            timerResetController.Init();
+            timerGamePlayController.StartTimer();
+            SkiStatic.Reset();
+        }
+
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu

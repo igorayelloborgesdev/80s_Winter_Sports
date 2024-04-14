@@ -23,6 +23,7 @@ public partial class Character : CharacterBody3D
     private IPlayerInput playerInput = null;
     private SceneTree sceneTree = null;
     private Control pauseScreen = null;
+    private string prefabName = String.Empty;
     #endregion
     #region Sport Ski
     [Export] Area3D startGate = null;
@@ -64,7 +65,11 @@ public partial class Character : CharacterBody3D
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.Init();
         //Sport Ski 
-        InitSki();
+        if (prefabName == "skiTrack")
+            InitSki();
+        //Sport Speed Skating
+        if (prefabName == "SpeedSkating")
+            InitSpeedSkating();
     }
     public void Reset()
     {
@@ -120,6 +125,13 @@ public partial class Character : CharacterBody3D
             this.pauseScreen = value;
         }
     }
+    public string SetPrefabName
+    {
+        set 
+        { 
+            this.prefabName = value; 
+        }
+    }
     #endregion
     #region Sport Ski
     public Area3D SetStartGate
@@ -140,6 +152,11 @@ public partial class Character : CharacterBody3D
     {        
         startGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredStartGate)));
         finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));        
+    }
+    private void InitSpeedSkating()
+    {
+        //startGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredStartGate)));//<-
+        //finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));
     }
     private void OnAreaEnteredStartGate(Node body)
     {        

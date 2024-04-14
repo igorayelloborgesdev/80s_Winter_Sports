@@ -49,11 +49,13 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Speed skating 500 metres 
-..Arquibancada<-	
-..Camera  personagem
+..Camera personagem<-
+..Esconder skis
+
 ..Animação personagem
 ..Personagem seguir trilho
 ..Cada comando ganha velocidade
+..Contagem regressiva
 ..UI tempo
 ..UI tempo Final
 

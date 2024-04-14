@@ -29,6 +29,9 @@ public partial class GameplayView : Control
     #region Variables
     private Character character = new Character();
     private Ski skiTrack = new Ski();
+    private SpeedSkating speedSkatingTrack = new SpeedSkating();
+    private int levelId = 0;
+    private string prefabName = String.Empty;
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -36,38 +39,58 @@ public partial class GameplayView : Control
     #region Behaviors
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-    {
+    {        
         Init();
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        gamePlayController.Update(delta);
+        //gamePlayController.Update(delta);//<-
     }
     #endregion
     #region Method
     private void Init()
     {
-        InstantiateLevel();
+        levelId = GameModeSingleton.sport - 1;
+        prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;
+        InstantiateLevel();//<-
         gamePlayController = new GamePlayController();
         AssignButtons();
         SetMainGamePlayEvents();
-        gamePlayController.Init();
-        gamePlayController.SetTimerLabel(timeLabel);
-        gamePlayController.SetSpeedLabel(speedNinePatchRect);
-        gamePlayController.SetReadySetGoControl(readySetGoControl, readySetGoLabel);
-        gamePlayController.SetCountryUI(countryCodeLabel, countryFlagTextureRect);
+        gamePlayController.Init(prefabName);
+        gamePlayController.SetTimerLabel(prefabName, timeLabel);
+        gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
+        gamePlayController.SetReadySetGoControl(prefabName, readySetGoControl, readySetGoLabel);
+        gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
         InstantiateCharacter();
-        ReturnMenu();
+        //ReturnMenu();//<-
     }
     private void InstantiateCharacter()
+    {        
+        if (prefabName == "skiTrack")
+            InstantiateCharacterSki();
+        if (prefabName == "SpeedSkating")
+            InstantiateCharacterSpeedSkating();//<-
+    }
+    private void InstantiateCharacterSki()
     {
         character = characterPackedScene.Instantiate<Character>();
+        character.SetPrefabName = prefabName;
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
         gamePlayController.SetPauseScreen(pauseScreen);
         this.AddChild(character);
+    }
+    private void InstantiateCharacterSpeedSkating()
+    {
+        character = characterPackedScene.Instantiate<Character>();
+        character.SetPrefabName = prefabName;
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);//<-
+        gamePlayController.SetCharacter(character);
+        //gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
+        gamePlayController.SetPauseScreen(pauseScreen);
+        this.AddChild(character);        
     }
     private void AssignButtons()
     {
@@ -82,17 +105,30 @@ public partial class GameplayView : Control
         gamePlayController.GetSetResetMenu.Pressed += () => { ResetGameMenu(); };
     }
     private void InstantiateLevel()
-    {        
-        int id = GameModeSingleton.sport - 1;        
-        PackedScene prefabScene = (PackedScene)ResourceLoader.Load("res://Prefab/" + LevelSingleton.levelObjDTO.levelList[id].prefabName + ".tscn");
+    {                
+        PackedScene prefabScene = (PackedScene)ResourceLoader.Load("res://Prefab/" + LevelSingleton.levelObjDTO.levelList[levelId].prefabName + ".tscn");
+        if (prefabName == "skiTrack")
+            InstantiateLevelSki(prefabScene, levelId);
+        if (prefabName == "SpeedSkating")
+            InstantiateLevelSpeedSkating(prefabScene, levelId - 4);//<-
+    }
+    private void InstantiateLevelSki(PackedScene prefabScene, int id)
+    {
         skiTrack = prefabScene.Instantiate<Ski>();
         initPoint = skiTrack.GetInitPoint(id);
         gateStart = skiTrack.GetStart(id);
         gateFinish = skiTrack.GetFinish(id);
         skiTrack.ShowGate(id);
-        //skiTrack.ShowStart(id);
-        //skiTrack.ShowFinish(id);
         AddChild(skiTrack);
+    }
+    private void InstantiateLevelSpeedSkating(PackedScene prefabScene, int id)
+    {
+        speedSkatingTrack = prefabScene.Instantiate<SpeedSkating>();
+        initPoint = speedSkatingTrack.GetInitPoint(id);
+        //gateStart = skiTrack.GetStart(id);
+        //gateFinish = skiTrack.GetFinish(id);
+        //skiTrack.ShowGate(id);
+        AddChild(speedSkatingTrack);        
     }
     #endregion
     #region Events
