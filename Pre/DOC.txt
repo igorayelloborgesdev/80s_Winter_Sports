@@ -49,8 +49,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Speed skating 500 metres 
-..Animação personagem<-
-..Personagem seguir trilho
+..Personagem seguir trilho<-
 ..Cada comando ganha velocidade
 ..Contagem regressiva
 ..UI tempo
