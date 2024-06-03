@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=13 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
 [ext_resource type="PackedScene" uid="uid://bcfwttoknloqc" path="res://Prefab/ski.tscn" id="3_dumya"]
 [ext_resource type="PackedScene" uid="uid://jjt4bb3yxqed" path="res://Prefab/ski_pole.tscn" id="4_hs4ql"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/SpeedContact.cs" id="5_mmw4u"]
+[ext_resource type="PackedScene" uid="uid://cfbcl1augt02l" path="res://Prefab/speed_box.tscn" id="6_nx70h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wter0"]
 shading_mode = 0
@@ -17,17 +19,23 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_k83uh"]
 
-[node name="Character" node_paths=PackedStringArray("bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "skiPole", "ski") instance=ExtResource("1_7hd1l")]
+[sub_resource type="CylinderMesh" id="CylinderMesh_r4wmt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_504mm"]
+
+[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski") instance=ExtResource("1_7hd1l")]
 script = ExtResource("2_51ifc")
-bodyMeshInstance3D = [NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LFoot_007")]
-armsMeshInstance3D = [NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_036"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_036/collider_view"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_038"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_038/collider_view"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LSholder_007"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_039"), null, null]
-handsAndHeadMeshInstance3D = [NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LSholder_007/collider_view"), null, null]
-legsMeshInstance3D = [NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LArm_035/collider_view"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LSholder_008"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_044"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/Skin_002/collider_view"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/RHand/collider_view"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LSholder_008/collider_view"), null, NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_042/collider_view"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_043/collider_view"), null, NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LEye_008")]
-bootsMeshInstance3D = [NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_042"), NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_043")]
-hairMeshInstance3D = [NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LHand/collider_view")]
-cameraRef = [null, NodePath("../../../../../../../../../../../../../../../../../../@SceneImportSettings@3331/@VBoxContainer@2927/@HSplitContainer@2937/@HSplitContainer@2941/@SubViewportContainer@2999/@SubViewport@3000/@Node3D@173275/Armature_002/Skeleton3D/LLeg_040")]
+animationPlayer = NodePath("AnimationPlayer")
+bodyMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Body_004")]
+armsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LArm_028"), NodePath("Armature_002/Skeleton3D/LArm_029"), NodePath("Armature_002/Skeleton3D/LArm_030"), NodePath("Armature_002/Skeleton3D/LArm_033"), NodePath("Armature_002/Skeleton3D/LArm_034"), NodePath("Armature_002/Skeleton3D/LArm_035"), NodePath("Armature_002/Skeleton3D/LSholder_007"), NodePath("Armature_002/Skeleton3D/LSholder_008")]
+handsAndHeadMeshInstance3D = [NodePath("Armature_002/Skeleton3D/RHand"), NodePath("Armature_002/Skeleton3D/LHand"), NodePath("Armature_002/Skeleton3D/Skin_002")]
+legsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LLeg_035"), NodePath("Armature_002/Skeleton3D/LLeg_036"), NodePath("Armature_002/Skeleton3D/LLeg_037"), NodePath("Armature_002/Skeleton3D/LLeg_038"), NodePath("Armature_002/Skeleton3D/LLeg_039"), NodePath("Armature_002/Skeleton3D/LLeg_040"), NodePath("Armature_002/Skeleton3D/LLeg_041"), NodePath("Armature_002/Skeleton3D/LLeg_042"), NodePath("Armature_002/Skeleton3D/LLeg_043"), NodePath("Armature_002/Skeleton3D/LLeg_044"), NodePath("Armature_002/Skeleton3D/Hip_004")]
+bootsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LFoot_007"), NodePath("Armature_002/Skeleton3D/LFoot_008")]
+hairMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Hair_004")]
+cameraRef = [NodePath("CameraRef1"), NodePath("CameraRef2")]
+camera3D = NodePath("Camera3D")
 skiPole = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D2/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D/SkiPole")]
-ski = [null, NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski")]
+ski = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D3/Ski")]
 
 [node name="Armature_002" parent="." index="0"]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.04, 0)
@@ -160,7 +168,7 @@ bone_idx = 4
 transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="30"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, -0.502935, -0.0424495)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, -0.502935, -0.0424495)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -168,7 +176,7 @@ bone_idx = 20
 transform = Transform3D(1.22197, -0.213849, 0.153498, 0.185196, 0.180408, -1.22297, 0.187071, 1.21829, 0.208045, -0.00801873, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="31"]
-transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, -0.460046, -0.222411)
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, -0.460046, -0.222411)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 
@@ -188,6 +196,20 @@ visible = false
 mesh = SubResource("BoxMesh_k83uh")
 
 [node name="CameraRef2" type="MeshInstance3D" parent="." index="5"]
-transform = Transform3D(-0.05, -3.11529e-09, 6.69019e-09, 1.00833e-09, 0.0420179, 0.0271015, -7.31074e-09, 0.0271015, -0.0420179, 0, 0.285028, -0.419788)
+transform = Transform3D(-0.05, 2.76859e-09, -3.38256e-09, 0, 0.038692, 0.031669, 4.37114e-09, 0.031669, -0.038692, 0, 0.589131, -0.399083)
 visible = false
 mesh = SubResource("BoxMesh_k83uh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="6"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.0554028, 0.71321)
+visible = false
+mesh = SubResource("CylinderMesh_r4wmt")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" index="0"]
+script = ExtResource("5_mmw4u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_504mm")
+
+[node name="SpeedBox" parent="." index="7" instance=ExtResource("6_nx70h")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.135981, 0.71321)

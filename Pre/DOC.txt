@@ -49,11 +49,12 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Speed skating 500 metres 
-..Personagem seguir trilho<-
 ..Cada comando ganha velocidade
-..Contagem regressiva
-..UI tempo
+...Se acionar comando antes da colisão inabilita o box e perde velocidade<-
+...Animação
+...computar volta
 ..UI tempo Final
+..Reset
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 

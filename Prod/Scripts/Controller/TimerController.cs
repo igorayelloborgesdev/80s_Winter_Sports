@@ -28,7 +28,7 @@ namespace WinterSports.Scripts.Controller
             }
         }
         public double GetTimer()
-        { 
+        {            
             return timerModel.timer;
         }
         public void StartTimer()
@@ -56,6 +56,10 @@ namespace WinterSports.Scripts.Controller
         {
             timerModel.timer = 0.0;
             timerModel.states = TimerModel.States.Init;
+        }
+        public void ResetTimerRunning()
+        {
+            timerModel.timer = 0.0;            
         }
         #endregion
     }

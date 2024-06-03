@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
 using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Prefabs;
 using WinterSports.Scripts.Singleton;
+using WinterSports.Scripts.Static;
 
 namespace WinterSports.Scripts.Controller
 {
@@ -16,7 +18,7 @@ namespace WinterSports.Scripts.Controller
         #region Controller Ski
         private TimerController timerController = null;
         private TimerController timerGamePlayController = null;
-        private TimerController timerResetController = null;
+        private TimerController timerResetController = null;        
         #endregion
         #region Model
         private GamePlayModel gamePlayModel = new GamePlayModel();
@@ -32,6 +34,7 @@ namespace WinterSports.Scripts.Controller
         private Label readySetGoLabel = null;
         private Label countryCodeLabel = null;
         private TextureRect countryFlagTextureRect = null;
+        private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -46,45 +49,97 @@ namespace WinterSports.Scripts.Controller
                 InitSpeedSkating();//<-
 
         }
-        public void Update(double delta)
-        {            
+        public void Update(double delta, string prefabName)
+        {
+            if (prefabName == "skiTrack")
+                UpdateSki(delta);
+            if (prefabName == "SpeedSkating")
+                UpdateSpeedSkating(delta);//<-
+        }
+
+        private void UpdateSki(double delta) 
+        {
             timerGamePlayController.TimerRunning(delta);
             if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
             {
                 this.character.statesSki = Character.StatesSki.Set;
                 readySetGoControl.Show();
-                readySetGoLabel.Text = "Ready";         
+                readySetGoLabel.Text = "Ready";
             }
             else if (timerGamePlayController.GetTimer() > 2.0f && this.character.statesSki == Character.StatesSki.Set)
             {
                 this.character.statesSki = Character.StatesSki.Go;
-                readySetGoLabel.Text = "Set";                
+                readySetGoLabel.Text = "Set";
             }
             else if (timerGamePlayController.GetTimer() > 3.0f && this.character.statesSki == Character.StatesSki.Go)
             {
                 this.character.statesSki = Character.StatesSki.Init;
                 timerGamePlayController.StopTimer();
                 timerGamePlayController.ResetTimer();
-                readySetGoLabel.Text = "Go";                
-            }                        
+                readySetGoLabel.Text = "Go";
+            }
             if (this.character.statesSki == Character.StatesSki.Running)
             {
                 timerController.StartTimer();
                 readySetGoControl.Hide();
-            }                
+            }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
                 timerController.StopTimer();
-                TimeToReset(delta);                
+                TimeToReset(delta);
             }
             if (SkiStatic.isCollided)
             {
-                this.character.statesSki = Character.StatesSki.Disqualified;                
-                TimeToReset(delta);                
-            }            
+                this.character.statesSki = Character.StatesSki.Disqualified;
+                TimeToReset(delta);
+            }
             timerController.TimerRunning(delta);
             updateTimer();
             UpdateSpeedLabel();
+        }
+        private void UpdateSpeedSkating(double delta)
+        {            
+            timerGamePlayController.TimerRunning(delta);
+            if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
+            {
+                this.character.statesSki = Character.StatesSki.Set;
+                readySetGoControl.Show();
+                readySetGoLabel.Text = "Ready";
+            }
+            else if (timerGamePlayController.GetTimer() > 2.0f && this.character.statesSki == Character.StatesSki.Set)
+            {
+                this.character.statesSki = Character.StatesSki.Go;
+                readySetGoLabel.Text = "Set";
+            }
+            else if (timerGamePlayController.GetTimer() < 4.0f && timerGamePlayController.GetTimer() > 3.0f && this.character.statesSki == Character.StatesSki.Go)
+            {
+                this.character.statesSki = Character.StatesSki.Init;                
+                readySetGoLabel.Text = "Go";                
+            }
+            else if (timerGamePlayController.GetTimer() > 4.0f && this.character.statesSki == Character.StatesSki.Init)
+            {
+                timerGamePlayController.StopTimer();
+                timerGamePlayController.ResetTimer();
+                readySetGoControl.Hide();
+            }            
+            if (this.character.statesSki == Character.StatesSki.Init)
+            {
+                timerController.StartTimer();                
+            }
+            if (this.character.statesSki == Character.StatesSki.Finish)
+            {
+                timerController.StopTimer();
+                TimeToReset(delta);
+            }
+            if (SkiStatic.isCollided)
+            {
+                this.character.statesSki = Character.StatesSki.Disqualified;
+                TimeToReset(delta);
+            }
+            timerController.TimerRunning(delta);
+            updateTimer();
+            UpdateSpeedLabel();
+            CheckResetDirectionArrow();//<-
         }
         private void TimeToReset(double delta)
         {
@@ -101,7 +156,7 @@ namespace WinterSports.Scripts.Controller
             this.character = character;
             this.character.Position = initPosition;
             this.character.Rotation = initRotation;            
-            this.character.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1BodyColor);
+            this.character.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1BodyColor);            
             this.character.GenerateArmsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1ArmsColor);
             this.character.GenerateHandsAndHeadColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].SkinColor);
             this.character.GenerateLegsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1LegsColor);
@@ -137,11 +192,11 @@ namespace WinterSports.Scripts.Controller
         #region Timer
         public void SetTimerLabel(string prefabName, Label timeLabel)
         {
-            if (prefabName == "skiTrack")
+            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
                 this.timeLabel = timeLabel;
         }
         public void updateTimer()
-        {
+        {            
             if (this.character.statesSki != Character.StatesSki.Finish && this.character.statesSki != Character.StatesSki.Disqualified)
             {
                 timeLabel.Text = TimeSpan.FromSeconds(timerController.GetTimer()).ToString("mm':'ss':'fff");
@@ -160,12 +215,12 @@ namespace WinterSports.Scripts.Controller
             timerResetController = new TimerController();
             timerResetController.Init();
             timerGamePlayController.StartTimer();
-        }
+        }        
         #endregion
         #region Speed
         public void SetSpeedLabel(string prefabName, NinePatchRect speedNinePatchRect)
         {
-            if (prefabName == "skiTrack")
+            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
                 this.speedNinePatchRect = speedNinePatchRect;
         }
         public void UpdateSpeedLabel()
@@ -177,7 +232,7 @@ namespace WinterSports.Scripts.Controller
         #region Country
         public void SetCountryUI(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
         {
-            if (prefabName == "skiTrack")
+            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
                 SetCountryUISki(countryCodeLabel, countryFlagTextureRect);
         }
         private void SetCountryUISki(Label countryCodeLabel, TextureRect countryFlagTextureRect)
@@ -193,7 +248,7 @@ namespace WinterSports.Scripts.Controller
         #region Warning
         public void SetReadySetGoControl(string prefabName, Control readySetGoControl, Label readySetGoLabel)
         {
-            if (prefabName == "skiTrack")
+            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
             {
                 this.readySetGoControl = readySetGoControl;
                 this.readySetGoLabel = readySetGoLabel;
@@ -218,11 +273,30 @@ namespace WinterSports.Scripts.Controller
         public void SetCharacterSpeedSkating()
         {                        
             this.character.MoveAndReScaleCharacter(1);
-            this.character.ShowHideSpeedSkatingItems();
+            this.character.ShowHideSpeedSkatingItems();                        
         }
         private void InitSpeedSkating()
         {
             InitTimer();            
+        }
+        public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
+        {            
+            this.character.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList);
+        }
+        public void CheckResetDirectionArrow()
+        {            
+            if (directionArrowList.Count - 1 == SpeedSkatingStatic.id && !directionArrowList[directionArrowList.Count - 1].enable)
+            {
+                foreach (var directionArrow in directionArrowList)
+                {
+                    directionArrow.enable = true;
+                    directionArrow.SetBodyColor(0);
+                }             
+            }
+        }
+        public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
+        {
+            directionArrowList = aDirectionArrowList;
         }
         #endregion
         #region Get Set
@@ -258,7 +332,7 @@ namespace WinterSports.Scripts.Controller
             {
                 gamePlayModel.resetMenu = value;
             }
-        }
+        }                
         #endregion
     }
 }

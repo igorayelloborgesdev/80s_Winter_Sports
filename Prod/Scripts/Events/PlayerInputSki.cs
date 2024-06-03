@@ -7,6 +7,7 @@ using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
 
 namespace WinterSports.Scripts.Events
@@ -41,7 +42,7 @@ namespace WinterSports.Scripts.Events
         private float angleInc = 0.0f;
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta) 
         {
             if (!isPause)
             {
@@ -176,6 +177,7 @@ namespace WinterSports.Scripts.Events
         {
             return maxSpeed;
         }
+        public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList) { }
         #endregion
         #region Methods
         private void AccelPlayer()
@@ -225,14 +227,12 @@ namespace WinterSports.Scripts.Events
             else
                 pauseScreen.Hide();
         }        
-
         private void CalcAngleDirection()
         {
             var speedCalc = speed/ maxSpeed;
             var angleCalc = angleMax -((angleMax - angleMin) * speedCalc);
             angleInc = angleCalc;            
         }
-
         #endregion
     }
 }

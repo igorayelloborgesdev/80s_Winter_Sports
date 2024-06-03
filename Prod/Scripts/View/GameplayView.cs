@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using WinterSports.Scripts.Controller;
+using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Prefabs;
 using WinterSports.Scripts.Singleton;
 
@@ -44,8 +45,8 @@ public partial class GameplayView : Control
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
-    {
-        //gamePlayController.Update(delta);//<-
+    {        
+        gamePlayController.Update(delta, prefabName);//<-
     }
     #endregion
     #region Method
@@ -62,8 +63,9 @@ public partial class GameplayView : Control
         gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
         gamePlayController.SetReadySetGoControl(prefabName, readySetGoControl, readySetGoLabel);
         gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
+        gamePlayController.SetDirectionArrowList(speedSkatingTrack.GetDirectionArrowList);
         InstantiateCharacter();
-        ReturnMenu();//<-
+        ReturnMenu();
     }
     private void InstantiateCharacter()
     {        
@@ -86,10 +88,12 @@ public partial class GameplayView : Control
     {
         character = characterPackedScene.Instantiate<Character>();
         character.SetPrefabName = prefabName;
-        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
+        character.SetDirectionArrowList(speedSkatingTrack.GetDirectionArrowList);
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);        
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSpeedSkating();
         gamePlayController.SetPauseScreen(pauseScreen);
+        gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);
         this.AddChild(character);        
     }
     private void AssignButtons()
@@ -124,8 +128,8 @@ public partial class GameplayView : Control
     private void InstantiateLevelSpeedSkating(PackedScene prefabScene, int id)
     {
         speedSkatingTrack = prefabScene.Instantiate<SpeedSkating>();
-        initPoint = speedSkatingTrack.GetInitPoint(id);        
-        //gateFinish = skiTrack.GetFinish(id);//<-
+        initPoint = speedSkatingTrack.GetSetInitPoint(id);
+        speedSkatingTrack.InstantiateRail();        
         AddChild(speedSkatingTrack);        
     }
     #endregion

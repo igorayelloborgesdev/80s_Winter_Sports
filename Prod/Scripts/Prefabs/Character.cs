@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Transactions;
 using System.Xml.Linq;
+using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Events;
 using WinterSports.Scripts.Interfaces;
 using static WinterSports.Scripts.Model.TimerModel;
@@ -28,6 +30,11 @@ public partial class Character : CharacterBody3D
     private SceneTree sceneTree = null;
     private Control pauseScreen = null;
     private string prefabName = String.Empty;
+    private int startPointId = 0;
+    private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
+    #endregion
+    #region Variables Speed Skating
+    private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();    
     #endregion
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
@@ -59,14 +66,24 @@ public partial class Character : CharacterBody3D
     }
     public override void _PhysicsProcess(double delta)
     {
-        if(statesSki > StatesSki.Go)
-            playerInput.PlayerInput(animationPlayer);
+        if (prefabName == "skiTrack")
+        {
+            if (statesSki > StatesSki.Go)
+                playerInput.PlayerInput(animationPlayer);
+        }
+        if (prefabName == "SpeedSkating")
+        {
+            if (statesSki > StatesSki.Go)
+            {
+                playerInput.PlayerInput(animationPlayer, delta);                
+            }            
+        }
     }
     #endregion
     #region Methods
     private void Init()
-    {
-        playerInput = new PlayerInputSki();
+    {        
+        PlayerInputSetUp();
         playerInput.SetCharacterBody3D(this);
         playerInput.SetPauseScreen(pauseScreen);
         playerInput.PlayAnimation(animationPlayer, 1);
@@ -78,13 +95,22 @@ public partial class Character : CharacterBody3D
         if (prefabName == "SpeedSkating")
             InitSpeedSkating();
     }
+    private void PlayerInputSetUp()
+    {
+        //Sport Ski 
+        if (prefabName == "skiTrack")
+            playerInput = new PlayerInputSki();
+        //Sport Speed Skating
+        if (prefabName == "SpeedSkating")
+            playerInput = new PlayerInputSpeedSkating();
+    }
     public void Reset()
     {
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.Init();        
     }
     public void GenerateBodyColor(Godot.Color aColor)
-    {
+    {        
         GenerateColor(aColor, bodyMeshInstance3D);
     }
     public void GenerateArmsColor(Godot.Color aColor)
@@ -178,6 +204,7 @@ public partial class Character : CharacterBody3D
     {
         //startGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredStartGate)));//<-
         //finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));
+        playerInput.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList, directionArrowList);        
     }
     private void OnAreaEnteredStartGate(Node body)
     {        
@@ -230,6 +257,15 @@ public partial class Character : CharacterBody3D
         {
             item.Hide();
         }
+    }
+    public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
+    {
+        this.startPointId = startPointId;
+        this.speedSkatingTrackDTOList = speedSkatingTrackDTOList;
+    }
+    public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
+    {
+        directionArrowList = aDirectionArrowList;
     }
     #endregion
 }
