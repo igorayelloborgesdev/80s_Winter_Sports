@@ -284,14 +284,15 @@ namespace WinterSports.Scripts.Controller
             this.character.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList);
         }
         public void CheckResetDirectionArrow()
-        {            
-            if (directionArrowList.Count - 1 == SpeedSkatingStatic.id && !directionArrowList[directionArrowList.Count - 1].enable)
-            {
+        {
+            if (SpeedSkatingStatic.resetArrowCount)
+            {                
                 foreach (var directionArrow in directionArrowList)
                 {
                     directionArrow.enable = true;
                     directionArrow.SetBodyColor(0);
-                }             
+                }
+                SpeedSkatingStatic.resetArrowCount = false;
             }
         }
         public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)

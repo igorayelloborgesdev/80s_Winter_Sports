@@ -12,6 +12,9 @@ namespace WinterSports.Scripts.Static
         public static bool isCollided = false;
         public static int direction = 0;
         public static int id = 0;
+        public static int currentIndex = 0;
+        public static int arrowCount = 0;
+        public static bool resetArrowCount = false;
         #endregion
     }
 }

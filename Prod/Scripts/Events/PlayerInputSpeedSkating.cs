@@ -107,9 +107,8 @@ namespace WinterSports.Scripts.Events
                             if (!Input.IsKeyPressed((Key)keyPressedId) && keyEnable)
                             {
                                 keyEnable = false;
-
                                 SpeedManager(indexSpeed);
-                                indexSpeed = 0;
+                                indexSpeed = 0;                                
                             }
                         }
                     }                    
@@ -239,20 +238,25 @@ namespace WinterSports.Scripts.Events
         private void SpeedManager(int index)
         {
             if (SpeedSkatingStatic.isCollided && (SpeedSkatingStatic.direction == index))
-            {                
+            {         
                 speed -= (float)timeSpeedCurrentInc;//<-                
-                SetArrowColor(1);
+                SetArrowColor(1);                
             }
             else 
-            {             
+            {                
                 speed += (float)timeSpeedCurrentInc;//<-         
                 SetArrowColor(2);
+                SetEnableDisableArrow(false);
             }            
         }
 
         private void SetArrowColor(int colorId)
-        {            
-            directionArrowList[SpeedSkatingStatic.id].SetBodyColor(colorId);
+        {
+            directionArrowList[SpeedSkatingStatic.id].SetBodyColor(colorId);            
+        }
+        private void SetEnableDisableArrow(bool enable)
+        {
+            directionArrowList[SpeedSkatingStatic.id].enable = enable;
         }
         #endregion        
     }

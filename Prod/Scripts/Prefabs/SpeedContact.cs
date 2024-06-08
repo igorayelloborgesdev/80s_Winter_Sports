@@ -13,7 +13,7 @@ public partial class SpeedContact : Area3D
             {
                 var directionArrow = body.GetParent<DirectionArrow>();                
                 if (directionArrow.enable)
-                {
+                {                    
                     SpeedSkatingStatic.isCollided = true;
                     SpeedSkatingStatic.direction = directionArrow.direction;
                     SpeedSkatingStatic.id = directionArrow.id;
@@ -29,11 +29,19 @@ public partial class SpeedContact : Area3D
             if (body.Name.ToString().Trim().ToLower() == "area3d")
             {
                 var directionArrow = body.GetParent<DirectionArrow>();
+                SpeedSkatingStatic.currentIndex++;
+                SpeedSkatingStatic.id++;
                 if (directionArrow.enable)
                 {
                     directionArrow.enable = false;
                     SpeedSkatingStatic.isCollided = false;
-                    SpeedSkatingStatic.direction = 0;                    
+                    SpeedSkatingStatic.direction = 0;                                        
+                    if (SpeedSkatingStatic.arrowCount == SpeedSkatingStatic.id)
+                    {
+                        SpeedSkatingStatic.currentIndex = 0;
+                        SpeedSkatingStatic.id = 0;
+                        SpeedSkatingStatic.resetArrowCount = true;                        
+                    }
                 }                
             }
         }

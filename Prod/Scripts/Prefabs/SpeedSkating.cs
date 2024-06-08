@@ -84,10 +84,11 @@ public partial class SpeedSkating : Node
                 count++;
                 directionArrow.LookAtFromPosition(speedSkatingTrackDTOList[i].position, speedSkatingTrackDTOList[i - 1].position,Vector3.Up);
                 directionArrow.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
-                directionArrow.GenerateBodyColor();//<-
+                directionArrow.GenerateBodyColor();
                 directionArrowList.Add(directionArrow);
             }            
         }
+        SpeedSkatingStatic.arrowCount = directionArrowList.Count;//<-
     }
 
     #endregion

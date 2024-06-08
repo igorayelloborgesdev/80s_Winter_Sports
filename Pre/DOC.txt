@@ -50,8 +50,7 @@ Esportes
 
 .Speed skating 500 metres 
 ..Cada comando ganha velocidade
-...Se acionar comando antes da colisão inabilita o box e perde velocidade<-
-...Animação
+...Animação<-
 ...computar volta
 ..UI tempo Final
 ..Reset
