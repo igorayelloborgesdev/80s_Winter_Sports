@@ -15,6 +15,8 @@ namespace WinterSports.Scripts.Static
         public static int currentIndex = 0;
         public static int arrowCount = 0;
         public static bool resetArrowCount = false;
+        public static bool isNotScore = false;
+        public static bool isLapFinished = false;
         #endregion
     }
 }

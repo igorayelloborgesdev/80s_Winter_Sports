@@ -10,7 +10,8 @@ public partial class DirectionArrow : Node3D
     #region Variables
     public int id = 0;
     public int direction = 0;
-    public bool enable = true;        
+    public bool enable = true;
+    public bool playerScore = false;
     #endregion
     #region Methods
     public void GenerateBodyColor()

@@ -26,8 +26,7 @@ namespace WinterSports.Scripts.Events
         };
         #endregion
         #region Constant        
-        private const float maxSpeed = 5.0f;        
-        private const float speedInc = 0.01f;
+        private const float maxSpeed = 5.0f;                
         private const double timeSpeedCurrentMin = 0.02;
         private const double timeSpeedCurrentMax = 0.10;
         private const double timeSpeedCurrentInc = 0.01;
@@ -95,8 +94,7 @@ namespace WinterSports.Scripts.Events
                         {
                             Pause();
                         }                                               
-                    }
-                    PlayAnimation(animationPlayer, indexSpeed);
+                    }                    
                 }
                 else
                 {
@@ -113,20 +111,21 @@ namespace WinterSports.Scripts.Events
                         }
                     }                    
                 }
-                MovePlayer(delta);
+                MovePlayer(delta); 
+                PlayAnimation(animationPlayer, 2);
+                GetNotScore();
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
-        {
+        {            
             if (animationPlayer is not null)
-            {
+            {                
                 if (animName.ContainsKey(animID))
                 {
-                    if (currentAnimation != animName[animID])
-                    {
-                        animationPlayer.Play(animName[animID]);
-                        currentAnimation = animName[animID];
-                    }
+                    var speedAnimScale = 2.0f + ((timeSpeedCurrentMax - speed) * 10.0f);                    
+                    animationPlayer.SpeedScale = (float)speedAnimScale;
+                    animationPlayer.Play(animName[animID]);
+                    currentAnimation = animName[animID];                    
                 }
             }
         }
@@ -239,24 +238,61 @@ namespace WinterSports.Scripts.Events
         {
             if (SpeedSkatingStatic.isCollided && (SpeedSkatingStatic.direction == index))
             {         
-                speed -= (float)timeSpeedCurrentInc;//<-                
-                SetArrowColor(1);                
+                speed -= (float)timeSpeedCurrentInc;           
+                SetArrowColor(1);
+                SetPlayerScore(true);
             }
             else 
             {                
-                speed += (float)timeSpeedCurrentInc;//<-         
+                speed += (float)timeSpeedCurrentInc;
                 SetArrowColor(2);
                 SetEnableDisableArrow(false);
+                SetPlayerScore(false);
             }            
         }
-
         private void SetArrowColor(int colorId)
         {
-            directionArrowList[SpeedSkatingStatic.id].SetBodyColor(colorId);            
+            try
+            {
+                directionArrowList[SpeedSkatingStatic.id].SetBodyColor(colorId);
+            }
+            catch (Exception ex)
+            {
+                SpeedSkatingStatic.id = 0;
+                SpeedSkatingStatic.currentIndex = 0;
+            }
+            
         }
         private void SetEnableDisableArrow(bool enable)
         {
-            directionArrowList[SpeedSkatingStatic.id].enable = enable;
+            try
+            {
+                directionArrowList[SpeedSkatingStatic.id].enable = enable;
+            }catch (Exception ex) 
+            {
+                SpeedSkatingStatic.id = 0;
+                SpeedSkatingStatic.currentIndex = 0;
+            }            
+        }
+        private void SetPlayerScore(bool enable)
+        {
+            try
+            {
+                directionArrowList[SpeedSkatingStatic.id].playerScore = enable;
+            }
+            catch (Exception ex)
+            {                
+            }
+        }
+
+        private void GetNotScore()
+        {
+            if (SpeedSkatingStatic.isNotScore)
+            {                
+                SpeedSkatingStatic.isNotScore = false;                
+                speed += (float)timeSpeedCurrentInc;                
+            }
+
         }
         #endregion        
     }

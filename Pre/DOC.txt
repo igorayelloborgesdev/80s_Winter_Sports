@@ -49,10 +49,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Speed skating 500 metres 
-..Cada comando ganha velocidade
-...Animação<-
-...computar volta
-..UI tempo Final
+..UI tempo Final<-
 ..Reset
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@

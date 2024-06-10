@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=15 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
 [ext_resource type="PackedScene" uid="uid://bcfwttoknloqc" path="res://Prefab/ski.tscn" id="3_dumya"]
 [ext_resource type="PackedScene" uid="uid://jjt4bb3yxqed" path="res://Prefab/ski_pole.tscn" id="4_hs4ql"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/CharacterCollision.cs" id="5_c3bqr"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/SpeedContact.cs" id="5_mmw4u"]
 [ext_resource type="PackedScene" uid="uid://cfbcl1augt02l" path="res://Prefab/speed_box.tscn" id="6_nx70h"]
 
@@ -16,6 +17,8 @@ shading_mode = 0
 albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_50ng8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nnynp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_k83uh"]
 
@@ -189,6 +192,14 @@ transform = Transform3D(-1, -1.39958e-14, 8.74228e-08, 2.01665e-08, 0.97303, 0.2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.0502603, 0)
 shape = SubResource("CylinderShape3D_50ng8")
+
+[node name="Area3D" type="Area3D" parent="CollisionShape3D" index="0"]
+visible = false
+script = ExtResource("5_c3bqr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D/Area3D" index="0"]
+visible = false
+shape = SubResource("CylinderShape3D_nnynp")
 
 [node name="CameraRef1" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(-0.05, -7.05298e-10, 7.34617e-09, 1.00832e-09, 0.0486515, 0.0115339, -7.31074e-09, 0.0115339, -0.0486515, 0, 0.132272, -0.419788)

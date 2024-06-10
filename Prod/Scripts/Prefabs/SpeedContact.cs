@@ -32,17 +32,22 @@ public partial class SpeedContact : Area3D
                 SpeedSkatingStatic.currentIndex++;
                 SpeedSkatingStatic.id++;
                 if (directionArrow.enable)
-                {
+                {                                        
+                    if (!directionArrow.playerScore)
+                    {                        
+                        SpeedSkatingStatic.isNotScore = true;
+                    }
+
                     directionArrow.enable = false;
                     SpeedSkatingStatic.isCollided = false;
                     SpeedSkatingStatic.direction = 0;                                        
-                    if (SpeedSkatingStatic.arrowCount == SpeedSkatingStatic.id)
-                    {
-                        SpeedSkatingStatic.currentIndex = 0;
-                        SpeedSkatingStatic.id = 0;
-                        SpeedSkatingStatic.resetArrowCount = true;                        
-                    }
-                }                
+                }
+                if (SpeedSkatingStatic.arrowCount == SpeedSkatingStatic.id)
+                {
+                    SpeedSkatingStatic.currentIndex = 0;
+                    SpeedSkatingStatic.id = 0;
+                    SpeedSkatingStatic.resetArrowCount = true;
+                }
             }
         }
         catch (Exception ex) { }

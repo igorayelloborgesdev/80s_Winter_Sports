@@ -15,6 +15,10 @@ public partial class SpeedSkating : Node
     [Export] private PackedScene speed_collider = null;
     #endregion
     #region Constants
+    private Dictionary<int, int> laps = new Dictionary<int, int>() {
+        { 0, 2 },
+        { 1, 4 }
+    };
     #endregion
     #region Variables
     private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();
@@ -28,6 +32,10 @@ public partial class SpeedSkating : Node
     {
         levelId = id;
         return initPoint[levelId];
+    }
+    public int GetLaps(int id)
+    {
+        return laps[id];
     }
     public void InstantiateRail()
     {

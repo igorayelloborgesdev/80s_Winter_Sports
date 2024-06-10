@@ -22,6 +22,7 @@ namespace WinterSports.Scripts.Controller
         #endregion
         #region Model
         private GamePlayModel gamePlayModel = new GamePlayModel();
+        private SpeedSkatingModel speedSkatingModel = new SpeedSkatingModel();
         #endregion
         #region Variables        
         private Character character = null;
@@ -124,17 +125,19 @@ namespace WinterSports.Scripts.Controller
             }            
             if (this.character.statesSki == Character.StatesSki.Init)
             {
-                timerController.StartTimer();                
+                timerController.StartTimer();
+                DefineLaps();
+                DefineEndRun();
             }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
                 timerController.StopTimer();
-                TimeToReset(delta);
+                TimeToReset(delta);                
             }
             if (SkiStatic.isCollided)
             {
                 this.character.statesSki = Character.StatesSki.Disqualified;
-                TimeToReset(delta);
+                TimeToReset(delta);                
             }
             timerController.TimerRunning(delta);
             updateTimer();
@@ -277,7 +280,8 @@ namespace WinterSports.Scripts.Controller
         }
         private void InitSpeedSkating()
         {
-            InitTimer();            
+            InitTimer();
+            speedSkatingModel.laps = 0;
         }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
         {            
@@ -290,6 +294,7 @@ namespace WinterSports.Scripts.Controller
                 foreach (var directionArrow in directionArrowList)
                 {
                     directionArrow.enable = true;
+                    directionArrow.playerScore = false;
                     directionArrow.SetBodyColor(0);
                 }
                 SpeedSkatingStatic.resetArrowCount = false;
@@ -298,6 +303,26 @@ namespace WinterSports.Scripts.Controller
         public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
         {
             directionArrowList = aDirectionArrowList;
+        }
+        public void SetLapCount(int lapCount)
+        {
+            speedSkatingModel.lapCount = lapCount;
+        }
+        public void DefineLaps()
+        {            
+            if (SpeedSkatingStatic.isLapFinished)
+            {
+                speedSkatingModel.laps++;
+                SpeedSkatingStatic.isLapFinished = false;
+                GD.Print(speedSkatingModel.laps);//<-
+            }                        
+        }
+        public void DefineEndRun()
+        {
+            if (speedSkatingModel.laps == speedSkatingModel.lapCount)
+            {
+                GD.Print("FINISH RUN");//<-
+            }
         }
         #endregion
         #region Get Set

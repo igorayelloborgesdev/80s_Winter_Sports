@@ -54,8 +54,8 @@ public partial class GameplayView : Control
     {
         levelId = GameModeSingleton.sport - 1;
         prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;
-        InstantiateLevel();//<-
         gamePlayController = new GamePlayController();
+        InstantiateLevel();//<-        
         AssignButtons();
         SetMainGamePlayEvents();
         gamePlayController.Init(prefabName);
@@ -130,7 +130,8 @@ public partial class GameplayView : Control
         speedSkatingTrack = prefabScene.Instantiate<SpeedSkating>();
         initPoint = speedSkatingTrack.GetSetInitPoint(id);
         speedSkatingTrack.InstantiateRail();        
-        AddChild(speedSkatingTrack);        
+        AddChild(speedSkatingTrack);
+        gamePlayController.SetLapCount(speedSkatingTrack.GetLaps(id));
     }
     #endregion
     #region Events
