@@ -132,12 +132,14 @@ namespace WinterSports.Scripts.Controller
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
                 timerController.StopTimer();
-                TimeToReset(delta);                
+                TimeToReset(delta);
+                ResetSpeedSkating();                
             }
             if (SkiStatic.isCollided)
             {
                 this.character.statesSki = Character.StatesSki.Disqualified;
-                TimeToReset(delta);                
+                TimeToReset(delta);
+                ResetSpeedSkating();                
             }
             timerController.TimerRunning(delta);
             updateTimer();
@@ -152,6 +154,7 @@ namespace WinterSports.Scripts.Controller
             {
                 Reset();
                 timerResetController.ResetTimer();
+                character.Pause();//<-TESTE
             }            
         }
         public void SetCharacter(Character character)
@@ -175,7 +178,13 @@ namespace WinterSports.Scripts.Controller
             this.character.Position = initPosition;
             this.character.Rotation = initRotation;            
             character.Reset();
-            SkiStatic.Reset();            
+            SkiStatic.Reset();
+        }
+        public void ResetSpeedSkating() 
+        {
+            SpeedSkatingStatic.Reset();
+            ResetDirectionArrow();
+            speedSkatingModel.laps = 0;
         }
         public void SetDefaultPositionRotation(Vector3 initPosition, Vector3 initRotation) 
         {
@@ -290,7 +299,8 @@ namespace WinterSports.Scripts.Controller
         public void CheckResetDirectionArrow()
         {
             if (SpeedSkatingStatic.resetArrowCount)
-            {                
+            {
+                GD.Print("A");//<-
                 foreach (var directionArrow in directionArrowList)
                 {
                     directionArrow.enable = true;
@@ -299,6 +309,16 @@ namespace WinterSports.Scripts.Controller
                 }
                 SpeedSkatingStatic.resetArrowCount = false;
             }
+        }
+        public void ResetDirectionArrow()
+        {            
+            foreach (var directionArrow in directionArrowList)
+            {
+                directionArrow.enable = true;
+                directionArrow.playerScore = false;
+                directionArrow.SetBodyColor(0);
+            }
+            SpeedSkatingStatic.resetArrowCount = false;            
         }
         public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
         {
@@ -313,15 +333,14 @@ namespace WinterSports.Scripts.Controller
             if (SpeedSkatingStatic.isLapFinished)
             {
                 speedSkatingModel.laps++;
-                SpeedSkatingStatic.isLapFinished = false;
-                GD.Print(speedSkatingModel.laps);//<-
+                SpeedSkatingStatic.isLapFinished = false;                
             }                        
         }
         public void DefineEndRun()
         {
             if (speedSkatingModel.laps == speedSkatingModel.lapCount)
-            {
-                GD.Print("FINISH RUN");//<-
+            {                
+                this.character.statesSki = Character.StatesSki.Finish;
             }
         }
         #endregion

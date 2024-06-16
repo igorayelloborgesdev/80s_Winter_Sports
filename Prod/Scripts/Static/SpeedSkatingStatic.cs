@@ -18,5 +18,17 @@ namespace WinterSports.Scripts.Static
         public static bool isNotScore = false;
         public static bool isLapFinished = false;
         #endregion
+        #region Methods
+        public static void Reset()
+        {
+            isCollided = false;
+            direction = 0;
+            id = 0;
+            currentIndex = 0;            
+            resetArrowCount = false;
+            isNotScore = false;
+            isLapFinished = false;
+        }
+        #endregion
     }
 }

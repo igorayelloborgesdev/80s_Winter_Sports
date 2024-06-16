@@ -146,8 +146,12 @@ public partial class Character : CharacterBody3D
         }
     }
     public void UnPause()
-    {
+    {        
         playerInput.UnPause();
+    }
+    public void Pause()
+    {        
+        playerInput.Pause();
     }
     private void MoveCameraPositionRotation(int id)
     {

@@ -48,9 +48,7 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Speed skating 500 metres 
-..UI tempo Final<-
-..Reset
+.Speed skating 500 metres<-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 

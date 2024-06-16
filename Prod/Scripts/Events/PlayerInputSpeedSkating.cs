@@ -155,18 +155,19 @@ namespace WinterSports.Scripts.Events
             timerGamePlayController = new TimerController();
             timerGamePlayController.Init();
             timerGamePlayController.StartTimer();
+            startPointId = 0;            
         }
         public void Reset()
         {            
-            speed = (float)timeSpeedCurrentMax;
+            speed = (float)timeSpeedCurrentMax;            
         }
         public float GetSpeed()
         {
-            return speed;
+            return (float)(-1.0f * ((speed - timeSpeedCurrentMin) - (timeSpeedCurrentMax - timeSpeedCurrentMin)));
         }
         public float GetMaxSpeed()
         {
-            return maxSpeed;
+            return (float)(timeSpeedCurrentMax - timeSpeedCurrentMin);
         }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList) 
         {
@@ -284,7 +285,6 @@ namespace WinterSports.Scripts.Events
             {                
             }
         }
-
         private void GetNotScore()
         {
             if (SpeedSkatingStatic.isNotScore)

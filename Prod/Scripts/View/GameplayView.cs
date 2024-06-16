@@ -145,8 +145,14 @@ public partial class GameplayView : Control
         gamePlayController.UnPause();
     }
     private void ResetGameMenu()
-    {
-        gamePlayController.Reset();
+    {        
+        if (prefabName == "skiTrack")
+            gamePlayController.Reset();
+        if (prefabName == "SpeedSkating")
+        {            
+            gamePlayController.Reset();
+            gamePlayController.ResetSpeedSkating();
+        }        
         gamePlayController.UnPause();
     }
     #endregion
