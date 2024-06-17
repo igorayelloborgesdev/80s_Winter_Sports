@@ -29,6 +29,7 @@ public partial class Character : CharacterBody3D
     private IPlayerInput playerInput = null;
     private SceneTree sceneTree = null;
     private Control pauseScreen = null;
+    private Control finishSessionScreen = null;    
     private string prefabName = String.Empty;
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
@@ -86,6 +87,7 @@ public partial class Character : CharacterBody3D
         PlayerInputSetUp();
         playerInput.SetCharacterBody3D(this);
         playerInput.SetPauseScreen(pauseScreen);
+        playerInput.SetFinishSessionScreen(finishSessionScreen);
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.Init();
         //Sport Ski 
@@ -153,6 +155,11 @@ public partial class Character : CharacterBody3D
     {        
         playerInput.Pause();
     }
+    public void ShowHideFinishSessionScreen()
+    {
+        playerInput.ShowHideFinishSessionScreen();
+    }
+
     private void MoveCameraPositionRotation(int id)
     {
         camera3D.Position = cameraRef[id].Position;
@@ -174,6 +181,13 @@ public partial class Character : CharacterBody3D
         set 
         { 
             this.pauseScreen = value;
+        }
+    }
+    public Control SetFinishSessionScreen
+    {
+        set
+        {
+            this.finishSessionScreen = value;
         }
     }
     public string SetPrefabName

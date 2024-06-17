@@ -12,5 +12,9 @@ namespace WinterSports.Scripts.Model
         public Button goToMainMenu = null;
         public Button returnMenu = null;
         public Button resetMenu = null;
+        public Button backMenuFinishButton = null;
+        public Button returnFinishButton = null;
+        public double bestTimeScore = 0.0;
+        public double currentTimeScore = 0.0;
     }
 }

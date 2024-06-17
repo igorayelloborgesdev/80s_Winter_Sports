@@ -37,6 +37,7 @@ namespace WinterSports.Scripts.Events
         private bool isPause = false;        
         private float speed = 0.0f;
         private Control pauseScreen = null;
+        private Control finishSessionScreen = null;
         private int startPointId = 0;        
         private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();
         private TimerController timerGamePlayController = null;
@@ -137,6 +138,10 @@ namespace WinterSports.Scripts.Events
         {
             this.pauseScreen = pauseScreen;
         }
+        public void SetFinishSessionScreen(Control finishSessionScreen)
+        {
+            this.finishSessionScreen = finishSessionScreen;
+        }        
         public void Pause()
         {
             isPause = !isPause;
@@ -148,6 +153,12 @@ namespace WinterSports.Scripts.Events
             isPause = false;
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHidePauseMenu(isPause);
+        }
+        public void ShowHideFinishSessionScreen()
+        {
+            isPause = !isPause;
+            Engine.TimeScale = isPause ? 0.0f : 1.0f;
+            ShowHideFinishSessionScreenMenu(isPause);
         }
         public void Init()
         {            
@@ -176,14 +187,21 @@ namespace WinterSports.Scripts.Events
             this.directionArrowList = directionArrowList;
         }
         #endregion
-        #region Methods                       
+        #region Methods  
+        private void ShowHideFinishSessionScreenMenu(bool isPause)
+        {
+            if (isPause)
+                finishSessionScreen.Show();
+            else
+                finishSessionScreen.Hide();
+        }
         private void ShowHidePauseMenu(bool isPause)
         {
             if (isPause)
                 pauseScreen.Show();
             else
                 pauseScreen.Hide();
-        }               
+        }
         private void MovePlayer(double delta)
         {                                 
             try

@@ -23,7 +23,7 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
@@ -40,6 +40,13 @@ readySetGoControl = NodePath("CanvasLayer/ReadySetGoControl")
 readySetGoLabel = NodePath("CanvasLayer/ReadySetGoControl/ReadySetGoLabel")
 countryCodeLabel = NodePath("CanvasLayer/HUD/CountryCode")
 countryFlagTextureRect = NodePath("CanvasLayer/HUD/CountryFlag")
+finishSessionScreen = NodePath("CanvasLayer/FinishSessionControl")
+backMenuFinishButton = NodePath("CanvasLayer/FinishSessionControl/BackToMainMenuButton")
+returnFinishButton = NodePath("CanvasLayer/FinishSessionControl/BackMenuButton")
+countryCodeLabelFinish = NodePath("CanvasLayer/FinishSessionControl/CountryCode")
+countryFlagTextureRectFinish = NodePath("CanvasLayer/FinishSessionControl/CountryFlag")
+timeScoreBestLabelFinish = NodePath("CanvasLayer/FinishSessionControl/BestScoreLabel")
+timeScoreLastLabelFinish = NodePath("CanvasLayer/FinishSessionControl/LastScoreLabel")
 
 [node name="SceneSki" type="Control" parent="."]
 anchors_preset = 0
@@ -436,4 +443,238 @@ theme = SubResource("Theme_bdmbr")
 theme_override_font_sizes/font_size = 18
 text = "Reset"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinishSessionControl" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/FinishSessionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_canv2")
+expand_mode = 1
+
+[node name="PauseTitle" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 49.0
+offset_right = 262.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("11_12gco")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="PauseTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/PauseTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rb25c")
+text = "Finished"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackToMainMenuButton" type="Button" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 574.0
+offset_right = 260.0
+offset_bottom = 630.0
+grow_horizontal = 2
+
+[node name="BackToMainMenuNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl/BackToMainMenuButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToMainMenuTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/BackToMainMenuButton/BackToMainMenuNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Quit to main menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackMenuButton" type="Button" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 502.0
+offset_right = 260.0
+offset_bottom = 558.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl/BackMenuButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/BackMenuButton/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -109.5
+offset_top = 179.0
+offset_right = -16.5
+offset_bottom = 235.0
+grow_horizontal = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -12.0
+offset_top = 173.0
+offset_right = 108.0
+offset_bottom = 239.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BestScore" type="Label" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -349.0
+offset_top = 266.0
+offset_right = -19.0
+offset_bottom = 332.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Best Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 5.0
+offset_top = 268.0
+offset_right = 335.0
+offset_bottom = 334.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+vertical_alignment = 1
+
+[node name="LastScore" type="Label" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -347.0
+offset_top = 342.0
+offset_right = -17.0
+offset_bottom = 408.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Last Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LastScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 7.0
+offset_top = 344.0
+offset_right = 337.0
+offset_bottom = 410.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
 vertical_alignment = 1

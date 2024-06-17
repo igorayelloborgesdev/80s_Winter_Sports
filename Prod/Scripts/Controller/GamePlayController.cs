@@ -29,6 +29,7 @@ namespace WinterSports.Scripts.Controller
         private Vector3 initPosition = Vector3.Zero;
         private Vector3 initRotation = Vector3.Zero;
         private Control pauseScreen = null;
+        private Control finishSessionScreen = null;
         private Label timeLabel = null;
         private NinePatchRect speedNinePatchRect = null;
         private Control readySetGoControl = null;
@@ -36,6 +37,10 @@ namespace WinterSports.Scripts.Controller
         private Label countryCodeLabel = null;
         private TextureRect countryFlagTextureRect = null;
         private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
+        private Label countryCodeLabelFinish = null;
+        private TextureRect countryFlagTextureRectFinish = null;
+        private Label timeScoreBestLabelFinish = null;
+        private Label timeScoreLastLabelFinish = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -47,7 +52,7 @@ namespace WinterSports.Scripts.Controller
             if (prefabName == "skiTrack")
                 InitSki();
             if (prefabName == "SpeedSkating")
-                InitSpeedSkating();//<-
+                InitSpeedSkating();
 
         }
         public void Update(double delta, string prefabName)
@@ -55,7 +60,7 @@ namespace WinterSports.Scripts.Controller
             if (prefabName == "skiTrack")
                 UpdateSki(delta);
             if (prefabName == "SpeedSkating")
-                UpdateSpeedSkating(delta);//<-
+                UpdateSpeedSkating(delta);
         }
 
         private void UpdateSki(double delta) 
@@ -86,11 +91,13 @@ namespace WinterSports.Scripts.Controller
             }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
+                SetTimeScore();//<-
                 timerController.StopTimer();
                 TimeToReset(delta);
             }
             if (SkiStatic.isCollided)
             {
+                SetTimeScore();//<-
                 this.character.statesSki = Character.StatesSki.Disqualified;
                 TimeToReset(delta);
             }
@@ -132,19 +139,21 @@ namespace WinterSports.Scripts.Controller
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
                 timerController.StopTimer();
+                SetTimeScore();//<-
                 TimeToReset(delta);
                 ResetSpeedSkating();                
             }
             if (SkiStatic.isCollided)
             {
                 this.character.statesSki = Character.StatesSki.Disqualified;
+                SetTimeScore();//<-
                 TimeToReset(delta);
                 ResetSpeedSkating();                
             }
             timerController.TimerRunning(delta);
             updateTimer();
             UpdateSpeedLabel();
-            CheckResetDirectionArrow();//<-
+            CheckResetDirectionArrow();
         }
         private void TimeToReset(double delta)
         {
@@ -154,7 +163,7 @@ namespace WinterSports.Scripts.Controller
             {
                 Reset();
                 timerResetController.ResetTimer();
-                character.Pause();//<-TESTE
+                character.ShowHideFinishSessionScreen();
             }            
         }
         public void SetCharacter(Character character)
@@ -196,10 +205,19 @@ namespace WinterSports.Scripts.Controller
             this.pauseScreen = pauseScreen;
             character.SetPauseScreen = this.pauseScreen;
         }
+        public void SetFinishSessionScreen(Control finishSessionSession)
+        {
+            this.finishSessionScreen = finishSessionSession;
+            character.SetFinishSessionScreen = this.finishSessionScreen;
+        }
         public void UnPause()
         {
             character.UnPause();
         }
+        public void ShowHideFinishSessionScreen() 
+        {
+            character.ShowHideFinishSessionScreen();
+        } 
         #endregion
         #region Timer
         public void SetTimerLabel(string prefabName, Label timeLabel)
@@ -227,7 +245,39 @@ namespace WinterSports.Scripts.Controller
             timerResetController = new TimerController();
             timerResetController.Init();
             timerGamePlayController.StartTimer();
-        }        
+        }
+        private void SetTimeScore()
+        {
+            gamePlayModel.currentTimeScore = timerController.GetTimer();
+            if (gamePlayModel.bestTimeScore != 0.0f && gamePlayModel.currentTimeScore < gamePlayModel.bestTimeScore)
+            {
+                gamePlayModel.bestTimeScore = timerController.GetTimer();
+            }
+            if (gamePlayModel.bestTimeScore == 0.0f)
+            {
+                gamePlayModel.bestTimeScore = timerController.GetTimer();
+            }
+            SetFinishTimeLabel();
+        }
+        private void SetFinishTimeLabel()
+        {
+            if (gamePlayModel.bestTimeScore == 0.0f)
+            {
+                timeScoreBestLabelFinish.Text = ("--:--:---");
+            }
+            else
+            {
+                timeScoreBestLabelFinish.Text = TimeSpan.FromSeconds(gamePlayModel.bestTimeScore).ToString("mm':'ss':'fff");
+            }
+            if (this.character.statesSki == Character.StatesSki.Disqualified)
+            {
+                timeScoreLastLabelFinish.Text = ("--:--:---");
+            }
+            else
+            {
+                timeScoreLastLabelFinish.Text = TimeSpan.FromSeconds(gamePlayModel.currentTimeScore).ToString("mm':'ss':'fff");
+            }
+        }
         #endregion
         #region Speed
         public void SetSpeedLabel(string prefabName, NinePatchRect speedNinePatchRect)
@@ -255,6 +305,23 @@ namespace WinterSports.Scripts.Controller
             Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
             Texture2D texture2D = textureResource as Texture2D;
             this.countryFlagTextureRect.Texture = texture2D;
+        }
+        public void SetCountryUIFinishScreen(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
+        {
+            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
+            {
+                this.countryCodeLabelFinish = countryCodeLabel;
+                this.countryCodeLabelFinish.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
+                this.countryFlagTextureRectFinish = countryFlagTextureRect;
+                Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
+                Texture2D texture2D = textureResource as Texture2D;
+                this.countryFlagTextureRectFinish.Texture = texture2D;
+            }                        
+        }
+        public void SetTimeScoreBestLastLabelFinish(Label timeScoreBestLabelFinish, Label timeScoreLastLabelFinish)
+        {
+            this.timeScoreBestLabelFinish = timeScoreBestLabelFinish;
+            this.timeScoreLastLabelFinish = timeScoreLastLabelFinish;
         }
         #endregion
         #region Warning
@@ -299,8 +366,7 @@ namespace WinterSports.Scripts.Controller
         public void CheckResetDirectionArrow()
         {
             if (SpeedSkatingStatic.resetArrowCount)
-            {
-                GD.Print("A");//<-
+            {                
                 foreach (var directionArrow in directionArrowList)
                 {
                     directionArrow.enable = true;
@@ -377,7 +443,29 @@ namespace WinterSports.Scripts.Controller
             {
                 gamePlayModel.resetMenu = value;
             }
-        }                
+        }
+        public Button GetSetBackMenuFinishButton
+        {
+            get
+            {
+                return gamePlayModel.backMenuFinishButton;
+            }
+            set
+            {
+                gamePlayModel.backMenuFinishButton = value;
+            }
+        }
+        public Button GetSetReturnFinishButton
+        {
+            get
+            {
+                return gamePlayModel.returnFinishButton;
+            }
+            set
+            {
+                gamePlayModel.returnFinishButton = value;
+            }
+        }
         #endregion
     }
 }

@@ -5,6 +5,7 @@ using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Prefabs;
 using WinterSports.Scripts.Singleton;
+using WinterSports.Scripts.Static;
 
 public partial class GameplayView : Control
 {
@@ -23,6 +24,13 @@ public partial class GameplayView : Control
     [Export] Label readySetGoLabel = null;
     [Export] Label countryCodeLabel = null;
     [Export] TextureRect countryFlagTextureRect = null;
+    [Export] private Control finishSessionScreen = null;
+    [Export] Button backMenuFinishButton = null;
+    [Export] Button returnFinishButton = null;
+    [Export] Label countryCodeLabelFinish = null;
+    [Export] TextureRect countryFlagTextureRectFinish = null;
+    [Export] Label timeScoreBestLabelFinish = null;
+    [Export] Label timeScoreLastLabelFinish = null;
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
@@ -63,8 +71,11 @@ public partial class GameplayView : Control
         gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
         gamePlayController.SetReadySetGoControl(prefabName, readySetGoControl, readySetGoLabel);
         gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
+        gamePlayController.SetCountryUIFinishScreen(prefabName, countryCodeLabelFinish, countryFlagTextureRectFinish);
+        gamePlayController.SetTimeScoreBestLastLabelFinish(timeScoreBestLabelFinish, timeScoreLastLabelFinish);
         gamePlayController.SetDirectionArrowList(speedSkatingTrack.GetDirectionArrowList);
         InstantiateCharacter();
+        InitStaticVariables();
         ReturnMenu();
     }
     private void InstantiateCharacter()
@@ -81,7 +92,8 @@ public partial class GameplayView : Control
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
-        gamePlayController.SetPauseScreen(pauseScreen);        
+        gamePlayController.SetPauseScreen(pauseScreen);
+        gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         this.AddChild(character);
     }
     private void InstantiateCharacterSpeedSkating()
@@ -93,6 +105,7 @@ public partial class GameplayView : Control
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSpeedSkating();
         gamePlayController.SetPauseScreen(pauseScreen);
+        gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);
         this.AddChild(character);        
     }
@@ -101,12 +114,16 @@ public partial class GameplayView : Control
         gamePlayController.GetSetGoToMainMenu = backMenuButton;
         gamePlayController.GetSetReturnMenu = returnMenuButton;
         gamePlayController.GetSetResetMenu = resetMenuButton;
+        gamePlayController.GetSetBackMenuFinishButton = backMenuFinishButton;
+        gamePlayController.GetSetReturnFinishButton = returnFinishButton;
     }
     private void SetMainGamePlayEvents()
     {
         gamePlayController.GetSetGoToMainMenu.Pressed += () => { QuitToMainMenu(); };
         gamePlayController.GetSetReturnMenu.Pressed += () => { ReturnMenu(); };
         gamePlayController.GetSetResetMenu.Pressed += () => { ResetGameMenu(); };
+        gamePlayController.GetSetBackMenuFinishButton.Pressed += () => { QuitToMainMenu(); };
+        gamePlayController.GetSetReturnFinishButton.Pressed += () => { ReturnMenuFromFinishScreen(); };
     }
     private void InstantiateLevel()
     {                
@@ -144,6 +161,10 @@ public partial class GameplayView : Control
     {
         gamePlayController.UnPause();
     }
+    private void ReturnMenuFromFinishScreen()
+    {
+        gamePlayController.ShowHideFinishSessionScreen();
+    }
     private void ResetGameMenu()
     {        
         if (prefabName == "skiTrack")
@@ -154,6 +175,11 @@ public partial class GameplayView : Control
             gamePlayController.ResetSpeedSkating();
         }        
         gamePlayController.UnPause();
+    }
+    private void InitStaticVariables()
+    {        
+        SkiStatic.Reset();
+        SpeedSkatingStatic.Reset();
     }
     #endregion
 

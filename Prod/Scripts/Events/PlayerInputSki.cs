@@ -39,6 +39,7 @@ namespace WinterSports.Scripts.Events
         private float angle = 0.0f;
         private float speed = 0.0f;
         private Control pauseScreen = null;
+        private Control finishSessionScreen = null;
         private float angleInc = 0.0f;
         #endregion
         #region Implements
@@ -146,6 +147,10 @@ namespace WinterSports.Scripts.Events
         { 
             this.pauseScreen = pauseScreen;
         }
+        public void SetFinishSessionScreen(Control finishSessionScreen)
+        {
+            this.finishSessionScreen = finishSessionScreen;
+        }
         public void Pause()
         {
             isPause = !isPause;
@@ -157,6 +162,12 @@ namespace WinterSports.Scripts.Events
             isPause = false;
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHidePauseMenu(isPause);
+        }
+        public void ShowHideFinishSessionScreen()
+        {
+            isPause = !isPause;
+            Engine.TimeScale = isPause ? 0.0f : 1.0f;
+            ShowHideFinishSessionScreenMenu(isPause);
         }
         public void Init()
         {            
@@ -232,6 +243,13 @@ namespace WinterSports.Scripts.Events
             var speedCalc = speed/ maxSpeed;
             var angleCalc = angleMax -((angleMax - angleMin) * speedCalc);
             angleInc = angleCalc;            
+        }
+        private void ShowHideFinishSessionScreenMenu(bool isPause)
+        {
+            if (isPause)
+                finishSessionScreen.Show();
+            else
+                finishSessionScreen.Hide();
         }
         #endregion
     }

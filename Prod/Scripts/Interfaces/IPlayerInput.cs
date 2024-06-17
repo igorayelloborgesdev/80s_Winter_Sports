@@ -15,8 +15,10 @@ namespace WinterSports.Scripts.Interfaces
         void PlayAnimation(AnimationPlayer animationPlayer, int animID);        
         void SetCharacterBody3D(CharacterBody3D characterBody3D);
         void SetPauseScreen(Control pauseScreen);
+        void SetFinishSessionScreen(Control finishSessionScreen);
         void Pause();
         void UnPause();
+        void ShowHideFinishSessionScreen();
         void Init();
         void Reset();
         float GetSpeed();
