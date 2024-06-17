@@ -41,6 +41,7 @@ namespace WinterSports.Scripts.Controller
         private TextureRect countryFlagTextureRectFinish = null;
         private Label timeScoreBestLabelFinish = null;
         private Label timeScoreLastLabelFinish = null;
+        private bool setScore = true;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -83,22 +84,23 @@ namespace WinterSports.Scripts.Controller
                 timerGamePlayController.StopTimer();
                 timerGamePlayController.ResetTimer();
                 readySetGoLabel.Text = "Go";
+                setScore = true;
             }
             if (this.character.statesSki == Character.StatesSki.Running)
             {
                 timerController.StartTimer();
                 readySetGoControl.Hide();
             }
-            if (this.character.statesSki == Character.StatesSki.Finish)
-            {
-                SetTimeScore();//<-
+            if (this.character.statesSki == Character.StatesSki.Finish && !SkiStatic.isCollided)
+            {                
+                SetTimeScore();
                 timerController.StopTimer();
                 TimeToReset(delta);
             }
             if (SkiStatic.isCollided)
-            {
-                SetTimeScore();//<-
-                this.character.statesSki = Character.StatesSki.Disqualified;
+            {                
+                this.character.statesSki = Character.StatesSki.Disqualified;                
+                SetTimeScore();
                 TimeToReset(delta);
             }
             timerController.TimerRunning(delta);
@@ -135,18 +137,19 @@ namespace WinterSports.Scripts.Controller
                 timerController.StartTimer();
                 DefineLaps();
                 DefineEndRun();
+                setScore = true;
             }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
                 timerController.StopTimer();
-                SetTimeScore();//<-
+                SetTimeScore();
                 TimeToReset(delta);
                 ResetSpeedSkating();                
             }
             if (SkiStatic.isCollided)
             {
                 this.character.statesSki = Character.StatesSki.Disqualified;
-                SetTimeScore();//<-
+                SetTimeScore();
                 TimeToReset(delta);
                 ResetSpeedSkating();                
             }
@@ -248,16 +251,20 @@ namespace WinterSports.Scripts.Controller
         }
         private void SetTimeScore()
         {
-            gamePlayModel.currentTimeScore = timerController.GetTimer();
-            if (gamePlayModel.bestTimeScore != 0.0f && gamePlayModel.currentTimeScore < gamePlayModel.bestTimeScore)
+            if (setScore)
             {
-                gamePlayModel.bestTimeScore = timerController.GetTimer();
-            }
-            if (gamePlayModel.bestTimeScore == 0.0f)
-            {
-                gamePlayModel.bestTimeScore = timerController.GetTimer();
-            }
-            SetFinishTimeLabel();
+                gamePlayModel.currentTimeScore = timerController.GetTimer();
+                if (gamePlayModel.bestTimeScore != 0.0f && gamePlayModel.currentTimeScore < gamePlayModel.bestTimeScore && this.character.statesSki != Character.StatesSki.Disqualified)
+                {                    
+                    gamePlayModel.bestTimeScore = timerController.GetTimer();                    
+                }
+                if (gamePlayModel.bestTimeScore == 0.0f && this.character.statesSki != Character.StatesSki.Disqualified)
+                {
+                    gamePlayModel.bestTimeScore = timerController.GetTimer();                                     
+                }
+                SetFinishTimeLabel();
+                setScore = false;
+            }            
         }
         private void SetFinishTimeLabel()
         {
@@ -266,7 +273,7 @@ namespace WinterSports.Scripts.Controller
                 timeScoreBestLabelFinish.Text = ("--:--:---");
             }
             else
-            {
+            {                
                 timeScoreBestLabelFinish.Text = TimeSpan.FromSeconds(gamePlayModel.bestTimeScore).ToString("mm':'ss':'fff");
             }
             if (this.character.statesSki == Character.StatesSki.Disqualified)
@@ -346,6 +353,7 @@ namespace WinterSports.Scripts.Controller
         {
             InitTimer();
             SkiStatic.Reset();
+            setScore = true;
         }
         #endregion
         #region Speed Skating

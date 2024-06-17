@@ -24,6 +24,7 @@ public partial class Character : CharacterBody3D
     [Export] Node3D camera3D = null;
     [Export] Node3D[] skiPole = null;
     [Export] Node3D[] ski = null;
+    [Export] Node3D speedBox = null;
     #endregion    
     #region Variables    
     private IPlayerInput playerInput = null;
@@ -216,12 +217,11 @@ public partial class Character : CharacterBody3D
     private void InitSki()
     {        
         startGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredStartGate)));
-        finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));        
+        finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));
+        speedBox.Hide();
     }
     private void InitSpeedSkating()
-    {
-        //startGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredStartGate)));//<-
-        //finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));
+    {        
         playerInput.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList, directionArrowList);        
     }
     private void OnAreaEnteredStartGate(Node body)

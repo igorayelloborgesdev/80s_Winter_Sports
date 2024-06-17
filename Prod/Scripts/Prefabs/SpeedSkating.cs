@@ -80,7 +80,7 @@ public partial class SpeedSkating : Node
         int count = 0;
         for (int i = 0; i < speedSkatingTrackDTOList.Count; i++)
         {
-            if (i % 40 == 0 && i != 0)
+            if (i % 30 == 0 && i != 0)
             {
                 var directionArrow = speed_collider.Instantiate<DirectionArrow>();
                 directionArrow.id = count;
@@ -96,7 +96,7 @@ public partial class SpeedSkating : Node
                 directionArrowList.Add(directionArrow);
             }            
         }
-        SpeedSkatingStatic.arrowCount = directionArrowList.Count;//<-
+        SpeedSkatingStatic.arrowCount = directionArrowList.Count;
     }
 
     #endregion

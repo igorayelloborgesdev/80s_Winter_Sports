@@ -206,7 +206,7 @@ namespace WinterSports.Scripts.Events
         {                                 
             try
             {
-                if (timerGamePlayController.GetTimer() > DefineSpeed())//<-
+                if (timerGamePlayController.GetTimer() > DefineSpeed())
                 {
                     if (speedSkatingTrackDTOList.Count == startPointId)
                         startPointId = 0;

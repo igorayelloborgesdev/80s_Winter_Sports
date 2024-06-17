@@ -54,7 +54,7 @@ public partial class GameplayView : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {        
-        gamePlayController.Update(delta, prefabName);//<-
+        gamePlayController.Update(delta, prefabName);
     }
     #endregion
     #region Method
@@ -63,7 +63,7 @@ public partial class GameplayView : Control
         levelId = GameModeSingleton.sport - 1;
         prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;
         gamePlayController = new GamePlayController();
-        InstantiateLevel();//<-        
+        InstantiateLevel();      
         AssignButtons();
         SetMainGamePlayEvents();
         gamePlayController.Init(prefabName);
@@ -131,7 +131,7 @@ public partial class GameplayView : Control
         if (prefabName == "skiTrack")
             InstantiateLevelSki(prefabScene, levelId);
         if (prefabName == "SpeedSkating")
-            InstantiateLevelSpeedSkating(prefabScene, levelId - 4);//<-
+            InstantiateLevelSpeedSkating(prefabScene, levelId - 4);
     }
     private void InstantiateLevelSki(PackedScene prefabScene, int id)
     {

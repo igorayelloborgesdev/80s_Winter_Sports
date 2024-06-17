@@ -48,12 +48,10 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Speed skating 500 metres<-
+.Biathlon 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Speed skating 1500 metres 
-.Biathlon 
 .Luge 
 .Bobsleigh 
 .Ski jumping 
