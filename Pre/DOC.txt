@@ -49,9 +49,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Biathlon 
-..Personagem animação<-
-..Personagem carabina
-..Cross country
+..Cross country<-
 ..Tiro
 ..Penalidades
 ..Finalização
