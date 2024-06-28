@@ -39,6 +39,7 @@ public partial class GameplayView : Control
     private Character character = new Character();
     private Ski skiTrack = new Ski();
     private SpeedSkating speedSkatingTrack = new SpeedSkating();
+    private Biathlon biathlonTrack = new Biathlon();
     private int levelId = 0;
     private string prefabName = String.Empty;
     #endregion
@@ -54,7 +55,7 @@ public partial class GameplayView : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {        
-        gamePlayController.Update(delta, prefabName);
+        //gamePlayController.Update(delta, prefabName);
     }
     #endregion
     #region Method
@@ -63,7 +64,7 @@ public partial class GameplayView : Control
         levelId = GameModeSingleton.sport - 1;
         prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;
         gamePlayController = new GamePlayController();
-        InstantiateLevel();      
+        InstantiateLevel();
         AssignButtons();
         SetMainGamePlayEvents();
         gamePlayController.Init(prefabName);
@@ -73,10 +74,17 @@ public partial class GameplayView : Control
         gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
         gamePlayController.SetCountryUIFinishScreen(prefabName, countryCodeLabelFinish, countryFlagTextureRectFinish);
         gamePlayController.SetTimeScoreBestLastLabelFinish(timeScoreBestLabelFinish, timeScoreLastLabelFinish);
-        gamePlayController.SetDirectionArrowList(speedSkatingTrack.GetDirectionArrowList);
+        SetDirectionArrowList();
         InstantiateCharacter();
-        InitStaticVariables();
-        ReturnMenu();
+        //InitStaticVariables();
+        //ReturnMenu();
+    }
+    private void SetDirectionArrowList()
+    {
+        if (prefabName == "SpeedSkating")
+            gamePlayController.SetDirectionArrowList(speedSkatingTrack.GetDirectionArrowList);
+        if (prefabName == "Biathlon")
+            gamePlayController.SetDirectionArrowList(biathlonTrack.GetDirectionArrowList);
     }
     private void InstantiateCharacter()
     {        
@@ -84,6 +92,8 @@ public partial class GameplayView : Control
             InstantiateCharacterSki();
         if (prefabName == "SpeedSkating")
             InstantiateCharacterSpeedSkating();
+        if (prefabName == "Biathlon")
+            InstantiateCharacterBiathlon();
     }
     private void InstantiateCharacterSki()
     {
@@ -109,6 +119,19 @@ public partial class GameplayView : Control
         gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);
         this.AddChild(character);        
     }
+    private void InstantiateCharacterBiathlon()
+    {
+        character = characterPackedScene.Instantiate<Character>();
+        character.SetPrefabName = prefabName;
+        character.SetDirectionArrowList(biathlonTrack.GetDirectionArrowList);
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
+        gamePlayController.SetCharacter(character);
+        gamePlayController.SetCharacterBiathlon();
+        gamePlayController.SetPauseScreen(pauseScreen);
+        gamePlayController.SetFinishSessionScreen(finishSessionScreen);
+        //gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);//<-
+        //this.AddChild(character);
+    }
     private void AssignButtons()
     {
         gamePlayController.GetSetGoToMainMenu = backMenuButton;
@@ -132,6 +155,8 @@ public partial class GameplayView : Control
             InstantiateLevelSki(prefabScene, levelId);
         if (prefabName == "SpeedSkating")
             InstantiateLevelSpeedSkating(prefabScene, levelId - 4);
+        if (prefabName == "Biathlon")
+            InstantiateLevelBiathlon(prefabScene);
     }
     private void InstantiateLevelSki(PackedScene prefabScene, int id)
     {
@@ -149,6 +174,13 @@ public partial class GameplayView : Control
         speedSkatingTrack.InstantiateRail();        
         AddChild(speedSkatingTrack);
         gamePlayController.SetLapCount(speedSkatingTrack.GetLaps(id));
+    }
+    private void InstantiateLevelBiathlon(PackedScene prefabScene)
+    {
+        biathlonTrack = prefabScene.Instantiate<Biathlon>();
+        initPoint = biathlonTrack.GetSetInitPoint();
+        biathlonTrack.InstantiateRail();
+        AddChild(biathlonTrack);
     }
     #endregion
     #region Events

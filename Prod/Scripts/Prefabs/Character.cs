@@ -23,7 +23,7 @@ public partial class Character : CharacterBody3D
     [Export] MeshInstance3D[] cameraRef = null;
     [Export] Node3D camera3D = null;
     [Export] Node3D[] skiPole = null;
-    [Export] Node3D[] ski = null;
+    [Export] Node3D[] ski = null;    
     [Export] Node3D speedBox = null;
     #endregion    
     #region Variables    
@@ -34,6 +34,7 @@ public partial class Character : CharacterBody3D
     private string prefabName = String.Empty;
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
+    private List<List<DirectionArrow>> directionArrowBiathlonList = new List<List<DirectionArrow>>();
     #endregion
     #region Variables Speed Skating
     private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();    
@@ -56,11 +57,16 @@ public partial class Character : CharacterBody3D
     };
     public StatesSki statesSki = StatesSki.Ready;
     #endregion
+    #region Sport Biathlon    
+    [Export] Node3D rifle = new Node3D();
+    [Export] Node3D skiPoleBiathlon1 = new Node3D();
+    [Export] Node3D skiPoleBiathlon2 = new Node3D();    
+    #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-    {
-        Init();        
+    {        
+        Init();
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
@@ -84,7 +90,7 @@ public partial class Character : CharacterBody3D
     #endregion
     #region Methods
     private void Init()
-    {        
+    {
         PlayerInputSetUp();
         playerInput.SetCharacterBody3D(this);
         playerInput.SetPauseScreen(pauseScreen);
@@ -262,6 +268,9 @@ public partial class Character : CharacterBody3D
         {
             item.Show();
         }
+        skiPoleBiathlon1.Hide();
+        skiPoleBiathlon2.Hide();
+        rifle.Hide();
     }
     #endregion
     #region Speed Skating
@@ -275,6 +284,9 @@ public partial class Character : CharacterBody3D
         {
             item.Hide();
         }
+        skiPoleBiathlon1.Hide();
+        skiPoleBiathlon2.Hide();
+        rifle.Hide();
     }
     public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
     {
@@ -284,6 +296,26 @@ public partial class Character : CharacterBody3D
     public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
     {
         directionArrowList = aDirectionArrowList;
+    }
+    #endregion
+    #region Biathlon
+    public void ShowHideSkiPoleBiathlonItems()
+    {
+        foreach (var item in skiPole)
+        {
+            item.Hide();
+        }
+        foreach (var item in ski)
+        {
+            item.Show();
+        }
+        skiPoleBiathlon1.Show();
+        skiPoleBiathlon2.Show();
+        rifle.Show();        
+    }
+    public void SetDirectionArrowList(List<List<DirectionArrow>> aDirectionArrowList)
+    {
+        directionArrowBiathlonList = aDirectionArrowList;
     }
     #endregion
 }

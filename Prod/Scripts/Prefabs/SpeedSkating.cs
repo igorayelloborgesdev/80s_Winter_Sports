@@ -98,7 +98,6 @@ public partial class SpeedSkating : Node
         }
         SpeedSkatingStatic.arrowCount = directionArrowList.Count;
     }
-
     #endregion
     #region Get Set
     public int GetStartPointId
@@ -115,7 +114,6 @@ public partial class SpeedSkating : Node
             return speedSkatingTrackDTOList;
         }
     }
-
     public List<DirectionArrow> GetDirectionArrowList
     {
         get { 

@@ -18,7 +18,7 @@ namespace WinterSports.Scripts.Controller
         #region Controller Ski
         private TimerController timerController = null;
         private TimerController timerGamePlayController = null;
-        private TimerController timerResetController = null;        
+        private TimerController timerResetController = null;
         #endregion
         #region Model
         private GamePlayModel gamePlayModel = new GamePlayModel();
@@ -37,6 +37,7 @@ namespace WinterSports.Scripts.Controller
         private Label countryCodeLabel = null;
         private TextureRect countryFlagTextureRect = null;
         private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
+        private List<List<DirectionArrow>> directionArrowBiathlonList = new List<List<DirectionArrow>>();
         private Label countryCodeLabelFinish = null;
         private TextureRect countryFlagTextureRectFinish = null;
         private Label timeScoreBestLabelFinish = null;
@@ -46,6 +47,7 @@ namespace WinterSports.Scripts.Controller
         #region const
         private const float rectXSize = 225.0f;
         private const string flagResource = "res://Art//2d//flags//";
+        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon" };
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -54,7 +56,8 @@ namespace WinterSports.Scripts.Controller
                 InitSki();
             if (prefabName == "SpeedSkating")
                 InitSpeedSkating();
-
+            if (prefabName == "Biathlon")
+                InitBiathlon();
         }
         public void Update(double delta, string prefabName)
         {
@@ -225,8 +228,10 @@ namespace WinterSports.Scripts.Controller
         #region Timer
         public void SetTimerLabel(string prefabName, Label timeLabel)
         {
-            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
+            if (prefabNameTimerList.ToList().Contains(prefabName))
+            {                
                 this.timeLabel = timeLabel;
+            }            
         }
         public void updateTimer()
         {            
@@ -289,7 +294,7 @@ namespace WinterSports.Scripts.Controller
         #region Speed
         public void SetSpeedLabel(string prefabName, NinePatchRect speedNinePatchRect)
         {
-            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
+            if (prefabNameTimerList.ToList().Contains(prefabName))
                 this.speedNinePatchRect = speedNinePatchRect;
         }
         public void UpdateSpeedLabel()
@@ -301,7 +306,7 @@ namespace WinterSports.Scripts.Controller
         #region Country
         public void SetCountryUI(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
         {
-            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
+            if (prefabNameTimerList.ToList().Contains(prefabName))
                 SetCountryUISki(countryCodeLabel, countryFlagTextureRect);
         }
         private void SetCountryUISki(Label countryCodeLabel, TextureRect countryFlagTextureRect)
@@ -315,7 +320,7 @@ namespace WinterSports.Scripts.Controller
         }
         public void SetCountryUIFinishScreen(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
         {
-            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
+            if (prefabNameTimerList.ToList().Contains(prefabName))
             {
                 this.countryCodeLabelFinish = countryCodeLabel;
                 this.countryCodeLabelFinish.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
@@ -334,7 +339,7 @@ namespace WinterSports.Scripts.Controller
         #region Warning
         public void SetReadySetGoControl(string prefabName, Control readySetGoControl, Label readySetGoLabel)
         {
-            if (prefabName == "skiTrack" || prefabName == "SpeedSkating")
+            if (prefabNameTimerList.ToList().Contains(prefabName))
             {
                 this.readySetGoControl = readySetGoControl;
                 this.readySetGoLabel = readySetGoLabel;
@@ -398,6 +403,10 @@ namespace WinterSports.Scripts.Controller
         {
             directionArrowList = aDirectionArrowList;
         }
+        public void SetDirectionArrowList(List<List<DirectionArrow>> aDirectionArrowList)
+        {
+            directionArrowBiathlonList = aDirectionArrowList;            
+        }
         public void SetLapCount(int lapCount)
         {
             speedSkatingModel.lapCount = lapCount;
@@ -416,6 +425,17 @@ namespace WinterSports.Scripts.Controller
             {                
                 this.character.statesSki = Character.StatesSki.Finish;
             }
+        }
+        #endregion
+        #region Biathlon
+        private void InitBiathlon()
+        {
+            InitTimer();            
+        }
+        public void SetCharacterBiathlon()
+        {
+            this.character.MoveAndReScaleCharacter(1);
+            this.character.ShowHideSkiPoleBiathlonItems();
         }
         #endregion
         #region Get Set
