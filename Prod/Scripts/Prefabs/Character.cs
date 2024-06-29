@@ -56,7 +56,8 @@ public partial class Character : CharacterBody3D
         Init,
         Running,
         Finish,
-        Disqualified
+        Disqualified,
+        Shooting
     };
     public StatesSki statesSki = StatesSki.Ready;
     #endregion

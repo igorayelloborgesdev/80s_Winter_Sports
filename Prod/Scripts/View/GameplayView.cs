@@ -54,8 +54,8 @@ public partial class GameplayView : Control
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
-    {        
-        //gamePlayController.Update(delta, prefabName);
+    {
+        gamePlayController.Update(delta, prefabName);//<-
     }
     #endregion
     #region Method
@@ -76,8 +76,8 @@ public partial class GameplayView : Control
         gamePlayController.SetTimeScoreBestLastLabelFinish(timeScoreBestLabelFinish, timeScoreLastLabelFinish);
         SetDirectionArrowList();
         InstantiateCharacter();
-        //InitStaticVariables();//<-
-        //ReturnMenu();
+        InitStaticVariables();
+        ReturnMenu();
     }
     private void SetDirectionArrowList()
     {
@@ -212,6 +212,7 @@ public partial class GameplayView : Control
     {        
         SkiStatic.Reset();
         SpeedSkatingStatic.Reset();
+        BiathlonStatic.Reset();
     }
     #endregion
 

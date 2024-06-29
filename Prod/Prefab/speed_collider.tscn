@@ -60,7 +60,7 @@ mesh = SubResource("CylinderMesh_m1tb3")
 skeleton = NodePath("../FinishArea3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_syni0")
 script = ExtResource("1_iwswi")
-colorsList = PackedColorArray(1, 1, 1, 1, 0.141176, 0.545098, 0.231373, 1, 0.952941, 0.0980392, 0.2, 1)
+colorsList = PackedColorArray(1, 1, 1, 1, 0.141176, 0.545098, 0.231373, 1, 0.952941, 0.0980392, 0.2, 1, 0.882353, 0.807843, 0.117647, 1)
 bodyMeshInstance3D = [NodePath("RotationNode3D/SpeedBoxHit"), NodePath("RotationNode3D/SpeedBoxHit2"), NodePath("RotationNode3D/SpeedBoxHit3"), NodePath("RotationNode3D/SpeedBoxHit4")]
 
 [node name="Area3D" type="Area3D" parent="."]

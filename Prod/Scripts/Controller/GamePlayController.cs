@@ -65,6 +65,8 @@ namespace WinterSports.Scripts.Controller
                 UpdateSki(delta);
             if (prefabName == "SpeedSkating")
                 UpdateSpeedSkating(delta);
+            if (prefabName == "Biathlon")
+                UpdateBiathlon(delta);
         }
 
         private void UpdateSki(double delta) 
@@ -160,6 +162,57 @@ namespace WinterSports.Scripts.Controller
             updateTimer();
             UpdateSpeedLabel();
             CheckResetDirectionArrow();
+        }
+        private void UpdateBiathlon(double delta)
+        {
+            timerGamePlayController.TimerRunning(delta);
+            if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
+            {
+                this.character.statesSki = Character.StatesSki.Set;
+                readySetGoControl.Show();
+                readySetGoLabel.Text = "Ready";
+            }
+            else if (timerGamePlayController.GetTimer() > 2.0f && this.character.statesSki == Character.StatesSki.Set)
+            {
+                this.character.statesSki = Character.StatesSki.Go;
+                readySetGoLabel.Text = "Set";
+            }
+            else if (timerGamePlayController.GetTimer() < 4.0f && timerGamePlayController.GetTimer() > 3.0f && this.character.statesSki == Character.StatesSki.Go)
+            {
+                this.character.statesSki = Character.StatesSki.Init;
+                readySetGoLabel.Text = "Go";
+            }
+            else if (timerGamePlayController.GetTimer() > 4.0f && this.character.statesSki == Character.StatesSki.Init)//<-
+            {
+                timerGamePlayController.StopTimer();
+                timerGamePlayController.ResetTimer();
+                readySetGoControl.Hide();
+            }
+            //if (this.character.statesSki == Character.StatesSki.Init)
+            //{
+            //    timerController.StartTimer();
+            //    DefineLaps();
+            //    DefineEndRun();
+            //    setScore = true;
+            //}
+            //if (this.character.statesSki == Character.StatesSki.Finish)
+            //{
+            //    timerController.StopTimer();
+            //    SetTimeScore();
+            //    TimeToReset(delta);
+            //    ResetSpeedSkating();
+            //}
+            //if (SkiStatic.isCollided)
+            //{
+            //    this.character.statesSki = Character.StatesSki.Disqualified;
+            //    SetTimeScore();
+            //    TimeToReset(delta);
+            //    ResetSpeedSkating();
+            //}
+            //timerController.TimerRunning(delta);
+            //updateTimer();
+            //UpdateSpeedLabel();
+            //CheckResetDirectionArrow();
         }
         private void TimeToReset(double delta)
         {

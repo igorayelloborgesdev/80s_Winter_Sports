@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Static;
@@ -97,6 +98,7 @@ public partial class Biathlon : Node
                     directionArrow.LookAtFromPosition(biathlonTrackDTOList[a][i].position, biathlonTrackDTOList[a][i - 1].position, Vector3.Up);
                     directionArrow.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
                     directionArrow.GenerateBodyColor();
+                    directionArrow.SetBodyColor(3);
                     directionArrowList[a].Add(directionArrow);
                 }
             }
