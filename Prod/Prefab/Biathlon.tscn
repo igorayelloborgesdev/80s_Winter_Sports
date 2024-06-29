@@ -357,7 +357,7 @@ transform = Transform3D(0.000262959, 0, -0.0635718, 0, 0.0635724, 0, 0.0635718, 
 transform = Transform3D(0.00434588, 0, -0.999991, 0, 1, 0, 0.999991, 0, 0.00434588, 214.538, -0.457952, 4.35942)
 
 [node name="InitPoint1" type="MeshInstance3D" parent="." index="15"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15.0896, 0.0157055, -0.1332)
+transform = Transform3D(0.00935478, 0, 0.999956, 0, 1, 0, -0.999956, 0, 0.00935478, -15.0896, 0.277278, -0.1332)
 visible = false
 mesh = SubResource("BoxMesh_aesm4")
 

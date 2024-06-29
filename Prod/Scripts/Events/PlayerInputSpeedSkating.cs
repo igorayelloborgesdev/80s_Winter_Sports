@@ -186,6 +186,9 @@ namespace WinterSports.Scripts.Events
             this.speedSkatingTrackDTOList = speedSkatingTrackDTOList;
             this.directionArrowList = directionArrowList;
         }
+        public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList)
+        {
+        }
         #endregion
         #region Methods  
         private void ShowHideFinishSessionScreenMenu(bool isPause)

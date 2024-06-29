@@ -76,7 +76,7 @@ public partial class GameplayView : Control
         gamePlayController.SetTimeScoreBestLastLabelFinish(timeScoreBestLabelFinish, timeScoreLastLabelFinish);
         SetDirectionArrowList();
         InstantiateCharacter();
-        //InitStaticVariables();
+        //InitStaticVariables();//<-
         //ReturnMenu();
     }
     private void SetDirectionArrowList()
@@ -129,8 +129,8 @@ public partial class GameplayView : Control
         gamePlayController.SetCharacterBiathlon();
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
-        //gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);//<-
-        //this.AddChild(character);
+        gamePlayController.SetRailBiathlon(biathlonTrack.GetStartPointId, biathlonTrack.GetBiathlonTrackDTOList);
+        this.AddChild(character);
     }
     private void AssignButtons()
     {

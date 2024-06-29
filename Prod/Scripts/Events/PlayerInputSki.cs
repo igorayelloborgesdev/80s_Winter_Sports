@@ -189,6 +189,7 @@ namespace WinterSports.Scripts.Events
             return maxSpeed;
         }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList) { }
+        public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList){}
         #endregion
         #region Methods
         private void AccelPlayer()

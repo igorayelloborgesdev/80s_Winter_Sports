@@ -17,7 +17,7 @@ public partial class Biathlon : Node
     [Export] private PackedScene speed_collider = null;
     #endregion
     #region Variables    
-    private List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList = new List<List<SpeedSkatingTrackDTO>>();
+    private List<List<SpeedSkatingTrackDTO>> biathlonTrackDTOList = new List<List<SpeedSkatingTrackDTO>>();
     private float multiplyPoint = 5.0f;
     private int startPointId = 0;
     private List<List<DirectionArrow>> directionArrowList = new List<List<DirectionArrow>>();
@@ -36,7 +36,7 @@ public partial class Biathlon : Node
         int countId = 0;
         for (int a = 0; a < pointsList.Count; a++)
         {
-            speedSkatingTrackDTOList.Add(new List<SpeedSkatingTrackDTO>());
+            biathlonTrackDTOList.Add(new List<SpeedSkatingTrackDTO>());
             for (int i = 0; i < pointsList[a].Count; i += 3)
             {
                 int points = (int)(RailLength(a, i) * multiplyPoint);
@@ -48,7 +48,7 @@ public partial class Biathlon : Node
                     t = j / (points - 1.0f);
                     position = (1.0f - t) * (1.0f - t) * pointsList[a][i + 0].Position + 2.0f * (1.0f - t) * t * pointsList[a][i + 1].Position + t * t * pointsList[a][i + 2].Position;
 
-                    speedSkatingTrackDTOList[a].Add(new SpeedSkatingTrackDTO()
+                    biathlonTrackDTOList[a].Add(new SpeedSkatingTrackDTO()
                     {
                         position = position,
                         id = countId
@@ -58,14 +58,14 @@ public partial class Biathlon : Node
                 count++;
             }
         }
-        for (int a = 0; a < speedSkatingTrackDTOList.Count; a++)
+        for (int a = 0; a < biathlonTrackDTOList.Count; a++)
         {
-            for (int i = 0; i < speedSkatingTrackDTOList[a].Count; i++)
+            for (int i = 0; i < biathlonTrackDTOList[a].Count; i++)
             {
-                speedSkatingTrackDTOList[a][i].distance = initPoint.Position.DistanceTo(speedSkatingTrackDTOList[a][i].position);
+                biathlonTrackDTOList[a][i].distance = initPoint.Position.DistanceTo(biathlonTrackDTOList[a][i].position);
             }            
         }
-        startPointId = speedSkatingTrackDTOList[0].OrderBy(x => x.distance).First().id;
+        startPointId = biathlonTrackDTOList[0].OrderBy(x => x.distance).First().id;
         InstantiateSpeedCollider();
     }
     private float RailLength(int indexX, int indexY)
@@ -79,10 +79,10 @@ public partial class Biathlon : Node
     private void InstantiateSpeedCollider()
     {
         int count = 0;
-        for (int a = 0; a < speedSkatingTrackDTOList.Count; a++)
+        for (int a = 0; a < biathlonTrackDTOList.Count; a++)
         {
             directionArrowList.Add(new List<DirectionArrow>());
-            for (int i = 0; i < speedSkatingTrackDTOList[a].Count; i++)
+            for (int i = 0; i < biathlonTrackDTOList[a].Count; i++)
             {
                 if (i % 30 == 0 && i != 0)
                 {
@@ -91,10 +91,10 @@ public partial class Biathlon : Node
                     Random rnd = new Random();
                     var direction = rnd.Next(1, 5);
                     directionArrow.direction = direction;
-                    directionArrow.Position = speedSkatingTrackDTOList[a][i].position;
+                    directionArrow.Position = biathlonTrackDTOList[a][i].position;
                     this.AddChild(directionArrow);
                     count++;
-                    directionArrow.LookAtFromPosition(speedSkatingTrackDTOList[a][i].position, speedSkatingTrackDTOList[a][i - 1].position, Vector3.Up);
+                    directionArrow.LookAtFromPosition(biathlonTrackDTOList[a][i].position, biathlonTrackDTOList[a][i - 1].position, Vector3.Up);
                     directionArrow.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
                     directionArrow.GenerateBodyColor();
                     directionArrowList[a].Add(directionArrow);
@@ -110,6 +110,20 @@ public partial class Biathlon : Node
         get
         {
             return directionArrowList;
+        }
+    }
+    public List<List<SpeedSkatingTrackDTO>> GetBiathlonTrackDTOList
+    {
+        get
+        {
+            return biathlonTrackDTOList;
+        }
+    }
+    public int GetStartPointId
+    {
+        get
+        {
+            return startPointId;
         }
     }
     #endregion

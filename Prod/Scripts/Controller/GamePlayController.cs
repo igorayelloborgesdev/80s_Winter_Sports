@@ -437,6 +437,10 @@ namespace WinterSports.Scripts.Controller
             this.character.MoveAndReScaleCharacter(1);
             this.character.ShowHideSkiPoleBiathlonItems();
         }
+        public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> biathlonTrackDTOList)
+        {
+            this.character.SetRailBiathlon(startPointId, biathlonTrackDTOList);
+        }
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu
