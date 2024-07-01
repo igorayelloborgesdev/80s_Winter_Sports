@@ -362,72 +362,72 @@ visible = false
 mesh = SubResource("BoxMesh_aesm4")
 
 [node name="track1" type="Node3D" parent="." index="16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0896, 0.0157055, -0.1332)
 
 [node name="p0" type="MeshInstance3D" parent="track1" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2456, 0, -0.106692)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 
 [node name="p1" type="MeshInstance3D" parent="track1" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.30618, 0, -0.0554881)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93946, 0, -0.16218)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 
 [node name="p2" type="MeshInstance3D" parent="track1" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.9434, 0, -0.00998634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.697764, 0, -0.116679)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 
 [node name="p3" type="MeshInstance3D" parent="track1" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5423, 0, -0.00998634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29666, 0, -0.116679)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p4" type="MeshInstance3D" parent="track1" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1407, 0, 0.430726)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.89506, 0, 0.324034)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p5" type="MeshInstance3D" parent="track1" index="5"]
-transform = Transform3D(0.948644, 0, -0.316345, 0, 1, 0, 0.316345, 0, 0.948644, 25.8681, 0, 1.54101)
+transform = Transform3D(0.948644, 0, -0.316345, 0, 1, 0, 0.316345, 0, 0.948644, 10.6225, 0, 1.43432)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p6" type="MeshInstance3D" parent="track1" index="6"]
-transform = Transform3D(0.948644, 0, -0.316345, 0, 1, 0, 0.316345, 0, 0.948644, 26.3575, 0, 1.69176)
+transform = Transform3D(0.948644, 0, -0.316345, 0, 1, 0, 0.316345, 0, 0.948644, 11.1119, 0, 1.58507)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p7" type="MeshInstance3D" parent="track1" index="7"]
-transform = Transform3D(0.961406, 0, -0.275134, 0, 1, 0, 0.275134, 0, 0.961406, 32.8581, 0.00992107, 3.46509)
+transform = Transform3D(0.961406, 0, -0.275134, 0, 1, 0, 0.275134, 0, 0.961406, 17.6125, 0.00992107, 3.3584)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p8" type="MeshInstance3D" parent="track1" index="8"]
-transform = Transform3D(0.977467, 0, -0.211086, 0, 1, 0, 0.211086, 0, 0.977467, 37.9219, 0, 4.92877)
+transform = Transform3D(0.977467, 0, -0.211086, 0, 1, 0, 0.211086, 0, 0.977467, 22.6763, 0, 4.82208)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p9" type="MeshInstance3D" parent="track1" index="9"]
-transform = Transform3D(0.980938, 0, -0.19432, 0, 1, 0, 0.19432, 0, 0.980938, 38.4595, 0, 5.04428)
+transform = Transform3D(0.980938, 0, -0.19432, 0, 1, 0, 0.19432, 0, 0.980938, 23.2139, 0, 4.93759)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p10" type="MeshInstance3D" parent="track1" index="10"]
-transform = Transform3D(0.975963, 0, -0.217939, 0, 1, 0, 0.217939, 0, 0.975963, 40.1364, 0.00992107, 5.53377)
+transform = Transform3D(0.975963, 0, -0.217939, 0, 1, 0, 0.217939, 0, 0.975963, 24.8908, 0.00992107, 5.42708)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p11" type="MeshInstance3D" parent="track1" index="11"]
-transform = Transform3D(0.967652, 0, -0.252289, 0, 1, 0, 0.252289, 0, 0.967652, 40.4705, 0, 3.96273)
+transform = Transform3D(0.967652, 0, -0.252289, 0, 1, 0, 0.252289, 0, 0.967652, 25.2249, 0, 3.85604)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")

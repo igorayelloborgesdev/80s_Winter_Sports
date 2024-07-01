@@ -182,37 +182,26 @@ namespace WinterSports.Scripts.Controller
                 this.character.statesSki = Character.StatesSki.Init;
                 readySetGoLabel.Text = "Go";
             }
-            else if (timerGamePlayController.GetTimer() > 4.0f && this.character.statesSki == Character.StatesSki.Init)//<-
+            else if (timerGamePlayController.GetTimer() > 4.0f && this.character.statesSki == Character.StatesSki.Init)
             {
                 timerGamePlayController.StopTimer();
                 timerGamePlayController.ResetTimer();
                 readySetGoControl.Hide();
             }
-            //if (this.character.statesSki == Character.StatesSki.Init)
-            //{
-            //    timerController.StartTimer();
-            //    DefineLaps();
-            //    DefineEndRun();
-            //    setScore = true;
-            //}
-            //if (this.character.statesSki == Character.StatesSki.Finish)
-            //{
-            //    timerController.StopTimer();
-            //    SetTimeScore();
-            //    TimeToReset(delta);
-            //    ResetSpeedSkating();
-            //}
-            //if (SkiStatic.isCollided)
-            //{
-            //    this.character.statesSki = Character.StatesSki.Disqualified;
-            //    SetTimeScore();
-            //    TimeToReset(delta);
-            //    ResetSpeedSkating();
-            //}
-            //timerController.TimerRunning(delta);
-            //updateTimer();
-            //UpdateSpeedLabel();
-            //CheckResetDirectionArrow();
+            if (this.character.statesSki == Character.StatesSki.Init)
+            {
+                timerController.StartTimer();                                                
+            }
+            if (this.character.statesSki == Character.StatesSki.Finish)
+            {
+                timerController.StopTimer();
+                SetTimeScore();
+                TimeToReset(delta);
+                ResetBiathlon();
+            }
+            timerController.TimerRunning(delta);
+            updateTimer();
+            UpdateSpeedLabel();            
         }
         private void TimeToReset(double delta)
         {
@@ -253,6 +242,11 @@ namespace WinterSports.Scripts.Controller
             SpeedSkatingStatic.Reset();
             ResetDirectionArrow();
             speedSkatingModel.laps = 0;
+        }
+        public void ResetBiathlon()
+        {
+            SpeedSkatingStatic.Reset();
+            ResetDirectionArrowBiathlon();            
         }
         public void SetDefaultPositionRotation(Vector3 initPosition, Vector3 initRotation) 
         {
@@ -352,7 +346,9 @@ namespace WinterSports.Scripts.Controller
         }
         public void UpdateSpeedLabel()
         {
-            var sizeXspeed = rectXSize * (character.GetSpeed / character.GetMaxSpeed);
+            var sizeXspeed = 0.0f;
+            if (character.GetMaxSpeed > 0.0f)
+                sizeXspeed = rectXSize * (character.GetSpeed / character.GetMaxSpeed);
             speedNinePatchRect.Size = new Vector2(sizeXspeed, speedNinePatchRect.Size.Y);            
         }
         #endregion
@@ -451,6 +447,18 @@ namespace WinterSports.Scripts.Controller
                 directionArrow.SetBodyColor(0);
             }
             SpeedSkatingStatic.resetArrowCount = false;            
+        }
+        public void ResetDirectionArrowBiathlon()
+        {
+            for (int i = 0; i < directionArrowBiathlonList.Count; i++)
+            {
+                for (int j = 0; j < directionArrowBiathlonList[i].Count; j++)
+                {
+                    directionArrowBiathlonList[i][j].enable = true;
+                    directionArrowBiathlonList[i][j].playerScore = false;
+                    directionArrowBiathlonList[i][j].SetBodyColor(3);
+                }                    
+            }            
         }
         public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
         {

@@ -18,14 +18,12 @@ namespace WinterSports.Scripts.Events
 {
     public class PlayerInputSpeedSkating : IPlayerInput
     {
-        #region Constants
+        #region Constant        
         IDictionary<int, string> animName = new Dictionary<int, string>()
         {
             {1,"SpeedSkating_Idle"},
             {2,"SpeedSkating_Run"}
         };
-        #endregion
-        #region Constant        
         private const float maxSpeed = 5.0f;                
         private const double timeSpeedCurrentMin = 0.02;
         private const double timeSpeedCurrentMax = 0.10;

@@ -37,18 +37,16 @@ public partial class Biathlon : Node
         int countId = 0;
         for (int a = 0; a < pointsList.Count; a++)
         {
-            biathlonTrackDTOList.Add(new List<SpeedSkatingTrackDTO>());
+            biathlonTrackDTOList.Add(new List<SpeedSkatingTrackDTO>());            
             for (int i = 0; i < pointsList[a].Count; i += 3)
             {
-                int points = (int)(RailLength(a, i) * multiplyPoint);
+                int points = (int)(RailLength(a, i) * multiplyPoint);                
                 for (int j = 0; j < points; j++)
-                {
+                {                    
                     float t;
                     Vector3 position;
-
                     t = j / (points - 1.0f);
                     position = (1.0f - t) * (1.0f - t) * pointsList[a][i + 0].Position + 2.0f * (1.0f - t) * t * pointsList[a][i + 1].Position + t * t * pointsList[a][i + 2].Position;
-
                     biathlonTrackDTOList[a].Add(new SpeedSkatingTrackDTO()
                     {
                         position = position,
@@ -101,8 +99,7 @@ public partial class Biathlon : Node
                     directionArrow.SetBodyColor(3);
                     directionArrowList[a].Add(directionArrow);
                 }
-            }
-            BiathlonStatic.arrowCount.Add(directionArrowList[a].Count);
+            }            
         }
     }
     #endregion

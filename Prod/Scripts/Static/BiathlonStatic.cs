@@ -8,14 +8,26 @@ namespace WinterSports.Scripts.Static
 {
     public static class BiathlonStatic
     {
-        #region variables        
-        public static List<int> arrowCount = new List<int>();        
+        #region variables                
+        public static int direction = 0;
+        public static bool isCollided = false;
+        public static int id = 0;
+        public static int idY = 0;
+        public static int currentIndex = 0;
+        public static bool isNotScore = false;
+        public static bool isShooting = false;
         #endregion
         #region Methods
         public static void Reset()
-        {
-            arrowCount = new List<int>();
-        }
+        {            
+            direction = 0;
+            isCollided = false;
+            id = 0;
+            idY = 0;
+            currentIndex = 0;
+            isNotScore = false;
+            isShooting = false;
+    }
         #endregion
     }
 }

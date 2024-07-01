@@ -55,7 +55,7 @@ public partial class GameplayView : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        gamePlayController.Update(delta, prefabName);//<-
+        gamePlayController.Update(delta, prefabName);
     }
     #endregion
     #region Method

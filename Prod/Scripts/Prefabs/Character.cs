@@ -85,10 +85,13 @@ public partial class Character : CharacterBody3D
         if (prefabName == "SpeedSkating")
         {
             if (statesSki > StatesSki.Go)
-            {
-                playerInput.PlayerInput(animationPlayer, delta);                
-            }            
+                playerInput.PlayerInput(animationPlayer, delta);                            
         }
+        if (prefabName == "Biathlon")
+        {
+            if (statesSki > StatesSki.Go)
+                playerInput.PlayerInput(animationPlayer, delta);
+        }            
     }
     #endregion
     #region Methods
@@ -106,6 +109,9 @@ public partial class Character : CharacterBody3D
         //Sport Speed Skating
         if (prefabName == "SpeedSkating")
             InitSpeedSkating();
+        //Sport Biathlon
+        if (prefabName == "Biathlon")
+            InitBiathlon();
     }
     private void PlayerInputSetUp()
     {
@@ -333,6 +339,10 @@ public partial class Character : CharacterBody3D
     {
         this.startPointId = startPointId;
         this.biathlonTrackDTOList = biathlonTrackDTOList;
+    }
+    private void InitBiathlon()
+    {
+        playerInput.SetRailBiathlon(startPointId, biathlonTrackDTOList, directionArrowBiathlonList);
     }
     #endregion
 }

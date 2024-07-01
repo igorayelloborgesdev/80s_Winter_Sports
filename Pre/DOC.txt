@@ -49,8 +49,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Biathlon 
-..Cross country<-
-..Tiro
+..Tiro<-
 ..Penalidades
 ..Finalização
 ..Reset
