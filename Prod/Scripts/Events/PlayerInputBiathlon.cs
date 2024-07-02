@@ -8,6 +8,7 @@ using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
 using WinterSports.Scripts.Static;
+using static Character;
 
 namespace WinterSports.Scripts.Events
 {
@@ -27,12 +28,13 @@ namespace WinterSports.Scripts.Events
         private Control pauseScreen = null;
         private Control finishSessionScreen = null;
         private string currentAnimation = "";
+        private Character character = null;
         #endregion
         #region Constant        
         IDictionary<int, string> animName = new Dictionary<int, string>()
         {
-            {1,"SpeedSkating_Idle"},
-            {2,"SpeedSkating_Run"}
+            {1,"Idle"},
+            {2,"CrossCountry_Run"}
         };
         private const float maxSpeed = 5.0f;
         private const double timeSpeedCurrentMin = 0.02;
@@ -53,33 +55,36 @@ namespace WinterSports.Scripts.Events
                         {
                             Pause();
                         }
-                        if (!isPause)
+                        if (!BiathlonStatic.isShooting)
                         {
-                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId) && !keyEnable)//Button 1
+                            if (!isPause)
                             {
-                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId;
-                                indexSpeed = 3;
-                                keyEnable = true;
+                                if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId) && !keyEnable)//Button 1
+                                {
+                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId;
+                                    indexSpeed = 3;
+                                    keyEnable = true;
+                                }
+                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId) && !keyEnable)//Button 2
+                                {
+                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId;
+                                    indexSpeed = 4;
+                                    keyEnable = true;
+                                }
+                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId) && !keyEnable)//Button 3
+                                {
+                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId;
+                                    indexSpeed = 2;
+                                    keyEnable = true;
+                                }
+                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId) && !keyEnable)//Button 4
+                                {
+                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId;
+                                    indexSpeed = 1;
+                                    keyEnable = true;
+                                }
                             }
-                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId) && !keyEnable)//Button 2
-                            {
-                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId;
-                                indexSpeed = 4;
-                                keyEnable = true;
-                            }
-                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId) && !keyEnable)//Button 3
-                            {
-                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId;
-                                indexSpeed = 2;
-                                keyEnable = true;
-                            }
-                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId) && !keyEnable)//Button 4
-                            {
-                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId;
-                                indexSpeed = 1;
-                                keyEnable = true;
-                            }
-                        }
+                        }                        
                     }
                     else
                     {
@@ -106,7 +111,14 @@ namespace WinterSports.Scripts.Events
                     }
                 }
                 MovePlayer(delta);
-                PlayAnimation(animationPlayer, 2);
+                if (BiathlonStatic.isShooting) 
+                {
+                    PlayAnimation(animationPlayer, 1);
+                }
+                else
+                {
+                    PlayAnimation(animationPlayer, 2);
+                }                
                 GetNotScore();
             }
         }
@@ -182,6 +194,10 @@ namespace WinterSports.Scripts.Events
             this.biathlonTrackDTOList = biathlonTrackDTOList;
             this.directionArrowList = directionArrowList;
         }
+        public void SetCharacter(Character character)
+        { 
+            this.character = character;
+        }
         #endregion
         #region Methods
         private void ShowHidePauseMenu(bool isPause)
@@ -255,38 +271,43 @@ namespace WinterSports.Scripts.Events
         {
             try
             {
-                if (timerGamePlayController.GetTimer() > DefineSpeed())
+                if (!BiathlonStatic.isShooting)
                 {
-                    if (biathlonTrackDTOList[BiathlonStatic.id].Count == startPointId)
+                    if (timerGamePlayController.GetTimer() > DefineSpeed())
                     {
-                        GD.Print(biathlonTrackDTOList[BiathlonStatic.id].Count);//<-
-                        //startPointId = 0;
-                    }                        
-                    else
-                        startPointId++;
-                    this.characterBody3D.Position = new Vector3(biathlonTrackDTOList[BiathlonStatic.id][startPointId].position.X,
-                        this.characterBody3D.Position.Y, biathlonTrackDTOList[BiathlonStatic.id][startPointId].position.Z);
-                    var newPositionLookAt = Vector3.Zero;
+                        if (biathlonTrackDTOList[BiathlonStatic.id].Count == startPointId)
+                        {
+                            BiathlonStatic.isShooting = true;
+                            character.SpeedBoxShowHide(false);
+                            character.MoveCameraPositionRotation(2);
+                            character.statesSki = StatesSki.Shooting;
+                            character.ShowHideTarget(true);
+                        }
+                        else
+                            startPointId++;
+                        this.characterBody3D.Position = new Vector3(biathlonTrackDTOList[BiathlonStatic.id][startPointId].position.X,
+                            this.characterBody3D.Position.Y, biathlonTrackDTOList[BiathlonStatic.id][startPointId].position.Z);
+                        var newPositionLookAt = Vector3.Zero;
 
-                    if (startPointId + 1 == biathlonTrackDTOList[BiathlonStatic.id].Count)
-                    {
-                        //<-
-                        //newPositionLookAt = new Vector3(biathlonTrackDTOList[BiathlonStatic.id][0].position.X,
-                        //    this.characterBody3D.Position.Y, biathlonTrackDTOList[BiathlonStatic.id][0].position.Z);
+                        if (startPointId + 1 == biathlonTrackDTOList[BiathlonStatic.id].Count)
+                        {                                         
+                            newPositionLookAt = new Vector3(biathlonTrackDTOList[BiathlonStatic.id][startPointId].position.X,
+                                this.characterBody3D.Position.Y, biathlonTrackDTOList[BiathlonStatic.id][startPointId].position.Z);
+                        }
+                        else
+                        {
+                            newPositionLookAt = new Vector3(biathlonTrackDTOList[BiathlonStatic.id][startPointId + 1].position.X,
+                                this.characterBody3D.Position.Y, biathlonTrackDTOList[BiathlonStatic.id][startPointId + 1].position.Z);
+                        }
+                        if (this.characterBody3D.Position != newPositionLookAt)
+                        {
+                            this.characterBody3D.LookAt(newPositionLookAt, Vector3.Up);
+                            this.characterBody3D.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
+                        }
+                        timerGamePlayController.ResetTimerRunning();
                     }
-                    else
-                    {
-                        newPositionLookAt = new Vector3(biathlonTrackDTOList[BiathlonStatic.id][startPointId + 1].position.X,
-                            this.characterBody3D.Position.Y, biathlonTrackDTOList[BiathlonStatic.id][startPointId + 1].position.Z);
-                    }
-                    if (this.characterBody3D.Position != newPositionLookAt)
-                    {
-                        this.characterBody3D.LookAt(newPositionLookAt, Vector3.Up);
-                        this.characterBody3D.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
-                    }
-                    timerGamePlayController.ResetTimerRunning();
-                }
-                timerGamePlayController.TimerRunning(delta);
+                    timerGamePlayController.TimerRunning(delta);
+                }                
             }
             catch (Exception ex)
             {

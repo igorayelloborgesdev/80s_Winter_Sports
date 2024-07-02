@@ -24,7 +24,8 @@ public partial class Character : CharacterBody3D
     [Export] Node3D camera3D = null;
     [Export] Node3D[] skiPole = null;
     [Export] Node3D[] ski = null;    
-    [Export] Node3D speedBox = null;    
+    [Export] Node3D speedBox = null;
+    [Export] Node3D target = null;
     #endregion    
     #region Variables    
     private IPlayerInput playerInput = null;
@@ -102,6 +103,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetPauseScreen(pauseScreen);
         playerInput.SetFinishSessionScreen(finishSessionScreen);
         playerInput.PlayAnimation(animationPlayer, 1);
+        playerInput.SetCharacter(this);
         playerInput.Init();
         //Sport Ski 
         if (prefabName == "skiTrack")
@@ -178,8 +180,7 @@ public partial class Character : CharacterBody3D
     {
         playerInput.ShowHideFinishSessionScreen();
     }
-
-    private void MoveCameraPositionRotation(int id)
+    public void MoveCameraPositionRotation(int id)
     {
         camera3D.Position = cameraRef[id].Position;
         camera3D.Rotation = cameraRef[id].Rotation;        
@@ -237,10 +238,12 @@ public partial class Character : CharacterBody3D
         startGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredStartGate)));
         finishGate.Connect("body_entered", new Callable(this, nameof(OnAreaEnteredFinishGate)));
         speedBox.Hide();
+        ShowHideTarget(false);
     }
     private void InitSpeedSkating()
     {        
-        playerInput.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList, directionArrowList);        
+        playerInput.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList, directionArrowList);
+        ShowHideTarget(false);
     }
     private void OnAreaEnteredStartGate(Node body)
     {        
@@ -343,6 +346,21 @@ public partial class Character : CharacterBody3D
     private void InitBiathlon()
     {
         playerInput.SetRailBiathlon(startPointId, biathlonTrackDTOList, directionArrowBiathlonList);
+        ShowHideTarget(false);
+    }
+    public void SpeedBoxShowHide(bool show)
+    {
+        if(show)
+            speedBox.Show();
+        else        
+            speedBox.Hide();
+    }
+    public void ShowHideTarget(bool show)
+    {
+        if (show)
+            target.Show();
+        else
+            target.Hide();        
     }
     #endregion
 }

@@ -49,7 +49,11 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Biathlon 
-..Tiro<-
+..Tiro
+...Mover Camera<-
+...Limitar Camera
+...Atirar
+...Mudar UI para tiro
 ..Penalidades
 ..Finalização
 ..Reset
@@ -83,6 +87,8 @@ Esportes
 .load
 ..load
 ..delete
+
+.Joystick
 
 .Tutorial
 ..Downhill

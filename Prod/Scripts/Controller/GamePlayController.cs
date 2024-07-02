@@ -192,6 +192,10 @@ namespace WinterSports.Scripts.Controller
             {
                 timerController.StartTimer();                                                
             }
+            if (this.character.statesSki == Character.StatesSki.Shooting)
+            {
+                timerController.StopTimer();
+            }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
                 timerController.StopTimer();

@@ -298,6 +298,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bvn81")
 transform = Transform3D(-0.00272758, 0, -0.264311, 0, 0.0189325, 0, 0.383886, 0, -0.00187797, 0.483819, 0, 0.034399)
 surface_material_override/0 = SubResource("StandardMaterial3D_bnnan")
 
+[node name="TargetBoard" parent="ShootStanding" index="3"]
+transform = Transform3D(0.206986, 0, 0, 0, 0.206986, 0, 0, 0, 0.206986, 6.01697, 0.695759, -0.0925713)
+
 [node name="HillFenceShoot_001" parent="ShootStanding_001" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_f066d")
 
@@ -427,7 +430,7 @@ mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
 [node name="p11" type="MeshInstance3D" parent="track1" index="11"]
-transform = Transform3D(0.967652, 0, -0.252289, 0, 1, 0, 0.252289, 0, 0.967652, 25.2249, 0, 3.85604)
+transform = Transform3D(0.967652, 0, -0.252289, 0, 1, 0, 0.252289, 0, 0.967652, 25.3655, 0, 3.77433)
 visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")

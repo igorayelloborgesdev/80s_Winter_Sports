@@ -25,5 +25,6 @@ namespace WinterSports.Scripts.Interfaces
         float GetMaxSpeed();
         void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList);
         void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList);
+        void SetCharacter(Character character);
     }
 }
