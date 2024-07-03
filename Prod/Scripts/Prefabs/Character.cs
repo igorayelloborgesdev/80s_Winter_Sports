@@ -45,6 +45,7 @@ public partial class Character : CharacterBody3D
     #endregion
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
+    private float increment = 0.01f;
     #endregion
     #region Sport Ski
     [Export] Area3D startGate = null;
@@ -182,6 +183,7 @@ public partial class Character : CharacterBody3D
     }
     public void MoveCameraPositionRotation(int id)
     {
+        GD.Print(cameraRef[id].RotationDegrees);//<-
         camera3D.Position = cameraRef[id].Position;
         camera3D.Rotation = cameraRef[id].Rotation;        
     }
@@ -216,7 +218,7 @@ public partial class Character : CharacterBody3D
         { 
             this.prefabName = value; 
         }
-    }
+    }    
     #endregion
     #region Sport Ski
     public Area3D SetStartGate
@@ -361,6 +363,20 @@ public partial class Character : CharacterBody3D
             target.Show();
         else
             target.Hide();        
+    }
+
+    public void MoveCameraX(bool isLeft)
+    {
+        var inc = camera3D.Rotation.Y + ((isLeft ? -1.0f : 1.0f) * increment);
+        camera3D.Rotation = new Vector3(camera3D.Rotation.X, inc, camera3D.Rotation.Z);
+        GD.Print(inc);
+    }
+    public void MoveCameraY(bool isUp)
+    {        
+        
+        var inc = camera3D.Rotation.X + ((isUp ? -1.0f : 1.0f) * increment);
+        camera3D.Rotation = new Vector3(inc, camera3D.Rotation.Y, camera3D.Rotation.Z);
+        GD.Print(inc);
     }
     #endregion
 }

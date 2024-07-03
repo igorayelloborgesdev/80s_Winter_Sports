@@ -42,7 +42,7 @@ camera3D = NodePath("Camera3D")
 skiPole = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D2/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D/SkiPole")]
 ski = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D3/Ski")]
 speedBox = NodePath("SpeedBox")
-target = NodePath("Target")
+target = NodePath("Camera3D/Target")
 rifle = NodePath("Armature_002/Skeleton3D/BoneAttachment3D5/Rifle")
 skiPoleBiathlon = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D6/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D7/SkiPole")]
 
@@ -167,7 +167,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
 surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
 
 [node name="BoneAttachment3D6" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="28"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, 0.300016, 2.43623)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 0.300016, 2.43623)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -175,7 +175,7 @@ bone_idx = 20
 transform = Transform3D(1.19768, -0.31452, -0.170739, 0.253889, 1.16704, -0.368871, 0.252221, 0.318752, 1.18207, -0.00801849, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D7" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="29"]
-transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, 0.342906, 2.25626)
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 0.342906, 2.25626)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 
@@ -183,7 +183,7 @@ bone_idx = 21
 transform = Transform3D(1.09548, 0.250242, 0.547533, 0.462362, -1.07782, -0.432485, 0.385529, 0.581553, -1.03715, 0.056942, 0.193757, -0.0186019)
 
 [node name="BoneAttachment3D5" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="30"]
-transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.017668, 0.998556, -0.0507347, -0.078622, 0.051973, 0.995549, 0.282026, 1.18879, -0.566809)
+transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.017668, 0.998556, -0.050735, -0.078622, 0.0519733, 0.995549, 0.282026, 1.18879, -0.566809)
 bone_name = "Spine"
 bone_idx = 1
 
@@ -207,7 +207,7 @@ bone_idx = 4
 transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="33"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, 0.300016, 2.43623)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 0.300016, 2.43623)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -215,7 +215,7 @@ bone_idx = 20
 transform = Transform3D(1.22197, -0.213849, 0.153498, 0.185196, 0.180408, -1.22297, 0.187071, 1.21829, 0.208045, -0.00801873, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="34"]
-transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, 0.342906, 2.25626)
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 0.342906, 2.25626)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 
@@ -223,7 +223,10 @@ bone_idx = 21
 transform = Transform3D(1.2064, -0.168214, 0.280711, 0.262805, -0.140942, -1.21391, 0.195008, 1.23059, -0.10066, 0.0569417, 0.193758, -0.0186019)
 
 [node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(-1, -1.39958e-14, 8.74228e-08, 2.01665e-08, 0.97303, 0.230678, -8.5065e-08, 0.230678, -0.97303, 0, 0.132272, -0.419788)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.06225e-07, 0.0740601, 0.287838)
+
+[node name="Target" parent="Camera3D" index="0" instance=ExtResource("9_m4ora")]
+transform = Transform3D(-0.1, -1.50996e-08, -6.60024e-16, 0, -4.37114e-09, 0.1, -1.50996e-08, 0.1, 4.37114e-09, -6.58559e-09, -5.99995e-05, -1.32215)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.0502603, 0)
@@ -266,6 +269,3 @@ shape = SubResource("CylinderShape3D_504mm")
 
 [node name="SpeedBox" parent="." index="8" instance=ExtResource("6_nx70h")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.135981, 0.71321)
-
-[node name="Target" parent="." index="9" instance=ExtResource("9_m4ora")]
-transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, 0, 0.0740001, 1.60999)

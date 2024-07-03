@@ -50,8 +50,7 @@ Esportes
 
 .Biathlon 
 ..Tiro
-...Mover Camera<-
-...Limitar Camera
+...Limitar Camera<-
 ...Atirar
 ...Mudar UI para tiro
 ..Penalidades

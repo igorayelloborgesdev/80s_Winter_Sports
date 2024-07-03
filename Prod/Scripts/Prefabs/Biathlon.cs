@@ -83,7 +83,7 @@ public partial class Biathlon : Node
             directionArrowList.Add(new List<DirectionArrow>());
             for (int i = 0; i < biathlonTrackDTOList[a].Count; i++)
             {
-                if (i % 30 == 0 && i != 0)
+                if (i % 20 == 0 && i != 0)
                 {
                     var directionArrow = speed_collider.Instantiate<DirectionArrow>();
                     directionArrow.id = count;

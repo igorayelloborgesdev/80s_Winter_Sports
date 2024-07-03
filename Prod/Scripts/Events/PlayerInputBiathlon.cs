@@ -40,77 +40,15 @@ namespace WinterSports.Scripts.Events
         private const double timeSpeedCurrentMin = 0.02;
         private const double timeSpeedCurrentMax = 0.10;
         private const double timeSpeedCurrentInc = 0.01;
+        private float increment = 0.01f;
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f) 
         {
             if (!isPause)
             {
-                JoystickInput.GetJoyPressed();
-                if (Input.IsAnythingPressed())
-                {
-                    if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
-                    {
-                        if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
-                        {
-                            Pause();
-                        }
-                        if (!BiathlonStatic.isShooting)
-                        {
-                            if (!isPause)
-                            {
-                                if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId) && !keyEnable)//Button 1
-                                {
-                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId;
-                                    indexSpeed = 3;
-                                    keyEnable = true;
-                                }
-                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId) && !keyEnable)//Button 2
-                                {
-                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId;
-                                    indexSpeed = 4;
-                                    keyEnable = true;
-                                }
-                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId) && !keyEnable)//Button 3
-                                {
-                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId;
-                                    indexSpeed = 2;
-                                    keyEnable = true;
-                                }
-                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId) && !keyEnable)//Button 4
-                                {
-                                    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId;
-                                    indexSpeed = 1;
-                                    keyEnable = true;
-                                }
-                            }
-                        }                        
-                    }
-                    else
-                    {
-                        var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
-                        if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
-                        {
-                            Pause();
-                        }
-                    }
-                }
-                else
-                {
-                    if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
-                    {
-                        if (!isPause)
-                        {
-                            if (!Input.IsKeyPressed((Key)keyPressedId) && keyEnable)
-                            {
-                                keyEnable = false;
-                                SpeedManager(indexSpeed);
-                                indexSpeed = 0;
-                            }
-                        }
-                    }
-                }
-                MovePlayer(delta);
+                MovePlayerInput();
+                MovePlayer(delta);                
                 if (BiathlonStatic.isShooting) 
                 {
                     PlayAnimation(animationPlayer, 1);
@@ -313,6 +251,96 @@ namespace WinterSports.Scripts.Events
             {
             }
         }
+        private void MovePlayerInput()
+        {                
+            JoystickInput.GetJoyPressed();
+            if (Input.IsAnythingPressed())
+            {
+
+                if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
+                {
+                    if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
+                    {
+                        Pause();
+                    }
+                    if (!BiathlonStatic.isShooting)
+                    {
+                        if (!isPause)
+                        {
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId) && !keyEnable)//Button 1
+                            {
+                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId;
+                                indexSpeed = 3;
+                                keyEnable = true;
+                            }
+                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId) && !keyEnable)//Button 2
+                            {
+                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId;
+                                indexSpeed = 4;
+                                keyEnable = true;
+                            }
+                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId) && !keyEnable)//Button 3
+                            {
+                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId;
+                                indexSpeed = 2;
+                                keyEnable = true;
+                            }
+                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId) && !keyEnable)//Button 4
+                            {
+                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId;
+                                indexSpeed = 1;
+                                keyEnable = true;
+                            }
+                        }
+                    }
+                    else
+                    {                        
+                        if (!isPause)
+                        {
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Button 1 UP
+                            {                                
+                                character.MoveCameraY(false);                                                                
+                            }
+                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Button 2 DOWN
+                            {                             
+                                character.MoveCameraY(true);                                                  
+                            }
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Button 3 LEFT
+                            {
+                                character.MoveCameraX(false);
+                            }
+                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Button 4 RIGHT
+                            {
+                                character.MoveCameraX(true);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
+                    if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
+                    {
+                        Pause();
+                    }
+                }
+            }
+            else
+            {
+                if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
+                {
+                    if (!isPause)
+                    {
+                        if (!Input.IsKeyPressed((Key)keyPressedId) && keyEnable)
+                        {
+                            keyEnable = false;
+                            SpeedManager(indexSpeed);
+                            indexSpeed = 0;
+                        }
+                    }
+                }
+            }                        
+        }        
         private double DefineSpeed()
         {
             if (speed > timeSpeedCurrentMax)
