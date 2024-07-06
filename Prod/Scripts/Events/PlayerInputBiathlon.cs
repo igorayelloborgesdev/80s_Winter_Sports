@@ -29,6 +29,8 @@ namespace WinterSports.Scripts.Events
         private Control finishSessionScreen = null;
         private string currentAnimation = "";
         private Character character = null;
+        private int shootingTries = 5;
+        private int shootingErrors = 0;
         #endregion
         #region Constant        
         IDictionary<int, string> animName = new Dictionary<int, string>()
@@ -299,19 +301,25 @@ namespace WinterSports.Scripts.Events
                         {
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Button 1 UP
                             {                                
-                                character.MoveCameraY(false);                                                                
+                                character.MoveCameraX(false);                                                                
                             }
                             else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Button 2 DOWN
                             {                             
-                                character.MoveCameraY(true);                                                  
+                                character.MoveCameraX(true);                                                  
                             }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Button 3 LEFT
                             {
-                                character.MoveCameraX(false);
+                                character.MoveCameraY(false);
                             }
                             else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Button 4 RIGHT
                             {
-                                character.MoveCameraX(true);
+                                character.MoveCameraY(true);
+                            }
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && !keyEnable)//Shoot
+                            {
+                                Shoot();
+                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId;                                
+                                keyEnable = true;
                             }
                         }
                     }
@@ -333,10 +341,20 @@ namespace WinterSports.Scripts.Events
                     {
                         if (!Input.IsKeyPressed((Key)keyPressedId) && keyEnable)
                         {
-                            keyEnable = false;
-                            SpeedManager(indexSpeed);
-                            indexSpeed = 0;
-                        }
+                            if (!BiathlonStatic.isShooting)
+                            {
+                                keyEnable = false;
+                                SpeedManager(indexSpeed);
+                                indexSpeed = 0;
+                            }
+                            else
+                            {
+                                if ((Key)keyPressedId == (Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId)
+                                {
+                                    keyEnable = false;                                    
+                                }
+                            }                            
+                        }        
                     }
                 }
             }                        
@@ -363,6 +381,32 @@ namespace WinterSports.Scripts.Events
                 speed += (float)timeSpeedCurrentInc;
             }
 
+        }
+
+        private void Shoot()
+        {                                    
+            if (character.GetTargetRayCast().IsColliding())
+            {
+                var collider = character.GetTargetRayCast().GetCollider() as Node;
+                if (collider is not null)
+                {
+                    var target = collider.GetParent() as Target;
+                    if (target.GetSetEnable)
+                    {
+                        var targetBoard = collider.GetParent().GetParent() as TargetBoard;
+                        targetBoard.DisableTargetById(target.GetId);
+                        target.GetSetEnable = false;                        
+                    }
+                }                
+            }
+            else
+            {
+                shootingErrors++;
+                GD.Print("Miss");//<-
+                                 //shootingTries
+            }
+            shootingTries--;
+            GD.Print(shootingTries);//<-
         }
         #endregion
     }

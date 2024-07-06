@@ -50,9 +50,12 @@ Esportes
 
 .Biathlon 
 ..Tiro
-...Limitar Camera<-
-...Atirar
-...Mudar UI para tiro
+...Mudar UI para tiro<-
+....Tiros restantes
+....Erros
+....Vento
+
+..Retornar corrida
 ..Penalidades
 ..Finalização
 ..Reset

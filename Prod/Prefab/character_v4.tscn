@@ -28,7 +28,7 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_504mm"]
 
-[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
+[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "rayCast3D", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
 script = ExtResource("2_51ifc")
 animationPlayer = NodePath("AnimationPlayer")
 bodyMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Body_004")]
@@ -43,6 +43,7 @@ skiPole = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D2/SkiPole"), NodePa
 ski = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D3/Ski")]
 speedBox = NodePath("SpeedBox")
 target = NodePath("Camera3D/Target")
+rayCast3D = NodePath("Camera3D/Target/RayCast3D")
 rifle = NodePath("Armature_002/Skeleton3D/BoneAttachment3D5/Rifle")
 skiPoleBiathlon = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D6/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D7/SkiPole")]
 
@@ -227,6 +228,9 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.062
 
 [node name="Target" parent="Camera3D" index="0" instance=ExtResource("9_m4ora")]
 transform = Transform3D(-0.1, -1.50996e-08, -6.60024e-16, 0, -4.37114e-09, 0.1, -1.50996e-08, 0.1, 4.37114e-09, -6.58559e-09, -5.99995e-05, -1.32215)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D/Target" index="1"]
+target_position = Vector3(0, -50, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.0502603, 0)

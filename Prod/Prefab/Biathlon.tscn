@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cnnbicrpa6an2"]
+[gd_scene load_steps=45 format=3 uid="uid://cnnbicrpa6an2"]
 
 [ext_resource type="PackedScene" uid="uid://depcln18g2rt0" path="res://Art/3d/BiathlonTrack.glb" id="1_ldpda"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Biathlon.cs" id="1_m8lly"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dwlvxquxshfgg" path="res://Art/3d/DonwhillTrack_DownhillFloor.png" id="4_pv2d2"]
 [ext_resource type="Texture2D" uid="uid://cjj1u0ip64un2" path="res://Art/3d/DonwhillTrack_tree.png" id="5_eoct8"]
 [ext_resource type="Texture2D" uid="uid://dml0jcqyxknu4" path="res://Art/3d/BiathlonTrack_tree.png" id="6_2x1o7"]
+[ext_resource type="PackedScene" uid="uid://bly2bw1cxk4g5" path="res://Prefab/target_board.tscn" id="6_v8cc0"]
 [ext_resource type="PackedScene" uid="uid://emem201u3ntr" path="res://Prefab/gate_start.tscn" id="7_ucrmp"]
 [ext_resource type="PackedScene" uid="uid://nj3mjr6c218v" path="res://Prefab/gate_finish.tscn" id="8_xusd6"]
 [ext_resource type="PackedScene" uid="uid://cisv43q421rkp" path="res://Prefab/grandstand.tscn" id="9_1s1c3"]
@@ -299,7 +300,11 @@ transform = Transform3D(-0.00272758, 0, -0.264311, 0, 0.0189325, 0, 0.383886, 0,
 surface_material_override/0 = SubResource("StandardMaterial3D_bnnan")
 
 [node name="TargetBoard" parent="ShootStanding" index="3"]
-transform = Transform3D(0.206986, 0, 0, 0, 0.206986, 0, 0, 0, 0.206986, 6.01697, 0.695759, -0.0925713)
+transform = Transform3D(0.206986, 0, 0, 0, 0.206986, 0, 0, 0, 0.206986, 5.59432, 0.695759, -0.0925751)
+visible = false
+
+[node name="TargetBoard1" parent="ShootStanding" index="4" instance=ExtResource("6_v8cc0")]
+transform = Transform3D(0.206986, 0, 3.72529e-09, 0, 0.206986, 0, -3.72529e-09, 0, 0.206986, 3.43818, 0.71408, -0.14716)
 
 [node name="HillFenceShoot_001" parent="ShootStanding_001" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_f066d")

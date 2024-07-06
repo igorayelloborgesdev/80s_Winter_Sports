@@ -42,6 +42,11 @@ public partial class Character : CharacterBody3D
     #endregion
     #region Variables Biathlon
     private List<List<SpeedSkatingTrackDTO>> biathlonTrackDTOList = new List<List<SpeedSkatingTrackDTO>>();
+    private float maxXTarget = 0.2f;
+    private float minXTarget = -0.2f;
+    private float minYTarget = -2.7f;
+    private float maxYTarget = -3.4f;
+    [Export] private RayCast3D rayCast3D = null;
     #endregion
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
@@ -183,7 +188,6 @@ public partial class Character : CharacterBody3D
     }
     public void MoveCameraPositionRotation(int id)
     {
-        GD.Print(cameraRef[id].RotationDegrees);//<-
         camera3D.Position = cameraRef[id].Position;
         camera3D.Rotation = cameraRef[id].Rotation;        
     }
@@ -364,19 +368,26 @@ public partial class Character : CharacterBody3D
         else
             target.Hide();        
     }
-
-    public void MoveCameraX(bool isLeft)
+    public void MoveCameraY(bool isLeft)
     {
         var inc = camera3D.Rotation.Y + ((isLeft ? -1.0f : 1.0f) * increment);
-        camera3D.Rotation = new Vector3(camera3D.Rotation.X, inc, camera3D.Rotation.Z);
-        GD.Print(inc);
+        if (inc < minYTarget && inc > maxYTarget)
+        {
+            camera3D.Rotation = new Vector3(camera3D.Rotation.X, inc, camera3D.Rotation.Z);
+        }                
     }
-    public void MoveCameraY(bool isUp)
-    {        
-        
+    public void MoveCameraX(bool isUp)
+    {                
         var inc = camera3D.Rotation.X + ((isUp ? -1.0f : 1.0f) * increment);
-        camera3D.Rotation = new Vector3(inc, camera3D.Rotation.Y, camera3D.Rotation.Z);
-        GD.Print(inc);
+        if (inc > minXTarget && inc < maxXTarget)
+        {
+            camera3D.Rotation = new Vector3(inc, camera3D.Rotation.Y, camera3D.Rotation.Z);            
+        }                
     }
+    public RayCast3D GetTargetRayCast()
+    {
+        return rayCast3D;
+    }
+
     #endregion
 }
