@@ -41,8 +41,14 @@ namespace WinterSports.Scripts.Controller
         private Label countryCodeLabelFinish = null;
         private TextureRect countryFlagTextureRectFinish = null;
         private Label timeScoreBestLabelFinish = null;
-        private Label timeScoreLastLabelFinish = null;
+        private Label timeScoreLastLabelFinish = null;        
         private bool setScore = true;
+        private Control controlSkiSpeedSkatingBiathlon = null;
+        private Control controlBiathlon = null;
+        private Label shoots = null;
+        private Label errorLabelScore = null;
+        private Label windDirection = null;
+        private Control windDirectionArrow = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -194,7 +200,7 @@ namespace WinterSports.Scripts.Controller
             }
             if (this.character.statesSki == Character.StatesSki.Shooting)
             {
-                timerController.StopTimer();
+                timerController.StopTimer();                
             }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
@@ -268,6 +274,16 @@ namespace WinterSports.Scripts.Controller
         {
             this.finishSessionScreen = finishSessionSession;
             character.SetFinishSessionScreen = this.finishSessionScreen;
+        }
+        public void SetControlSkiSpeedSkatingBiathlon(Control controlSkiSpeedSkatingBiathlon)
+        {
+            this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
+            character.SetControlSkiSpeedSkatingBiathlon = this.controlSkiSpeedSkatingBiathlon;
+        }
+        public void SetControlBiathlon(Control controlBiathlon)
+        {
+            this.controlBiathlon = controlBiathlon;
+            character.SetControlBiathlon = this.controlBiathlon;
         }
         public void UnPause()
         {
@@ -507,6 +523,14 @@ namespace WinterSports.Scripts.Controller
         public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> biathlonTrackDTOList)
         {
             this.character.SetRailBiathlon(startPointId, biathlonTrackDTOList);
+        }
+
+        public void SetBiathlonUILabels(Label shoots, Label errorLabelScore, Label windDirection, Control windDirectionArrow)
+        {
+            this.shoots = shoots;
+            this.errorLabelScore = errorLabelScore;
+            this.windDirection = windDirection;
+            this.windDirectionArrow = windDirectionArrow;
         }
         #endregion
         #region Get Set

@@ -222,6 +222,10 @@ namespace WinterSports.Scripts.Events
                             character.MoveCameraPositionRotation(2);
                             character.statesSki = StatesSki.Shooting;
                             character.ShowHideTarget(true);
+                            character.ShowHideControlSkiSpeedSkatingBiathlon(false);
+                            character.ShowHideControlBiathlon(true);
+                            character.SetShoots(shootingTries);
+                            character.SetErrors(shootingErrors);
                         }
                         else
                             startPointId++;
@@ -402,10 +406,11 @@ namespace WinterSports.Scripts.Events
             else
             {
                 shootingErrors++;
-                GD.Print("Miss");//<-
-                                 //shootingTries
+                character.SetErrors(shootingErrors);
+                GD.Print("Miss");//<-                                 
             }
             shootingTries--;
+            character.SetShoots(shootingTries);
             GD.Print(shootingTries);//<-
         }
         #endregion

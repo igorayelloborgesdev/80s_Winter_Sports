@@ -31,7 +31,9 @@ public partial class Character : CharacterBody3D
     private IPlayerInput playerInput = null;
     private SceneTree sceneTree = null;
     private Control pauseScreen = null;
-    private Control finishSessionScreen = null;    
+    private Control finishSessionScreen = null;
+    private Control controlSkiSpeedSkatingBiathlon = null;
+    private Control controlBiathlon = null;
     private string prefabName = String.Empty;
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
@@ -47,6 +49,10 @@ public partial class Character : CharacterBody3D
     private float minYTarget = -2.7f;
     private float maxYTarget = -3.4f;
     [Export] private RayCast3D rayCast3D = null;
+    private Label shoots = null;
+    private Label errorLabelScore = null;
+    private Label windDirection = null;
+    private Control windDirectionArrow = null;
     #endregion
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
@@ -216,6 +222,20 @@ public partial class Character : CharacterBody3D
             this.finishSessionScreen = value;
         }
     }
+    public Control SetControlSkiSpeedSkatingBiathlon
+    {
+        set
+        {
+            this.controlSkiSpeedSkatingBiathlon = value;
+        }
+    }
+    public Control SetControlBiathlon
+    {
+        set
+        {
+            this.controlBiathlon = value;
+        }
+    }    
     public string SetPrefabName
     {
         set 
@@ -388,6 +408,34 @@ public partial class Character : CharacterBody3D
     {
         return rayCast3D;
     }
-
+    public void ShowHideControlSkiSpeedSkatingBiathlon(bool isShow)
+    { 
+        if(isShow)
+            this.controlSkiSpeedSkatingBiathlon.Show();
+        else
+            this.controlSkiSpeedSkatingBiathlon.Hide();
+    }
+    public void ShowHideControlBiathlon(bool isShow)
+    {
+        if (isShow)
+            this.controlBiathlon.Show();
+        else
+            this.controlBiathlon.Hide();
+    }
+    public void SetBiathlonUILabels(Label shoots, Label errorLabelScore, Label windDirection, Control windDirectionArrow)
+    {
+        this.shoots = shoots;
+        this.errorLabelScore = errorLabelScore;
+        this.windDirection = windDirection;
+        this.windDirectionArrow = windDirectionArrow;
+    }
+    public void SetShoots(int shoots)
+    {
+        this.shoots.Text = shoots.ToString();
+    }
+    public void SetErrors(int errors)
+    {
+        this.errorLabelScore.Text = errors.ToString();
+    }
     #endregion
 }

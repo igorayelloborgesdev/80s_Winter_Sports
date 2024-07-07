@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b25qr0ntq7ns2"]
+[gd_scene load_steps=15 format=3 uid="uid://b25qr0ntq7ns2"]
 
 [ext_resource type="PackedScene" uid="uid://dyc2ihlu1s18b" path="res://Prefab/sky.tscn" id="1_356u1"]
 [ext_resource type="Script" path="res://Scripts/View/GameplayView.cs" id="1_p3jv1"]
 [ext_resource type="PackedScene" uid="uid://c7unrelaoyecc" path="res://Prefab/character_v4.tscn" id="2_us2bk"]
 [ext_resource type="PackedScene" uid="uid://b7itcmeqrxwd7" path="res://Prefab/bg.tscn" id="2_xwheb"]
+[ext_resource type="Texture2D" uid="uid://bxv58xte0v7hf" path="res://Art/3d/ArrowHitBox.png" id="8_2trn4"]
 [ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="10_canv2"]
 [ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="10_kdmjr"]
 [ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="11_12gco"]
@@ -23,7 +24,7 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
@@ -34,8 +35,8 @@ pauseScreen = NodePath("CanvasLayer/PauseControl")
 backMenuButton = NodePath("CanvasLayer/PauseControl/BackToMainMenuButton")
 returnMenuButton = NodePath("CanvasLayer/PauseControl/BackMenuButton")
 resetMenuButton = NodePath("CanvasLayer/PauseControl/ResetMenuButton")
-timeLabel = NodePath("CanvasLayer/HUD/Time")
-speedNinePatchRect = NodePath("CanvasLayer/HUD/HUDBGSpeed/SpeedNinePatchRect")
+timeLabel = NodePath("CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon/Time")
+speedNinePatchRect = NodePath("CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon/HUDBGSpeed/SpeedNinePatchRect")
 readySetGoControl = NodePath("CanvasLayer/ReadySetGoControl")
 readySetGoLabel = NodePath("CanvasLayer/ReadySetGoControl/ReadySetGoLabel")
 countryCodeLabel = NodePath("CanvasLayer/HUD/CountryCode")
@@ -47,6 +48,12 @@ countryCodeLabelFinish = NodePath("CanvasLayer/FinishSessionControl/CountryCode"
 countryFlagTextureRectFinish = NodePath("CanvasLayer/FinishSessionControl/CountryFlag")
 timeScoreBestLabelFinish = NodePath("CanvasLayer/FinishSessionControl/BestScoreLabel")
 timeScoreLastLabelFinish = NodePath("CanvasLayer/FinishSessionControl/LastScoreLabel")
+controlSkiSpeedSkatingBiathlon = NodePath("CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon")
+controlBiathlon = NodePath("CanvasLayer/HUD/ControlBiathlon")
+shoots = NodePath("CanvasLayer/HUD/ControlBiathlon/Shoots")
+errorLabelScore = NodePath("CanvasLayer/HUD/ControlBiathlon/ErrorLabelScore")
+windDirection = NodePath("CanvasLayer/HUD/ControlBiathlon/WindDirection")
+windDirectionArrow = NodePath("CanvasLayer/HUD/ControlBiathlon/WindDirectionArrow")
 
 [node name="SceneSki" type="Control" parent="."]
 anchors_preset = 0
@@ -117,7 +124,15 @@ text = "AUT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimeLabel" type="Label" parent="CanvasLayer/HUD"]
+[node name="ControlSkiSpeedSkatingBiathlon" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -136,7 +151,7 @@ text = "Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Time" type="Label" parent="CanvasLayer/HUD"]
+[node name="Time" type="Label" parent="CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -155,7 +170,7 @@ text = "99:99.999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Speed" type="Label" parent="CanvasLayer/HUD"]
+[node name="Speed" type="Label" parent="CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -174,7 +189,7 @@ text = "Speed"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HUDBGSpeed" type="NinePatchRect" parent="CanvasLayer/HUD"]
+[node name="HUDBGSpeed" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon"]
 modulate = Color(0.764706, 0.890196, 0.964706, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -192,7 +207,7 @@ patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
 
-[node name="HUDBGSpeed2" type="NinePatchRect" parent="CanvasLayer/HUD/HUDBGSpeed"]
+[node name="HUDBGSpeed2" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon/HUDBGSpeed"]
 modulate = Color(0, 0.509804, 0.796078, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -210,7 +225,7 @@ patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
 
-[node name="SpeedNinePatchRect" type="NinePatchRect" parent="CanvasLayer/HUD/HUDBGSpeed"]
+[node name="SpeedNinePatchRect" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon/HUDBGSpeed"]
 modulate = Color(0.921569, 0.639216, 0.152941, 1)
 layout_mode = 0
 offset_left = 6.0
@@ -219,11 +234,152 @@ offset_right = 231.0
 offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
 
+[node name="ControlBiathlon" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShootsLabel" type="Label" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -314.0
+offset_top = -84.0
+offset_right = -164.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Shoots"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shoots" type="Label" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -84.0
+offset_right = -64.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "0/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ErrorLabelScore" type="Label" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 124.0
+offset_top = -83.0
+offset_right = 210.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -84.0
+offset_right = 124.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Errors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WindLabel" type="Label" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 231.0
+offset_top = -85.0
+offset_right = 381.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Wind"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WindDirection" type="Label" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 415.0
+offset_top = -85.0
+offset_right = 565.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "2,5ms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WindDirectionArrow" type="TextureRect" parent="CanvasLayer/HUD/ControlBiathlon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 360.0
+offset_top = -71.0
+offset_right = 417.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(26.95, 17.28)
+texture = ExtResource("8_2trn4")
+expand_mode = 1
+
 [node name="ReadySetGoControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 

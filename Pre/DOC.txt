@@ -50,10 +50,7 @@ Esportes
 
 .Biathlon 
 ..Tiro
-...Mudar UI para tiro<-
-....Tiros restantes
-....Erros
-....Vento
+....Vento<-
 
 ..Retornar corrida
 ..Penalidades

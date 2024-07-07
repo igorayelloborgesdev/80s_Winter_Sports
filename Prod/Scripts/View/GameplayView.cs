@@ -31,6 +31,12 @@ public partial class GameplayView : Control
     [Export] TextureRect countryFlagTextureRectFinish = null;
     [Export] Label timeScoreBestLabelFinish = null;
     [Export] Label timeScoreLastLabelFinish = null;
+    [Export] Control controlSkiSpeedSkatingBiathlon = null;
+    [Export] Control controlBiathlon = null;
+    [Export] Label shoots = null;
+    [Export] Label errorLabelScore = null;
+    [Export] Label windDirection = null;
+    [Export] Control windDirectionArrow = null;
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
@@ -104,6 +110,10 @@ public partial class GameplayView : Control
         gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
+        gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlBiathlon(controlBiathlon);
+        character.ShowHideControlSkiSpeedSkatingBiathlon(true);
+        character.ShowHideControlBiathlon(false);
         this.AddChild(character);
     }
     private void InstantiateCharacterSpeedSkating()
@@ -116,7 +126,11 @@ public partial class GameplayView : Control
         gamePlayController.SetCharacterSpeedSkating();
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
+        gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);
+        character.ShowHideControlSkiSpeedSkatingBiathlon(true);
+        character.ShowHideControlBiathlon(false);
         this.AddChild(character);        
     }
     private void InstantiateCharacterBiathlon()
@@ -129,7 +143,12 @@ public partial class GameplayView : Control
         gamePlayController.SetCharacterBiathlon();
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
+        gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetRailBiathlon(biathlonTrack.GetStartPointId, biathlonTrack.GetBiathlonTrackDTOList);
+        character.ShowHideControlSkiSpeedSkatingBiathlon(true);
+        character.ShowHideControlBiathlon(false);
+        character.SetBiathlonUILabels(shoots, errorLabelScore, windDirection, windDirectionArrow);
         this.AddChild(character);
     }
     private void AssignButtons()
@@ -180,6 +199,7 @@ public partial class GameplayView : Control
         biathlonTrack = prefabScene.Instantiate<Biathlon>();
         initPoint = biathlonTrack.GetSetInitPoint();
         biathlonTrack.InstantiateRail();
+        gamePlayController.SetBiathlonUILabels(shoots, errorLabelScore, windDirection, windDirectionArrow);        
         AddChild(biathlonTrack);
     }
     #endregion

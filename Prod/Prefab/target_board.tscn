@@ -131,7 +131,7 @@ shadow_mesh = SubResource("ArrayMesh_midqf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jums7"]
 shading_mode = 0
-albedo_color = Color(0.784314, 0.784314, 0.784314, 1)
+albedo_color = Color(0.862745, 0.862745, 0.862745, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhb8v"]
 

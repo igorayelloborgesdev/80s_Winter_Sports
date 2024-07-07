@@ -304,7 +304,7 @@ transform = Transform3D(0.206986, 0, 0, 0, 0.206986, 0, 0, 0, 0.206986, 5.59432,
 visible = false
 
 [node name="TargetBoard1" parent="ShootStanding" index="4" instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.206986, 0, 3.72529e-09, 0, 0.206986, 0, -3.72529e-09, 0, 0.206986, 3.43818, 0.71408, -0.14716)
+transform = Transform3D(0.206986, 0, 3.72529e-09, 0, 0.206986, 0, -3.72529e-09, 0, 0.206986, 3.86596, 0.71408, -0.147161)
 
 [node name="HillFenceShoot_001" parent="ShootStanding_001" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_f066d")
