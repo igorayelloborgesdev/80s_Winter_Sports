@@ -213,7 +213,7 @@ namespace WinterSports.Scripts.Controller
             updateTimer();
             UpdateSpeedLabel();
 
-            GD.Print(this.character.statesSki);
+            //GD.Print(this.character.statesSki);//<-
         }
         private void TimeToReset(double delta)
         {

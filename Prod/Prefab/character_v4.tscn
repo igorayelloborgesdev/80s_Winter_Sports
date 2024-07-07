@@ -224,7 +224,7 @@ bone_idx = 21
 transform = Transform3D(1.2064, -0.168214, 0.280711, 0.262805, -0.140942, -1.21391, 0.195008, 1.23059, -0.10066, 0.0569417, 0.193758, -0.0186019)
 
 [node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.06225e-07, 0.0740601, 0.287838)
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -2.06225e-07, 0.0740601, 0.287838)
 
 [node name="Target" parent="Camera3D" index="0" instance=ExtResource("9_m4ora")]
 transform = Transform3D(-0.1, -1.50996e-08, -6.60024e-16, 0, -4.37114e-09, 0.1, -1.50996e-08, 0.1, 4.37114e-09, -6.58559e-09, -5.99995e-05, -1.32215)

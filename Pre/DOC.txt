@@ -49,10 +49,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Biathlon 
-..Tiro
-....Vento<-
-
-..Retornar corrida
+..Retornar corrida<-
 ..Penalidades
 ..Finalização
 ..Reset

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.Controller;
@@ -31,6 +32,10 @@ namespace WinterSports.Scripts.Events
         private Character character = null;
         private int shootingTries = 5;
         private int shootingErrors = 0;
+        private int windAngle = 0;
+        private int windPower = 0;
+        private float caX = 0.0f;
+        private float coY = 0.0f;
         #endregion
         #region Constant        
         IDictionary<int, string> animName = new Dictionary<int, string>()
@@ -226,6 +231,7 @@ namespace WinterSports.Scripts.Events
                             character.ShowHideControlBiathlon(true);
                             character.SetShoots(shootingTries);
                             character.SetErrors(shootingErrors);
+                            GenerateWind();
                         }
                         else
                             startPointId++;
@@ -324,7 +330,7 @@ namespace WinterSports.Scripts.Events
                                 Shoot();
                                 keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId;                                
                                 keyEnable = true;
-                            }
+                            }                            
                         }
                     }
                 }
@@ -356,12 +362,20 @@ namespace WinterSports.Scripts.Events
                                 if ((Key)keyPressedId == (Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId)
                                 {
                                     keyEnable = false;                                    
-                                }
+                                }                                
                             }                            
-                        }        
+                        }                        
                     }
                 }
-            }                        
+            }
+            if (!isPause)
+            {
+                if (BiathlonStatic.isShooting)
+                {
+                    character.MoveCameraXWind(coY, windAngle);
+                    character.MoveCameraYWind(caX, windAngle);
+                }
+            }
         }        
         private double DefineSpeed()
         {
@@ -406,12 +420,32 @@ namespace WinterSports.Scripts.Events
             else
             {
                 shootingErrors++;
-                character.SetErrors(shootingErrors);
-                GD.Print("Miss");//<-                                 
+                character.SetErrors(shootingErrors);                
             }
             shootingTries--;
-            character.SetShoots(shootingTries);
-            GD.Print(shootingTries);//<-
+            character.SetShoots(shootingTries);            
+        }
+        private void GenerateWind()
+        {
+            Random rnd = new Random();
+            windAngle = rnd.Next(0, 361);
+            Random rndWindPower = new Random();
+            windPower = rndWindPower.Next(0, 100);
+            DefineShootingWindForce();
+        }
+        private void DefineShootingWindForce()
+        {            
+            var angle = Mathf.DegToRad((float)windAngle);
+            var hyp = windPower;
+            var cos = Math.Cos(angle);
+            caX = (float)(cos * hyp);
+            var sin = Math.Sin(angle);
+            coY = (float)(sin * hyp);
+            DefineWindUI((-1.0f * (float)windAngle), ((float)windPower)/100.0f);
+        }
+        private void DefineWindUI(float angle, float power)
+        {
+            character.SetWind(angle, power);
         }
         #endregion
     }

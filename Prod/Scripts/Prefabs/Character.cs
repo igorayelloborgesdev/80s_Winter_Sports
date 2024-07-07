@@ -57,6 +57,7 @@ public partial class Character : CharacterBody3D
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
     private float increment = 0.01f;
+    private float shootInc = 30000.0f;
     #endregion
     #region Sport Ski
     [Export] Area3D startGate = null;
@@ -389,12 +390,12 @@ public partial class Character : CharacterBody3D
             target.Hide();        
     }
     public void MoveCameraY(bool isLeft)
-    {
+    {        
         var inc = camera3D.Rotation.Y + ((isLeft ? -1.0f : 1.0f) * increment);
         if (inc < minYTarget && inc > maxYTarget)
         {
             camera3D.Rotation = new Vector3(camera3D.Rotation.X, inc, camera3D.Rotation.Z);
-        }                
+        }        
     }
     public void MoveCameraX(bool isUp)
     {                
@@ -402,7 +403,25 @@ public partial class Character : CharacterBody3D
         if (inc > minXTarget && inc < maxXTarget)
         {
             camera3D.Rotation = new Vector3(inc, camera3D.Rotation.Y, camera3D.Rotation.Z);            
-        }                
+        }        
+    }
+    public void MoveCameraXWind(float moveInc, float windAngle)
+    {
+        var moveIncNormal = (windAngle > 180.0f && windAngle <= 360.0f ? -1.0f : 1.0f) * MathF.Abs(moveInc);
+        var inc = camera3D.Rotation.X + ((moveIncNormal / shootInc));        
+        if (inc > minXTarget && inc < maxXTarget)
+        {
+            camera3D.Rotation = new Vector3(inc, camera3D.Rotation.Y, camera3D.Rotation.Z);
+        }
+    }
+    public void MoveCameraYWind(float moveInc, float windAngle)
+    {        
+        var moveIncNormal = (windAngle > 90.0f && windAngle <= 270.0f ? 1.0f : -1.0f) * MathF.Abs(moveInc);
+        var inc = camera3D.Rotation.Y + ((moveIncNormal / shootInc));
+        if (inc < minYTarget && inc > maxYTarget)
+        {
+            camera3D.Rotation = new Vector3(camera3D.Rotation.X, inc, camera3D.Rotation.Z);
+        }
     }
     public RayCast3D GetTargetRayCast()
     {
@@ -436,6 +455,11 @@ public partial class Character : CharacterBody3D
     public void SetErrors(int errors)
     {
         this.errorLabelScore.Text = errors.ToString();
+    }
+    public void SetWind(float angle, float power)
+    {        
+        windDirectionArrow.RotationDegrees = angle;
+        windDirection.Text = string.Format("{0:0.0}", power) + "m/s";
     }
     #endregion
 }
