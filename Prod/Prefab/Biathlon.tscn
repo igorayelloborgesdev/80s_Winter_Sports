@@ -271,10 +271,10 @@ shadow_mesh = SubResource("ArrayMesh_e8dsu")
 script = ExtResource("1_m8lly")
 initPoint = NodePath("InitPoint1")
 pointsList1 = [NodePath("track1/p0"), NodePath("track1/p1"), NodePath("track1/p2"), NodePath("track1/p3"), NodePath("track1/p4"), NodePath("track1/p5"), NodePath("track1/p6"), NodePath("track1/p7"), NodePath("track1/p8"), NodePath("track1/p9"), NodePath("track1/p10"), NodePath("track1/p11")]
-pointsList2 = []
-pointsList3 = []
-pointsList4 = []
-pointsList5 = []
+pointsList2 = [NodePath("track2/p0"), NodePath("track2/p1"), NodePath("track2/p2"), NodePath("track2/p3"), NodePath("track2/p4"), NodePath("track2/p5"), NodePath("track2/p6"), NodePath("track2/p7"), NodePath("track2/p8"), NodePath("track2/p9"), NodePath("track2/p10"), NodePath("track2/p11"), NodePath("track2/p12"), NodePath("track2/p13"), NodePath("track2/p14"), NodePath("track2/p15"), NodePath("track2/p16"), NodePath("track2/p17"), NodePath("track2/p18"), NodePath("track2/p19"), NodePath("track2/p20"), NodePath("track2/p21"), NodePath("track2/p22"), NodePath("track2/p23"), NodePath("track2/p24"), NodePath("track2/p25"), NodePath("track2/p26")]
+pointsList3 = [NodePath("track3/p0"), NodePath("track3/p1"), NodePath("track3/p2"), NodePath("track3/p3"), NodePath("track3/p4"), NodePath("track3/p5"), NodePath("track3/p6"), NodePath("track3/p7"), NodePath("track3/p8"), NodePath("track3/p9"), NodePath("track3/p10"), NodePath("track3/p11"), NodePath("track3/p12"), NodePath("track3/p13"), NodePath("track3/p14"), NodePath("track3/p15"), NodePath("track3/p16"), NodePath("track3/p17"), NodePath("track3/p18"), NodePath("track3/p19"), NodePath("track3/p20")]
+pointsList4 = [NodePath("track4/p0"), NodePath("track4/p1"), NodePath("track4/p2"), NodePath("track4/p3"), NodePath("track4/p4"), NodePath("track4/p5"), NodePath("track4/p6"), NodePath("track4/p7"), NodePath("track4/p8"), NodePath("track4/p9"), NodePath("track4/p10"), NodePath("track4/p11"), NodePath("track4/p12"), NodePath("track4/p13"), NodePath("track4/p14"), NodePath("track4/p15"), NodePath("track4/p16"), NodePath("track4/p17")]
+pointsList5 = [NodePath("track5/p0"), NodePath("track5/p1"), NodePath("track5/p2"), NodePath("track5/p3"), NodePath("track5/p4"), NodePath("track5/p5"), NodePath("track5/p6"), NodePath("track5/p7"), NodePath("track5/p8"), NodePath("track5/p9"), NodePath("track5/p10"), NodePath("track5/p11")]
 speed_collider = ExtResource("3_swys3")
 
 [node name="HillFence" parent="." index="0"]
@@ -437,8 +437,418 @@ visible = false
 mesh = SubResource("BoxMesh_y8vaw")
 skeleton = NodePath("../p2")
 
-[node name="FinishArea3D" type="MeshInstance3D" parent="." index="17"]
-transform = Transform3D(1.625, 0, 0, 0, 1, 0, 0, 0, 0.305, 193.098, 0.198343, 2.7886)
+[node name="track2" type="Node3D" parent="." index="17"]
+
+[node name="p0" type="MeshInstance3D" parent="track2" index="0"]
+transform = Transform3D(0.981101, 0, -0.193498, 0, 1, 0, 0.193498, 0, 0.981101, 25.3655, 0, 3.77433)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p1" type="MeshInstance3D" parent="track2" index="1"]
+transform = Transform3D(0.982336, 0, -0.187124, 0, 1, 0, 0.187124, 0, 0.982336, 25.1544, 0, 5.25804)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p2" type="MeshInstance3D" parent="track2" index="2"]
+transform = Transform3D(0.977743, 0, -0.209806, 0, 1, 0, 0.209806, 0, 0.977743, 26.748, 0, 5.55124)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p3" type="MeshInstance3D" parent="track2" index="3"]
+transform = Transform3D(0.977743, 0, -0.209806, 0, 1, 0, 0.209806, 0, 0.977743, 26.766, 0, 5.55511)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p4" type="MeshInstance3D" parent="track2" index="4"]
+transform = Transform3D(0.99632, 0, -0.0857125, 0, 1, 0, 0.0857125, 0, 0.99632, 30.0305, 0, 6.03365)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p5" type="MeshInstance3D" parent="track2" index="5"]
+transform = Transform3D(0.99632, 0, -0.0857125, 0, 1, 0, 0.0857125, 0, 0.99632, 34.0244, 0, 6.32369)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p6" type="MeshInstance3D" parent="track2" index="6"]
+transform = Transform3D(0.99632, 0, -0.0857125, 0, 1, 0, 0.0857125, 0, 0.99632, 34.1138, 0, 6.33138)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p7" type="MeshInstance3D" parent="track2" index="7"]
+transform = Transform3D(0.97998, 0, 0.199094, 0, 1, 0, -0.199094, 0, 0.97998, 36.3346, 0, 6.30862)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p8" type="MeshInstance3D" parent="track2" index="8"]
+transform = Transform3D(0.915354, 0, 0.402651, 0, 1, 0, -0.402651, 0, 0.915354, 38.1918, 0, 5.59469)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p9" type="MeshInstance3D" parent="track2" index="9"]
+transform = Transform3D(0.915354, 0, 0.402651, 0, 1, 0, -0.402651, 0, 0.915354, 38.3444, 0, 5.52757)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p10" type="MeshInstance3D" parent="track2" index="10"]
+transform = Transform3D(0.777673, 0, 0.628669, 0, 1, 0, -0.628669, 0, 0.777673, 41.6298, 0, 3.02833)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p11" type="MeshInstance3D" parent="track2" index="11"]
+transform = Transform3D(0.777673, 0, 0.628669, 0, 1, 0, -0.628669, 0, 0.777673, 45.601, 0, -0.603993)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p12" type="MeshInstance3D" parent="track2" index="12"]
+transform = Transform3D(0.777673, 0, 0.628669, 0, 1, 0, -0.628669, 0, 0.777673, 45.6762, 0, -0.664716)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p13" type="MeshInstance3D" parent="track2" index="13"]
+transform = Transform3D(0.96143, 0, 0.27505, 0, 1, 0, -0.27505, 0, 0.96143, 47.444, 0, -1.83703)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p14" type="MeshInstance3D" parent="track2" index="14"]
+transform = Transform3D(0.999837, 0, -0.0180632, 0, 1, 0, 0.0180632, 0, 0.999837, 49.6248, 0, -2.06727)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p15" type="MeshInstance3D" parent="track2" index="15"]
+transform = Transform3D(0.999837, 0, -0.0180632, 0, 1, 0, 0.0180632, 0, 0.999837, 49.7527, 0, -2.06496)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p16" type="MeshInstance3D" parent="track2" index="16"]
+transform = Transform3D(0.954714, 0, -0.297525, 0, 1, 0, 0.297525, 0, 0.954714, 52.3427, 0, -1.81048)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p17" type="MeshInstance3D" parent="track2" index="17"]
+transform = Transform3D(0.909838, 0, -0.414963, 0, 1, 0, 0.414963, 0, 0.909838, 54.4557, 0, -0.783978)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p18" type="MeshInstance3D" parent="track2" index="18"]
+transform = Transform3D(0.909838, 0, -0.414963, 0, 1, 0, 0.414963, 0, 0.909838, 54.5576, 0, -0.737497)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p19" type="MeshInstance3D" parent="track2" index="19"]
+transform = Transform3D(0.808832, 0, -0.588039, 0, 1, 0, 0.588039, 0, 0.808832, 57.2999, 0, 1.02873)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p20" type="MeshInstance3D" parent="track2" index="20"]
+transform = Transform3D(0.867679, 0, -0.497125, 0, 1, 0, 0.497125, 0, 0.867679, 60.3639, 0, 2.86979)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p21" type="MeshInstance3D" parent="track2" index="21"]
+transform = Transform3D(0.867679, 0, -0.497125, 0, 1, 0, 0.497125, 0, 0.867679, 60.4595, 0, 2.92461)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p22" type="MeshInstance3D" parent="track2" index="22"]
+transform = Transform3D(0.993048, 0, -0.117711, 0, 1, 0, 0.117711, 0, 0.993048, 62.414, 0, 3.85508)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p23" type="MeshInstance3D" parent="track2" index="23"]
+transform = Transform3D(0.993048, 0, -0.117711, 0, 1, 0, 0.117711, 0, 0.993048, 63.4614, 0, 3.97924)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p24" type="MeshInstance3D" parent="track2" index="24"]
+transform = Transform3D(0.993048, 0, -0.117711, 0, 1, 0, 0.117711, 0, 0.993048, 63.5819, 0, 3.99352)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p25" type="MeshInstance3D" parent="track2" index="25"]
+transform = Transform3D(0.993048, 0, -0.117711, 0, 1, 0, 0.117711, 0, 0.993048, 64.1933, 0, 4.066)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p26" type="MeshInstance3D" parent="track2" index="26"]
+transform = Transform3D(0.993048, 0, -0.117711, 0, 1, 0, 0.117711, 0, 0.993048, 64.4374, 0, 2.6846)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="track3" type="Node3D" parent="." index="18"]
+
+[node name="p0" type="MeshInstance3D" parent="track3" index="0"]
+transform = Transform3D(0.981101, 0, -0.193498, 0, 1, 0, 0.193498, 0, 0.981101, 64.4374, 0, 2.6846)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p1" type="MeshInstance3D" parent="track3" index="1"]
+transform = Transform3D(0.999721, 0, -0.0236294, 0, 1, 0, 0.0236294, 0, 0.999721, 64.3646, 0, 4.14558)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p2" type="MeshInstance3D" parent="track3" index="2"]
+transform = Transform3D(0.999721, 0, -0.0236294, 0, 1, 0, 0.0236294, 0, 0.999721, 67.3875, 0, 4.0953)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p3" type="MeshInstance3D" parent="track3" index="3"]
+transform = Transform3D(0.999721, 0, -0.0236294, 0, 1, 0, 0.0236294, 0, 0.999721, 67.4522, 0, 4.09683)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p4" type="MeshInstance3D" parent="track3" index="4"]
+transform = Transform3D(0.849589, 0, 0.527446, 0, 1, 0, -0.527446, 0, 0.849589, 70.1727, 0, 3.04519)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p5" type="MeshInstance3D" parent="track3" index="5"]
+transform = Transform3D(0.798478, 0, 0.602024, 0, 1, 0, -0.602024, 0, 0.798478, 72.4411, 0, 1.19616)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p6" type="MeshInstance3D" parent="track3" index="6"]
+transform = Transform3D(0.798478, 0, 0.602024, 0, 1, 0, -0.602024, 0, 0.798478, 72.513, 0, 1.14199)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p7" type="MeshInstance3D" parent="track3" index="7"]
+transform = Transform3D(0.943327, 0, 0.331865, 0, 1, 0, -0.331865, 0, 0.943327, 74.5108, 0, -0.161263)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p8" type="MeshInstance3D" parent="track3" index="8"]
+transform = Transform3D(0.975799, 0, 0.218671, 0, 1, 0, -0.218671, 0, 0.975799, 76.5776, 0, -0.514636)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p9" type="MeshInstance3D" parent="track3" index="9"]
+transform = Transform3D(0.975799, 0, 0.218671, 0, 1, 0, -0.218671, 0, 0.975799, 76.681, 0, -0.537814)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p10" type="MeshInstance3D" parent="track3" index="10"]
+transform = Transform3D(1, 0, -0.000924945, 0, 1, 0, 0.000924945, 0, 1, 79.3978, 0, -0.867024)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p11" type="MeshInstance3D" parent="track3" index="11"]
+transform = Transform3D(0.971826, 0, -0.235702, 0, 1, 0, 0.235702, 0, 0.971826, 81.8309, 0, -0.229047)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p12" type="MeshInstance3D" parent="track3" index="12"]
+transform = Transform3D(0.971826, 0, -0.235702, 0, 1, 0, 0.235702, 0, 0.971826, 81.9244, 0, -0.206373)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p13" type="MeshInstance3D" parent="track3" index="13"]
+transform = Transform3D(0.971826, 0, -0.235702, 0, 1, 0, 0.235702, 0, 0.971826, 85.7898, 0, 0.731122)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p14" type="MeshInstance3D" parent="track3" index="14"]
+transform = Transform3D(0.991304, 0, -0.131599, 0, 1, 0, 0.131599, 0, 0.991304, 89.5615, 0, 1.6459)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p15" type="MeshInstance3D" parent="track3" index="15"]
+transform = Transform3D(0.991304, 0, -0.131599, 0, 1, 0, 0.131599, 0, 0.991304, 89.644, 0, 1.65686)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p16" type="MeshInstance3D" parent="track3" index="16"]
+transform = Transform3D(0.998458, 0, -0.0555252, 0, 1, 0, 0.0555252, 0, 0.998458, 91.8721, 0, 1.95263)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p17" type="MeshInstance3D" parent="track3" index="17"]
+transform = Transform3D(0.998458, 0, -0.0555252, 0, 1, 0, 0.0555252, 0, 0.998458, 93.977, 0, 2.06969)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p18" type="MeshInstance3D" parent="track3" index="18"]
+transform = Transform3D(0.998458, 0, -0.0555252, 0, 1, 0, 0.0555252, 0, 0.998458, 94.0369, 0, 2.07302)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p19" type="MeshInstance3D" parent="track3" index="19"]
+transform = Transform3D(0.998458, 0, -0.0555252, 0, 1, 0, 0.0555252, 0, 0.998458, 95.1849, 0, 2.13687)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p20" type="MeshInstance3D" parent="track3" index="20"]
+transform = Transform3D(0.999873, 0, -0.0159865, 0, 1, 0, 0.0159865, 0, 0.999873, 95.4703, 0, 0.647207)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="track4" type="Node3D" parent="." index="19"]
+
+[node name="p0" type="MeshInstance3D" parent="track4" index="0"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 95.4703, 0, 0.647207)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p1" type="MeshInstance3D" parent="track4" index="1"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 95.6478, 0, 2.18138)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p2" type="MeshInstance3D" parent="track4" index="2"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 97.5761, 0, 2.13608)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p3" type="MeshInstance3D" parent="track4" index="3"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 97.6697, 0, 2.13553)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p4" type="MeshInstance3D" parent="track4" index="4"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 103.546, 0, 2.10128)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p5" type="MeshInstance3D" parent="track4" index="5"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 112.033, 0, 1.99475)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p6" type="MeshInstance3D" parent="track4" index="6"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 112.096, 0, 1.99438)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p7" type="MeshInstance3D" parent="track4" index="7"]
+transform = Transform3D(0.986251, 0, 0.165254, 0, 1, 0, -0.165254, 0, 0.986251, 119.445, 0, 0.690119)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p8" type="MeshInstance3D" parent="track4" index="8"]
+transform = Transform3D(0.997873, 0, 0.0651943, 0, 1, 0, -0.0651943, 0, 0.997873, 125.299, 0, -0.375448)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p9" type="MeshInstance3D" parent="track4" index="9"]
+transform = Transform3D(0.997873, 0, 0.0651943, 0, 1, 0, -0.0651943, 0, 0.997873, 125.386, 0, -0.381108)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p10" type="MeshInstance3D" parent="track4" index="10"]
+transform = Transform3D(0.997873, 0, 0.0651943, 0, 1, 0, -0.0651943, 0, 0.997873, 128.605, 0, -0.591404)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p11" type="MeshInstance3D" parent="track4" index="11"]
+transform = Transform3D(0.980687, 0, -0.195587, 0, 1, 0, 0.195587, 0, 0.980687, 131.752, 0, -0.293444)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p12" type="MeshInstance3D" parent="track4" index="12"]
+transform = Transform3D(0.980687, 0, -0.195587, 0, 1, 0, 0.195587, 0, 0.980687, 131.855, 0, -0.272842)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p13" type="MeshInstance3D" parent="track4" index="13"]
+transform = Transform3D(0.928803, 0, -0.370574, 0, 1, 0, 0.370574, 0, 0.928803, 134.754, 0, 0.707872)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p14" type="MeshInstance3D" parent="track4" index="14"]
+transform = Transform3D(0.928803, 0, -0.370574, 0, 1, 0, 0.370574, 0, 0.928803, 137.416, 0, 1.77)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p15" type="MeshInstance3D" parent="track4" index="15"]
+transform = Transform3D(0.928803, 0, -0.370574, 0, 1, 0, 0.370574, 0, 0.928803, 137.456, 0, 1.78592)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p16" type="MeshInstance3D" parent="track4" index="16"]
+transform = Transform3D(0.928803, 0, -0.370574, 0, 1, 0, 0.370574, 0, 0.928803, 138.628, 0, 2.18225)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p17" type="MeshInstance3D" parent="track4" index="17"]
+transform = Transform3D(0.971018, 0, -0.239008, 0, 1, 0, 0.239008, 0, 0.971018, 139.217, 0, 0.830369)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="track5" type="Node3D" parent="." index="20"]
+
+[node name="p0" type="MeshInstance3D" parent="track5" index="0"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 139.217, 0, 0.830369)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p1" type="MeshInstance3D" parent="track5" index="1"]
+transform = Transform3D(0.999983, 0, 0.00582953, 0, 1, 0, -0.00582953, 0, 0.999983, 139.226, 0, 2.3275)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p2" type="MeshInstance3D" parent="track5" index="2"]
+transform = Transform3D(0.987563, 0, -0.157227, 0, 1, 0, 0.157227, 0, 0.987563, 141.226, 0, 2.6288)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p3" type="MeshInstance3D" parent="track5" index="3"]
+transform = Transform3D(0.987563, 0, -0.157227, 0, 1, 0, 0.157227, 0, 0.987563, 141.339, 0, 2.64681)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p4" type="MeshInstance3D" parent="track5" index="4"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 145.144, 0, 2.89754)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p5" type="MeshInstance3D" parent="track5" index="5"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 149.616, 0, 3.03203)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p6" type="MeshInstance3D" parent="track5" index="6"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 149.738, 0, 3.03572)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p7" type="MeshInstance3D" parent="track5" index="7"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 159.662, 0, 3.33424)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p8" type="MeshInstance3D" parent="track5" index="8"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 168.015, 0, 3.5855)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p9" type="MeshInstance3D" parent="track5" index="9"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 168.166, 0, 3.59005)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p10" type="MeshInstance3D" parent="track5" index="10"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 178.8, 0, 3.67667)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="p11" type="MeshInstance3D" parent="track5" index="11"]
+transform = Transform3D(0.999548, 0, -0.0300673, 0, 1, 0, 0.0300673, 0, 0.999548, 191.285, 0, 3.95603)
+visible = false
+mesh = SubResource("BoxMesh_y8vaw")
+
+[node name="TargetBoard" parent="." index="21" instance=ExtResource("6_v8cc0")]
+transform = Transform3D(0.0451209, 0, 0.202008, 0, 0.206986, 0, -0.202008, 0, 0.0451209, 25.9703, 0.71408, 0.446906)
+
+[node name="TargetBoard2" parent="." index="22" instance=ExtResource("6_v8cc0")]
+transform = Transform3D(0.0232448, 0, 0.205677, 0, 0.206986, 0, -0.205677, 0, 0.0232448, 64.6005, 0.71408, -0.64391)
+
+[node name="TargetBoard3" parent="." index="23" instance=ExtResource("6_v8cc0")]
+transform = Transform3D(0.00712983, 0, 0.206863, 0, 0.206986, 0, -0.206863, 0, 0.00712983, 95.4188, 0.71408, -2.76466)
+
+[node name="TargetBoard4" parent="." index="24" instance=ExtResource("6_v8cc0")]
+transform = Transform3D(0.0463082, 0, 0.201739, 0, 0.206986, 0, -0.201739, 0, 0.0463082, 139.865, 0.71408, -2.52975)
+
+[node name="FinishArea3D" type="MeshInstance3D" parent="." index="25"]
+transform = Transform3D(-0.0170449, 0, -0.304983, 0, 1, 0, 1.62491, 0, -0.0031992, 189.659, 0.198343, 3.77718)
 visible = false
 mesh = SubResource("BoxMesh_tbqmx")
 
@@ -446,6 +856,3 @@ mesh = SubResource("BoxMesh_tbqmx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinishArea3D/Area3DFinish" index="0"]
 shape = SubResource("BoxShape3D_d168w")
-
-[node name="TargetBoard" parent="." index="18" instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.0456002, 0, 0.201901, 0, 0.206986, 0, -0.201901, 0, 0.0456002, 25.9674, 0.630276, 0.440817)

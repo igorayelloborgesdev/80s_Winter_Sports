@@ -32,7 +32,11 @@ public partial class Biathlon : Node
     public void InstantiateRail()
     {
         pointsList.Add(pointsList1.ToList());
-        
+        pointsList.Add(pointsList2.ToList());
+        pointsList.Add(pointsList3.ToList());
+        pointsList.Add(pointsList4.ToList());
+        pointsList.Add(pointsList5.ToList());
+
         int count = 0;
         int countId = 0;
         for (int a = 0; a < pointsList.Count; a++)
@@ -76,10 +80,10 @@ public partial class Biathlon : Node
         return app_arc_length;
     }
     private void InstantiateSpeedCollider()
-    {
-        int count = 0;
+    {        
         for (int a = 0; a < biathlonTrackDTOList.Count; a++)
         {
+            int count = 0;
             directionArrowList.Add(new List<DirectionArrow>());
             for (int i = 0; i < biathlonTrackDTOList[a].Count; i++)
             {                

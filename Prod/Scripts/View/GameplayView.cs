@@ -37,6 +37,12 @@ public partial class GameplayView : Control
     [Export] Label errorLabelScore = null;
     [Export] Label windDirection = null;
     [Export] Control windDirectionArrow = null;
+    [Export] Control controlSkiSpeedSkatingScreen = null;
+    [Export] Control controlBiathlonScreen = null;
+    [Export] Label bestScoreLabel = null;
+    [Export] Label timeScoreLabel = null;
+    [Export] Label errorsScoreLabel = null;
+    [Export] Label lastScoreLabel = null;
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
@@ -80,6 +86,8 @@ public partial class GameplayView : Control
         gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
         gamePlayController.SetCountryUIFinishScreen(prefabName, countryCodeLabelFinish, countryFlagTextureRectFinish);
         gamePlayController.SetTimeScoreBestLastLabelFinish(timeScoreBestLabelFinish, timeScoreLastLabelFinish);
+        gamePlayController.SetTimeScoreBestLastLabelFinishBiathlon(bestScoreLabel, timeScoreLabel, errorsScoreLabel, lastScoreLabel);
+        gamePlayController.SetTimeScreenControl(controlSkiSpeedSkatingScreen, controlBiathlonScreen);
         SetDirectionArrowList();
         InstantiateCharacter();
         InitStaticVariables();
@@ -205,12 +213,12 @@ public partial class GameplayView : Control
     #endregion
     #region Events
     private void QuitToMainMenu()
-    {
+    {     
         Engine.TimeScale = 1.0f;
         GetTree().ChangeSceneToFile("res://Scenes/MainScene.tscn");
     }
     private void ReturnMenu()
-    {
+    {        
         gamePlayController.UnPause();
     }
     private void ReturnMenuFromFinishScreen()

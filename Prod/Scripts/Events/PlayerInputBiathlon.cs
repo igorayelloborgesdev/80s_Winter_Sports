@@ -10,6 +10,7 @@ using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
 using WinterSports.Scripts.Static;
 using static Character;
+using static Godot.TextServer;
 
 namespace WinterSports.Scripts.Events
 {
@@ -36,6 +37,7 @@ namespace WinterSports.Scripts.Events
         private int windPower = 0;
         private float caX = 0.0f;
         private float coY = 0.0f;
+        private List<TargetBoard> targetBoardList = new List<TargetBoard>();
         #endregion
         #region Constant        
         IDictionary<int, string> animName = new Dictionary<int, string>()
@@ -62,7 +64,14 @@ namespace WinterSports.Scripts.Events
                 }
                 else
                 {
-                    PlayAnimation(animationPlayer, 2);
+                    if (biathlonTrackDTOList[BiathlonStatic.id].Count == startPointId && BiathlonStatic.isLapFinished)                        
+                    {                        
+                        PlayAnimation(animationPlayer, 1);
+                    }
+                    else
+                    {                        
+                        PlayAnimation(animationPlayer, 2);
+                    }                    
                 }                
                 GetNotScore();
             }
@@ -115,15 +124,26 @@ namespace WinterSports.Scripts.Events
             speed = (float)timeSpeedCurrentMax;
             timerGamePlayController = new TimerController();
             timerGamePlayController.Init();
-            timerGamePlayController.StartTimer();
+            timerGamePlayController.StartTimer();            
             startPointId = 0;
+            shootingTries = 5;
+            shootingErrors = 0;
+            windAngle = 0;
+            windPower = 0;
+            caX = 0.0f;
+            coY = 0.0f;
         }
         public void Reset()
         {
             speed = (float)timeSpeedCurrentMax;
+            foreach (var targetBoard in targetBoardList)
+            {
+                targetBoard.EnableAllTargetById();
+            }
+            targetBoardList.Clear();
         }
         public float GetSpeed()
-        {
+        {            
             return (float)(-1.0f * ((speed - timeSpeedCurrentMin) - (timeSpeedCurrentMax - timeSpeedCurrentMin)));
         }
         public float GetMaxSpeed()
@@ -160,15 +180,15 @@ namespace WinterSports.Scripts.Events
                 finishSessionScreen.Hide();
         }
         private void SpeedManager(int index)
-        {
+        {            
             if (BiathlonStatic.isCollided && (BiathlonStatic.direction == index))
-            {
+            {                
                 speed -= (float)timeSpeedCurrentInc;
                 SetArrowColor(1);
                 SetPlayerScore(true);
             }
             else
-            {
+            {             
                 speed += (float)timeSpeedCurrentInc;
                 SetArrowColor(2);
                 SetEnableDisableArrow(false);
@@ -178,12 +198,11 @@ namespace WinterSports.Scripts.Events
         private void SetArrowColor(int colorId)
         {
             try
-            {
+            {             
                 directionArrowList[BiathlonStatic.id][BiathlonStatic.idY].SetBodyColor(colorId);
             }
             catch (Exception ex)
-            {
-                BiathlonStatic.id = 0;
+            {                                
                 BiathlonStatic.idY = 0;
                 BiathlonStatic.currentIndex = 0;
             }
@@ -206,8 +225,7 @@ namespace WinterSports.Scripts.Events
                 directionArrowList[BiathlonStatic.id][BiathlonStatic.idY].enable = enable;
             }
             catch (Exception ex)
-            {
-                BiathlonStatic.id = 0;
+            {                
                 BiathlonStatic.idY = 0;
                 BiathlonStatic.currentIndex = 0;
             }
@@ -217,10 +235,10 @@ namespace WinterSports.Scripts.Events
             try
             {
                 if (!BiathlonStatic.isShooting)
-                {
+                {                    
                     if (timerGamePlayController.GetTimer() > DefineSpeed())
                     {
-                        if (biathlonTrackDTOList[BiathlonStatic.id].Count == startPointId)
+                        if (biathlonTrackDTOList[BiathlonStatic.id].Count == startPointId && !BiathlonStatic.isLapFinished)
                         {
                             BiathlonStatic.isShooting = true;
                             character.SpeedBoxShowHide(false);
@@ -232,6 +250,7 @@ namespace WinterSports.Scripts.Events
                             character.SetShoots(shootingTries);
                             character.SetErrors(shootingErrors);
                             GenerateWind();
+                            speed = 0.0f;
                         }
                         else
                             startPointId++;
@@ -400,20 +419,25 @@ namespace WinterSports.Scripts.Events
             }
 
         }
-
         private void Shoot()
-        {                                    
+        {            
             if (character.GetTargetRayCast().IsColliding())
-            {
-                var collider = character.GetTargetRayCast().GetCollider() as Node;
+            {                
+                var collider = character.GetTargetRayCast().GetCollider() as Node;                
                 if (collider is not null)
-                {
+                {                    
                     var target = collider.GetParent() as Target;
                     if (target.GetSetEnable)
-                    {
-                        var targetBoard = collider.GetParent().GetParent() as TargetBoard;
+                    {                        
+                        var targetBoard = collider.GetParent().GetParent() as TargetBoard;                        
                         targetBoard.DisableTargetById(target.GetId);
-                        target.GetSetEnable = false;                        
+                        target.GetSetEnable = false;
+                        targetBoardList.Add(targetBoard);
+                    }
+                    else 
+                    {
+                        shootingErrors++;
+                        character.SetErrors(shootingErrors);
                     }
                 }                
             }
@@ -423,7 +447,28 @@ namespace WinterSports.Scripts.Events
                 character.SetErrors(shootingErrors);                
             }
             shootingTries--;
-            character.SetShoots(shootingTries);            
+            character.SetShoots(shootingTries);
+            DefineShootFinishing();
+        }
+        private void DefineShootFinishing()
+        {
+            if (shootingTries == 0)
+            {                
+                BiathlonStatic.id++;
+                BiathlonStatic.idY = 0;
+                BiathlonStatic.isShooting = false;
+                BiathlonStatic.isCollided = false;
+                BiathlonStatic.direction = 0;
+                character.statesSki = StatesSki.Init;                
+                character.ShowHideControlSkiSpeedSkatingBiathlon(true);
+                character.ShowHideControlBiathlon(false);
+                character.MoveCameraPositionRotation(1);
+                character.ShowHideTarget(false);
+                character.SpeedBoxShowHide(true);
+                startPointId = 0;
+                speed = (float)timeSpeedCurrentMax;
+                shootingTries = 5;
+            }
         }
         private void GenerateWind()
         {

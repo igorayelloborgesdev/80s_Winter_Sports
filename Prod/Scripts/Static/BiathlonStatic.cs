@@ -16,6 +16,7 @@ namespace WinterSports.Scripts.Static
         public static int currentIndex = 0;
         public static bool isNotScore = false;
         public static bool isShooting = false;
+        public static bool isLapFinished = false;
         #endregion
         #region Methods
         public static void Reset()
@@ -27,7 +28,8 @@ namespace WinterSports.Scripts.Static
             currentIndex = 0;
             isNotScore = false;
             isShooting = false;
-    }
+            isLapFinished = false;
+        }
         #endregion
     }
 }

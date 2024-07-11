@@ -86,7 +86,7 @@ public partial class SpeedContact : Area3D
             {
                 BiathlonStatic.isCollided = true;
                 BiathlonStatic.direction = directionArrow.direction;
-                BiathlonStatic.idY = directionArrow.id;
+                BiathlonStatic.idY = directionArrow.id;                
             }
         }
 

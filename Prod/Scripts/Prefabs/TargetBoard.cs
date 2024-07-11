@@ -13,5 +13,21 @@ public partial class TargetBoard : Node
         targetDisable[id].Show();
         targetEnable[id].Hide();                
     }
+    public void EnableAllTargetById()
+    {
+        foreach (var target in targetEnable) 
+        {
+            var targetObj = target as Target;
+            targetObj.GetSetEnable = true;
+        }
+        foreach (var target1 in targetDisable)
+        {
+            target1.Hide();            
+        }
+        foreach (var target2 in targetEnable)
+        {
+            target2.Show();
+        }        
+    }
     #endregion
 }

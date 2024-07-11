@@ -24,7 +24,7 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
@@ -42,18 +42,24 @@ readySetGoLabel = NodePath("CanvasLayer/ReadySetGoControl/ReadySetGoLabel")
 countryCodeLabel = NodePath("CanvasLayer/HUD/CountryCode")
 countryFlagTextureRect = NodePath("CanvasLayer/HUD/CountryFlag")
 finishSessionScreen = NodePath("CanvasLayer/FinishSessionControl")
-backMenuFinishButton = NodePath("CanvasLayer/FinishSessionControl/BackToMainMenuButton")
-returnFinishButton = NodePath("CanvasLayer/FinishSessionControl/BackMenuButton")
+backMenuFinishButton = NodePath("CanvasLayer/FinishSessionControl/BackToMainMenuButtonFinish")
+returnFinishButton = NodePath("CanvasLayer/FinishSessionControl/BackMenuButtonFinish")
 countryCodeLabelFinish = NodePath("CanvasLayer/FinishSessionControl/CountryCode")
 countryFlagTextureRectFinish = NodePath("CanvasLayer/FinishSessionControl/CountryFlag")
-timeScoreBestLabelFinish = NodePath("CanvasLayer/FinishSessionControl/BestScoreLabel")
-timeScoreLastLabelFinish = NodePath("CanvasLayer/FinishSessionControl/LastScoreLabel")
+timeScoreBestLabelFinish = NodePath("CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating/BestScoreLabel")
+timeScoreLastLabelFinish = NodePath("CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating/LastScoreLabel")
 controlSkiSpeedSkatingBiathlon = NodePath("CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon")
 controlBiathlon = NodePath("CanvasLayer/HUD/ControlBiathlon")
 shoots = NodePath("CanvasLayer/HUD/ControlBiathlon/Shoots")
 errorLabelScore = NodePath("CanvasLayer/HUD/ControlBiathlon/ErrorLabelScore")
 windDirection = NodePath("CanvasLayer/HUD/ControlBiathlon/WindDirection")
 windDirectionArrow = NodePath("CanvasLayer/HUD/ControlBiathlon/WindDirectionArrow")
+controlSkiSpeedSkatingScreen = NodePath("CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating")
+controlBiathlonScreen = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon")
+bestScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/BestScoreLabel")
+timeScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/TimeScoreLabel")
+errorsScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/ErrorsScoreLabel")
+lastScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/LastScoreLabel")
 
 [node name="SceneSki" type="Control" parent="."]
 anchors_preset = 0
@@ -378,8 +384,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -657,48 +661,221 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="BackToMainMenuButton" type="Button" parent="CanvasLayer/FinishSessionControl"]
-modulate = Color(0.862745, 0.862745, 0.862745, 1)
-self_modulate = Color(1, 1, 1, 0)
+[node name="ControlSkiSpeedSkating" type="Control" parent="CanvasLayer/FinishSessionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BestScore" type="Label" parent="CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating"]
+modulate = Color(0, 0.498039, 0.776471, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -252.0
-offset_top = 574.0
-offset_right = 260.0
-offset_bottom = 630.0
+offset_left = -349.0
+offset_top = 266.0
+offset_right = -19.0
+offset_bottom = 332.0
 grow_horizontal = 2
-
-[node name="BackToMainMenuNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl/BackToMainMenuButton"]
-modulate = Color(0, 0.607843, 0.941176, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("13_18oum")
-region_rect = Rect2(0, 0, 31, 31)
-patch_margin_left = 10
-patch_margin_top = 8
-patch_margin_right = 7
-patch_margin_bottom = 9
-
-[node name="BackToMainMenuTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/BackToMainMenuButton/BackToMainMenuNinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_bdmbr")
-theme_override_font_sizes/font_size = 18
-text = "Quit to main menu"
-horizontal_alignment = 1
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Best Score:"
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BackMenuButton" type="Button" parent="CanvasLayer/FinishSessionControl"]
+[node name="BestScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 5.0
+offset_top = 268.0
+offset_right = 335.0
+offset_bottom = 334.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+vertical_alignment = 1
+
+[node name="LastScore" type="Label" parent="CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -347.0
+offset_top = 342.0
+offset_right = -17.0
+offset_bottom = 408.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Last Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LastScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 7.0
+offset_top = 344.0
+offset_right = 337.0
+offset_bottom = 410.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+vertical_alignment = 1
+
+[node name="ControlBiathlon" type="Control" parent="CanvasLayer/FinishSessionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BestScore" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -333.0
+offset_top = 330.0
+offset_right = -3.0
+offset_bottom = 396.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Best Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 21.0
+offset_top = 332.0
+offset_right = 351.0
+offset_bottom = 398.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+vertical_alignment = 1
+
+[node name="TimeScore" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 262.0
+offset_right = -257.0
+offset_bottom = 328.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Time:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TimeScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -233.0
+offset_top = 264.0
+offset_right = 13.0
+offset_bottom = 330.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+vertical_alignment = 1
+
+[node name="ErrorsScore" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 24.0
+offset_top = 262.0
+offset_right = 199.0
+offset_bottom = 328.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Errors:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ErrorsScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 223.0
+offset_top = 264.0
+offset_right = 286.0
+offset_bottom = 330.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "20"
+vertical_alignment = 1
+
+[node name="LastScore" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -331.0
+offset_top = 406.0
+offset_right = -1.0
+offset_bottom = 472.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Last Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LastScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl/ControlBiathlon"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 23.0
+offset_top = 408.0
+offset_right = 353.0
+offset_bottom = 474.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+vertical_alignment = 1
+
+[node name="BackMenuButtonFinish" type="Button" parent="CanvasLayer/FinishSessionControl"]
 modulate = Color(0.862745, 0.862745, 0.862745, 1)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -711,7 +888,7 @@ offset_right = 260.0
 offset_bottom = 558.0
 grow_horizontal = 2
 
-[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl/BackMenuButton"]
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl/BackMenuButtonFinish"]
 modulate = Color(0, 0.607843, 0.941176, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -726,7 +903,7 @@ patch_margin_top = 8
 patch_margin_right = 7
 patch_margin_bottom = 9
 
-[node name="BackTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/BackMenuButton/BackNinePatchRect"]
+[node name="BackTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/BackMenuButtonFinish/BackNinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -736,6 +913,47 @@ grow_vertical = 2
 theme = SubResource("Theme_bdmbr")
 theme_override_font_sizes/font_size = 18
 text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMainMenuButtonFinish" type="Button" parent="CanvasLayer/FinishSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 574.0
+offset_right = 260.0
+offset_bottom = 630.0
+grow_horizontal = 2
+
+[node name="BackToMainMenuNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishSessionControl/BackToMainMenuButtonFinish"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToMainMenuTitleLabel" type="Label" parent="CanvasLayer/FinishSessionControl/BackToMainMenuButtonFinish/BackToMainMenuNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Quit to main menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -767,70 +985,4 @@ theme = SubResource("Theme_l04wb")
 theme_override_font_sizes/font_size = 30
 text = "AUT"
 horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BestScore" type="Label" parent="CanvasLayer/FinishSessionControl"]
-modulate = Color(0, 0.498039, 0.776471, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -349.0
-offset_top = 266.0
-offset_right = -19.0
-offset_bottom = 332.0
-grow_horizontal = 2
-theme = SubResource("Theme_l04wb")
-theme_override_font_sizes/font_size = 25
-text = "Best Score:"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="BestScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl"]
-modulate = Color(0, 0.498039, 0.776471, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 5.0
-offset_top = 268.0
-offset_right = 335.0
-offset_bottom = 334.0
-grow_horizontal = 2
-theme = SubResource("Theme_l04wb")
-theme_override_font_sizes/font_size = 25
-text = "99:99.999"
-vertical_alignment = 1
-
-[node name="LastScore" type="Label" parent="CanvasLayer/FinishSessionControl"]
-modulate = Color(0, 0.498039, 0.776471, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -347.0
-offset_top = 342.0
-offset_right = -17.0
-offset_bottom = 408.0
-grow_horizontal = 2
-theme = SubResource("Theme_l04wb")
-theme_override_font_sizes/font_size = 25
-text = "Last Score:"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="LastScoreLabel" type="Label" parent="CanvasLayer/FinishSessionControl"]
-modulate = Color(0, 0.498039, 0.776471, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 7.0
-offset_top = 344.0
-offset_right = 337.0
-offset_bottom = 410.0
-grow_horizontal = 2
-theme = SubResource("Theme_l04wb")
-theme_override_font_sizes/font_size = 25
-text = "99:99.999"
 vertical_alignment = 1

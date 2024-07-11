@@ -12,6 +12,7 @@ public partial class CharacterCollision : Area3D
             if (body.Name.ToString().Trim().ToLower() == "area3dfinish")
             {
                 SpeedSkatingStatic.isLapFinished = true;
+                BiathlonStatic.isLapFinished = true;
             }                
         }
         catch (Exception ex) { }

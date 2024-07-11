@@ -48,15 +48,10 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Biathlon 
-..Retornar corrida<-
-..Penalidades
-..Finalização
-..Reset
+.Luge 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Luge 
 .Bobsleigh 
 .Ski jumping 
 .Cross Country
@@ -85,14 +80,4 @@ Esportes
 ..delete
 
 .Joystick
-
 .Tutorial
-..Downhill
-..Giant slalom
-..Speed skating 500 metres
-..Speed skating 1500 metres
-..Biathlon
-..Luge
-..Bobsleigh
-..Ski jumping
-..Ice Hockey

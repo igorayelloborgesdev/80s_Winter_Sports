@@ -49,6 +49,12 @@ namespace WinterSports.Scripts.Controller
         private Label errorLabelScore = null;
         private Label windDirection = null;
         private Control windDirectionArrow = null;
+        private Control controlSkiSpeedSkatingScreen = null;
+        private Control controlBiathlonScreen = null;
+        private Label bestScoreLabel = null;
+        private Label timeScoreLabel = null;
+        private Label errorsScoreLabel = null;
+        private Label lastScoreLabel = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -74,7 +80,6 @@ namespace WinterSports.Scripts.Controller
             if (prefabName == "Biathlon")
                 UpdateBiathlon(delta);
         }
-
         private void UpdateSki(double delta) 
         {
             timerGamePlayController.TimerRunning(delta);
@@ -107,12 +112,14 @@ namespace WinterSports.Scripts.Controller
                 SetTimeScore();
                 timerController.StopTimer();
                 TimeToReset(delta);
+                ShowControlSkiSpeedSkatingScreen();
             }
             if (SkiStatic.isCollided)
             {                
                 this.character.statesSki = Character.StatesSki.Disqualified;                
                 SetTimeScore();
                 TimeToReset(delta);
+                ShowControlSkiSpeedSkatingScreen();
             }
             timerController.TimerRunning(delta);
             updateTimer();
@@ -155,14 +162,8 @@ namespace WinterSports.Scripts.Controller
                 timerController.StopTimer();
                 SetTimeScore();
                 TimeToReset(delta);
-                ResetSpeedSkating();                
-            }
-            if (SkiStatic.isCollided)
-            {
-                this.character.statesSki = Character.StatesSki.Disqualified;
-                SetTimeScore();
-                TimeToReset(delta);
-                ResetSpeedSkating();                
+                ResetSpeedSkating();
+                ShowControlSkiSpeedSkatingScreen();
             }
             timerController.TimerRunning(delta);
             updateTimer();
@@ -196,7 +197,12 @@ namespace WinterSports.Scripts.Controller
             }
             if (this.character.statesSki == Character.StatesSki.Init)
             {
-                timerController.StartTimer();                                                
+                timerController.StartTimer();
+                DefineEndRunBiathlon();                
+            }
+            if (this.character.statesSki == Character.StatesSki.Init && timerController.GetTimerModel.states == TimerModel.States.Stop)
+            {                
+                timerController.UnstopTimer();             
             }
             if (this.character.statesSki == Character.StatesSki.Shooting)
             {
@@ -204,16 +210,16 @@ namespace WinterSports.Scripts.Controller
             }
             if (this.character.statesSki == Character.StatesSki.Finish)
             {
+                setScore = true;
                 timerController.StopTimer();
-                SetTimeScore();
+                SetTimeScoreBiathlon();
                 TimeToReset(delta);
                 ResetBiathlon();
+                ShowControlBiathlonScreen();
             }
             timerController.TimerRunning(delta);
             updateTimer();
-            UpdateSpeedLabel();
-
-            //GD.Print(this.character.statesSki);//<-
+            UpdateSpeedLabel();            
         }
         private void TimeToReset(double delta)
         {
@@ -257,8 +263,9 @@ namespace WinterSports.Scripts.Controller
         }
         public void ResetBiathlon()
         {
-            SpeedSkatingStatic.Reset();
-            ResetDirectionArrowBiathlon();            
+            BiathlonStatic.Reset();
+            ResetDirectionArrowBiathlon();
+            character.Reset();
         }
         public void SetDefaultPositionRotation(Vector3 initPosition, Vector3 initRotation) 
         {
@@ -292,7 +299,17 @@ namespace WinterSports.Scripts.Controller
         public void ShowHideFinishSessionScreen() 
         {
             character.ShowHideFinishSessionScreen();
-        } 
+        }
+        public void ShowControlSkiSpeedSkatingScreen()
+        {
+            controlSkiSpeedSkatingScreen.Show();
+            controlBiathlonScreen.Hide();
+        }
+        public void ShowControlBiathlonScreen()
+        {
+            controlSkiSpeedSkatingScreen.Hide();
+            controlBiathlonScreen.Show();
+        }
         #endregion
         #region Timer
         public void SetTimerLabel(string prefabName, Label timeLabel)
@@ -305,7 +322,7 @@ namespace WinterSports.Scripts.Controller
         public void updateTimer()
         {            
             if (this.character.statesSki != Character.StatesSki.Finish && this.character.statesSki != Character.StatesSki.Disqualified)
-            {
+            {                         
                 timeLabel.Text = TimeSpan.FromSeconds(timerController.GetTimer()).ToString("mm':'ss':'fff");
             }
             if (this.character.statesSki == Character.StatesSki.Disqualified)
@@ -340,6 +357,25 @@ namespace WinterSports.Scripts.Controller
                 setScore = false;
             }            
         }
+        private void SetTimeScoreBiathlon()
+        {            
+            if (setScore)
+            {
+                gamePlayModel.biathlonCurrentTimeScore = timerController.GetTimer();
+                gamePlayModel.shootErrors = character.GetErrors();
+                gamePlayModel.currentTimeScore = gamePlayModel.biathlonCurrentTimeScore + (10.0 * gamePlayModel.shootErrors);
+                if (gamePlayModel.currentTimeScore < gamePlayModel.bestTimeScore)
+                {
+                    gamePlayModel.bestTimeScore = gamePlayModel.currentTimeScore;                    
+                }
+                if (gamePlayModel.bestTimeScore == 0.0f)
+                {
+                    gamePlayModel.bestTimeScore = gamePlayModel.currentTimeScore;
+                }
+                SetFinishTimeLabelBiathlon();
+                setScore = false;
+            }
+        }
         private void SetFinishTimeLabel()
         {
             if (gamePlayModel.bestTimeScore == 0.0f)
@@ -358,6 +394,20 @@ namespace WinterSports.Scripts.Controller
             {
                 timeScoreLastLabelFinish.Text = TimeSpan.FromSeconds(gamePlayModel.currentTimeScore).ToString("mm':'ss':'fff");
             }
+        }
+        private void SetFinishTimeLabelBiathlon()
+        {
+            if (gamePlayModel.bestTimeScore == 0.0f)
+            {
+                bestScoreLabel.Text = ("--:--:---");
+            }
+            else
+            {
+                bestScoreLabel.Text = TimeSpan.FromSeconds(gamePlayModel.bestTimeScore).ToString("mm':'ss':'fff");
+            }
+            errorsScoreLabel.Text = gamePlayModel.shootErrors.ToString();
+            timeScoreLabel.Text = TimeSpan.FromSeconds(gamePlayModel.biathlonCurrentTimeScore).ToString("mm':'ss':'fff");
+            lastScoreLabel.Text = TimeSpan.FromSeconds(gamePlayModel.currentTimeScore).ToString("mm':'ss':'fff");
         }
         #endregion
         #region Speed
@@ -405,6 +455,18 @@ namespace WinterSports.Scripts.Controller
         {
             this.timeScoreBestLabelFinish = timeScoreBestLabelFinish;
             this.timeScoreLastLabelFinish = timeScoreLastLabelFinish;
+        }
+        public void SetTimeScreenControl(Control controlSkiSpeedSkatingScreen, Control controlBiathlonScreen)
+        {
+            this.controlSkiSpeedSkatingScreen = controlSkiSpeedSkatingScreen;
+            this.controlBiathlonScreen = controlBiathlonScreen;
+        }
+        public void SetTimeScoreBestLastLabelFinishBiathlon(Label BestScoreLabel, Label TimeScoreLabel, Label ErrorsScoreLabel, Label LastScoreLabel)
+        {
+            this.bestScoreLabel = BestScoreLabel;
+            this.timeScoreLabel = TimeScoreLabel;
+            this.errorsScoreLabel = ErrorsScoreLabel;
+            this.lastScoreLabel = LastScoreLabel;
         }
         #endregion
         #region Warning
@@ -524,13 +586,19 @@ namespace WinterSports.Scripts.Controller
         {
             this.character.SetRailBiathlon(startPointId, biathlonTrackDTOList);
         }
-
         public void SetBiathlonUILabels(Label shoots, Label errorLabelScore, Label windDirection, Control windDirectionArrow)
         {
             this.shoots = shoots;
             this.errorLabelScore = errorLabelScore;
             this.windDirection = windDirection;
             this.windDirectionArrow = windDirectionArrow;
+        }
+        public void DefineEndRunBiathlon()
+        {
+            if (BiathlonStatic.isLapFinished)
+            {                
+                this.character.statesSki = Character.StatesSki.Finish;
+            }
         }
         #endregion
         #region Get Set

@@ -53,6 +53,7 @@ public partial class Character : CharacterBody3D
     private Label errorLabelScore = null;
     private Label windDirection = null;
     private Control windDirectionArrow = null;
+    private int shootErrors = 0;
     #endregion
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
@@ -143,8 +144,9 @@ public partial class Character : CharacterBody3D
     public void Reset()
     {
         playerInput.PlayAnimation(animationPlayer, 1);
-        playerInput.Init();        
-    }
+        playerInput.Init();
+        playerInput.Reset();
+    }    
     public void GenerateBodyColor(Godot.Color aColor)
     {        
         GenerateColor(aColor, bodyMeshInstance3D);
@@ -454,7 +456,12 @@ public partial class Character : CharacterBody3D
     }
     public void SetErrors(int errors)
     {
+        this.shootErrors = errors;
         this.errorLabelScore.Text = errors.ToString();
+    }
+    public int GetErrors()
+    { 
+        return this.shootErrors;
     }
     public void SetWind(float angle, float power)
     {        

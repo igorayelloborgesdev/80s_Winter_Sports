@@ -23,18 +23,18 @@ namespace WinterSports.Scripts.Controller
         public void TimerRunning(double delta)
         {
             if (timerModel.states == TimerModel.States.Running)
-            {                
+            {
                 timerModel.timer += delta;
             }
         }
         public double GetTimer()
-        {            
+        {
             return timerModel.timer;
         }
         public void StartTimer()
         {
             if (timerModel.states == TimerModel.States.Init)
-            {                
+            {
                 timerModel.states = TimerModel.States.Running;
             }
         }
@@ -59,7 +59,13 @@ namespace WinterSports.Scripts.Controller
         }
         public void ResetTimerRunning()
         {
-            timerModel.timer = 0.0;            
+            timerModel.timer = 0.0;
+        }
+        #endregion
+        #region Get
+        public TimerModel GetTimerModel
+        {
+            get { return timerModel; }
         }
         #endregion
     }
