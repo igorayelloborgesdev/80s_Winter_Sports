@@ -49,6 +49,15 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Luge 
+..Impulso<-
+..Seguir trilho principal
+..Seguir trilho secundário
+..Ganhar velocidade na rampa
+..Perder velocidade fora da rampa
+..Perder velocidade contato com parede
+..UI
+..Finalização
+..Reset
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnnppa7evsab1"]
+
+[ext_resource type="PackedScene" uid="uid://dj8admlibsfl7" path="res://Art/3d/Sled.glb" id="1_h7uq4"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sled" parent="." instance=ExtResource("1_h7uq4")]

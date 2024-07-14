@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://gp0em2xcaaul"]
+
+[ext_resource type="PackedScene" uid="uid://ym35vp0hxx4" path="res://Art/3d/BobsleighLugeTrack.glb" id="1_8ovbq"]
+[ext_resource type="Texture2D" uid="uid://cjj1u0ip64un2" path="res://Art/3d/DonwhillTrack_tree.png" id="2_1yhbr"]
+[ext_resource type="PackedScene" uid="uid://emem201u3ntr" path="res://Prefab/gate_start.tscn" id="3_b5pdx"]
+[ext_resource type="PackedScene" uid="uid://nj3mjr6c218v" path="res://Prefab/gate_finish.tscn" id="4_f3cuq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xnbf"]
+shading_mode = 0
+albedo_color = Color(0.654902, 0.796078, 0.941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1cae"]
+shading_mode = 0
+albedo_color = Color(0.133333, 0.454902, 0.788235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m341o"]
+shading_mode = 0
+albedo_color = Color(0.0745098, 0.239216, 0.545098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ytt0p"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2_1yhbr")
+
+[node name="BobsleighLugeTrack" instance=ExtResource("1_8ovbq")]
+
+[node name="SpeedSlow" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2xnbf")
+
+[node name="SpeedSlowWall1" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_e1cae")
+
+[node name="SpeedSlowWall2" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_e1cae")
+
+[node name="SpeedSlowRoof" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_m341o")
+
+[node name="SpeedHigh" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_e1cae")
+
+[node name="SpeedNormal" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2xnbf")
+
+[node name="Tree_001" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ytt0p")
+surface_material_override/1 = SubResource("StandardMaterial3D_ytt0p")
+
+[node name="Tree_002" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ytt0p")
+surface_material_override/1 = SubResource("StandardMaterial3D_ytt0p")
+
+[node name="GateStart" parent="." index="8" instance=ExtResource("3_b5pdx")]
+transform = Transform3D(-0.00110173, 0, 0.0635628, 0, 0.0635724, 0, -0.0635628, 0, -0.00110173, 45.1949, 1.32596, -0.417753)
+
+[node name="GateFinish" parent="." index="9" instance=ExtResource("4_f3cuq")]
+transform = Transform3D(-0.000837682, 0, 0.0635669, 0, 0.0635724, 0, -0.0635669, 0, -0.000837682, 104.692, 1.30563, -7.20926)
