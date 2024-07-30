@@ -34,7 +34,8 @@ public partial class Character : CharacterBody3D
     private Control finishSessionScreen = null;
     private Control controlSkiSpeedSkatingBiathlon = null;
     private Control controlBiathlon = null;
-    private string prefabName = String.Empty;
+    //private string prefabName = String.Empty;
+    private string prefabName = "LugeBobsleigh";//<-
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
     private List<List<DirectionArrow>> directionArrowBiathlonList = new List<List<DirectionArrow>>();
@@ -54,7 +55,7 @@ public partial class Character : CharacterBody3D
     private Label windDirection = null;
     private Control windDirectionArrow = null;
     private int shootErrors = 0;
-    #endregion
+    #endregion    
     #region Constant
     private float[] scaleFactorArray = { 1.0f, 1.5f };
     private float increment = 0.01f;
@@ -106,19 +107,19 @@ public partial class Character : CharacterBody3D
         {
             if (statesSki > StatesSki.Go)
                 playerInput.PlayerInput(animationPlayer, delta);
-        }            
+        }
     }
     #endregion
     #region Methods
     private void Init()
-    {        
+    {                
         PlayerInputSetUp();
         playerInput.SetCharacterBody3D(this);
         playerInput.SetPauseScreen(pauseScreen);
         playerInput.SetFinishSessionScreen(finishSessionScreen);
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.SetCharacter(this);
-        playerInput.Init();
+        playerInput.Init();            
         //Sport Ski 
         if (prefabName == "skiTrack")
             InitSki();
@@ -140,6 +141,9 @@ public partial class Character : CharacterBody3D
         //Sport Biathlon
         if (prefabName == "Biathlon")
             playerInput = new PlayerInputBiathlon();
+        //Sport Luge
+        if (prefabName == "LugeBobsleigh")        
+            playerInput = new PlayerInputLuge();                
     }
     public void Reset()
     {
@@ -208,6 +212,10 @@ public partial class Character : CharacterBody3D
     {
         MoveCameraPositionRotation(id);
         ReScaleCharacter(id);
+    }
+    public void DisableCamera()
+    {
+        camera3D.Hide();
     }
     #endregion
     #region Get Set
@@ -468,5 +476,27 @@ public partial class Character : CharacterBody3D
         windDirectionArrow.RotationDegrees = angle;
         windDirection.Text = string.Format("{0:0.0}", power) + "m/s";
     }
+    #endregion
+    #region Luge
+    public void SetPlayerInputAnim()
+    {        
+        playerInput.PlayAnimation(animationPlayer, 2);
+    }
+    public void HideItemsForLuge()
+    {
+        foreach (var item in skiPole)
+        {
+            item.Hide();
+        }
+        foreach (var item in ski)
+        {
+            item.Hide();
+        }
+        foreach (var item in skiPoleBiathlon)
+        {
+            item.Hide();
+        }
+        rifle.Hide();
+    }    
     #endregion
 }

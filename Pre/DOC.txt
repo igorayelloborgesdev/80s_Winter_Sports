@@ -49,9 +49,9 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Luge 
-..Impulso<-
+..Setup cena<-
+..Impulso
 ..Seguir trilho principal
-..Seguir trilho secundário
 ..Ganhar velocidade na rampa
 ..Perder velocidade fora da rampa
 ..Perder velocidade contato com parede

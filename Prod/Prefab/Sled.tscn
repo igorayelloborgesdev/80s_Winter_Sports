@@ -1,7 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnnppa7evsab1"]
+[gd_scene load_steps=3 format=3 uid="uid://dnnppa7evsab1"]
 
-[ext_resource type="PackedScene" uid="uid://dj8admlibsfl7" path="res://Art/3d/Sled.glb" id="1_h7uq4"]
+[ext_resource type="PackedScene" uid="uid://dj8admlibsfl7" path="res://Art/3d/Sled.glb" id="1_1tg3h"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1uj4"]
+shading_mode = 0
+albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="Sled" parent="." instance=ExtResource("1_h7uq4")]
+[node name="Sled" instance=ExtResource("1_1tg3h")]
+
+[node name="SledLuge" parent="." index="0"]
+transform = Transform3D(1.51258, 0, 0, 0, 1.51258, 0, 0, 0, 1.51258, -0.697013, -0.357007, 1.93804)
+surface_material_override/0 = SubResource("StandardMaterial3D_u1uj4")
+
+[node name="SledLuge_001" parent="SledLuge" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_u1uj4")
+
+[node name="SledLuge_002" parent="SledLuge" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_u1uj4")
