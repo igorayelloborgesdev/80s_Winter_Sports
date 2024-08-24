@@ -12,5 +12,8 @@ namespace WinterSports.Scripts.DTO
         public Godot.Vector3 position { get; set; }
         public int id { get; set; }        
         public float distance { get; set; }
+        public bool isRamp { get; set; }
+        public float incRamp { get; set; }
+        public bool isLeftWall { get; set; }
     }
 }

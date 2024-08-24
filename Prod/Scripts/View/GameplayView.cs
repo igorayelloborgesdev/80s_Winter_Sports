@@ -11,6 +11,7 @@ public partial class GameplayView : Control
 {
     #region Exports
     [Export] private PackedScene characterPackedScene = null;
+    [Export] private PackedScene lugePackedScene = null;
     [Export] private MeshInstance3D initPoint = null;
     [Export] private GateStartFinish gateStart = null;
     [Export] private GateStartFinish gateFinish = null;
@@ -20,6 +21,7 @@ public partial class GameplayView : Control
     [Export] Button resetMenuButton = null;
     [Export] Label timeLabel = null;
     [Export] NinePatchRect speedNinePatchRect = null;
+    [Export] NinePatchRect impulseNinePatchRect = null;
     [Export] Control readySetGoControl = null;
     [Export] Label readySetGoLabel = null;
     [Export] Label countryCodeLabel = null;
@@ -39,19 +41,22 @@ public partial class GameplayView : Control
     [Export] Control windDirectionArrow = null;
     [Export] Control controlSkiSpeedSkatingScreen = null;
     [Export] Control controlBiathlonScreen = null;
+    [Export] Control controlLugeImpulse = null;
     [Export] Label bestScoreLabel = null;
     [Export] Label timeScoreLabel = null;
     [Export] Label errorsScoreLabel = null;
-    [Export] Label lastScoreLabel = null;
+    [Export] Label lastScoreLabel = null;    
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
     #endregion
     #region Variables
     private Character character = new Character();
+    private LugeSled lugeSled = new LugeSled();
     private Ski skiTrack = new Ski();
     private SpeedSkating speedSkatingTrack = new SpeedSkating();
     private Biathlon biathlonTrack = new Biathlon();
+    private LugeBobsleigh lugeBobsleigh = new LugeBobsleigh();
     private int levelId = 0;
     private string prefabName = String.Empty;
     #endregion
@@ -87,7 +92,9 @@ public partial class GameplayView : Control
         gamePlayController.SetCountryUIFinishScreen(prefabName, countryCodeLabelFinish, countryFlagTextureRectFinish);
         gamePlayController.SetTimeScoreBestLastLabelFinish(timeScoreBestLabelFinish, timeScoreLastLabelFinish);
         gamePlayController.SetTimeScoreBestLastLabelFinishBiathlon(bestScoreLabel, timeScoreLabel, errorsScoreLabel, lastScoreLabel);
-        gamePlayController.SetTimeScreenControl(controlSkiSpeedSkatingScreen, controlBiathlonScreen);
+        gamePlayController.SetTimeScreenControl(controlSkiSpeedSkatingScreen, controlBiathlonScreen, controlLugeImpulse);
+        gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
+        gamePlayController.SetImpulseLabel(impulseNinePatchRect);
         SetDirectionArrowList();
         InstantiateCharacter();
         InitStaticVariables();
@@ -108,6 +115,8 @@ public partial class GameplayView : Control
             InstantiateCharacterSpeedSkating();
         if (prefabName == "Biathlon")
             InstantiateCharacterBiathlon();
+        if (prefabName == "LugeBobsleigh")
+            InstantiateCharacterLugeBobsleigh();
     }
     private void InstantiateCharacterSki()
     {
@@ -120,6 +129,7 @@ public partial class GameplayView : Control
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
         gamePlayController.SetControlBiathlon(controlBiathlon);
+        gamePlayController.ShowHideControlLugeImpulse(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
         this.AddChild(character);
@@ -137,6 +147,7 @@ public partial class GameplayView : Control
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetRailSpeedSkating(speedSkatingTrack.GetStartPointId, speedSkatingTrack.GetSpeedSkatingTrackDTOList);
+        gamePlayController.ShowHideControlLugeImpulse(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
         this.AddChild(character);        
@@ -154,10 +165,27 @@ public partial class GameplayView : Control
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetRailBiathlon(biathlonTrack.GetStartPointId, biathlonTrack.GetBiathlonTrackDTOList);
+        gamePlayController.ShowHideControlLugeImpulse(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
         character.SetBiathlonUILabels(shoots, errorLabelScore, windDirection, windDirectionArrow);
         this.AddChild(character);
+    }
+    private void InstantiateCharacterLugeBobsleigh()
+    {
+        lugeSled = lugePackedScene.Instantiate<LugeSled>();
+        lugeSled.SetPrefabName(prefabName);
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
+        gamePlayController.SetCharacter(lugeSled);        
+        gamePlayController.SetPauseScreenLuge(pauseScreen);
+        gamePlayController.SetFinishSessionScreenLuge(finishSessionScreen);        
+        gamePlayController.SetControlSkiSpeedSkatingBiathlonLuge(controlSkiSpeedSkatingBiathlon, controlBiathlon);
+        gamePlayController.ShowHideControlLugeImpulse(true);        
+        lugeSled.GetSetStartPointIdInit = lugeBobsleigh.GetSetStartPointId;
+        lugeSled.GetSetStartPointId = lugeBobsleigh.GetSetStartPointId;
+        lugeSled.SetSpeedSkatingTrackDTOList = lugeBobsleigh.GetLugeTrackDTOList;
+        lugeSled.ShowHideControlLuge();        
+        this.AddChild(lugeSled);
     }
     private void AssignButtons()
     {
@@ -184,6 +212,8 @@ public partial class GameplayView : Control
             InstantiateLevelSpeedSkating(prefabScene, levelId - 4);
         if (prefabName == "Biathlon")
             InstantiateLevelBiathlon(prefabScene);
+        if (prefabName == "LugeBobsleigh")
+            InstantiateLevelLugeBobsleigh(prefabScene);        
     }
     private void InstantiateLevelSki(PackedScene prefabScene, int id)
     {
@@ -210,6 +240,14 @@ public partial class GameplayView : Control
         gamePlayController.SetBiathlonUILabels(shoots, errorLabelScore, windDirection, windDirectionArrow);        
         AddChild(biathlonTrack);
     }
+    private void InstantiateLevelLugeBobsleigh(PackedScene prefabScene)
+    {
+        lugeBobsleigh = prefabScene.Instantiate<LugeBobsleigh>();
+        initPoint = lugeBobsleigh.GetSetInitPoint();
+        lugeBobsleigh.InstantiateRail();
+        lugeSled.MovePlayerToStartPosition();        
+        AddChild(lugeBobsleigh);
+    }
     #endregion
     #region Events
     private void QuitToMainMenu()
@@ -219,10 +257,20 @@ public partial class GameplayView : Control
     }
     private void ReturnMenu()
     {        
+        if (prefabName == "LugeBobsleigh")
+        {
+            gamePlayController.UnPauseLuge();
+            return;
+        }        
         gamePlayController.UnPause();
     }
     private void ReturnMenuFromFinishScreen()
     {
+        if (prefabName == "LugeBobsleigh")
+        {
+            gamePlayController.ShowHideFinishSessionScreenLuge();
+            return;
+        }
         gamePlayController.ShowHideFinishSessionScreen();
     }
     private void ResetGameMenu()
@@ -241,6 +289,7 @@ public partial class GameplayView : Control
         SkiStatic.Reset();
         SpeedSkatingStatic.Reset();
         BiathlonStatic.Reset();
+        LugeStatic.Reset();
     }
     #endregion
 

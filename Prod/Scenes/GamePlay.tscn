@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://b25qr0ntq7ns2"]
+[gd_scene load_steps=74 format=3 uid="uid://b25qr0ntq7ns2"]
 
 [ext_resource type="PackedScene" uid="uid://dyc2ihlu1s18b" path="res://Prefab/sky.tscn" id="1_356u1"]
 [ext_resource type="Script" path="res://Scripts/View/GameplayView.cs" id="1_p3jv1"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cfbcl1augt02l" path="res://Prefab/speed_box.tscn" id="9_libwk"]
 [ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="10_canv2"]
 [ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="10_kdmjr"]
+[ext_resource type="PackedScene" uid="uid://dvfd0s1xpgdaf" path="res://Prefab/luge_sled.tscn" id="10_pyyon"]
 [ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="11_12gco"]
 [ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="13_18oum"]
 [ext_resource type="Texture2D" uid="uid://b2t8m1llbty4e" path="res://Art/UI/RectNeutral.png" id="14_8vguo"]
@@ -2393,19 +2394,21 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
 offset_bottom = 1.0
 script = ExtResource("1_p3jv1")
 characterPackedScene = SubResource("PackedScene_jr2v2")
+lugePackedScene = ExtResource("10_pyyon")
 pauseScreen = NodePath("CanvasLayer/PauseControl")
 backMenuButton = NodePath("CanvasLayer/PauseControl/BackToMainMenuButton")
 returnMenuButton = NodePath("CanvasLayer/PauseControl/BackMenuButton")
 resetMenuButton = NodePath("CanvasLayer/PauseControl/ResetMenuButton")
 timeLabel = NodePath("CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon/Time")
 speedNinePatchRect = NodePath("CanvasLayer/HUD/ControlSkiSpeedSkatingBiathlon/HUDBGSpeed/SpeedNinePatchRect")
+impulseNinePatchRect = NodePath("CanvasLayer/HUD/ControlLugeImpulse/HUDBGSpeed/ImpulseNinePatchRect")
 readySetGoControl = NodePath("CanvasLayer/ReadySetGoControl")
 readySetGoLabel = NodePath("CanvasLayer/ReadySetGoControl/ReadySetGoLabel")
 countryCodeLabel = NodePath("CanvasLayer/HUD/CountryCode")
@@ -2425,6 +2428,7 @@ windDirection = NodePath("CanvasLayer/HUD/ControlBiathlon/WindDirection")
 windDirectionArrow = NodePath("CanvasLayer/HUD/ControlBiathlon/WindDirectionArrow")
 controlSkiSpeedSkatingScreen = NodePath("CanvasLayer/FinishSessionControl/ControlSkiSpeedSkating")
 controlBiathlonScreen = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon")
+controlLugeImpulse = NodePath("CanvasLayer/HUD/ControlLugeImpulse")
 bestScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/BestScoreLabel")
 timeScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/TimeScoreLabel")
 errorsScoreLabel = NodePath("CanvasLayer/FinishSessionControl/ControlBiathlon/ErrorsScoreLabel")
@@ -2747,6 +2751,59 @@ grow_vertical = 0
 pivot_offset = Vector2(22.77, 14.73)
 texture = ExtResource("8_2trn4")
 expand_mode = 1
+
+[node name="ControlLugeImpulse" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUDBGSpeed" type="NinePatchRect" parent="CanvasLayer/HUD/ControlLugeImpulse"]
+modulate = Color(0.764706, 0.890196, 0.964706, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 525.0
+offset_top = 292.0
+offset_right = -516.0
+offset_bottom = -385.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="HUDBGSpeed2" type="NinePatchRect" parent="CanvasLayer/HUD/ControlLugeImpulse/HUDBGSpeed"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ImpulseNinePatchRect" type="NinePatchRect" parent="CanvasLayer/HUD/ControlLugeImpulse/HUDBGSpeed"]
+modulate = Color(0.921569, 0.639216, 0.152941, 1)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 231.0
+offset_bottom = 37.0
+texture = ExtResource("14_8vguo")
 
 [node name="ReadySetGoControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3

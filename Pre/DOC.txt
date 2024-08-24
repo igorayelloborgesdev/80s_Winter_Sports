@@ -49,15 +49,8 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Luge 
-..Setup cena<-
-..Impulso
-..Seguir trilho principal
-..Ganhar velocidade na rampa
-..Perder velocidade fora da rampa
-..Perder velocidade contato com parede
-..UI
-..Finalização
 ..Reset
+@Rotação inicial<-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -89,4 +82,5 @@ Esportes
 ..delete
 
 .Joystick
+.Sound
 .Tutorial

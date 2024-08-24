@@ -34,8 +34,7 @@ public partial class Character : CharacterBody3D
     private Control finishSessionScreen = null;
     private Control controlSkiSpeedSkatingBiathlon = null;
     private Control controlBiathlon = null;
-    //private string prefabName = String.Empty;
-    private string prefabName = "LugeBobsleigh";//<-
+    private string prefabName = String.Empty;
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
     private List<List<DirectionArrow>> directionArrowBiathlonList = new List<List<DirectionArrow>>();
@@ -112,8 +111,8 @@ public partial class Character : CharacterBody3D
     #endregion
     #region Methods
     private void Init()
-    {                
-        PlayerInputSetUp();
+    {        
+        PlayerInputSetUp();        
         playerInput.SetCharacterBody3D(this);
         playerInput.SetPauseScreen(pauseScreen);
         playerInput.SetFinishSessionScreen(finishSessionScreen);
@@ -131,7 +130,7 @@ public partial class Character : CharacterBody3D
             InitBiathlon();
     }
     private void PlayerInputSetUp()
-    {
+    {        
         //Sport Ski 
         if (prefabName == "skiTrack")
             playerInput = new PlayerInputSki();
@@ -478,9 +477,9 @@ public partial class Character : CharacterBody3D
     }
     #endregion
     #region Luge
-    public void SetPlayerInputAnim()
+    public void SetPlayerInputAnim(int id)
     {        
-        playerInput.PlayAnimation(animationPlayer, 2);
+        playerInput.PlayAnimation(animationPlayer, id);
     }
     public void HideItemsForLuge()
     {

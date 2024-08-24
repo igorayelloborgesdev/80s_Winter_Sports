@@ -68,7 +68,7 @@ public partial class Biathlon : Node
                 biathlonTrackDTOList[a][i].distance = initPoint.Position.DistanceTo(biathlonTrackDTOList[a][i].position);
             }            
         }
-        startPointId = biathlonTrackDTOList[0].OrderBy(x => x.distance).First().id;
+        startPointId = biathlonTrackDTOList[0].OrderBy(x => x.distance).First().id;        
         InstantiateSpeedCollider();
     }
     private float RailLength(int indexX, int indexY)

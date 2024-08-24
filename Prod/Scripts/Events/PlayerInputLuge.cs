@@ -18,6 +18,10 @@ namespace WinterSports.Scripts.Events
             {2,"Luge_Run"}
         };
         #endregion
+        #region Variables
+        private bool isPause = false;
+        private Control finishSessionScreen = null;
+        #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f) 
         { }
@@ -30,13 +34,19 @@ namespace WinterSports.Scripts.Events
         public void SetPauseScreen(Control pauseScreen)
         { }
         public void SetFinishSessionScreen(Control finishSessionScreen)
-        { }
+        {
+            this.finishSessionScreen = finishSessionScreen;
+        }
         public void Pause()
         { }
         public void UnPause()
         { }
         public void ShowHideFinishSessionScreen()
-        { }
+        {
+            isPause = !isPause;
+            Engine.TimeScale = isPause ? 0.0f : 1.0f;
+            ShowHideFinishSessionScreenMenu(isPause);
+        }
         public void Init()
         { }
         public void Reset()
@@ -51,6 +61,15 @@ namespace WinterSports.Scripts.Events
         { }
         public void SetCharacter(Character character)
         { }
+        #endregion
+        #region Methods
+        private void ShowHideFinishSessionScreenMenu(bool isPause)
+        {
+            if (isPause)
+                finishSessionScreen.Show();
+            else
+                finishSessionScreen.Hide();
+        }
         #endregion
     }
 }

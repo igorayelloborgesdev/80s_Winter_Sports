@@ -26,12 +26,14 @@ namespace WinterSports.Scripts.Controller
         #endregion
         #region Variables        
         private Character character = null;
+        private LugeSled lugeSled = null;
         private Vector3 initPosition = Vector3.Zero;
         private Vector3 initRotation = Vector3.Zero;
         private Control pauseScreen = null;
         private Control finishSessionScreen = null;
         private Label timeLabel = null;
         private NinePatchRect speedNinePatchRect = null;
+        private NinePatchRect impulseNinePatchRect = null;
         private Control readySetGoControl = null;
         private Label readySetGoLabel = null;
         private Label countryCodeLabel = null;
@@ -51,6 +53,7 @@ namespace WinterSports.Scripts.Controller
         private Control windDirectionArrow = null;
         private Control controlSkiSpeedSkatingScreen = null;
         private Control controlBiathlonScreen = null;
+        private Control controlLugeImpulse = null;
         private Label bestScoreLabel = null;
         private Label timeScoreLabel = null;
         private Label errorsScoreLabel = null;
@@ -59,7 +62,7 @@ namespace WinterSports.Scripts.Controller
         #region const
         private const float rectXSize = 225.0f;
         private const string flagResource = "res://Art//2d//flags//";
-        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon" };
+        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh" };
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -70,6 +73,8 @@ namespace WinterSports.Scripts.Controller
                 InitSpeedSkating();
             if (prefabName == "Biathlon")
                 InitBiathlon();
+            if (prefabName == "LugeBobsleigh")
+                InitLuge();
         }
         public void Update(double delta, string prefabName)
         {
@@ -79,6 +84,8 @@ namespace WinterSports.Scripts.Controller
                 UpdateSpeedSkating(delta);
             if (prefabName == "Biathlon")
                 UpdateBiathlon(delta);
+            if (prefabName == "LugeBobsleigh")
+                UpdateLuge(delta);
         }
         private void UpdateSki(double delta) 
         {
@@ -221,6 +228,51 @@ namespace WinterSports.Scripts.Controller
             updateTimer();
             UpdateSpeedLabel();            
         }
+        private void UpdateLuge(double delta)
+        {            
+            if (this.lugeSled.GetCharacter.statesSki == Character.StatesSki.Ready)
+            {
+                readySetGoControl.Show();
+                readySetGoLabel.Text = "Impulse";
+                var impulse = this.lugeSled.CalculateImpulsePercent();
+                var sizeXspeed = rectXSize * (impulse / this.lugeSled.GetMaxImpulse);
+                impulseNinePatchRect.Size = new Vector2(sizeXspeed, impulseNinePatchRect.Size.Y);
+            }
+            else if (this.lugeSled.GetCharacter.statesSki == Character.StatesSki.Running && !LugeStatic.isEndRun)
+            {                
+                readySetGoControl.Hide();
+                ShowHideControlLugeImpulse(false);
+                timerController.StartTimer();                
+            }
+            else if (this.lugeSled.GetCharacter.statesSki == Character.StatesSki.Running && LugeStatic.isEndRun)
+            {                
+                timerController.StopTimer();
+                timerGamePlayController.StartTimer();
+                timerGamePlayController.TimerRunning(delta);
+            }
+            if (this.lugeSled.GetCharacter.statesSki == Character.StatesSki.Running && LugeStatic.isEndRun && timerGamePlayController.GetTimer() > 3.0f)
+            {
+                this.lugeSled.GetCharacter.statesSki = Character.StatesSki.Finish;
+                timerGamePlayController.StopTimer();
+                setScore = true;
+                ShowControlSkiSpeedSkatingScreen();
+                SetTimeScoreLuge();
+                this.lugeSled.GetCharacter.ShowHideFinishSessionScreen();
+                ShowHideControlLugeImpulse(true);
+                ResetLuge();
+                this.lugeSled.MovePlayerToStartPosition();
+            }            
+            if (this.lugeSled.GetCharacter.statesSki == Character.StatesSki.Finish)
+            {
+                timerController.ResetTimer();
+                timerGamePlayController.ResetTimer();
+                this.lugeSled.GetCharacter.statesSki = Character.StatesSki.Ready;
+                this.lugeSled.Pause(true);                
+            }
+            timerController.TimerRunning(delta);
+            updateTimerLuge();
+            UpdateSpeedLabelLuge();            
+        }                
         private void TimeToReset(double delta)
         {
             timerResetController.StartTimer();
@@ -243,7 +295,19 @@ namespace WinterSports.Scripts.Controller
             this.character.GenerateLegsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1LegsColor);
             this.character.GenerateBotsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].BootsColor);
             this.character.GenerateHairColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].HairColor);
-        }        
+        }
+        public void SetCharacter(LugeSled lugeSled)
+        {
+            this.lugeSled = lugeSled;
+            this.lugeSled.Position = initPosition;
+            this.lugeSled.Rotation = initRotation;
+            this.lugeSled.GetCharacter.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1BodyColor);
+            this.lugeSled.GetCharacter.GenerateArmsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1ArmsColor);
+            this.lugeSled.GetCharacter.GenerateHandsAndHeadColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].SkinColor);
+            this.lugeSled.GetCharacter.GenerateLegsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1LegsColor);
+            this.lugeSled.GetCharacter.GenerateBotsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].BootsColor);
+            this.lugeSled.GetCharacter.GenerateHairColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].HairColor);
+        }
         public void Reset()
         {
             timerController.ResetTimer();
@@ -277,28 +341,56 @@ namespace WinterSports.Scripts.Controller
             this.pauseScreen = pauseScreen;
             character.SetPauseScreen = this.pauseScreen;
         }
+        public void SetPauseScreenLuge(Control pauseScreen)
+        {
+            this.pauseScreen = pauseScreen;
+            lugeSled.GetCharacter.SetPauseScreen = this.pauseScreen;
+            lugeSled.SetPauseScreen = this.pauseScreen;
+        }
         public void SetFinishSessionScreen(Control finishSessionSession)
         {
             this.finishSessionScreen = finishSessionSession;
             character.SetFinishSessionScreen = this.finishSessionScreen;
         }
+        public void SetFinishSessionScreenLuge(Control finishSessionSession)
+        {
+            this.finishSessionScreen = finishSessionSession;
+            lugeSled.GetCharacter.SetFinishSessionScreen = this.finishSessionScreen;
+        }
         public void SetControlSkiSpeedSkatingBiathlon(Control controlSkiSpeedSkatingBiathlon)
         {
             this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
             character.SetControlSkiSpeedSkatingBiathlon = this.controlSkiSpeedSkatingBiathlon;
-        }
+        }        
         public void SetControlBiathlon(Control controlBiathlon)
         {
             this.controlBiathlon = controlBiathlon;
             character.SetControlBiathlon = this.controlBiathlon;
         }
+        public void SetControlSkiSpeedSkatingBiathlonLuge(Control controlSkiSpeedSkatingBiathlon, Control controlBiathlon)
+        {
+            this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
+            this.controlBiathlon = controlBiathlon;
+            lugeSled.SetControlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
+            lugeSled.SetControlBiathlon = controlBiathlon;            
+            lugeSled.ShowHideControlLuge();
+        }
         public void UnPause()
         {
             character.UnPause();
         }
+        public void UnPauseLuge()
+        {
+            lugeSled.UnPause();
+        }
         public void ShowHideFinishSessionScreen() 
         {
             character.ShowHideFinishSessionScreen();
+        }
+        public void ShowHideFinishSessionScreenLuge()
+        {
+            this.lugeSled.GetCharacter.ShowHideFinishSessionScreen();
+            this.lugeSled.Pause(false);
         }
         public void ShowControlSkiSpeedSkatingScreen()
         {
@@ -330,6 +422,13 @@ namespace WinterSports.Scripts.Controller
                 timeLabel.Text = "DSQ";
             }            
         }
+        public void updateTimerLuge()
+        {
+            if (this.lugeSled.GetCharacter.statesSki != Character.StatesSki.Finish && this.lugeSled.GetCharacter.statesSki != Character.StatesSki.Disqualified)
+            {
+                timeLabel.Text = TimeSpan.FromSeconds(timerController.GetTimer()).ToString("mm':'ss':'fff");
+            }            
+        }
         private void InitTimer()
         {
             timerController = new TimerController();
@@ -356,6 +455,43 @@ namespace WinterSports.Scripts.Controller
                 SetFinishTimeLabel();
                 setScore = false;
             }            
+        }
+        private void SetTimeScoreLuge()
+        {
+            if (setScore)
+            {
+                gamePlayModel.currentTimeScore = timerController.GetTimer();
+                if (gamePlayModel.bestTimeScore != 0.0f && gamePlayModel.currentTimeScore < gamePlayModel.bestTimeScore && 
+                    this.lugeSled.GetCharacter.statesSki != Character.StatesSki.Disqualified)
+                {
+                    gamePlayModel.bestTimeScore = timerController.GetTimer();
+                }
+                if (gamePlayModel.bestTimeScore == 0.0f && this.lugeSled.GetCharacter.statesSki != Character.StatesSki.Disqualified)
+                {
+                    gamePlayModel.bestTimeScore = timerController.GetTimer();
+                }
+                SetFinishTimeLabelLuge();
+                setScore = false;
+            }
+        }
+        private void SetFinishTimeLabelLuge()
+        {
+            if (gamePlayModel.bestTimeScore == 0.0f)
+            {
+                timeScoreBestLabelFinish.Text = ("--:--:---");
+            }
+            else
+            {
+                timeScoreBestLabelFinish.Text = TimeSpan.FromSeconds(gamePlayModel.bestTimeScore).ToString("mm':'ss':'fff");
+            }
+            if (this.lugeSled.GetCharacter.statesSki == Character.StatesSki.Disqualified)
+            {
+                timeScoreLastLabelFinish.Text = ("--:--:---");
+            }
+            else
+            {
+                timeScoreLastLabelFinish.Text = TimeSpan.FromSeconds(gamePlayModel.currentTimeScore).ToString("mm':'ss':'fff");
+            }
         }
         private void SetTimeScoreBiathlon()
         {            
@@ -423,6 +559,17 @@ namespace WinterSports.Scripts.Controller
                 sizeXspeed = rectXSize * (character.GetSpeed / character.GetMaxSpeed);
             speedNinePatchRect.Size = new Vector2(sizeXspeed, speedNinePatchRect.Size.Y);            
         }
+        public void UpdateSpeedLabelLuge()
+        {
+            var sizeXspeed = 0.0f;
+            if (this.lugeSled.GetMaxSpeed > 0.0f)
+                sizeXspeed = rectXSize * ((float)this.lugeSled.GetSpeed / (float)this.lugeSled.GetMaxSpeed);            
+            speedNinePatchRect.Size = new Vector2(sizeXspeed, speedNinePatchRect.Size.Y);
+        }
+        public void SetImpulseLabel(NinePatchRect impulseNinePatchRect)
+        {
+            this.impulseNinePatchRect = impulseNinePatchRect;
+        }
         #endregion
         #region Country
         public void SetCountryUI(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
@@ -456,10 +603,18 @@ namespace WinterSports.Scripts.Controller
             this.timeScoreBestLabelFinish = timeScoreBestLabelFinish;
             this.timeScoreLastLabelFinish = timeScoreLastLabelFinish;
         }
-        public void SetTimeScreenControl(Control controlSkiSpeedSkatingScreen, Control controlBiathlonScreen)
+        public void SetTimeScreenControl(Control controlSkiSpeedSkatingScreen, Control controlBiathlonScreen, Control controlLugeImpulse)
         {
             this.controlSkiSpeedSkatingScreen = controlSkiSpeedSkatingScreen;
             this.controlBiathlonScreen = controlBiathlonScreen;
+            this.controlLugeImpulse = controlLugeImpulse;
+        }
+        public void ShowHideControlLugeImpulse(bool isShow)
+        {
+            if(isShow)
+                this.controlLugeImpulse.Show();
+            else
+                this.controlLugeImpulse.Hide();
         }
         public void SetTimeScoreBestLastLabelFinishBiathlon(Label BestScoreLabel, Label TimeScoreLabel, Label ErrorsScoreLabel, Label LastScoreLabel)
         {
@@ -577,6 +732,10 @@ namespace WinterSports.Scripts.Controller
         {
             InitTimer();            
         }
+        private void InitLuge()
+        {
+            InitTimer();
+        }
         public void SetCharacterBiathlon()
         {
             this.character.MoveAndReScaleCharacter(1);
@@ -599,6 +758,20 @@ namespace WinterSports.Scripts.Controller
             {                
                 this.character.statesSki = Character.StatesSki.Finish;
             }
+        }
+        #endregion
+        #region Luge
+        public void ResetLuge()
+        {
+            timerController.ResetTimer();
+            timerGamePlayController.ResetTimer();
+            this.lugeSled.Reset();            
+            this.lugeSled.GetCharacter.Reset();
+            this.lugeSled.MovePlayerReset();
+            LugeStatic.Reset();
+            var impulse = this.lugeSled.CalculateImpulsePercent();
+            var sizeXspeed = rectXSize * (impulse / this.lugeSled.GetMaxImpulse);
+            impulseNinePatchRect.Size = new Vector2(sizeXspeed, impulseNinePatchRect.Size.Y);
         }
         #endregion
         #region Get Set
