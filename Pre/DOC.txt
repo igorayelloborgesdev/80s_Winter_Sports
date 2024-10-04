@@ -1,5 +1,3 @@
-C:\Users\igor8\AppData\Roaming\Godot\app_userdata\WinterSports
-
 Países
 
 .Austria
@@ -48,13 +46,20 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Luge 
+.Bobsleigh 
+
+..Animação dos 4 personagens entrando no trenó<-
+..Reset animação
+..Inicio Bobsleigh
+..Cor trenó
+..Inicio Luge
+..Bobsleigh velocidade
+..Bobsleigh posição
+..Finalização
 ..Reset
-@Rotação inicial<-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Bobsleigh 
 .Ski jumping 
 .Cross Country
 .Ice Hockey 
