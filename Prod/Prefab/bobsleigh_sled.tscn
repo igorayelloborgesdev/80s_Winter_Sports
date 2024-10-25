@@ -1,0 +1,145 @@
+[gd_scene load_steps=9 format=3 uid="uid://chu1v6ay7su55"]
+
+[ext_resource type="Script" path="res://Scripts/Prefabs/BobsleighSled.cs" id="1_bwv68"]
+[ext_resource type="PackedScene" uid="uid://cenuunl4m3uan" path="res://Prefab/bobsleigh.tscn" id="1_of8a0"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/LugeCollision.cs" id="2_5elhu"]
+[ext_resource type="PackedScene" uid="uid://c7unrelaoyecc" path="res://Prefab/character_v4.tscn" id="2_afngp"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/LugePathCollision.cs" id="3_q7k12"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aeu2h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2wfx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2wnwe"]
+
+[node name="Bobsleigh" type="Node3D" node_paths=PackedStringArray("character", "pointsList1", "pointsList2", "pointsList3", "sled", "jumpList1", "jumpList2", "jumpList3", "jumpList4")]
+script = ExtResource("1_bwv68")
+character = [NodePath("Bobsleigh/Character"), NodePath("Bobsleigh/Character2"), NodePath("Bobsleigh/Character3"), NodePath("Bobsleigh/Character4")]
+pointsList1 = [NodePath("direction/p0"), NodePath("direction/p1"), NodePath("direction/p2")]
+pointsList2 = [NodePath("direction2/p0"), NodePath("direction2/p1"), NodePath("direction2/p2")]
+pointsList3 = [NodePath("direction3/p0"), NodePath("direction3/p1"), NodePath("direction3/p2")]
+sled = NodePath("Bobsleigh")
+jumpList1 = [NodePath("Bobsleigh/p0"), NodePath("Bobsleigh/p1"), NodePath("Bobsleigh/p2")]
+jumpList2 = [NodePath("Bobsleigh/p3"), NodePath("Bobsleigh/p4"), NodePath("Bobsleigh/p5")]
+jumpList3 = [NodePath("Bobsleigh/p6"), NodePath("Bobsleigh/p7"), NodePath("Bobsleigh/p8")]
+jumpList4 = [NodePath("Bobsleigh/p9"), NodePath("Bobsleigh/p10"), NodePath("Bobsleigh/p11")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -4.80194e-08, 0.16, -0.777018)
+
+[node name="Bobsleigh" parent="." instance=ExtResource("1_of8a0")]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, -0.132973)
+
+[node name="Area3D" type="Area3D" parent="Bobsleigh"]
+transform = Transform3D(42, 0, 0, 0, 40, 0, 0, 0, 132, 0, 0, 4.89952)
+script = ExtResource("2_5elhu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bobsleigh/Area3D"]
+transform = Transform3D(0.15, 0, 0, 0, 0.1, 0, 0, 0, 0.2, 0, -0.0236381, 0)
+shape = SubResource("BoxShape3D_aeu2h")
+
+[node name="Character" parent="Bobsleigh" instance=ExtResource("2_afngp")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 4.45807, 5.47127, 9.91208)
+
+[node name="Character2" parent="Bobsleigh" instance=ExtResource("2_afngp")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -4.633, 5.471, 5.319)
+
+[node name="Character3" parent="Bobsleigh" instance=ExtResource("2_afngp")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 4.458, 5.471, 0.927)
+
+[node name="Character4" parent="Bobsleigh" instance=ExtResource("2_afngp")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -4.633, 5.471, -4.13)
+
+[node name="p0" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 4.45807, 5.47127, 9.91208)
+skeleton = NodePath("")
+
+[node name="p1" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 2.68, 7.24, 9.94347)
+skeleton = NodePath("")
+
+[node name="p2" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -0.217734, 6.717, 9.91208)
+skeleton = NodePath("")
+
+[node name="p3" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -4.633, 5.471, 5.319)
+skeleton = NodePath("")
+
+[node name="p4" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -2.463, 7.24, 5.319)
+skeleton = NodePath("")
+
+[node name="p5" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -0.218, 6.717, 5.319)
+skeleton = NodePath("")
+
+[node name="p6" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 4.45807, 5.47127, 0.927)
+skeleton = NodePath("")
+
+[node name="p7" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 2.68, 7.24, 0.927)
+skeleton = NodePath("")
+
+[node name="p8" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -0.217734, 6.717, 0.927)
+skeleton = NodePath("")
+
+[node name="p9" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -4.633, 5.471, -4.13)
+skeleton = NodePath("")
+
+[node name="p10" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -2.463, 7.24, -4.13)
+skeleton = NodePath("")
+
+[node name="p11" type="MeshInstance3D" parent="Bobsleigh"]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -0.218, 6.717, -4.13)
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00865617, 0.567769)
+script = ExtResource("3_q7k12")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_t2wfx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_2wnwe")
+
+[node name="direction" type="Node3D" parent="."]
+
+[node name="p0" type="MeshInstance3D" parent="direction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21, 0.3, 0)
+
+[node name="p1" type="MeshInstance3D" parent="direction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21, 0.101885, 0)
+
+[node name="p2" type="MeshInstance3D" parent="direction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21, 0.00138547, 0)
+
+[node name="direction2" type="Node3D" parent="."]
+
+[node name="p0" type="MeshInstance3D" parent="direction2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21, 0.001, 0)
+
+[node name="p1" type="MeshInstance3D" parent="direction2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00280448, 0.00116807, 0)
+
+[node name="p2" type="MeshInstance3D" parent="direction2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21, 0.001, 0)
+
+[node name="direction3" type="Node3D" parent="."]
+
+[node name="p0" type="MeshInstance3D" parent="direction3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21, 0.001, 0)
+
+[node name="p1" type="MeshInstance3D" parent="direction3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21, 0.101668, 0)
+
+[node name="p2" type="MeshInstance3D" parent="direction3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21, 0.3, 0)

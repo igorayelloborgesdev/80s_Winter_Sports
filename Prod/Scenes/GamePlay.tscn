@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://b25qr0ntq7ns2"]
+[gd_scene load_steps=75 format=3 uid="uid://b25qr0ntq7ns2"]
 
 [ext_resource type="PackedScene" uid="uid://dyc2ihlu1s18b" path="res://Prefab/sky.tscn" id="1_356u1"]
 [ext_resource type="Script" path="res://Scripts/View/GameplayView.cs" id="1_p3jv1"]
@@ -16,6 +16,7 @@
 [ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="10_kdmjr"]
 [ext_resource type="PackedScene" uid="uid://dvfd0s1xpgdaf" path="res://Prefab/luge_sled.tscn" id="10_pyyon"]
 [ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="11_12gco"]
+[ext_resource type="PackedScene" uid="uid://chu1v6ay7su55" path="res://Prefab/bobsleigh_sled.tscn" id="11_e0quk"]
 [ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="13_18oum"]
 [ext_resource type="Texture2D" uid="uid://b2t8m1llbty4e" path="res://Art/UI/RectNeutral.png" id="14_8vguo"]
 [ext_resource type="Texture2D" uid="uid://bk2csh7gf8tsr" path="res://Art/2d/flags/AUT.png" id="15_sg524"]
@@ -2402,6 +2403,7 @@ offset_bottom = 1.0
 script = ExtResource("1_p3jv1")
 characterPackedScene = SubResource("PackedScene_jr2v2")
 lugePackedScene = ExtResource("10_pyyon")
+bobsleighPackedScene = ExtResource("11_e0quk")
 pauseScreen = NodePath("CanvasLayer/PauseControl")
 backMenuButton = NodePath("CanvasLayer/PauseControl/BackToMainMenuButton")
 returnMenuButton = NodePath("CanvasLayer/PauseControl/BackMenuButton")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cenuunl4m3uan"]
+
+[ext_resource type="PackedScene" uid="uid://c6v11udc624be" path="res://Art/3d/Bobsleigh.gltf" id="1_x7oqp"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/Bobsleigh.cs" id="2_2punk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao3ab"]
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqvgj"]
+shading_mode = 0
+albedo_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gbqq"]
+shading_mode = 0
+albedo_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[node name="Bobsleigh" node_paths=PackedStringArray("bodyMeshInstance3D") instance=ExtResource("1_x7oqp")]
+script = ExtResource("2_2punk")
+bodyMeshInstance3D = NodePath("Bobsleigh2")
+
+[node name="Bobsleigh2" parent="." index="0"]
+transform = Transform3D(1.51258, 0, 0, 0, 1.51258, 0, 0, 0, 1.51258, -0.779257, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_ao3ab")
+
+[node name="SledLuge_003" parent="Bobsleigh2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jqvgj")
+
+[node name="SledLuge_004" parent="Bobsleigh2" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4gbqq")

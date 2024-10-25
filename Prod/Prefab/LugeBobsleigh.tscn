@@ -52,9 +52,9 @@ albedo_texture = ExtResource("2_1yhbr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xyx3v"]
 
-[node name="BobsleighLugeTrack" node_paths=PackedStringArray("initPoint", "pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8", "pointsList9", "pointsList10", "pointsList11", "pointsList12", "pointsList13", "pointsList14", "pointsList15", "pointsList16", "pointsList17", "pointsList18", "pointsList19", "pointsList20", "pointsList21", "pointsList22", "pointsList23", "pointsList24", "pointsList25", "pointsList26", "pointsList27", "pointsList28", "pointsList29", "pointsList30", "pointsList31", "pointsList32", "pointsList33", "pointsList34", "pointsList35", "pointsList36", "pointsList37", "pointsList38", "pointsList39", "pointsList40", "pointsList41", "pointsList42", "pointsList43", "pointsList44") instance=ExtResource("1_8ovbq")]
+[node name="BobsleighLugeTrack" node_paths=PackedStringArray("initPoint", "pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8", "pointsList9", "pointsList10", "pointsList11", "pointsList12", "pointsList13", "pointsList14", "pointsList15", "pointsList16", "pointsList17", "pointsList18", "pointsList19", "pointsList20", "pointsList21", "pointsList22", "pointsList23", "pointsList24", "pointsList25", "pointsList26", "pointsList27", "pointsList28", "pointsList29", "pointsList30", "pointsList31", "pointsList32", "pointsList33", "pointsList34", "pointsList35", "pointsList36", "pointsList37", "pointsList38", "pointsList39", "pointsList40", "pointsList41", "pointsList42", "pointsList43", "pointsList44", "gates") instance=ExtResource("1_8ovbq")]
 script = ExtResource("2_8sylk")
-initPoint = NodePath("InitPoint1")
+initPoint = [NodePath("InitPoint1"), NodePath("InitPoint2")]
 pointsList1 = [NodePath("track1/p0"), NodePath("track1/p1"), NodePath("track1/p2")]
 pointsList2 = [NodePath("track1/p3"), NodePath("track1/p4"), NodePath("track1/p5")]
 pointsList3 = [NodePath("track1/p6"), NodePath("track1/p7"), NodePath("track1/p8")]
@@ -99,6 +99,7 @@ pointsList41 = [NodePath("track1/p120"), NodePath("track1/p121"), NodePath("trac
 pointsList42 = [NodePath("track1/p123"), NodePath("track1/p124"), NodePath("track1/p125")]
 pointsList43 = [NodePath("track1/p126"), NodePath("track1/p127"), NodePath("track1/p128")]
 pointsList44 = [NodePath("track1/p129"), NodePath("track1/p130"), NodePath("track1/p131")]
+gates = [NodePath("GateStart1"), NodePath("GateStart2")]
 
 [node name="SpeedSlow" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2xnbf")
@@ -160,18 +161,26 @@ surface_material_override/1 = SubResource("StandardMaterial3D_ytt0p")
 surface_material_override/0 = SubResource("StandardMaterial3D_ytt0p")
 surface_material_override/1 = SubResource("StandardMaterial3D_ytt0p")
 
-[node name="GateStart" parent="." index="8" instance=ExtResource("3_b5pdx")]
+[node name="GateStart1" parent="." index="8" instance=ExtResource("3_b5pdx")]
 transform = Transform3D(-0.00110173, 0, 0.0635628, 0, 0.0635724, 0, -0.0635628, 0, -0.00110173, 45.1949, 1.32596, -0.417753)
 
-[node name="GateFinish" parent="." index="9" instance=ExtResource("4_f3cuq")]
+[node name="GateStart2" parent="." index="9" instance=ExtResource("3_b5pdx")]
+transform = Transform3D(-0.00110173, 0, 0.0635628, 0, 0.0635724, 0, -0.0635628, 0, -0.00110173, 35.5567, 1.32596, -0.561323)
+
+[node name="GateFinish" parent="." index="10" instance=ExtResource("4_f3cuq")]
 transform = Transform3D(-0.000837682, 0, 0.0635669, 0, 0.0635724, 0, -0.0635669, 0, -0.000837682, 104.692, 1.30563, -7.20926)
 
-[node name="InitPoint1" type="MeshInstance3D" parent="." index="10"]
+[node name="InitPoint1" type="MeshInstance3D" parent="." index="11"]
 transform = Transform3D(0.00935478, 0, 0.999956, 0, 1, 0, -0.999956, 0, 0.00935478, 44.6511, 1.55251, 0.18277)
 visible = false
 mesh = SubResource("BoxMesh_pq3i5")
 
-[node name="track1" type="Node3D" parent="." index="11"]
+[node name="InitPoint2" type="MeshInstance3D" parent="." index="12"]
+transform = Transform3D(0.00935478, 0, 0.999956, 0, 1, 0, -0.999956, 0, 0.00935478, 34.7606, 1.55251, 0.035924)
+visible = false
+mesh = SubResource("BoxMesh_pq3i5")
+
+[node name="track1" type="Node3D" parent="." index="13"]
 
 [node name="p0" type="MeshInstance3D" parent="track1" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9168, 1.55251, -0.0344139)
@@ -833,7 +842,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84.6889, 1.55251, -7.01563)
 visible = false
 mesh = SubResource("BoxMesh_bhljb")
 
-[node name="FinishArea3D" type="MeshInstance3D" parent="." index="12"]
+[node name="FinishArea3D" type="MeshInstance3D" parent="." index="14"]
 transform = Transform3D(-0.0170449, 0, -0.304983, 0, 1, 0, 1.62491, 0, -0.0031992, 104.665, 1.38278, -6.55957)
 visible = false
 mesh = SubResource("BoxMesh_pxbv5")

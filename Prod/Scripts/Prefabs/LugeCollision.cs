@@ -14,7 +14,7 @@ namespace WinterSports.Scripts.Prefabs
         private void OnBodyEntered(Node body)
         {
             try
-            {
+            {                
                 if (body.Name.ToString().Trim().ToLower() == "speednormal")
                 {
                     LugeStatic.statesLuge = LugeStatic.StatesLuge.trackNormal;

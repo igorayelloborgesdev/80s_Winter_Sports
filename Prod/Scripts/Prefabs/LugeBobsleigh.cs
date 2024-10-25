@@ -8,7 +8,7 @@ using WinterSports.Scripts.DTO;
 public partial class LugeBobsleigh : Node
 {
     #region Exports
-    [Export] private MeshInstance3D initPoint = null;
+    [Export] private MeshInstance3D[] initPoint = null;
     [Export] private Node3D[] pointsList1 = null;
     [Export] private Node3D[] pointsList2 = null;
     [Export] private Node3D[] pointsList3 = null;
@@ -53,6 +53,7 @@ public partial class LugeBobsleigh : Node
     [Export] private Node3D[] pointsList42 = null;
     [Export] private Node3D[] pointsList43 = null;
     [Export] private Node3D[] pointsList44 = null;
+    [Export] private Node3D[] gates = null;
     #endregion
     #region Variables
     private List<List<Node3D>> pointsList = new List<List<Node3D>>();
@@ -63,9 +64,9 @@ public partial class LugeBobsleigh : Node
     private float multiplyPoint = 12.0f;
     #endregion
     #region Get Set
-    public MeshInstance3D GetSetInitPoint()
+    public MeshInstance3D GetSetInitPoint(int id)
     {
-        return initPoint;
+        return initPoint[id];
     }
     #endregion
 
@@ -75,7 +76,7 @@ public partial class LugeBobsleigh : Node
     //}
 
     #region Methods
-    public void InstantiateRail()
+    public void InstantiateRail(int id)
     {
         pointsList.Add(pointsList1.ToList());
         pointsList.Add(pointsList2.ToList());
@@ -147,7 +148,7 @@ public partial class LugeBobsleigh : Node
         }
         for (int a = 0; a < lugeTrackDTOList.Count; a++)
         {            
-            lugeTrackDTOList[a].distance = initPoint.Position.DistanceTo(lugeTrackDTOList[a].position);         
+            lugeTrackDTOList[a].distance = initPoint[id].Position.DistanceTo(lugeTrackDTOList[a].position);         
         }
         startPointId = lugeTrackDTOList.OrderBy(x => x.distance).First().id;        
     }
@@ -169,6 +170,10 @@ public partial class LugeBobsleigh : Node
         myMesh.Scale = myMesh.Scale * 0.1f;
         myMesh.Position = position;
     }
+    public void EnableDisableGate(int id)
+    {        
+        gates[id == 0 ? 1 : 0].Hide();
+    }
     #endregion
     #region Get Set
     public int GetSetStartPointId
@@ -188,7 +193,6 @@ public partial class LugeBobsleigh : Node
         {
             return lugeTrackDTOList;
         }
-    }
-
+    }    
     #endregion
 }

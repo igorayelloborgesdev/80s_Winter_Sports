@@ -70,6 +70,8 @@ public partial class Character : CharacterBody3D
         Go,
         Init,
         Running,
+        JumpInCarBobsleigh,
+        RunningBobsleigh,
         Finish,
         Disqualified,
         Shooting
@@ -115,7 +117,7 @@ public partial class Character : CharacterBody3D
         PlayerInputSetUp();        
         playerInput.SetCharacterBody3D(this);
         playerInput.SetPauseScreen(pauseScreen);
-        playerInput.SetFinishSessionScreen(finishSessionScreen);
+        playerInput.SetFinishSessionScreen(finishSessionScreen);        
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.SetCharacter(this);
         playerInput.Init();            
@@ -140,7 +142,7 @@ public partial class Character : CharacterBody3D
         //Sport Biathlon
         if (prefabName == "Biathlon")
             playerInput = new PlayerInputBiathlon();
-        //Sport Luge
+        //Sport Luge        
         if (prefabName == "LugeBobsleigh")        
             playerInput = new PlayerInputLuge();                
     }
@@ -482,7 +484,7 @@ public partial class Character : CharacterBody3D
         playerInput.PlayAnimation(animationPlayer, id);
     }
     public void HideItemsForLuge()
-    {
+    {        
         foreach (var item in skiPole)
         {
             item.Hide();

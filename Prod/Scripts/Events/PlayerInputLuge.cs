@@ -15,7 +15,10 @@ namespace WinterSports.Scripts.Events
         IDictionary<int, string> animName = new Dictionary<int, string>()
         {
             {1,"Luge_Idle"},
-            {2,"Luge_Run"}
+            {2,"Luge_Run"},
+            {3,"Bobsleigh_Idle"},
+            {4,"Bobsleigh_Run"},
+            {5,"Bobsleigh_Jump"}
         };
         #endregion
         #region Variables

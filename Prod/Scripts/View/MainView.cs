@@ -245,7 +245,7 @@ public partial class MainView : Control
         mainController.SelectCountry(id);
     }
     private void SelectSport(int id)
-    {
+    {        
         mainController.SelectSport(id);        
     }
     private void GoToSportsSelection()

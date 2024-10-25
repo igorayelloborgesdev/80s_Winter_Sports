@@ -47,16 +47,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Bobsleigh 
-
-..Animação dos 4 personagens entrando no trenó<-
-..Reset animação
-..Inicio Bobsleigh
-..Cor trenó
-..Inicio Luge
-..Bobsleigh velocidade
-..Bobsleigh posição
-..Finalização
-..Reset
+..Reset<-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
