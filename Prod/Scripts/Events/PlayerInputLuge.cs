@@ -60,10 +60,16 @@ namespace WinterSports.Scripts.Events
         { return 0.0f; }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList)
         { }
+        public void SetSkiJumpPoint(int[] flyPoints) { }
+        public void SetWindSkiJump(float angle, float power) { }
         public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList)
         { }
         public void SetCharacter(Character character)
         { }
+        public bool GetPause()
+        {
+            return isPause;
+        }
         #endregion
         #region Methods
         private void ShowHideFinishSessionScreenMenu(bool isPause)

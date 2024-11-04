@@ -48,18 +48,7 @@ Esportes
 
 .Ski jumping 
 
-..Importar arte<-
-
-..5 rails (rails 3,4 e 5 tem que ser dinâmicos)
-..Iniciar gameplay
-..vento
-..Impulso
-..Voô
-..Aterrizagem
-..Aterrizagem distância
-..Nota
-..Finaliazação
-..Reset
+..Reset<-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 

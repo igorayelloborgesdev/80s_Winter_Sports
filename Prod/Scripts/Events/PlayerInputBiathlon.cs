@@ -113,6 +113,10 @@ namespace WinterSports.Scripts.Events
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHidePauseMenu(isPause);
         }
+        public bool GetPause()
+        { 
+            return isPause;
+        }
         public void ShowHideFinishSessionScreen()
         {
             isPause = !isPause;
@@ -153,6 +157,8 @@ namespace WinterSports.Scripts.Events
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList)
         {
         }
+        public void SetSkiJumpPoint(int[] flyPoints) { }        
+        public void SetWindSkiJump(float angle, float power) { }
         public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> biathlonTrackDTOList, List<List<DirectionArrow>> directionArrowList)
         {
             this.startPointId = startPointId;

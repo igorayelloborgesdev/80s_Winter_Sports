@@ -26,5 +26,8 @@ namespace WinterSports.Scripts.Interfaces
         void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList);
         void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList);
         void SetCharacter(Character character);
+        bool GetPause();
+        void SetSkiJumpPoint(int[] flyPoints);
+        void SetWindSkiJump(float angle, float power);
     }
 }

@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Events;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Static;
 using static WinterSports.Scripts.Model.TimerModel;
 
 public partial class Character : CharacterBody3D
@@ -26,6 +27,7 @@ public partial class Character : CharacterBody3D
     [Export] Node3D[] ski = null;    
     [Export] Node3D speedBox = null;
     [Export] Node3D target = null;
+    [Export] Node3D armature = null;
     #endregion    
     #region Variables    
     private IPlayerInput playerInput = null;
@@ -34,6 +36,10 @@ public partial class Character : CharacterBody3D
     private Control finishSessionScreen = null;
     private Control controlSkiSpeedSkatingBiathlon = null;
     private Control controlBiathlon = null;
+    private Control controlSkiJumpImpulseHorizontal = null;
+    private Control windDirectionArrowHorizontal = null;
+    private Control controlSkiJumpImpulseVertical = null;
+    private Control windDirectionArrowVertical = null;
     private string prefabName = String.Empty;
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
@@ -56,9 +62,16 @@ public partial class Character : CharacterBody3D
     private int shootErrors = 0;
     #endregion    
     #region Constant
-    private float[] scaleFactorArray = { 1.0f, 1.5f };
+    private float[] scaleFactorArray = { 1.0f, 1.5f, 1.5f, 1.5f };
     private float increment = 0.01f;
     private float shootInc = 30000.0f;
+    private const int minRotateZ = -45;
+    private const int maxRotateZ = 45;
+    private const int minRotateZUI = 0;
+    private const int medRotateZUI = 85;
+    private const int maxRotateZUI = 170;
+    private const int minRotateX = -45;
+    private const int maxRotateX = 45;
     #endregion
     #region Sport Ski
     [Export] Area3D startGate = null;
@@ -74,7 +87,11 @@ public partial class Character : CharacterBody3D
         RunningBobsleigh,
         Finish,
         Disqualified,
-        Shooting
+        Shooting,
+        SkiJumpingDown,
+        SkiJumpingFly,
+        SkiJumpingLand,
+        SkiJumpingFinish
     };
     public StatesSki statesSki = StatesSki.Ready;
     #endregion
@@ -82,6 +99,16 @@ public partial class Character : CharacterBody3D
     [Export] public Node3D rifle = null;
     [Export] Node3D[] skiPoleBiathlon = null;
     #endregion    
+    #region Sport Ski jump
+    private float impulse = 180.0f;
+    private float impulsePercent = 0.0f;
+    private const float maxImpulse = 100.0f;
+    private float impulseRail = 0.0f;
+    private Label windDirectionSkiJump = null;
+    private Control windDirectionArrowSkiJump = null;
+    private float angle = 0.0f;
+    private float power = 0.0f;
+    #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -109,6 +136,10 @@ public partial class Character : CharacterBody3D
             if (statesSki > StatesSki.Go)
                 playerInput.PlayerInput(animationPlayer, delta);
         }
+        if (prefabName == "Skijumping")
+        {            
+            playerInput.PlayerInput(animationPlayer, delta);
+        }
     }
     #endregion
     #region Methods
@@ -130,6 +161,9 @@ public partial class Character : CharacterBody3D
         //Sport Biathlon
         if (prefabName == "Biathlon")
             InitBiathlon();
+        //Ski jumping
+        if (prefabName == "Skijumping")
+            InitSkiJump();
     }
     private void PlayerInputSetUp()
     {        
@@ -144,13 +178,19 @@ public partial class Character : CharacterBody3D
             playerInput = new PlayerInputBiathlon();
         //Sport Luge        
         if (prefabName == "LugeBobsleigh")        
-            playerInput = new PlayerInputLuge();                
+            playerInput = new PlayerInputLuge();
+        //Ski jumping        
+        if (prefabName == "Skijumping")
+            playerInput = new PlayerInputSkiJump();
     }
     public void Reset()
     {
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.Init();
         playerInput.Reset();
+        impulse = 180.0f;
+        impulsePercent = 0.0f;
+        impulseRail = 0.0f;
     }    
     public void GenerateBodyColor(Godot.Color aColor)
     {        
@@ -206,7 +246,7 @@ public partial class Character : CharacterBody3D
         camera3D.Rotation = cameraRef[id].Rotation;        
     }
     private void ReScaleCharacter(int id)
-    {
+    {        
         this.Scale = new Vector3(scaleFactorArray[id], scaleFactorArray[id], scaleFactorArray[id]);
     }
     public void MoveAndReScaleCharacter(int id)
@@ -217,6 +257,18 @@ public partial class Character : CharacterBody3D
     public void DisableCamera()
     {
         camera3D.Hide();
+    }
+    public float CalculateImpulsePercent()
+    {
+
+        if (!playerInput.GetPause())
+        {
+            impulse += 5.0f;
+            var normalize = 1.0f + MathF.Cos((float)((Math.PI / 180.0) * (double)impulse));
+            impulsePercent = (normalize * 100.0f) / 2.0f;
+            return impulsePercent;
+        }
+        return 0.0f;
     }
     #endregion
     #region Get Set
@@ -247,14 +299,68 @@ public partial class Character : CharacterBody3D
         {
             this.controlBiathlon = value;
         }
-    }    
+    }
+    public Control SetControlSkiJumpImpulseHorizontal
+    {
+        set
+        {
+            this.controlSkiJumpImpulseHorizontal = value;
+        }
+    }
+    public Control SetWindDirectionArrowHorizontal
+    {
+        set
+        {
+            this.windDirectionArrowHorizontal = value;
+        }
+    }
+    public Control SetControlSkiJumpImpulseVertical
+    {
+        set
+        {
+            this.controlSkiJumpImpulseVertical = value;
+        }
+    }
+    public Control SetWindDirectionArrowVertical
+    {
+        set
+        {
+            this.windDirectionArrowVertical = value;
+        }
+    }
     public string SetPrefabName
     {
         set 
         { 
             this.prefabName = value; 
         }
-    }    
+    }
+    public float GetMaxImpulse
+    {
+        get 
+        {
+            return maxImpulse;
+        }
+    }
+    public float GetSetImpulseRail
+    {
+        get
+        {
+            return impulseRail;
+        }
+        set
+        {
+            impulseRail = value;
+        }
+    }
+
+    public float GetMaxRotateX
+    {
+        get
+        {
+            return maxRotateX;
+        }
+    }
     #endregion
     #region Sport Ski
     public Area3D SetStartGate
@@ -346,9 +452,10 @@ public partial class Character : CharacterBody3D
         rifle.Hide();
     }
     public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
-    {
+    {        
         this.startPointId = startPointId;
         this.speedSkatingTrackDTOList = speedSkatingTrackDTOList;
+        InitSkiJumpRail();
     }
     public void SetDirectionArrowList(List<DirectionArrow> aDirectionArrowList)
     {
@@ -459,6 +566,11 @@ public partial class Character : CharacterBody3D
         this.windDirection = windDirection;
         this.windDirectionArrow = windDirectionArrow;
     }
+    public void SetWindDirectionSkiJumpUILabels(Label windDirectionSkiJump, Control windDirectionArrowSkiJump)
+    {
+        this.windDirectionSkiJump = windDirectionSkiJump;
+        this.windDirectionArrowSkiJump = windDirectionArrowSkiJump;
+    }
     public void SetShoots(int shoots)
     {
         this.shoots.Text = shoots.ToString();
@@ -498,6 +610,152 @@ public partial class Character : CharacterBody3D
             item.Hide();
         }
         rifle.Hide();
+    }
+    #endregion
+    #region Ski jump
+    private void InitSkiJump()
+    {        
+        ShowHideTarget(false);
+        speedBox.Hide();        
+    }
+    public void ShowHideSkiJumpItems()
+    {
+        foreach (var item in skiPole)
+        {
+            item.Hide();
+        }
+        foreach (var item in ski)
+        {
+            item.Show();
+        }
+        foreach (var item in skiPoleBiathlon)
+        {
+            item.Hide();
+        }
+        rifle.Hide();
+    }
+    private void InitSkiJumpRail()
+    {
+        playerInput.SetRailSpeedSkating(startPointId, speedSkatingTrackDTOList, directionArrowList);        
+    }
+    public void SetWindSkiJump(float angle, float power)
+    {
+        this.angle = angle;
+        this.power = power;
+        playerInput.SetWindSkiJump(angle, power);
+        windDirectionArrowSkiJump.RotationDegrees = angle;
+        windDirectionSkiJump.Text = string.Format("{0:0.0}", power) + "m/s";
+    }
+    public void SetSkiJumpPoint(int[] flyPoints)
+    { 
+        playerInput.SetSkiJumpPoint(flyPoints);
+    }
+    public void RotateZ(bool isLeft, float inc)
+    {
+        if (isLeft)
+        {
+            if (armature.RotationDegrees.Z < maxRotateZ)
+                armature.RotationDegrees = new Vector3(armature.RotationDegrees.X, armature.RotationDegrees.Y, armature.RotationDegrees.Z + inc);            
+        }
+        else
+        {
+            if(armature.RotationDegrees.Z > minRotateZ)
+                armature.RotationDegrees = new Vector3(armature.RotationDegrees.X, armature.RotationDegrees.Y, armature.RotationDegrees.Z - inc);            
+        }                
     }    
+    public void RotateZWind(float inc)
+    {
+        if (armature.RotationDegrees.Z < maxRotateZ && armature.RotationDegrees.Z > minRotateZ)
+            armature.RotationDegrees = new Vector3(armature.RotationDegrees.X, armature.RotationDegrees.Y, armature.RotationDegrees.Z + inc);
+        SkiJumpStatic.fliyngScore.Add(System.Math.Abs(armature.RotationDegrees.Z));        
+        MoveZArrowWind();        
+    }
+    public void RotateX(bool isUp, float inc)
+    {
+        if (isUp)
+        {
+            if (armature.RotationDegrees.X < maxRotateX)
+                armature.RotationDegrees = new Vector3(armature.RotationDegrees.X + inc, armature.RotationDegrees.Y, armature.RotationDegrees.Z);
+        }
+        else
+        {
+            if (armature.RotationDegrees.X > minRotateX)
+                armature.RotationDegrees = new Vector3(armature.RotationDegrees.X - inc, armature.RotationDegrees.Y, armature.RotationDegrees.Z);
+        }
+    }
+    public void RotateXWind(float inc)
+    {
+        if (armature.RotationDegrees.X < maxRotateX && armature.RotationDegrees.X > minRotateX)
+            armature.RotationDegrees = new Vector3(armature.RotationDegrees.X + inc, armature.RotationDegrees.Y, armature.RotationDegrees.Z);
+        SkiJumpStatic.landingScore = armature.RotationDegrees.X;
+        MoveXArrowWind();
+    }
+    public void ShoHideControlSkiJumpImpulseHorizontal(bool isShow)
+    {
+        if (isShow)
+            this.controlSkiJumpImpulseHorizontal.Show();
+        else
+            this.controlSkiJumpImpulseHorizontal.Hide();
+    }
+    public void ShoHideControlSkiJumpImpulseVertical(bool isShow)
+    {
+        if (isShow)
+            this.controlSkiJumpImpulseVertical.Show();
+        else
+            this.controlSkiJumpImpulseVertical.Hide();
+    }
+    private void MoveZArrowWind()
+    {
+        if (armature.RotationDegrees.Z < 0)
+        {            
+            var perc = ((-1.0f * armature.RotationDegrees.Z) / 45.0f) * 100.0f;
+            var pos = (perc * medRotateZUI) / 100.0f;
+            windDirectionArrowHorizontal.Position = new Vector2(medRotateZUI + pos, windDirectionArrowHorizontal.Position.Y);
+        }
+        else if (armature.RotationDegrees.Z > 0)
+        {
+            
+            var perc = ((-1.0f * armature.RotationDegrees.Z) / 45.0f) * 100.0f;
+            var pos = (perc * medRotateZUI) / 100.0f;
+            windDirectionArrowHorizontal.Position = new Vector2(medRotateZUI + pos, windDirectionArrowHorizontal.Position.Y);
+        }
+        else 
+        {
+            windDirectionArrowHorizontal.Position = new Vector2(medRotateZUI, windDirectionArrowHorizontal.Position.Y);
+        }
+        
+    }
+    private void MoveXArrowWind()
+    {
+        if (armature.RotationDegrees.X < 0)
+        {
+            var perc = ((-1.0f * armature.RotationDegrees.X) / 45.0f) * 100.0f;
+            var pos = (perc * medRotateZUI) / 100.0f;
+            windDirectionArrowVertical.Position = new Vector2(medRotateZUI + pos, windDirectionArrowVertical.Position.Y);
+        }
+        else if (armature.RotationDegrees.X > 0)
+        {
+            var perc = ((-1.0f * armature.RotationDegrees.X) / 45.0f) * 100.0f;
+            var pos = (perc * medRotateZUI) / 100.0f;
+            windDirectionArrowVertical.Position = new Vector2(medRotateZUI + pos, windDirectionArrowVertical.Position.Y);
+        }
+        else
+        {
+            windDirectionArrowVertical.Position = new Vector2(medRotateZUI, windDirectionArrowVertical.Position.Y);
+        }
+
+    }
+    public void ResetSkiJump()
+    {
+        impulse = 180.0f;
+        impulsePercent = 0.0f;
+        impulseRail = 0.0f;
+        angle = 0.0f;
+        power = 0.0f;
+        armature.RotationDegrees = Vector3.Zero;
+        playerInput.PlayAnimation(animationPlayer, 1);
+        playerInput.Init();
+        playerInput.Reset();        
+    }
     #endregion
 }

@@ -10,6 +10,7 @@ using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Prefabs;
 using WinterSports.Scripts.Singleton;
 using WinterSports.Scripts.Static;
+using static Character;
 
 namespace WinterSports.Scripts.Controller
 {
@@ -35,6 +36,7 @@ namespace WinterSports.Scripts.Controller
         private Label timeLabel = null;
         private NinePatchRect speedNinePatchRect = null;
         private NinePatchRect impulseNinePatchRect = null;
+        private NinePatchRect impulseSkiJumpNinePatchRect = null;
         private Control readySetGoControl = null;
         private Label readySetGoLabel = null;
         private Label countryCodeLabel = null;
@@ -48,6 +50,10 @@ namespace WinterSports.Scripts.Controller
         private bool setScore = true;
         private Control controlSkiSpeedSkatingBiathlon = null;
         private Control controlBiathlon = null;
+        private Control controlSkiJumpImpulseHorizontal = null;
+        private Control windDirectionArrowHorizontal = null;
+        private Control controlSkiJumpImpulseVertical = null;
+        private Control windDirectionArrowVertical = null;
         private Label shoots = null;
         private Label errorLabelScore = null;
         private Label windDirection = null;
@@ -55,6 +61,8 @@ namespace WinterSports.Scripts.Controller
         private Control controlSkiSpeedSkatingScreen = null;
         private Control controlBiathlonScreen = null;
         private Control controlLugeImpulse = null;
+        private Control controlSkiJumpImpulse = null;
+        private Control controlSkiJump = null;
         private Label bestScoreLabel = null;
         private Label timeScoreLabel = null;
         private Label errorsScoreLabel = null;
@@ -63,7 +71,8 @@ namespace WinterSports.Scripts.Controller
         #region const
         private const float rectXSize = 225.0f;
         private const string flagResource = "res://Art//2d//flags//";
-        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh" };
+        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
+        private string[] prefabNameCountryList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -76,6 +85,8 @@ namespace WinterSports.Scripts.Controller
                 InitBiathlon();
             if (prefabName == "LugeBobsleigh")
                 InitLuge();
+            if (prefabName == "Skijumping")
+                InitSkiJump();
         }
         public void Update(double delta, string prefabName)
         {            
@@ -87,6 +98,17 @@ namespace WinterSports.Scripts.Controller
                 UpdateBiathlon(delta);
             if (prefabName == "LugeBobsleigh")
                 UpdateLuge(delta);
+            if (prefabName == "Skijumping")
+                UpdateSkiJump(delta);
+        }
+        public void UpdateSkiJumpRail(string prefabName, SkiJump skiJump)
+        {            
+            if (prefabName == "Skijumping" && character.statesSki == Character.StatesSki.Running)
+            {                
+                skiJump.InstantiateRail(character.GetSetImpulseRail);
+                character.SetRailSpeedSkating(skiJump.GetStartPointId, skiJump.GetSkiJumpTrackDTOList);
+                character.SetSkiJumpPoint(skiJump.GetFlyPoints); 
+            }
         }
         private void UpdateSki(double delta) 
         {
@@ -327,7 +349,7 @@ namespace WinterSports.Scripts.Controller
                     this.bobsleighSled.GetCharacter[0].ShowHideFinishSessionScreen();
                     ShowHideControlLugeImpulse(true);
                     ResetBobsleigh();
-                    this.bobsleighSled.MovePlayerToStartPosition();//<-
+                    this.bobsleighSled.MovePlayerToStartPosition();
                 }
                 if (this.bobsleighSled.GetCharacter[0].statesSki == Character.StatesSki.Finish)
                 {
@@ -340,7 +362,36 @@ namespace WinterSports.Scripts.Controller
                 updateTimerLuge();
                 UpdateSpeedLabelLuge();
             }                      
-        }                
+        }
+        private void UpdateSkiJump(double delta)
+        {
+            if (this.character.statesSki == Character.StatesSki.Ready)
+            {
+                readySetGoControl.Show();
+                readySetGoLabel.Text = "Impulse";
+                var impulse = this.character.CalculateImpulsePercent();
+                var sizeXspeed = rectXSize * (impulse / this.character.GetMaxImpulse);
+                impulseSkiJumpNinePatchRect.Size = new Vector2(sizeXspeed, impulseSkiJumpNinePatchRect.Size.Y);
+                SkiJumpStatic.impulseScore = impulse;
+            }
+            else if (this.character.statesSki == Character.StatesSki.Running)
+            {
+                readySetGoControl.Hide();
+                controlSkiJumpImpulse.Hide();
+                this.character.statesSki = Character.StatesSki.SkiJumpingDown;
+            }
+            else if (this.character.statesSki == Character.StatesSki.SkiJumpingFinish)
+            {
+                CalculateScore();
+                ShowControlSkiSpeedSkatingScreen();
+                SetFinishTimeLabelSkiJump();                
+                this.character.statesSki = Character.StatesSki.Finish;
+            }
+            else if (this.character.statesSki == Character.StatesSki.Finish)
+            {
+                ResetSkiJump();
+            }
+        }
         private void TimeToReset(double delta)
         {
             timerResetController.StartTimer();
@@ -418,6 +469,17 @@ namespace WinterSports.Scripts.Controller
             ResetDirectionArrowBiathlon();
             character.Reset();
         }
+        public void ResetSkiJump()
+        {            
+            SkiJumpStatic.Reset();
+            setScore = true;
+            this.character.Position = initPosition;
+            this.character.Rotation = initRotation;
+            this.character.statesSki = Character.StatesSki.Ready;
+            this.character.ResetSkiJump();
+            ShowHideControlSkiJumpImpulse(true);
+            ShowHideControlSkiJump(true);
+        }
         public void SetDefaultPositionRotation(Vector3 initPosition, Vector3 initRotation) 
         {
             this.initPosition = initPosition;
@@ -471,6 +533,20 @@ namespace WinterSports.Scripts.Controller
             this.controlBiathlon = controlBiathlon;
             character.SetControlBiathlon = this.controlBiathlon;
         }
+        public void SetControlSkiJumpImpulseHorizontal(Control controlSkiJumpImpulseHorizontal, Control windDirectionArrowHorizontal)
+        {
+            this.controlSkiJumpImpulseHorizontal = controlSkiJumpImpulseHorizontal;
+            this.windDirectionArrowHorizontal = windDirectionArrowHorizontal;
+            character.SetControlSkiJumpImpulseHorizontal = this.controlSkiJumpImpulseHorizontal;
+            character.SetWindDirectionArrowHorizontal = this.windDirectionArrowHorizontal;
+        }
+        public void SetControlSkiJumpImpulseVertical(Control controlSkiJumpImpulseVertical, Control windDirectionArrowVertical)
+        {
+            this.controlSkiJumpImpulseVertical = controlSkiJumpImpulseVertical;
+            this.windDirectionArrowVertical = windDirectionArrowVertical;
+            character.SetControlSkiJumpImpulseVertical = this.controlSkiJumpImpulseVertical;
+            character.SetWindDirectionArrowVertical = this.windDirectionArrowVertical;
+        }
         public void SetControlSkiSpeedSkatingBiathlonLuge(Control controlSkiSpeedSkatingBiathlon, Control controlBiathlon)
         {
             this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
@@ -516,7 +592,7 @@ namespace WinterSports.Scripts.Controller
             }
         }
         public void ShowControlSkiSpeedSkatingScreen()
-        {
+        {            
             controlSkiSpeedSkatingScreen.Show();
             controlBiathlonScreen.Hide();
         }
@@ -625,6 +701,23 @@ namespace WinterSports.Scripts.Controller
                 setScore = false;
             }
         }
+        private void SetTimeScoreSkiJump(float score)
+        {
+            if (setScore)
+            {
+                gamePlayModel.currentTimeScore = score;
+                if (gamePlayModel.bestTimeScore != 0.0f && gamePlayModel.currentTimeScore > gamePlayModel.bestTimeScore)
+                {
+                    gamePlayModel.bestTimeScore = score;
+                }
+                if (gamePlayModel.bestTimeScore == 0.0f)
+                {
+                    gamePlayModel.bestTimeScore = score;
+                }
+                SetFinishTimeLabelSkiJump();
+                setScore = false;
+            }
+        }
         private void SetFinishTimeLabelLuge()
         {
             if (gamePlayModel.bestTimeScore == 0.0f)
@@ -715,6 +808,18 @@ namespace WinterSports.Scripts.Controller
             timeScoreLabel.Text = TimeSpan.FromSeconds(gamePlayModel.biathlonCurrentTimeScore).ToString("mm':'ss':'fff");
             lastScoreLabel.Text = TimeSpan.FromSeconds(gamePlayModel.currentTimeScore).ToString("mm':'ss':'fff");
         }
+        private void SetFinishTimeLabelSkiJump()
+        {
+            if (gamePlayModel.bestTimeScore == 0.0f)
+            {
+                timeScoreBestLabelFinish.Text = ("0");
+            }
+            else
+            {
+                timeScoreBestLabelFinish.Text = gamePlayModel.bestTimeScore.ToString();
+            }
+            timeScoreLastLabelFinish.Text = gamePlayModel.currentTimeScore.ToString();
+        }
         #endregion
         #region Speed
         public void SetSpeedLabel(string prefabName, NinePatchRect speedNinePatchRect)
@@ -746,15 +851,16 @@ namespace WinterSports.Scripts.Controller
                 speedNinePatchRect.Size = new Vector2(sizeXspeed, speedNinePatchRect.Size.Y);
             }            
         }
-        public void SetImpulseLabel(NinePatchRect impulseNinePatchRect)
+        public void SetImpulseLabel(NinePatchRect impulseNinePatchRect, NinePatchRect impulseSkiJumpNinePatchRect)
         {
             this.impulseNinePatchRect = impulseNinePatchRect;
+            this.impulseSkiJumpNinePatchRect = impulseSkiJumpNinePatchRect;
         }
         #endregion
         #region Country
         public void SetCountryUI(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
         {
-            if (prefabNameTimerList.ToList().Contains(prefabName))
+            if (prefabNameCountryList.ToList().Contains(prefabName))
                 SetCountryUISki(countryCodeLabel, countryFlagTextureRect);
         }
         private void SetCountryUISki(Label countryCodeLabel, TextureRect countryFlagTextureRect)
@@ -768,7 +874,7 @@ namespace WinterSports.Scripts.Controller
         }
         public void SetCountryUIFinishScreen(string prefabName, Label countryCodeLabel, TextureRect countryFlagTextureRect)
         {
-            if (prefabNameTimerList.ToList().Contains(prefabName))
+            if (prefabNameCountryList.ToList().Contains(prefabName))
             {
                 this.countryCodeLabelFinish = countryCodeLabel;
                 this.countryCodeLabelFinish.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
@@ -783,11 +889,14 @@ namespace WinterSports.Scripts.Controller
             this.timeScoreBestLabelFinish = timeScoreBestLabelFinish;
             this.timeScoreLastLabelFinish = timeScoreLastLabelFinish;
         }
-        public void SetTimeScreenControl(Control controlSkiSpeedSkatingScreen, Control controlBiathlonScreen, Control controlLugeImpulse)
+        public void SetTimeScreenControl(Control controlSkiSpeedSkatingScreen, Control controlBiathlonScreen, Control controlLugeImpulse, 
+            Control controlSkiJumpImpulse, Control controlSkiJump)
         {
             this.controlSkiSpeedSkatingScreen = controlSkiSpeedSkatingScreen;
             this.controlBiathlonScreen = controlBiathlonScreen;
             this.controlLugeImpulse = controlLugeImpulse;
+            this.controlSkiJumpImpulse = controlSkiJumpImpulse;
+            this.controlSkiJump = controlSkiJump;
         }
         public void ShowHideControlLugeImpulse(bool isShow)
         {
@@ -795,6 +904,34 @@ namespace WinterSports.Scripts.Controller
                 this.controlLugeImpulse.Show();
             else
                 this.controlLugeImpulse.Hide();
+        }
+        public void ShowHideControlSkiJumpImpulse(bool isShow)
+        {
+            if (isShow)
+                this.controlSkiJumpImpulse.Show();
+            else
+                this.controlSkiJumpImpulse.Hide();
+        }
+        public void ShowHideControlSkiJump(bool isShow)
+        {
+            if (isShow)
+                this.controlSkiJump.Show();
+            else
+                this.controlSkiJump.Hide();
+        }
+        public void ShowHideControlSkiJumpImpulseHorizontal(bool isShow)
+        {
+            if (isShow)
+                this.controlSkiJumpImpulseHorizontal.Show();
+            else
+                this.controlSkiJumpImpulseHorizontal.Hide();
+        }
+        public void ShowHideControlSkiJumpImpulseVertical(bool isShow)
+        {
+            if (isShow)
+                this.controlSkiJumpImpulseVertical.Show();
+            else
+                this.controlSkiJumpImpulseVertical.Hide();
         }
         public void SetTimeScoreBestLastLabelFinishBiathlon(Label BestScoreLabel, Label TimeScoreLabel, Label ErrorsScoreLabel, Label LastScoreLabel)
         {
@@ -912,10 +1049,7 @@ namespace WinterSports.Scripts.Controller
         {
             InitTimer();            
         }
-        private void InitLuge()
-        {
-            InitTimer();
-        }
+        
         public void SetCharacterBiathlon()
         {
             this.character.MoveAndReScaleCharacter(1);
@@ -941,6 +1075,10 @@ namespace WinterSports.Scripts.Controller
         }
         #endregion
         #region Luge
+        private void InitLuge()
+        {
+            InitTimer();
+        }
         public void ResetLuge()
         {
             timerController.ResetTimer();
@@ -959,13 +1097,32 @@ namespace WinterSports.Scripts.Controller
         {
             timerController.ResetTimer();
             timerGamePlayController.ResetTimer();
-            this.bobsleighSled.Reset();
-            //this.lugeSled.GetCharacter.Reset();
-            this.bobsleighSled.MovePlayerReset();//<-
+            this.bobsleighSled.Reset();            
+            this.bobsleighSled.MovePlayerReset();
             LugeStatic.Reset();
             var impulse = this.bobsleighSled.CalculateImpulsePercent();
             var sizeXspeed = rectXSize * (impulse / this.bobsleighSled.GetMaxImpulse);
             impulseNinePatchRect.Size = new Vector2(sizeXspeed, impulseNinePatchRect.Size.Y);
+        }
+        #endregion
+        #region Ski jump
+        private void InitSkiJump()
+        {
+            InitTimer();            
+        }
+        public void SetCharacterSportSkiJump()
+        {            
+            this.character.MoveAndReScaleCharacter(3);
+            this.character.ShowHideSkiJumpItems();
+        }
+
+        private void CalculateScore()
+        {                                    
+            float impulseScore = SkiJumpStatic.impulseScore;
+            float flyingScore = (100.0f * (1.0f - ((SkiJumpStatic.fliyngScore.Sum() / SkiJumpStatic.fliyngScore.Count()) / character.GetMaxRotateX)));
+            float landingScore = (100.0f * (1.0f - (System.Math.Abs((SkiJumpStatic.landingScore) / character.GetMaxRotateX))));
+            float skiJumpFinal = (float)Math.Round((impulseScore + flyingScore + landingScore), 0);
+            SetTimeScoreSkiJump(skiJumpFinal);            
         }
         #endregion
         #region Get Set

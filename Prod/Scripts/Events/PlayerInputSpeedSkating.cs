@@ -178,6 +178,8 @@ namespace WinterSports.Scripts.Events
         {
             return (float)(timeSpeedCurrentMax - timeSpeedCurrentMin);
         }
+        public void SetSkiJumpPoint(int[] flyPoints) { }
+        public void SetWindSkiJump(float angle, float power) { }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList) 
         {
             this.startPointId = startPointId;
@@ -316,6 +318,11 @@ namespace WinterSports.Scripts.Events
                 speed += (float)timeSpeedCurrentInc;                
             }
 
+        }
+
+        public bool GetPause()
+        {
+            return isPause;
         }
         #endregion        
     }
