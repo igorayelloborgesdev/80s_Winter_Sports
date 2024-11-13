@@ -27,7 +27,7 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "impulseSkiJumpNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "controlSkiJumpImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel", "controlSkiJump", "windDirectionSkiJump", "windDirectionArrowSkiJump", "controlSkiJumpImpulseHorizontal", "windDirectionArrowHorizontal", "controlSkiJumpImpulseVertical", "windDirectionArrowVertical")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "impulseSkiJumpNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "controlSkiJumpImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel", "controlSkiJump", "windDirectionSkiJump", "windDirectionArrowSkiJump", "controlSkiJumpImpulseHorizontal", "windDirectionArrowHorizontal", "controlSkiJumpImpulseVertical", "windDirectionArrowVertical", "controlSkiCrossCountry", "controlSkiCrossCountryTime", "controlSkiCrossCountrySpeed", "controlSkiCrossCountryEnergy")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
@@ -76,6 +76,10 @@ controlSkiJumpImpulseHorizontal = NodePath("CanvasLayer/HUD/ControlSkiJumpImpuls
 windDirectionArrowHorizontal = NodePath("CanvasLayer/HUD/ControlSkiJumpImpulseHorizontal/HUDBGSpeed4/WindDirectionArrow")
 controlSkiJumpImpulseVertical = NodePath("CanvasLayer/HUD/ControlSkiJumpImpulseVertical")
 windDirectionArrowVertical = NodePath("CanvasLayer/HUD/ControlSkiJumpImpulseVertical/HUDBGSpeed4/WindDirectionArrow")
+controlSkiCrossCountry = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry")
+controlSkiCrossCountryTime = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/Time")
+controlSkiCrossCountrySpeed = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGSpeed/SpeedNinePatchRect")
+controlSkiCrossCountryEnergy = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGEnergy/SpeedNinePatchRect")
 
 [node name="SceneSki" type="Control" parent="."]
 anchors_preset = 0
@@ -145,6 +149,180 @@ theme_override_font_sizes/font_size = 30
 text = "AUT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ControlSkiCrossCountry" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountry"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -261.5
+offset_top = -84.0
+offset_right = -136.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountry"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.5
+offset_top = -84.0
+offset_right = 105.5
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountry"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.5
+offset_top = -107.0
+offset_right = 319.5
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUDBGSpeed" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountry"]
+modulate = Color(0.764706, 0.890196, 0.964706, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 985.0
+offset_top = 621.0
+offset_right = -56.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="HUDBGSpeed2" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGSpeed"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="SpeedNinePatchRect" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGSpeed"]
+modulate = Color(0.921569, 0.639216, 0.152941, 1)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 231.0
+offset_bottom = 37.0
+texture = ExtResource("14_8vguo")
+
+[node name="Energy" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountry"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.5
+offset_top = -58.0
+offset_right = 319.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "Energy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUDBGEnergy" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountry"]
+modulate = Color(0.764706, 0.890196, 0.964706, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 985.0
+offset_top = 670.0
+offset_right = -56.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="HUDBGEnergy" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGEnergy"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="SpeedNinePatchRect" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGEnergy"]
+modulate = Color(0.921569, 0.639216, 0.152941, 1)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 231.0
+offset_bottom = 37.0
+texture = ExtResource("14_8vguo")
 
 [node name="ControlSkiSpeedSkatingBiathlon" type="Control" parent="CanvasLayer/HUD"]
 layout_mode = 1
@@ -765,6 +943,7 @@ patch_margin_right = 9
 patch_margin_bottom = 9
 
 [node name="ReadySetGoControl" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

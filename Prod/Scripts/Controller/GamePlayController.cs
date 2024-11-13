@@ -67,6 +67,11 @@ namespace WinterSports.Scripts.Controller
         private Label timeScoreLabel = null;
         private Label errorsScoreLabel = null;
         private Label lastScoreLabel = null;
+        private Control controlSkiCrossCountry = null;
+        private Label controlSkiCrossCountryTime = null;
+        private NinePatchRect controlSkiCrossCountrySpeed = null;
+        private NinePatchRect controlSkiCrossCountryEnergy = null;        
+        private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();        
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -88,10 +93,19 @@ namespace WinterSports.Scripts.Controller
             if (prefabName == "Skijumping")
                 InitSkiJump();
         }
-        public void Update(double delta, string prefabName)
-        {            
+        public void Update(double delta, string prefabName, int levelId)
+        {
             if (prefabName == "skiTrack")
-                UpdateSki(delta);
+            {
+                if (levelId == 11)
+                {
+                    UpdateSkiCrossCountry(delta);//<-
+                }
+                else
+                {
+                    UpdateSki(delta);
+                }                                
+            }            
             if (prefabName == "SpeedSkating")
                 UpdateSpeedSkating(delta);
             if (prefabName == "Biathlon")
@@ -102,13 +116,16 @@ namespace WinterSports.Scripts.Controller
                 UpdateSkiJump(delta);
         }
         public void UpdateSkiJumpRail(string prefabName, SkiJump skiJump)
-        {            
-            if (prefabName == "Skijumping" && character.statesSki == Character.StatesSki.Running)
-            {                
-                skiJump.InstantiateRail(character.GetSetImpulseRail);
-                character.SetRailSpeedSkating(skiJump.GetStartPointId, skiJump.GetSkiJumpTrackDTOList);
-                character.SetSkiJumpPoint(skiJump.GetFlyPoints); 
-            }
+        {
+            if (character is not null)
+            {
+                if (prefabName == "Skijumping" && character.statesSki == Character.StatesSki.Running)
+                {
+                    skiJump.InstantiateRail(character.GetSetImpulseRail);
+                    character.SetRailSpeedSkating(skiJump.GetStartPointId, skiJump.GetSkiJumpTrackDTOList);
+                    character.SetSkiJumpPoint(skiJump.GetFlyPoints);
+                }
+            }            
         }
         private void UpdateSki(double delta) 
         {
@@ -154,6 +171,62 @@ namespace WinterSports.Scripts.Controller
             timerController.TimerRunning(delta);
             updateTimer();
             UpdateSpeedLabel();
+        }
+        private void UpdateSkiCrossCountry(double delta)
+        {
+            timerGamePlayController.TimerRunning(delta);
+            if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
+            {
+                this.character.statesSki = Character.StatesSki.Set;
+                readySetGoControl.Show();
+                readySetGoLabel.Text = "Ready";
+            }
+            else if (timerGamePlayController.GetTimer() > 2.0f && this.character.statesSki == Character.StatesSki.Set)
+            {
+                this.character.statesSki = Character.StatesSki.Go;
+                readySetGoLabel.Text = "Set";
+            }
+            else if (timerGamePlayController.GetTimer() > 3.0f && this.character.statesSki == Character.StatesSki.Go)
+            {
+                this.character.statesSki = Character.StatesSki.Init;
+                readySetGoLabel.Text = "Go";
+                setScore = true;
+                timerController.StartTimer();
+            }
+            else if (timerGamePlayController.GetTimer() > 5.0f && this.character.statesSki == Character.StatesSki.Init)
+            {
+                readySetGoControl.Hide();
+                timerGamePlayController.StopTimer();
+                timerGamePlayController.ResetTimer();
+                this.character.statesSki = Character.StatesSki.Running;
+                crossCountryDTOList.Clear();
+            }
+            else if (this.character.statesSki == Character.StatesSki.Running)
+            {
+                SaveAI();                
+            }
+
+            //if (this.character.statesSki == Character.StatesSki.Running)
+            //{
+
+            //}
+            //if (this.character.statesSki == Character.StatesSki.Finish && !SkiStatic.isCollided)
+            //{
+            //    SetTimeScore();
+            //    timerController.StopTimer();
+            //    TimeToReset(delta);
+            //    ShowControlSkiSpeedSkatingScreen();
+            //}
+            //if (SkiStatic.isCollided)
+            //{
+            //    this.character.statesSki = Character.StatesSki.Disqualified;
+            //    SetTimeScore();
+            //    TimeToReset(delta);
+            //    ShowControlSkiSpeedSkatingScreen();
+            //}
+            timerController.TimerRunning(delta);
+            updateTimerCrossCountry();
+            UpdateSpeedEnergyLabel();
         }
         private void UpdateSpeedSkating(double delta)
         {            
@@ -453,7 +526,7 @@ namespace WinterSports.Scripts.Controller
             timerGamePlayController.StartTimer();
             this.character.statesSki = Character.StatesSki.Ready;
             this.character.Position = initPosition;
-            this.character.Rotation = initRotation;            
+            this.character.Rotation = initRotation;
             character.Reset();
             SkiStatic.Reset();
         }
@@ -527,7 +600,12 @@ namespace WinterSports.Scripts.Controller
         {
             this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
             character.SetControlSkiSpeedSkatingBiathlon = this.controlSkiSpeedSkatingBiathlon;
-        }        
+        }
+        public void SetControlSkiCrossCountry(Control controlSkiCrossCountry)
+        {
+            this.controlSkiCrossCountry = controlSkiCrossCountry;
+            character.SetControlSkiCrossCountry = this.controlSkiCrossCountry;
+        }
         public void SetControlBiathlon(Control controlBiathlon)
         {
             this.controlBiathlon = controlBiathlon;
@@ -619,6 +697,13 @@ namespace WinterSports.Scripts.Controller
             if (this.character.statesSki == Character.StatesSki.Disqualified)
             {
                 timeLabel.Text = "DSQ";
+            }            
+        }
+        public void updateTimerCrossCountry()
+        {
+            if (this.character.statesSki != Character.StatesSki.Finish)
+            {
+                controlSkiCrossCountryTime.Text = TimeSpan.FromSeconds(timerController.GetTimer()).ToString("mm':'ss':'fff");
             }            
         }
         public void updateTimerLuge()
@@ -834,6 +919,17 @@ namespace WinterSports.Scripts.Controller
                 sizeXspeed = rectXSize * (character.GetSpeed / character.GetMaxSpeed);
             speedNinePatchRect.Size = new Vector2(sizeXspeed, speedNinePatchRect.Size.Y);            
         }
+        public void UpdateSpeedEnergyLabel()
+        {
+            var sizeXspeed = 0.0f;
+            if (character.GetMaxSpeed > 0.0f)
+                sizeXspeed = rectXSize * (character.GetSpeed / character.GetMaxSpeed);
+            controlSkiCrossCountrySpeed.Size = new Vector2(sizeXspeed, controlSkiCrossCountrySpeed.Size.Y);
+
+            var sizeXenergy = 0.0f;            
+            sizeXenergy = rectXSize * (character.GetEnergy / character.GetMaxSpeed);
+            controlSkiCrossCountryEnergy.Size = new Vector2(sizeXenergy, controlSkiCrossCountryEnergy.Size.Y);
+        }
         public void UpdateSpeedLabelLuge()
         {
             if (this.lugeSled is not null)
@@ -932,7 +1028,7 @@ namespace WinterSports.Scripts.Controller
                 this.controlSkiJumpImpulseVertical.Show();
             else
                 this.controlSkiJumpImpulseVertical.Hide();
-        }
+        }        
         public void SetTimeScoreBestLastLabelFinishBiathlon(Label BestScoreLabel, Label TimeScoreLabel, Label ErrorsScoreLabel, Label LastScoreLabel)
         {
             this.bestScoreLabel = BestScoreLabel;
@@ -1115,7 +1211,6 @@ namespace WinterSports.Scripts.Controller
             this.character.MoveAndReScaleCharacter(3);
             this.character.ShowHideSkiJumpItems();
         }
-
         private void CalculateScore()
         {                                    
             float impulseScore = SkiJumpStatic.impulseScore;
@@ -1123,6 +1218,47 @@ namespace WinterSports.Scripts.Controller
             float landingScore = (100.0f * (1.0f - (System.Math.Abs((SkiJumpStatic.landingScore) / character.GetMaxRotateX))));
             float skiJumpFinal = (float)Math.Round((impulseScore + flyingScore + landingScore), 0);
             SetTimeScoreSkiJump(skiJumpFinal);            
+        }
+        #endregion
+        #region Cross Country
+        public void SetCrossCountryLabel(Label controlSkiCrossCountryTime, NinePatchRect controlSkiCrossCountrySpeed, NinePatchRect controlSkiCrossCountryEnergy)
+        {
+            this.controlSkiCrossCountryTime = controlSkiCrossCountryTime;
+            this.controlSkiCrossCountrySpeed = controlSkiCrossCountrySpeed;
+            this.controlSkiCrossCountryEnergy = controlSkiCrossCountryEnergy;
+        }
+        private void SaveAI()//!<- Save AI Path
+        {
+            if (this.character.GetIsFinished())
+            {                                
+                this.character.statesSki = Character.StatesSki.Finish;
+                var crossCountryObjDTO = new CrossCountryObjDTO();
+                crossCountryObjDTO.CrossCountryDTOList = this.crossCountryDTOList;
+                SaveLoad.SaveData<CrossCountryObjDTO>(crossCountryObjDTO, "Data//CrossCountryAI.json");
+            }
+            else 
+            {
+                if (crossCountryDTOList.Where(x => x.id == this.character.GetSkiCrossCountryDistance()).Any())
+                {
+                    var index = crossCountryDTOList.FindIndex(x => x.id == this.character.GetSkiCrossCountryDistance());
+                    crossCountryDTOList[index].position = this.character.GlobalPosition;
+                    crossCountryDTOList[index].speed = this.character.GetSpeed;
+                    crossCountryDTOList[index].isAccel = this.character.GetIsAccel();
+                    crossCountryDTOList[index].isBreak = this.character.GetIsBreak();
+                }
+                else 
+                {
+                    var crossCountryDTO = new CrossCountryDTO()
+                    {
+                        id = this.character.GetSkiCrossCountryDistance(),
+                        position = this.character.GlobalPosition,
+                        speed = this.character.GetSpeed,
+                        isAccel = this.character.GetIsAccel(),
+                        isBreak = this.character.GetIsBreak()
+                    };
+                    crossCountryDTOList.Add(crossCountryDTO);
+                }                
+            }            
         }
         #endregion
         #region Get Set

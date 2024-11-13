@@ -46,13 +46,20 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Ski jumping 
+.Cross Country
+..Instanciar AI//<-
+..AI seguir way point
+..AI ultrapassar
+..AI velocidade X energia
 
-..Reset<-
+..Final
+..Pausa
+..Reinício
+..Reset
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Cross Country
+
 .Ice Hockey 
 
 .Main Menu

@@ -64,8 +64,7 @@ public partial class BobsleighSled : Node3D
     }
     public override void _PhysicsProcess(double delta)
     {
-        PlayerInput(delta);
-        //JumpInCar();
+        PlayerInput(delta);        
     }
     #endregion
     #region Methods

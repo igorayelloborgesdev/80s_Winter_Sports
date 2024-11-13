@@ -62,6 +62,7 @@ namespace WinterSports.Scripts.Events
         { }
         public void SetSkiJumpPoint(int[] flyPoints) { }
         public void SetWindSkiJump(float angle, float power) { }
+        public void SetSkiCollision(SkiCollision skiCollision) { }
         public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList)
         { }
         public void SetCharacter(Character character)
@@ -70,6 +71,11 @@ namespace WinterSports.Scripts.Events
         {
             return isPause;
         }
+        public float GetEnergy()
+        {
+            return 0.0f;
+        }
+        public bool GetIsFinished() { return false; }
         #endregion
         #region Methods
         private void ShowHideFinishSessionScreenMenu(bool isPause)
@@ -79,6 +85,8 @@ namespace WinterSports.Scripts.Events
             else
                 finishSessionScreen.Hide();
         }
+        public bool GetIsAccel() { return false; }
+        public bool GetIsBreak() { return false; }
         #endregion
     }
 }

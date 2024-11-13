@@ -30,17 +30,33 @@ namespace WinterSports.Scripts.Events
         private const float angleMin = 0.1f;
         private const float angleMax = 0.5f;
         private const float speedInc = 0.01f;
+        private const float speedDec = 0.02f;
         private const float brakeInc = 0.05f;
+        private const float maxEnergy = 5.0f;
+        private const float minEnergy = 0.25f;        
+        private float[] energyArray = new float[] { 0.0f, 1.25f, 2.5f, 3.75f, 5.0f };
+        private const float minSpeed = 0.25f;
+        private const float speedIncCollision = 0.025f;
+        private const float maxSpeedEnergy = 4.9f;
+        private const float maxSpeedEnergyReturn = 4.75f;
         #endregion
         #region Variables
         private string currentAnimation = "";        
         private CharacterBody3D characterBody3D = null;
         private bool isPause = false;        
         private float angle = 0.0f;
-        private float speed = 0.0f;
+        private float speed = 0.0f;        
         private Control pauseScreen = null;
         private Control finishSessionScreen = null;
         private float angleInc = 0.0f;
+        private float energy = 0.0f;
+        private float energyInc = 0.0f;        
+        private SkiCollision skiCollision = null;
+        private float speedEnergy = 0.0f;
+        private bool isEnergySlow = false;
+        private float energyDecrease = 1500.0f;
+        private bool isAccel = false;
+        private bool isBreak = false;
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta) 
@@ -58,7 +74,7 @@ namespace WinterSports.Scripts.Events
                             Pause();
                         }
                         if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
-                        {
+                        {                           
                             index = 5;
                             AccelPlayer();
                         }
@@ -121,8 +137,9 @@ namespace WinterSports.Scripts.Events
                     PlayAnimation(animationPlayer, 5);
                     DecreaseSpeedPlayer();
                 }
+                ManageCollisionSpeed();
                 MovePlayer();
-                CalcAngleDirection();
+                CalcAngleDirection();                
             }            
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -173,12 +190,17 @@ namespace WinterSports.Scripts.Events
         {            
             angle = angleInit;
             speed = 0.0f;
+            speedEnergy = 0.0f;
             angleInc = 0.0f;
+            energy = maxEnergy;
+            this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);
         }
         public void Reset()
         {
-            angle = 0.0f;
+            angle = angleInit;
             speed = 0.0f;
+            speedEnergy = 0.0f;
+            this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);            
         }
         public float GetSpeed()
         {
@@ -191,6 +213,11 @@ namespace WinterSports.Scripts.Events
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList) { }
         public void SetSkiJumpPoint(int[] flyPoints) { }
         public void SetWindSkiJump(float angle, float power) { }
+
+        public void SetSkiCollision(SkiCollision skiCollision) 
+        { 
+            this.skiCollision = skiCollision;
+        }
         public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> speedSkatingTrackDTOList, List<List<DirectionArrow>> directionArrowList){}
         public void SetCharacter(Character character)
         {
@@ -200,27 +227,195 @@ namespace WinterSports.Scripts.Events
         {
             return isPause;
         }
+        public float GetEnergy()
+        {
+            return energy;
+        }
         #endregion
         #region Methods
         private void AccelPlayer()
         {
-            if(speed < maxSpeed)
-                speed += speedInc;                        
+            if (GameModeSingleton.sport == 12)
+            {
+                ManageEnergy();
+                if (speed < maxSpeed)
+                {                                     
+                    speed = speed + speedInc;
+                }
+                if (speedEnergy < maxSpeedEnergy)
+                {                 
+                    speedEnergy = speedEnergy + speedInc;
+                }                
+            }
+            else
+            {
+                if (speed < maxSpeed)
+                {
+                    speed += speedInc;                    
+                }                
+            }
+            isAccel = true;
         }
         private void DecreaseSpeedPlayer()
         {
-            if (speed > 0.0f)
-                speed -= speedInc;
+            if (GameModeSingleton.sport == 12)
+            {                
+                ManageEnergy();
+                if (speed > 0.25f)
+                {
+                    speed -= speedInc + energyInc;
+                    speedEnergy -= speedInc + energyInc;
+                }
+                else
+                {
+                    speed = 0.25f;
+                    speedEnergy = 0.25f;
+                }                
+            }
             else
-                speed = 0.0f;
+            {
+                if (speed > 0.0f)
+                {
+                    speed -= speedInc;                    
+                }
+                else
+                {
+                    speed = 0.0f;                    
+                }                
+            }
+            isAccel = false;
+            isBreak = false;
         }
         private void BrakePlayer()
         {
-            if (speed > 0.0f)
-                speed -= brakeInc;
+            if (GameModeSingleton.sport == 12)
+            {             
+                ManageEnergy();
+                if (speed > 0.25f)
+                {
+                    speed -= brakeInc + energyInc;
+                    speedEnergy -= brakeInc + energyInc;
+                }
+                else
+                {
+                    speed = 0.25f;
+                    speedEnergy = 0.25f;
+                }                
+            }
             else
-                speed = 0.0f;            
+            {
+                if (speed > 0.0f)
+                {
+                    speed -= brakeInc;                    
+                }
+                else
+                {
+                    speed = 0.0f;                    
+                }
+                
+            }
+            isBreak = true;
         }
+        private void ManageCollisionSpeed()
+        {
+            if (skiCollision.GetIsCollided)
+            {
+                if (speed > minSpeed)
+                {
+                    speed -= speedIncCollision;
+                    speedEnergy -= speedIncCollision;
+                }
+                else
+                {
+                    speed = minSpeed;
+                    speedEnergy = minSpeed;
+                }
+            }            
+        }        
+        private void ManageEnergy()
+        {
+            if (!isEnergySlow)
+            {
+                DecreaseEnergy();
+                if (energy < energyArray[1])
+                {
+                    DecreaseSpeed();
+                    if (speed < energy)
+                    {
+                        isEnergySlow = true;
+                    }
+                }
+            }
+            else
+            {
+                if (speed < energy)
+                {
+                    IncreaseEnergy();
+                }
+                if (speed > energy + (maxSpeed / 50.0f))
+                {                    
+                    DecreaseEnergy();
+                    speed -= speedDec;
+                    DecreaseSpeed();
+                }
+                if (energy >= maxSpeedEnergyReturn)
+                {
+                    isEnergySlow = false;
+                }
+            }                                   
+            LimitEnergy();
+        }        
+        private void DecreaseEnergy()
+        {                                   
+            if (speed > energyArray[0] && speed <= energyArray[1])
+                energyInc = energyArray[1] / energyDecrease;
+            else if (speed > energyArray[1] && speed <= energyArray[2])
+                energyInc = energyArray[2] / energyDecrease;
+            else if (speed > energyArray[2] && speed <= energyArray[3])
+                energyInc = energyArray[3] / energyDecrease;
+            else if (speed > energyArray[3] && speed <= energyArray[4])
+                energyInc = energyArray[4] / energyDecrease;
+            else
+                energyInc = energyArray[4] / energyDecrease;                
+            energy -= energyInc;                        
+        }
+        private void DecreaseSpeed()
+        {            
+            if (energy <= energyArray[1])
+            {
+                speed -= speedDec;
+            }
+            if (speed < minSpeed)
+            {
+                speed = minSpeed;
+            }
+        }
+        private void LimitEnergy()
+        {
+            if (energy >= maxEnergy)
+            {
+                energy = maxEnergy;
+            }
+            if (energy <= minEnergy)
+            {
+                energy = minEnergy;
+            }        
+        }
+        private void IncreaseEnergy()
+        {            
+            if (speed > energyArray[0] && speed <= energyArray[1])
+                energyInc = energyArray[4] / energyDecrease;
+            else if (speed > energyArray[1] && speed <= energyArray[2])
+                energyInc = energyArray[3] / energyDecrease;
+            else if (speed > energyArray[2] && speed <= energyArray[3])
+                energyInc = energyArray[2] / energyDecrease;
+            else if (speed > energyArray[3] && speed <= energyArray[4])
+                energyInc = energyArray[1] / energyDecrease;
+            else
+                energyInc = energyArray[1] / energyDecrease;
+            energy += energyInc;            
+        }        
+
         private void MovePlayer()
         {            
             float hyp = speed;
@@ -261,6 +456,18 @@ namespace WinterSports.Scripts.Events
                 finishSessionScreen.Show();
             else
                 finishSessionScreen.Hide();
+        }
+        public bool GetIsFinished()
+        {
+            return skiCollision.GetIsFinished;
+        }
+        public bool GetIsAccel() 
+        { 
+            return isAccel; 
+        }
+        public bool GetIsBreak() 
+        { 
+            return isBreak; 
         }
         #endregion
     }

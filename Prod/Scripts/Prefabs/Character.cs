@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Events;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Static;
 using static WinterSports.Scripts.Model.TimerModel;
 
@@ -28,13 +29,15 @@ public partial class Character : CharacterBody3D
     [Export] Node3D speedBox = null;
     [Export] Node3D target = null;
     [Export] Node3D armature = null;
-    #endregion    
+    [Export] SkiCollision skiCollision = null;
+    #endregion
     #region Variables    
     private IPlayerInput playerInput = null;
     private SceneTree sceneTree = null;
     private Control pauseScreen = null;
     private Control finishSessionScreen = null;
     private Control controlSkiSpeedSkatingBiathlon = null;
+    private Control controlSkiCrossCountry = null;
     private Control controlBiathlon = null;
     private Control controlSkiJumpImpulseHorizontal = null;
     private Control windDirectionArrowHorizontal = null;
@@ -109,6 +112,9 @@ public partial class Character : CharacterBody3D
     private float angle = 0.0f;
     private float power = 0.0f;
     #endregion
+    #region Ski Cross Country
+    private List<CrossCountryModel> crossCountryModelList = null;
+    #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -120,7 +126,7 @@ public partial class Character : CharacterBody3D
     {
     }
     public override void _PhysicsProcess(double delta)
-    {
+    {        
         if (prefabName == "skiTrack")
         {
             if (statesSki > StatesSki.Go)
@@ -151,6 +157,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetFinishSessionScreen(finishSessionScreen);        
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.SetCharacter(this);
+        playerInput.SetSkiCollision(skiCollision);
         playerInput.Init();            
         //Sport Ski 
         if (prefabName == "skiTrack")
@@ -293,6 +300,13 @@ public partial class Character : CharacterBody3D
             this.controlSkiSpeedSkatingBiathlon = value;
         }
     }
+    public Control SetControlSkiCrossCountry
+    {
+        set
+        {
+            this.controlSkiCrossCountry = value;
+        }
+    }
     public Control SetControlBiathlon
     {
         set
@@ -353,7 +367,6 @@ public partial class Character : CharacterBody3D
             impulseRail = value;
         }
     }
-
     public float GetMaxRotateX
     {
         get
@@ -408,6 +421,13 @@ public partial class Character : CharacterBody3D
         get 
         {
             return playerInput.GetSpeed();
+        }
+    }
+    public float GetEnergy
+    {
+        get
+        {
+            return playerInput.GetEnergy();
         }
     }
     public float GetMaxSpeed
@@ -546,11 +566,27 @@ public partial class Character : CharacterBody3D
         return rayCast3D;
     }
     public void ShowHideControlSkiSpeedSkatingBiathlon(bool isShow)
-    { 
-        if(isShow)
-            this.controlSkiSpeedSkatingBiathlon.Show();
-        else
+    {
+        if (GameModeSingleton.sport == 12)
+        {
+            ShowHideControlSkiCrossCountry(true);
             this.controlSkiSpeedSkatingBiathlon.Hide();
+        }        
+        else
+        {            
+            ShowHideControlSkiCrossCountry(false);
+            if (isShow)
+                this.controlSkiSpeedSkatingBiathlon.Show();
+            else
+                this.controlSkiSpeedSkatingBiathlon.Hide();
+        }        
+    }
+    private void ShowHideControlSkiCrossCountry(bool isShow)
+    {
+        if (isShow)
+            this.controlSkiCrossCountry.Show();
+        else
+            this.controlSkiCrossCountry.Hide();
     }
     public void ShowHideControlBiathlon(bool isShow)
     {
@@ -756,6 +792,32 @@ public partial class Character : CharacterBody3D
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.Init();
         playerInput.Reset();        
+    }
+    #endregion
+    #region Ski Cross Country
+    public void SetCrossCountryModel(List<CrossCountryModel> crossCountryModelList)
+    {        
+        this.crossCountryModelList = crossCountryModelList;
+    }
+    public int GetSkiCrossCountryDistance()
+    {
+        foreach (var crossCountryModel in crossCountryModelList)
+        {
+            crossCountryModel.distance = this.Position.DistanceTo(crossCountryModel.position);            
+        }
+        return crossCountryModelList.OrderBy(x => x.distance).First().id;//<-        
+    }
+    public bool GetIsFinished() 
+    {        
+        return playerInput.GetIsFinished();
+    }
+    public bool GetIsAccel()
+    {  
+        return playerInput.GetIsAccel(); 
+    }
+    public bool GetIsBreak() 
+    {
+        return playerInput.GetIsBreak();
     }
     #endregion
 }

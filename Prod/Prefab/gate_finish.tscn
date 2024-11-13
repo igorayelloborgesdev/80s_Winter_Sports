@@ -48,9 +48,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_bkoam")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yts38"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_h3swt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yts38"]
 
 [node name="GateFinish" type="MeshInstance3D" node_paths=PackedStringArray("area3D")]
 transform = Transform3D(0.0635724, 0, 0, 0, 0.0635724, 0, 0, 0, 0.0635724, 0, 0, 0)
@@ -58,15 +58,17 @@ material_override = SubResource("StandardMaterial3D_3u5i4")
 mesh = SubResource("ArrayMesh_qg8vo")
 skeleton = NodePath("")
 script = ExtResource("2_7mq5i")
-area3D = NodePath("GateFinishArea3D")
+area3D = NodePath("GateFinishMeshInstance3D/GateFinishArea3D")
 
-[node name="GateFinishArea3D" type="Area3D" parent="."]
-transform = Transform3D(32, 0, 0, 0, 10, 0, 0, 0, 1, -8.93039, 3.97932, 1.21531)
-
-[node name="GateFinishCollisionShape3D" type="CollisionShape3D" parent="GateFinishArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0685869)
-shape = SubResource("BoxShape3D_yts38")
-
-[node name="GateFinishMeshInstance3D" type="MeshInstance3D" parent="GateFinishArea3D/GateFinishCollisionShape3D"]
+[node name="GateFinishMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(32, 0, 0, 0, 10, 0, 0, 0, 1, -8.93039, 3.97932, 1.14672)
 visible = false
 mesh = SubResource("BoxMesh_h3swt")
+skeleton = NodePath("GateFinishArea3D/GateFinishCollisionShape3D")
+
+[node name="GateFinishArea3D" type="Area3D" parent="GateFinishMeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0685869)
+
+[node name="GateFinishCollisionShape3D" type="CollisionShape3D" parent="GateFinishMeshInstance3D/GateFinishArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0685869)
+shape = SubResource("BoxShape3D_yts38")

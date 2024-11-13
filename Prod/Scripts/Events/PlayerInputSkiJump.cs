@@ -79,6 +79,7 @@ namespace WinterSports.Scripts.Events
         {
             this.finishSessionScreen = finishSessionScreen;
         }
+        public void SetSkiCollision(SkiCollision skiCollision) { }
         public void Pause()
         {            
             isPause = !isPause;
@@ -150,6 +151,13 @@ namespace WinterSports.Scripts.Events
         {
             return isPause;
         }
+        public float GetEnergy()
+        {
+            return 0.0f;
+        }
+        public bool GetIsFinished() { return false; }
+        public bool GetIsAccel() { return false; }
+        public bool GetIsBreak() { return false; }
         #endregion
         #region Methods
         private void MovePlayerInput()

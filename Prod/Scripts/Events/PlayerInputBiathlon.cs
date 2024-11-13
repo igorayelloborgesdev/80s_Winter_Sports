@@ -159,6 +159,8 @@ namespace WinterSports.Scripts.Events
         }
         public void SetSkiJumpPoint(int[] flyPoints) { }        
         public void SetWindSkiJump(float angle, float power) { }
+
+        public void SetSkiCollision(SkiCollision skiCollision) { }
         public void SetRailBiathlon(int startPointId, List<List<SpeedSkatingTrackDTO>> biathlonTrackDTOList, List<List<DirectionArrow>> directionArrowList)
         {
             this.startPointId = startPointId;
@@ -169,6 +171,14 @@ namespace WinterSports.Scripts.Events
         { 
             this.character = character;
         }
+        public float GetEnergy()
+        {
+            return 0.0f;
+        }
+
+        public bool GetIsFinished(){ return false; }
+        public bool GetIsAccel() { return false; }
+        public bool GetIsBreak() { return false; }
         #endregion
         #region Methods
         private void ShowHidePauseMenu(bool isPause)

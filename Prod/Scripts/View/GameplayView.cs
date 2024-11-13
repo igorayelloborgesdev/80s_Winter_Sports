@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.DTO;
+using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Prefabs;
 using WinterSports.Scripts.Singleton;
 using WinterSports.Scripts.Static;
@@ -56,6 +57,10 @@ public partial class GameplayView : Control
     [Export] Control windDirectionArrowHorizontal = null;
     [Export] Control controlSkiJumpImpulseVertical = null;
     [Export] Control windDirectionArrowVertical = null;
+    [Export] Control controlSkiCrossCountry = null;
+    [Export] Label controlSkiCrossCountryTime = null;
+    [Export] NinePatchRect controlSkiCrossCountrySpeed = null;
+    [Export] NinePatchRect controlSkiCrossCountryEnergy = null;
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
@@ -85,7 +90,7 @@ public partial class GameplayView : Control
     public override void _Process(double delta)
     {
         gamePlayController.UpdateSkiJumpRail(prefabName, skiJump);
-        gamePlayController.Update(delta, prefabName);        
+        gamePlayController.Update(delta, prefabName, levelId);                
     }
     #endregion
     #region Method
@@ -99,6 +104,7 @@ public partial class GameplayView : Control
         SetMainGamePlayEvents();
         gamePlayController.Init(prefabName);
         gamePlayController.SetTimerLabel(prefabName, timeLabel);
+        gamePlayController.SetCrossCountryLabel(controlSkiCrossCountryTime, controlSkiCrossCountrySpeed, controlSkiCrossCountryEnergy);
         gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
         gamePlayController.SetReadySetGoControl(prefabName, readySetGoControl, readySetGoLabel);
         gamePlayController.SetCountryUI(prefabName, countryCodeLabel, countryFlagTextureRect);
@@ -120,9 +126,18 @@ public partial class GameplayView : Control
             gamePlayController.SetDirectionArrowList(biathlonTrack.GetDirectionArrowList);
     }
     private void InstantiateCharacter()
-    {        
+    {
         if (prefabName == "skiTrack")
-            InstantiateCharacterSki();
+        {
+            if (levelId == 11)
+            {
+                InstantiateCharacterSkiCrossCountry();
+            }
+            else
+            {
+                InstantiateCharacterSki();
+            }            
+        }        
         if (prefabName == "SpeedSkating")
             InstantiateCharacterSpeedSkating();
         if (prefabName == "Biathlon")
@@ -142,6 +157,7 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -152,6 +168,30 @@ public partial class GameplayView : Control
         gamePlayController.ShowHideControlSkiJumpImpulseVertical(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
+        this.AddChild(character);
+    }
+    private void InstantiateCharacterSkiCrossCountry()
+    {
+        character = characterPackedScene.Instantiate<Character>();
+        character.SetPrefabName = prefabName;
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
+        gamePlayController.SetCharacter(character);
+        gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
+        gamePlayController.SetPauseScreen(pauseScreen);
+        gamePlayController.SetFinishSessionScreen(finishSessionScreen);
+        gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
+        gamePlayController.SetControlBiathlon(controlBiathlon);
+        gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
+        gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
+        gamePlayController.ShowHideControlLugeImpulse(false);
+        gamePlayController.ShowHideControlSkiJumpImpulse(false);
+        gamePlayController.ShowHideControlSkiJump(false);
+        gamePlayController.ShowHideControlSkiJumpImpulseHorizontal(false);
+        gamePlayController.ShowHideControlSkiJumpImpulseVertical(false);
+        character.ShowHideControlSkiSpeedSkatingBiathlon(true);
+        character.ShowHideControlBiathlon(false);
+        character.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
         this.AddChild(character);
     }
     private void InstantiateCharacterSpeedSkating()
@@ -165,6 +205,7 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -189,6 +230,7 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -214,6 +256,7 @@ public partial class GameplayView : Control
             gamePlayController.SetPauseScreenLuge(pauseScreen);
             gamePlayController.SetFinishSessionScreenLuge(finishSessionScreen);
             gamePlayController.SetControlSkiSpeedSkatingBiathlonLuge(controlSkiSpeedSkatingBiathlon, controlBiathlon);
+            gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
             gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
             gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
             gamePlayController.ShowHideControlLugeImpulse(true);
@@ -237,6 +280,7 @@ public partial class GameplayView : Control
             gamePlayController.SetPauseScreenBobsleigh(pauseScreen);
             gamePlayController.SetFinishSessionScreenBobsleigh(finishSessionScreen);
             gamePlayController.SetControlSkiSpeedSkatingBiathlonBobsleigh(controlSkiSpeedSkatingBiathlon, controlBiathlon);
+            gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
             gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
             gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
             gamePlayController.ShowHideControlLugeImpulse(true);
@@ -261,6 +305,7 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -305,13 +350,27 @@ public partial class GameplayView : Control
             InstantiateLevelSkiJump(prefabScene, levelId);
     }
     private void InstantiateLevelSki(PackedScene prefabScene, int id)
-    {
-        skiTrack = prefabScene.Instantiate<Ski>();
-        initPoint = skiTrack.GetInitPoint(id);
-        gateStart = skiTrack.GetStart(id);
-        gateFinish = skiTrack.GetFinish(id);
-        skiTrack.ShowGate(id);
-        AddChild(skiTrack);
+    {        
+        if (id != 11)
+        {
+            skiTrack = prefabScene.Instantiate<Ski>();
+            initPoint = skiTrack.GetInitPoint(id);
+            gateStart = skiTrack.GetStart(id);
+            gateFinish = skiTrack.GetFinish(id);
+            skiTrack.ShowGate(id);
+            skiTrack.ShowHideCrossCountry(false, 4);
+            AddChild(skiTrack);
+        }
+        else
+        {            
+            skiTrack = prefabScene.Instantiate<Ski>();
+            initPoint = skiTrack.GetInitPointCrossCountry(0);
+            gateStart = skiTrack.GetStart(4);
+            gateFinish = skiTrack.GetFinish(4);
+            skiTrack.HideGates();
+            skiTrack.ShowGateStartFinish();            
+            AddChild(skiTrack);
+        }        
     }
     private void InstantiateLevelSpeedSkating(PackedScene prefabScene, int id)
     {
@@ -389,6 +448,7 @@ public partial class GameplayView : Control
         BiathlonStatic.Reset();
         LugeStatic.Reset();
         SkiJumpStatic.Reset();
+        CrossCountryStatic.Reset();
     }
     #endregion
 

@@ -29,5 +29,10 @@ namespace WinterSports.Scripts.Interfaces
         bool GetPause();
         void SetSkiJumpPoint(int[] flyPoints);
         void SetWindSkiJump(float angle, float power);
+        void SetSkiCollision(SkiCollision skiCollision);
+        float GetEnergy();
+        bool GetIsFinished();
+        bool GetIsAccel();
+        bool GetIsBreak();
     }
 }

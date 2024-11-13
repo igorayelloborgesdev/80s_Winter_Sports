@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6cjftgn674tx"]
+[gd_scene load_steps=12 format=3 uid="uid://b6cjftgn674tx"]
 
 [ext_resource type="Script" path="res://Scripts/Prefabs/Ski.cs" id="1_ob0bs"]
+[ext_resource type="PackedScene" uid="uid://c2umsr43sib1b" path="res://Prefab/ski_down_hill_cross_country.tscn" id="2_t3vt4"]
 [ext_resource type="PackedScene" uid="uid://n852lgio0j6" path="res://Prefab/donwhill_track.tscn" id="2_vr3bs"]
 [ext_resource type="PackedScene" uid="uid://emem201u3ntr" path="res://Prefab/gate_start.tscn" id="3_trrsa"]
 [ext_resource type="PackedScene" uid="uid://nj3mjr6c218v" path="res://Prefab/gate_finish.tscn" id="4_eyh8u"]
@@ -12,12 +13,18 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_ib4q7"]
 
-[node name="Ski" type="Node3D" node_paths=PackedStringArray("gateStart", "gateFinish", "initPoint", "gates")]
+[node name="Ski" type="Node3D" node_paths=PackedStringArray("gateStart", "gateFinish", "initPoint", "gates", "initPointCrossCountry", "skiCrossCountry")]
 script = ExtResource("1_ob0bs")
-gateStart = [NodePath("GateStart"), NodePath("GateStart3"), NodePath("GateStart2"), NodePath("GateStart")]
-gateFinish = [NodePath("GateFinish"), NodePath("GateFinish3"), NodePath("GateFinish2"), NodePath("GateFinish")]
+gateStart = [NodePath("GateStart"), NodePath("GateStart3"), NodePath("GateStart2"), NodePath("GateStart"), NodePath("GateStartCrossCountry")]
+gateFinish = [NodePath("GateFinish"), NodePath("GateFinish3"), NodePath("GateFinish2"), NodePath("GateFinish"), NodePath("GateFinishCrossCountry")]
 initPoint = [NodePath("InitPoint"), NodePath("InitPoint3"), NodePath("InitPoint2"), NodePath("InitPoint")]
 gates = [NodePath("SkiDownhillGates"), NodePath("SkiSlalomGates"), NodePath("SkiGiantSlalomGates"), NodePath("SkiSuperGGates")]
+initPointCrossCountry = [NodePath("InitPoint00"), NodePath("InitPoint01"), NodePath("InitPoint02"), NodePath("InitPoint03"), NodePath("InitPoint04"), NodePath("InitPoint05"), NodePath("InitPoint06"), NodePath("InitPoint07"), NodePath("InitPoint08"), NodePath("InitPoint09"), NodePath("InitPoint10"), NodePath("InitPoint11"), NodePath("InitPoint12"), NodePath("InitPoint13"), NodePath("InitPoint14"), NodePath("InitPoint15")]
+skiCrossCountry = NodePath("SkiDownHillCrossCountry")
+
+[node name="SkiDownHillCrossCountry" parent="." instance=ExtResource("2_t3vt4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.499, 0.00724279, -0.125)
+visible = false
 
 [node name="DonwhillTrack" parent="." instance=ExtResource("2_vr3bs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.494, 0, -0.118046)
@@ -440,3 +447,107 @@ transform = Transform3D(-0.0122403, 0, -0.0628186, 0, 0.064, 0, 0.0628186, 0, -0
 
 [node name="GateFinish3" parent="." instance=ExtResource("4_eyh8u")]
 transform = Transform3D(-0.0111719, 0, -0.0630174, 0, 0.064, 0, 0.0630174, 0, -0.0111719, 407.517, 0.0212261, 30.9295)
+
+[node name="GateStartCrossCountry" parent="." node_paths=PackedStringArray("area3D") instance=ExtResource("3_trrsa")]
+transform = Transform3D(-0.0017937, 0, -0.0639749, 0, 0.064, 0, 0.0639749, 0, -0.0017937, -791.312, -0.0924856, 0.494802)
+area3D = NodePath("../GateStart3/GateStartArea3D")
+
+[node name="GateFinishCrossCountry" parent="." node_paths=PackedStringArray("area3D") instance=ExtResource("4_eyh8u")]
+transform = Transform3D(-0.00503152, 0, -0.0638019, 0, 0.064, 0, 0.0638019, 0, -0.00503152, -787.341, 0.0212261, 0.580565)
+area3D = NodePath("../GateFinish3/GateFinishMeshInstance3D/GateFinishArea3D")
+
+[node name="InitPoint00" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.471, 0.14881, 0.372485)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint01" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.472, 0.14881, 0.0627742)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint02" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.471, 0.14881, -0.140727)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint03" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.472, 0.14881, -0.450438)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint04" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.16, 0.14881, 0.372485)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint05" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.161, 0.14881, 0.0627742)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint06" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.16, 0.14881, -0.140727)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint07" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.161, 0.14881, -0.450438)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint08" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.804, 0.14881, 0.372485)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint09" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.805, 0.14881, 0.0627742)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint10" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.804, 0.14881, -0.140727)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint11" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.805, 0.14881, -0.450438)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint12" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -794.493, 0.14881, 0.372485)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint13" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -794.494, 0.14881, 0.0627742)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint14" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -794.493, 0.14881, -0.140727)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint15" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -794.494, 0.14881, -0.450438)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")

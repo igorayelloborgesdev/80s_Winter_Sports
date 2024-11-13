@@ -96,6 +96,7 @@ public partial class SkiJump : Node
         var app_arc_length = (cont_net + chord) / 2;
         return app_arc_length;
     }
+    //!<- Instantiate cube
     private void InstatiateRefBox(Vector3 position, int id)
     {
         var myMesh = new MeshInstance3D();

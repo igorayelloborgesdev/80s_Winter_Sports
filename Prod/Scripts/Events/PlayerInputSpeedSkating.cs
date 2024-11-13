@@ -132,6 +132,7 @@ namespace WinterSports.Scripts.Events
         {
             this.characterBody3D = rigidBody3D;
         }
+        public void SetSkiCollision(SkiCollision skiCollision) { }
         public void SetPauseScreen(Control pauseScreen)
         {
             this.pauseScreen = pauseScreen;
@@ -193,6 +194,13 @@ namespace WinterSports.Scripts.Events
         {
          
         }
+        public float GetEnergy()
+        {
+            return 0.0f;
+        }
+        public bool GetIsFinished() { return false; }
+        public bool GetIsAccel() { return false; }
+        public bool GetIsBreak() { return false; }
         #endregion
         #region Methods  
         private void ShowHideFinishSessionScreenMenu(bool isPause)
