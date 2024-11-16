@@ -47,6 +47,9 @@ public partial class Character : CharacterBody3D
     private int startPointId = 0;
     private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
     private List<List<DirectionArrow>> directionArrowBiathlonList = new List<List<DirectionArrow>>();
+    private int characterId = 0;
+    private int characterIdCountry = 0;
+    private bool isAI = false;
     #endregion
     #region Variables Speed Skating
     private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();
@@ -130,7 +133,12 @@ public partial class Character : CharacterBody3D
         if (prefabName == "skiTrack")
         {
             if (statesSki > StatesSki.Go)
-                playerInput.PlayerInput(animationPlayer);
+            {
+                if(GameModeSingleton.sport == 12)
+                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance());
+                else
+                    playerInput.PlayerInput(animationPlayer);
+            }            
         }
         if (prefabName == "SpeedSkating")
         {
@@ -158,6 +166,7 @@ public partial class Character : CharacterBody3D
         playerInput.PlayAnimation(animationPlayer, 1);
         playerInput.SetCharacter(this);
         playerInput.SetSkiCollision(skiCollision);
+        playerInput.SetIsAI(isAI);
         playerInput.Init();            
         //Sport Ski 
         if (prefabName == "skiTrack")
@@ -260,6 +269,15 @@ public partial class Character : CharacterBody3D
     {
         MoveCameraPositionRotation(id);
         ReScaleCharacter(id);
+    }
+    public void MoveAndReScaleCharacterAI(int id)
+    {
+        HideCamera();
+        ReScaleCharacter(id);
+    }
+    public void HideCamera()
+    {
+        camera3D.Hide();        
     }
     public void DisableCamera()
     {
@@ -372,6 +390,28 @@ public partial class Character : CharacterBody3D
         get
         {
             return maxRotateX;
+        }
+    }
+    public int GetSetCharacterId
+    {
+        get
+        {
+            return characterId;
+        }
+        set
+        {
+            characterId = value;
+        }
+    }
+    public int GetSetCharacterIdCountry
+    {
+        get
+        {
+            return characterIdCountry;
+        }
+        set
+        {
+            characterIdCountry = value;
         }
     }
     #endregion
@@ -800,7 +840,7 @@ public partial class Character : CharacterBody3D
         this.crossCountryModelList = crossCountryModelList;
     }
     public int GetSkiCrossCountryDistance()
-    {
+    {        
         foreach (var crossCountryModel in crossCountryModelList)
         {
             crossCountryModel.distance = this.Position.DistanceTo(crossCountryModel.position);            
@@ -818,6 +858,10 @@ public partial class Character : CharacterBody3D
     public bool GetIsBreak() 
     {
         return playerInput.GetIsBreak();
+    }
+    public void SetIsAI(bool isAI)
+    { 
+        this.isAI = isAI;        
     }
     #endregion
 }

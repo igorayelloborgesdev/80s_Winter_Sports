@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Singleton;
+using WinterSports.Scripts.Static;
 
 namespace WinterSports.Scripts.Events
 {
@@ -56,91 +58,103 @@ namespace WinterSports.Scripts.Events
         private bool isEnergySlow = false;
         private float energyDecrease = 1500.0f;
         private bool isAccel = false;
-        private bool isBreak = false;
+        private bool isBreak = false;        
+        #endregion
+        #region Variables AI
+        private bool isAI = false;
+        private int currentWayPoint = 0;
+        private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID) 
         {
             if (!isPause)
             {
-                JoystickInput.GetJoyPressed();
-                if (Input.IsAnythingPressed())
+                if (!isAI)
                 {
-                    var index = 5;
-                    if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
+                    JoystickInput.GetJoyPressed();
+                    if (Input.IsAnythingPressed())
                     {
-                        if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
-                        {                            
-                            Pause();
-                        }
-                        if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
-                        {                           
-                            index = 5;
-                            AccelPlayer();
+                        var index = 5;
+                        if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
+                        {
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
+                            {
+                                Pause();
+                            }
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
+                            {
+                                index = 5;
+                                AccelPlayer();
+                            }
+                            else
+                            {
+                                DecreaseSpeedPlayer();
+                            }
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
+                            {
+                                index = 6;
+                                BrakePlayer();
+                            }
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                            {
+                                index = 3;
+                                DirectPlayer(true);
+                            }
+                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                            {
+                                index = 4;
+                                DirectPlayer(false);
+                            }
                         }
                         else
                         {
-                            DecreaseSpeedPlayer();
+                            var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
+                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
+                            {
+                                Pause();
+                            }
+                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
+                            {
+                                index = 5;
+                                AccelPlayer();
+                            }
+                            else
+                            {
+                                DecreaseSpeedPlayer();
+                            }
+                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
+                            {
+                                index = 6;
+                                BrakePlayer();
+                            }
+                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                            {
+                                index = 3;
+                                DirectPlayer(true);
+                            }
+                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                            {
+                                index = 4;
+                                DirectPlayer(false);
+                            }
                         }
-                        if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
-                        {
-                            index = 6;
-                            BrakePlayer();
-                        }
-                        if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
-                        {
-                            index = 3;
-                            DirectPlayer(true);
-                        }
-                        if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
-                        {
-                            index = 4;
-                            DirectPlayer(false);
-                        }
+                        PlayAnimation(animationPlayer, index);
                     }
                     else
                     {
-                        var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
-                        if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
-                        {
-                            Pause();
-                        }
-                        if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
-                        {
-                            index = 5;
-                            AccelPlayer();
-                        }
-                        else
-                        {
-                            DecreaseSpeedPlayer();
-                        }
-                        if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
-                        {
-                            index = 6;
-                            BrakePlayer();
-                        }
-                        if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
-                        {
-                            index = 3;
-                            DirectPlayer(true);
-                        }
-                        if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
-                        {
-                            index = 4;
-                            DirectPlayer(false);
-                        }
+                        PlayAnimation(animationPlayer, 5);
+                        DecreaseSpeedPlayer();
                     }
-                    PlayAnimation(animationPlayer, index);
-                }
-                else
-                {
-                    PlayAnimation(animationPlayer, 5);
-                    DecreaseSpeedPlayer();
-                }
-                ManageCollisionSpeed();
-                MovePlayer();
-                CalcAngleDirection();                
+                    ManageCollisionSpeed();
+                    MovePlayer();
+                    CalcAngleDirection();
+                }                
             }            
+            if (!CrossCountryStatic.isPause && isAI)
+            {
+                MoveDirectionAI(positionID);                
+            }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
         {
@@ -172,19 +186,29 @@ namespace WinterSports.Scripts.Events
         {
             isPause = !isPause;
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
-            ShowHidePauseMenu(isPause);            
+            ShowHidePauseMenu(isPause);
+            SetStaticPause();
         }
         public void UnPause()
         {
             isPause = false;
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHidePauseMenu(isPause);
+            SetStaticPause();
         }
         public void ShowHideFinishSessionScreen()
         {
             isPause = !isPause;
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHideFinishSessionScreenMenu(isPause);
+            SetStaticPause();
+        }
+        private void SetStaticPause()
+        {
+            if (!isAI)
+            { 
+                CrossCountryStatic.isPause = isPause;
+            }
         }
         public void Init()
         {            
@@ -194,6 +218,10 @@ namespace WinterSports.Scripts.Events
             angleInc = 0.0f;
             energy = maxEnergy;
             this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);
+            if (isAI)
+            {
+                crossCountryDTOList = AISingleton.crossCountryObjDTO.CrossCountryDTOList.OrderBy(x => x.id).ToList();                
+            }            
         }
         public void Reset()
         {
@@ -213,7 +241,6 @@ namespace WinterSports.Scripts.Events
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList, List<DirectionArrow> directionArrowList) { }
         public void SetSkiJumpPoint(int[] flyPoints) { }
         public void SetWindSkiJump(float angle, float power) { }
-
         public void SetSkiCollision(SkiCollision skiCollision) 
         { 
             this.skiCollision = skiCollision;
@@ -415,7 +442,6 @@ namespace WinterSports.Scripts.Events
                 energyInc = energyArray[1] / energyDecrease;
             energy += energyInc;            
         }        
-
         private void MovePlayer()
         {            
             float hyp = speed;
@@ -469,6 +495,41 @@ namespace WinterSports.Scripts.Events
         { 
             return isBreak; 
         }
+        public void SetIsAI(bool isAI)
+        { 
+            this.isAI = isAI;
+        }
+
+        private void MoveDirectionAI(int positionID)
+        {            
+            Vector3 targetPosition = crossCountryDTOList[currentWayPoint].position;
+            Vector3 currentPosition = this.characterBody3D.GlobalPosition;
+            Vector3 direction = (targetPosition - currentPosition).Normalized();
+            float targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            float angleDegrees = Mathf.RadToDeg(targetYRotation);
+            if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
+            {
+                CalcAngleDirection();                
+                if ((int)angleDegrees < (int)this.characterBody3D.RotationDegrees.Y)
+                {
+                    DirectPlayer(false);                    
+                }
+                else if ((int)angleDegrees > (int)this.characterBody3D.RotationDegrees.Y)
+                {                    
+                    DirectPlayer(true);
+                }                
+            }
+            if (crossCountryDTOList[currentWayPoint].isAccel)
+            {                
+                AccelPlayer();                
+            }
+            if (crossCountryDTOList[currentWayPoint].id == positionID)
+            {
+                GD.Print("A");//<-PAREI AQUI
+            }
+            ManageCollisionSpeed();
+            MovePlayer();
+        }        
         #endregion
     }
 }

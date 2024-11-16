@@ -14,6 +14,7 @@ public partial class SplashView : Control
         splashController.LoadConfig();
         splashController.LoadCountryData();
         splashController.LoadLevelData();
+        splashController.LoadAIData();
     }
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)

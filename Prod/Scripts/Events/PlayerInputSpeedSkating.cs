@@ -45,7 +45,7 @@ namespace WinterSports.Scripts.Events
         private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta)
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID = 0)
         {
             if (!isPause)
             {
@@ -201,6 +201,7 @@ namespace WinterSports.Scripts.Events
         public bool GetIsFinished() { return false; }
         public bool GetIsAccel() { return false; }
         public bool GetIsBreak() { return false; }
+        public void SetIsAI(bool isAI) { }
         #endregion
         #region Methods  
         private void ShowHideFinishSessionScreenMenu(bool isPause)

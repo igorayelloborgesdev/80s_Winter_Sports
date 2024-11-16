@@ -26,7 +26,7 @@ namespace WinterSports.Scripts.Controller
         private SpeedSkatingModel speedSkatingModel = new SpeedSkatingModel();
         #endregion
         #region Variables        
-        private Character character = null;
+        private Character character = null;        
         private LugeSled lugeSled = null;
         private BobsleighSled bobsleighSled = null;
         private Vector3 initPosition = Vector3.Zero;
@@ -71,7 +71,8 @@ namespace WinterSports.Scripts.Controller
         private Label controlSkiCrossCountryTime = null;
         private NinePatchRect controlSkiCrossCountrySpeed = null;
         private NinePatchRect controlSkiCrossCountryEnergy = null;        
-        private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();        
+        private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
+        private List<Character> characterCrossCountryList = new List<Character>();        
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -173,7 +174,7 @@ namespace WinterSports.Scripts.Controller
             UpdateSpeedLabel();
         }
         private void UpdateSkiCrossCountry(double delta)
-        {
+        {            
             timerGamePlayController.TimerRunning(delta);
             if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
             {
@@ -192,6 +193,7 @@ namespace WinterSports.Scripts.Controller
                 readySetGoLabel.Text = "Go";
                 setScore = true;
                 timerController.StartTimer();
+                StartAI();
             }
             else if (timerGamePlayController.GetTimer() > 5.0f && this.character.statesSki == Character.StatesSki.Init)
             {
@@ -199,11 +201,13 @@ namespace WinterSports.Scripts.Controller
                 timerGamePlayController.StopTimer();
                 timerGamePlayController.ResetTimer();
                 this.character.statesSki = Character.StatesSki.Running;
-                crossCountryDTOList.Clear();
+                crossCountryDTOList.Clear();                
+                CrossCountryStatic.isPause = false;
             }
             else if (this.character.statesSki == Character.StatesSki.Running)
             {
-                SaveAI();                
+                MoveAI();
+                //SaveAI();//<-
             }
 
             //if (this.character.statesSki == Character.StatesSki.Running)
@@ -480,13 +484,30 @@ namespace WinterSports.Scripts.Controller
         {            
             this.character = character;
             this.character.Position = initPosition;
-            this.character.Rotation = initRotation;            
+            this.character.Rotation = initRotation;
+            this.character.GetSetCharacterIdCountry = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Id;
             this.character.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1BodyColor);            
             this.character.GenerateArmsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1ArmsColor);
             this.character.GenerateHandsAndHeadColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].SkinColor);
             this.character.GenerateLegsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1LegsColor);
             this.character.GenerateBotsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].BootsColor);
             this.character.GenerateHairColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].HairColor);
+            this.character.SetIsAI(false);
+        }
+        public void SetCharacterCrossCountryAI(Character characterAI, Vector3 initPositionAI, Vector3 initRotationAI, int id)
+        {
+            Character characterObj = characterAI;
+            characterObj.Position = initPositionAI;
+            characterObj.Rotation = initRotationAI;
+            characterObj.GetSetCharacterIdCountry = CountrySingleton.countryObjDTO.countryList[id].Id;
+            characterObj.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[id].kit1BodyColor);
+            characterObj.GenerateArmsColor(CountrySingleton.countryObjDTO.countryList[id].kit1ArmsColor);
+            characterObj.GenerateHandsAndHeadColor(CountrySingleton.countryObjDTO.countryList[id].SkinColor);
+            characterObj.GenerateLegsColor(CountrySingleton.countryObjDTO.countryList[id].kit1LegsColor);
+            characterObj.GenerateBotsColor(CountrySingleton.countryObjDTO.countryList[id].BootsColor);
+            characterObj.GenerateHairColor(CountrySingleton.countryObjDTO.countryList[id].HairColor);
+            characterObj.SetIsAI(true);
+            characterCrossCountryList.Add(characterObj);            
         }
         public void SetCharacter(LugeSled lugeSled)
         {
@@ -726,7 +747,7 @@ namespace WinterSports.Scripts.Controller
         private void InitTimer()
         {
             timerController = new TimerController();
-            timerController.Init();
+            timerController.Init();            
             timerGamePlayController = new TimerController();
             timerGamePlayController.Init();
             timerResetController = new TimerController();
@@ -1055,8 +1076,15 @@ namespace WinterSports.Scripts.Controller
             this.character.MoveAndReScaleCharacter(0);
             this.character.ShowHideSkiItems();
         }
-        private void InitSki()
+        public void SetCharacterSportSkiCrossCountryAI(GateStartFinish gateStart, GateStartFinish gateFinish)
         {
+            characterCrossCountryList[characterCrossCountryList.Count - 1].SetStartGate = gateStart.GetArea3D();
+            characterCrossCountryList[characterCrossCountryList.Count - 1].SetFinishGate = gateFinish.GetArea3D();
+            characterCrossCountryList[characterCrossCountryList.Count - 1].MoveAndReScaleCharacter(0);
+            characterCrossCountryList[characterCrossCountryList.Count - 1].ShowHideSkiItems();
+        }
+        private void InitSki()
+        {            
             InitTimer();
             SkiStatic.Reset();
             setScore = true;
@@ -1230,7 +1258,7 @@ namespace WinterSports.Scripts.Controller
         private void SaveAI()//!<- Save AI Path
         {
             if (this.character.GetIsFinished())
-            {                                
+            {
                 this.character.statesSki = Character.StatesSki.Finish;
                 var crossCountryObjDTO = new CrossCountryObjDTO();
                 crossCountryObjDTO.CrossCountryDTOList = this.crossCountryDTOList;
@@ -1259,6 +1287,23 @@ namespace WinterSports.Scripts.Controller
                     crossCountryDTOList.Add(crossCountryDTO);
                 }                
             }            
+        }
+        private void StartAI()
+        {
+            foreach (var crossCountryDTO in this.characterCrossCountryList)
+            {
+                if (crossCountryDTO.GetSetCharacterIdCountry == 4)//<-
+                {
+                    crossCountryDTO.statesSki = Character.StatesSki.Running;
+                }                
+            }
+        }
+        private void MoveAI()
+        {
+            foreach (var crossCountryDTO in this.characterCrossCountryList)
+            {                
+                //GD.Print(crossCountryDTO.GetSetCharacterIdCountry);
+            }
         }
         #endregion
         #region Get Set
@@ -1316,7 +1361,7 @@ namespace WinterSports.Scripts.Controller
             {
                 gamePlayModel.returnFinishButton = value;
             }
-        }
+        }        
         #endregion
     }
 }

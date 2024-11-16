@@ -37,22 +37,22 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 script = ExtResource("2_51ifc")
 animationPlayer = NodePath("AnimationPlayer")
 bodyMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Body_004")]
-armsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LArm_028"), NodePath("Armature_002/Skeleton3D/LArm_029"), NodePath("Armature_002/Skeleton3D/LArm_030"), NodePath("Armature_002/Skeleton3D/LArm_033"), NodePath("Armature_002/Skeleton3D/LArm_034"), NodePath("Armature_002/Skeleton3D/LArm_035"), NodePath("Armature_002/Skeleton3D/LSholder_007"), NodePath("Armature_002/Skeleton3D/LSholder_008")]
+armsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LSholder_007"), NodePath("Armature_002/Skeleton3D/LSholder_008"), NodePath("Armature_002/Skeleton3D/LArm_028"), NodePath("Armature_002/Skeleton3D/LArm_029"), NodePath("Armature_002/Skeleton3D/LArm_030"), NodePath("Armature_002/Skeleton3D/LArm_033"), NodePath("Armature_002/Skeleton3D/LArm_034"), NodePath("Armature_002/Skeleton3D/LArm_035")]
 handsAndHeadMeshInstance3D = [NodePath("Armature_002/Skeleton3D/RHand"), NodePath("Armature_002/Skeleton3D/LHand"), NodePath("Armature_002/Skeleton3D/Skin_002")]
-legsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LLeg_035"), NodePath("Armature_002/Skeleton3D/LLeg_036"), NodePath("Armature_002/Skeleton3D/LLeg_037"), NodePath("Armature_002/Skeleton3D/LLeg_038"), NodePath("Armature_002/Skeleton3D/LLeg_039"), NodePath("Armature_002/Skeleton3D/LLeg_040"), NodePath("Armature_002/Skeleton3D/LLeg_041"), NodePath("Armature_002/Skeleton3D/LLeg_042"), NodePath("Armature_002/Skeleton3D/LLeg_043"), NodePath("Armature_002/Skeleton3D/LLeg_044"), NodePath("Armature_002/Skeleton3D/Hip_004")]
+legsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Hip_004"), NodePath("Armature_002/Skeleton3D/LLeg_035"), NodePath("Armature_002/Skeleton3D/LLeg_036"), NodePath("Armature_002/Skeleton3D/LLeg_037"), NodePath("Armature_002/Skeleton3D/LLeg_038"), NodePath("Armature_002/Skeleton3D/LLeg_039"), NodePath("Armature_002/Skeleton3D/LLeg_040"), NodePath("Armature_002/Skeleton3D/LLeg_041"), NodePath("Armature_002/Skeleton3D/LLeg_042"), NodePath("Armature_002/Skeleton3D/LLeg_043"), NodePath("Armature_002/Skeleton3D/LLeg_044")]
 bootsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LFoot_007"), NodePath("Armature_002/Skeleton3D/LFoot_008")]
 hairMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Hair_004")]
 cameraRef = [NodePath("CameraRef1"), NodePath("CameraRef2"), NodePath("CameraRef3"), NodePath("CameraRef4")]
 camera3D = NodePath("Camera3D")
-skiPole = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D2/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D/SkiPole")]
-ski = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D3/Ski")]
+skiPole = []
+ski = []
 speedBox = NodePath("SpeedBox")
 target = NodePath("Camera3D/Target")
 armature = NodePath("Armature_002")
 skiCollision = NodePath("SkiCollision/Area3D")
 rayCast3D = NodePath("Camera3D/Target/RayCast3D")
 rifle = NodePath("Armature_002/Skeleton3D/BoneAttachment3D5/Rifle")
-skiPoleBiathlon = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D6/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D7/SkiPole")]
+skiPoleBiathlon = []
 
 [node name="Armature_002" parent="." index="0"]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.04, 0)

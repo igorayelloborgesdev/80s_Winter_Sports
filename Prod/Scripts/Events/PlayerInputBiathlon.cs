@@ -52,7 +52,7 @@ namespace WinterSports.Scripts.Events
         private float increment = 0.01f;
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0) 
         {
             if (!isPause)
             {
@@ -179,6 +179,7 @@ namespace WinterSports.Scripts.Events
         public bool GetIsFinished(){ return false; }
         public bool GetIsAccel() { return false; }
         public bool GetIsBreak() { return false; }
+        public void SetIsAI(bool isAI){}
         #endregion
         #region Methods
         private void ShowHidePauseMenu(bool isPause)
@@ -508,6 +509,7 @@ namespace WinterSports.Scripts.Events
         {
             character.SetWind(angle, power);
         }
+
         #endregion
     }
 }

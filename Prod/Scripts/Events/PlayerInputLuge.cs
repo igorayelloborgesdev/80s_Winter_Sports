@@ -26,7 +26,7 @@ namespace WinterSports.Scripts.Events
         private Control finishSessionScreen = null;
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0) 
         { }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
         {            
@@ -76,6 +76,7 @@ namespace WinterSports.Scripts.Events
             return 0.0f;
         }
         public bool GetIsFinished() { return false; }
+        public void SetIsAI(bool isAI) { }
         #endregion
         #region Methods
         private void ShowHideFinishSessionScreenMenu(bool isPause)

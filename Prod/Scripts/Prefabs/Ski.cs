@@ -94,7 +94,7 @@ public partial class Ski : Node
         
     }
     public void ShowHideCrossCountry(bool isShow, int id)
-    {
+    {        
         if (isShow)
         {
             gateStart[id].Show();

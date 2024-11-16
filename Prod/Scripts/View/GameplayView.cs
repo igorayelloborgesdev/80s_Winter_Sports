@@ -67,6 +67,7 @@ public partial class GameplayView : Control
     #endregion
     #region Variables
     private Character character = new Character();
+    private List<Character> characterList = new List<Character>();
     private LugeSled lugeSled = new LugeSled();
     private BobsleighSled bobsleighSled = new BobsleighSled();
     private Ski skiTrack = new Ski();
@@ -132,6 +133,7 @@ public partial class GameplayView : Control
             if (levelId == 11)
             {
                 InstantiateCharacterSkiCrossCountry();
+                InstantiateCharacterSkiCrossCountryAI();
             }
             else
             {
@@ -190,9 +192,28 @@ public partial class GameplayView : Control
         gamePlayController.ShowHideControlSkiJumpImpulseHorizontal(false);
         gamePlayController.ShowHideControlSkiJumpImpulseVertical(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
-        character.ShowHideControlBiathlon(false);
+        character.ShowHideControlBiathlon(false);        
         character.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
         this.AddChild(character);
+    }
+    private void InstantiateCharacterSkiCrossCountryAI()
+    {
+        int count = 1;
+        foreach (var obj in CountrySingleton.countryObjDTO.countryList)
+        {
+            if (obj.Id != GameModeSingleton.country)
+            {
+                Character characterAI = characterPackedScene.Instantiate<Character>();
+                characterAI.SetPrefabName = prefabName;
+                MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(count);                
+                gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
+                gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
+                characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
+                characterList.Add(characterAI);
+                this.AddChild(characterAI);                                
+                count++;
+            }
+        }
     }
     private void InstantiateCharacterSpeedSkating()
     {

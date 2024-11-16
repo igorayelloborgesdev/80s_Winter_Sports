@@ -36,5 +36,9 @@ public class SplashController
     {
         ConfigDefaultInputs.Init();        
     }
+    public void LoadAIData()
+    {
+        AISingleton.crossCountryObjDTO = SaveLoad.LoadData<CrossCountryObjDTO>("Data//CrossCountryAI.json");
+    }
     #endregion
 }
