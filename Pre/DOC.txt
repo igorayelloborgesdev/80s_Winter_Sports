@@ -47,12 +47,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Cross Country
-..AI seguir way point
-...Trocar way point//<-
-...Freiar
-...Diminuir velocidade
-
-..AI ultrapassar
+..AI ultrapassar//<-
 ..AI velocidade X energia
 
 ..Posição

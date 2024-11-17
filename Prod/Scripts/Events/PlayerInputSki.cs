@@ -153,7 +153,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID);                
+                MoveDirectionAI(positionID);//<-PAREI AQUI             
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -519,17 +519,41 @@ namespace WinterSports.Scripts.Events
                     DirectPlayer(true);
                 }                
             }
-            if (crossCountryDTOList[currentWayPoint].isAccel)
-            {                
-                AccelPlayer();                
-            }
-            if (crossCountryDTOList[currentWayPoint].id == positionID)
-            {
-                GD.Print("A");//<-PAREI AQUI
-            }
+            AccelBrakeAI();
+            DefineNextWayPointAI(positionID);
             ManageCollisionSpeed();
             MovePlayer();
-        }        
+        }
+        private void AccelBrakeAI()
+        {
+            if (crossCountryDTOList[currentWayPoint].isAccel)
+            {
+                AccelPlayer();
+            }
+            else
+            {
+                DecreaseSpeedPlayer();
+            }
+            if (crossCountryDTOList[currentWayPoint].isBreak)
+            {
+                BrakePlayer();
+            }
+            if (speed > crossCountryDTOList[currentWayPoint].speed)
+            {
+                BrakePlayer();
+            }
+        }
+        private void DefineNextWayPointAI(int positionID)
+        {
+            if (crossCountryDTOList[currentWayPoint].id == positionID)
+            {
+                var index = crossCountryDTOList.FindIndex(x => x.id == positionID);
+                if (index < crossCountryDTOList.Count - 1)
+                {
+                    currentWayPoint++;
+                }
+            }
+        }
         #endregion
     }
 }
