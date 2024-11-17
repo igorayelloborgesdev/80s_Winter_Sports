@@ -15,9 +15,9 @@
 
 [node name="Ski" type="Node3D" node_paths=PackedStringArray("gateStart", "gateFinish", "initPoint", "gates", "initPointCrossCountry", "skiCrossCountry")]
 script = ExtResource("1_ob0bs")
-gateStart = [NodePath("GateStart"), NodePath("GateStart2"), NodePath("GateStart3"), NodePath("GateStart"), NodePath("GateStartCrossCountry")]
-gateFinish = [NodePath("GateFinish"), NodePath("GateFinish2"), NodePath("GateFinish3"), NodePath("GateFinish"), NodePath("GateFinishCrossCountry")]
-initPoint = [NodePath("InitPoint"), NodePath("InitPoint2"), NodePath("InitPoint3")]
+gateStart = [NodePath("GateStart"), NodePath("GateStart3"), NodePath("GateStart2"), NodePath("GateStart"), NodePath("GateStartCrossCountry")]
+gateFinish = [NodePath("GateFinish"), NodePath("GateFinish3"), NodePath("GateFinish2"), NodePath("GateFinish"), NodePath("GateFinishCrossCountry")]
+initPoint = [NodePath("InitPoint"), NodePath("InitPoint3"), NodePath("InitPoint2"), NodePath("InitPoint")]
 gates = [NodePath("SkiDownhillGates"), NodePath("SkiSlalomGates"), NodePath("SkiGiantSlalomGates"), NodePath("SkiSuperGGates")]
 initPointCrossCountry = [NodePath("InitPoint00"), NodePath("InitPoint01"), NodePath("InitPoint02"), NodePath("InitPoint03"), NodePath("InitPoint04"), NodePath("InitPoint05"), NodePath("InitPoint06"), NodePath("InitPoint07"), NodePath("InitPoint08"), NodePath("InitPoint09"), NodePath("InitPoint10"), NodePath("InitPoint11"), NodePath("InitPoint12"), NodePath("InitPoint13"), NodePath("InitPoint14"), NodePath("InitPoint15")]
 skiCrossCountry = NodePath("SkiDownHillCrossCountry")
