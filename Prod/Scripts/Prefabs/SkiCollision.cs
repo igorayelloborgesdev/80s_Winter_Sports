@@ -17,21 +17,7 @@ public partial class SkiCollision : Area3D
         get { return isFinished; }
     }
     #endregion
-    #region Behavior
-    private void HillFenceEnter(Node body)
-    {        
-        if (body.GetParent().Name == "HillFence")
-        {
-            isCollided = true;
-        }
-    }
-    private void HillFenceExit(Node body)
-    {
-        if (body.GetParent().Name == "HillFence")
-        {
-            isCollided = false;
-        }
-    }
+    #region Behavior    
     public override void _Ready()
     {
         Connect("body_entered", new Callable(this, nameof(HillFenceEnter)));
@@ -50,6 +36,20 @@ public partial class SkiCollision : Area3D
             }            
         }catch (Exception ex) { }
         
+    }
+    private void HillFenceEnter(Node body)
+    {
+        if (body.GetParent().Name == "HillFence")
+        {
+            isCollided = true;
+        }
+    }
+    private void HillFenceExit(Node body)
+    {
+        if (body.GetParent().Name == "HillFence")
+        {
+            isCollided = false;
+        }
     }
     public void Reset()
     {

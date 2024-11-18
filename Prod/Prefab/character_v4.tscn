@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=23 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cfbcl1augt02l" path="res://Prefab/speed_box.tscn" id="6_nx70h"]
 [ext_resource type="PackedScene" uid="uid://bnir71w3nswcj" path="res://Prefab/target.tscn" id="9_m4ora"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/SkiCollision.cs" id="10_d4d4k"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/CrossCountryOvertake.cs" id="11_w80qr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wter0"]
 shading_mode = 0
@@ -33,7 +34,11 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_guigk"]
 
-[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "armature", "skiCollision", "rayCast3D", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
+[sub_resource type="BoxMesh" id="BoxMesh_foyeu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2lxn"]
+
+[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "armature", "skiCollision", "crossCountryOvertakeFM", "crossCountryOvertakeFR", "crossCountryOvertakeFL", "crossCountryOvertakeMM", "crossCountryOvertakeMR", "crossCountryOvertakeML", "rayCast3D", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
 script = ExtResource("2_51ifc")
 animationPlayer = NodePath("AnimationPlayer")
 bodyMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Body_004")]
@@ -50,6 +55,12 @@ speedBox = NodePath("SpeedBox")
 target = NodePath("Camera3D/Target")
 armature = NodePath("Armature_002")
 skiCollision = NodePath("SkiCollision/Area3D")
+crossCountryOvertakeFM = NodePath("CrossCountryCollisionF/Area3D")
+crossCountryOvertakeFR = NodePath("CrossCountryCollisionFR/Area3D")
+crossCountryOvertakeFL = NodePath("CrossCountryCollisionFL/Area3D")
+crossCountryOvertakeMM = NodePath("CrossCountryCollisionM/Area3D")
+crossCountryOvertakeMR = NodePath("CrossCountryCollisionMR/Area3D")
+crossCountryOvertakeML = NodePath("CrossCountryCollisionML/Area3D")
 rayCast3D = NodePath("Camera3D/Target/RayCast3D")
 rifle = NodePath("Armature_002/Skeleton3D/BoneAttachment3D5/Rifle")
 skiPoleBiathlon = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D6/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D7/SkiPole")]
@@ -296,3 +307,73 @@ script = ExtResource("10_d4d4k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SkiCollision/Area3D" index="0"]
 shape = SubResource("CylinderShape3D_guigk")
+
+[node name="CrossCountryCollisionF" type="MeshInstance3D" parent="." index="11"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.0748925, 0.29143)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionF" index="0"]
+script = ExtResource("11_w80qr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionF/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionFL" type="MeshInstance3D" parent="." index="12"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.195, -0.075, 0.291)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionFL" index="0"]
+script = ExtResource("11_w80qr")
+colliderTypes = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionFL/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionFR" type="MeshInstance3D" parent="." index="13"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.195, -0.075, 0.291)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionFR" index="0"]
+script = ExtResource("11_w80qr")
+colliderTypes = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionFR/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionM" type="MeshInstance3D" parent="." index="14"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.0748925, 0.00155114)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionM" index="0"]
+script = ExtResource("11_w80qr")
+colliderTypes = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionM/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionML" type="MeshInstance3D" parent="." index="15"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.195, -0.075, 0.0011213)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionML" index="0"]
+script = ExtResource("11_w80qr")
+colliderTypes = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionML/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionMR" type="MeshInstance3D" parent="." index="16"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.195, -0.075, 0.0011213)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionMR" index="0"]
+script = ExtResource("11_w80qr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionMR/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")

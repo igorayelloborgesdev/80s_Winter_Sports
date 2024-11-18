@@ -457,7 +457,7 @@ transform = Transform3D(-0.00503152, 0, -0.0638019, 0, 0.064, 0, 0.0638019, 0, -
 area3D = NodePath("../GateFinish3/GateFinishMeshInstance3D/GateFinishArea3D")
 
 [node name="InitPoint00" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.471, 0.14881, 0.372485)
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.471, 0.14881, 0.398287)
 visible = false
 mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")
@@ -481,7 +481,7 @@ mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")
 
 [node name="InitPoint04" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.16, 0.14881, 0.372485)
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.621, 0.14881, 0.3987)
 visible = false
 mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")

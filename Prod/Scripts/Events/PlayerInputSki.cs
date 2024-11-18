@@ -64,9 +64,21 @@ namespace WinterSports.Scripts.Events
         private bool isAI = false;
         private int currentWayPoint = 0;
         private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
+        private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;
+
+        private CrossCountryOvertake crossCountryOvertakeFR = null;
+        #endregion
+        #region Enum
+        private enum OvertakeProcess
+        {
+            NoneOvertake,
+            Start,
+            Passing,
+            Finish
+        };
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID, bool isOvertake) 
         {
             if (!isPause)
             {
@@ -153,7 +165,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID);//<-PAREI AQUI             
+                MoveDirectionAI(positionID, isOvertake);
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -500,13 +512,16 @@ namespace WinterSports.Scripts.Events
             this.isAI = isAI;
         }
 
-        private void MoveDirectionAI(int positionID)
-        {            
+        private void MoveDirectionAI(int positionID, bool isOvertake)
+        {
+            GD.Print(isOvertake);//<-PAREI AQUI
+
             Vector3 targetPosition = crossCountryDTOList[currentWayPoint].position;
             Vector3 currentPosition = this.characterBody3D.GlobalPosition;
             Vector3 direction = (targetPosition - currentPosition).Normalized();
             float targetYRotation = Mathf.Atan2(direction.X, direction.Z);
             float angleDegrees = Mathf.RadToDeg(targetYRotation);
+
             if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
             {
                 CalcAngleDirection();                

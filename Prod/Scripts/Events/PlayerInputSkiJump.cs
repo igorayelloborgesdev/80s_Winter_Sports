@@ -45,7 +45,7 @@ namespace WinterSports.Scripts.Events
         };
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0)
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0, bool isOvertake = false)
         {
             if (!isPause)
             {

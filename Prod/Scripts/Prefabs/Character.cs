@@ -10,6 +10,7 @@ using WinterSports.Scripts.Events;
 using WinterSports.Scripts.Interfaces;
 using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Static;
+using static CrossCountryOvertake;
 using static WinterSports.Scripts.Model.TimerModel;
 
 public partial class Character : CharacterBody3D
@@ -30,6 +31,12 @@ public partial class Character : CharacterBody3D
     [Export] Node3D target = null;
     [Export] Node3D armature = null;
     [Export] SkiCollision skiCollision = null;
+    [Export] CrossCountryOvertake crossCountryOvertakeFM = null;
+    [Export] CrossCountryOvertake crossCountryOvertakeFR = null;
+    [Export] CrossCountryOvertake crossCountryOvertakeFL = null;
+    [Export] CrossCountryOvertake crossCountryOvertakeMM = null;
+    [Export] CrossCountryOvertake crossCountryOvertakeMR = null;
+    [Export] CrossCountryOvertake crossCountryOvertakeML = null;
     #endregion
     #region Variables    
     private IPlayerInput playerInput = null;
@@ -134,8 +141,10 @@ public partial class Character : CharacterBody3D
         {
             if (statesSki > StatesSki.Go)
             {
-                if(GameModeSingleton.sport == 12)
-                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance());
+                if (GameModeSingleton.sport == 12)
+                {                    
+                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance(), crossCountryOvertakeFM.GetSetIsOvertake);
+                }                    
                 else
                     playerInput.PlayerInput(animationPlayer);
             }            

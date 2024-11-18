@@ -26,7 +26,7 @@ namespace WinterSports.Scripts.Events
         private Control finishSessionScreen = null;
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0, bool isOvertake = false) 
         { }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
         {            
