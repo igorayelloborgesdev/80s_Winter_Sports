@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Singleton;
 using WinterSports.Scripts.Static;
 
@@ -41,6 +42,8 @@ namespace WinterSports.Scripts.Events
         private const float speedIncCollision = 0.025f;
         private const float maxSpeedEnergy = 4.9f;
         private const float maxSpeedEnergyReturn = 4.75f;
+        private const float angleMinOvertake = 0.5f;
+        private const float angleMaxOvertake = 1.0f;        
         #endregion
         #region Variables
         private string currentAnimation = "";        
@@ -64,9 +67,7 @@ namespace WinterSports.Scripts.Events
         private bool isAI = false;
         private int currentWayPoint = 0;
         private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
-        private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;
-
-        private CrossCountryOvertake crossCountryOvertakeFR = null;
+        private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;        
         #endregion
         #region Enum
         private enum OvertakeProcess
@@ -78,7 +79,7 @@ namespace WinterSports.Scripts.Events
         };
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID, bool isOvertake) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID, CrossCountryOvertake crossCountryOvertakeM) 
         {
             if (!isPause)
             {
@@ -165,7 +166,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID, isOvertake);
+                MoveDirectionAI(positionID, crossCountryOvertakeM);
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -488,6 +489,12 @@ namespace WinterSports.Scripts.Events
             var angleCalc = angleMax -((angleMax - angleMin) * speedCalc);
             angleInc = angleCalc;            
         }
+        private void CalcAngleDirectionOvertake()
+        {            
+            var speedCalc = speed / maxSpeed;
+            var angleCalc = angleMaxOvertake - ((angleMaxOvertake - angleMinOvertake) * speedCalc);
+            angleInc = angleCalc;
+        }
         private void ShowHideFinishSessionScreenMenu(bool isPause)
         {
             if (isPause)
@@ -512,19 +519,73 @@ namespace WinterSports.Scripts.Events
             this.isAI = isAI;
         }
 
-        private void MoveDirectionAI(int positionID, bool isOvertake)
+        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM)
         {
-            GD.Print(isOvertake);//<-PAREI AQUI
+            
 
-            Vector3 targetPosition = crossCountryDTOList[currentWayPoint].position;
+            Vector3 targetPosition = Vector3.Zero;
             Vector3 currentPosition = this.characterBody3D.GlobalPosition;
-            Vector3 direction = (targetPosition - currentPosition).Normalized();
-            float targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-            float angleDegrees = Mathf.RadToDeg(targetYRotation);
+            Vector3 direction = Vector3.Zero;
+            float targetYRotation = 0.0f;
+            float angleDegrees = 0.0f;
+
+            if (!crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
+            {
+                targetPosition = crossCountryDTOList[currentWayPoint].position;
+                direction = (targetPosition - currentPosition).Normalized();
+                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+                angleDegrees = Mathf.RadToDeg(targetYRotation);                
+
+                GD.Print("A");
+            }
+            else if (crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
+            {
+                targetPosition = crossCountryDTOList[currentWayPoint].position;
+                direction = (targetPosition - currentPosition).Normalized();
+                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+                angleDegrees = Mathf.RadToDeg(targetYRotation);
+                overtakeProcess = OvertakeProcess.Start;
+
+                GD.Print("B");
+            }
+            else if (overtakeProcess == OvertakeProcess.Start)
+            {
+                targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition;
+                direction = (targetPosition - currentPosition).Normalized();
+                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+                angleDegrees = Mathf.RadToDeg(targetYRotation);
+                if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition) < 0.1f)
+                {
+                    overtakeProcess = OvertakeProcess.Passing;
+                }
+
+                GD.Print("C");
+            }
+            else if (overtakeProcess == OvertakeProcess.Passing)
+            {
+                targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition;
+                direction = (targetPosition - currentPosition).Normalized();
+                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+                angleDegrees = Mathf.RadToDeg(targetYRotation);
+                if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition) < 0.2f)
+                {
+                    overtakeProcess = OvertakeProcess.Finish;
+                }
+                GD.Print("D");               
+            }
+            else if (overtakeProcess == OvertakeProcess.Finish)
+            {
+                overtakeProcess = OvertakeProcess.NoneOvertake;
+                GD.Print("E");//<-PAREI AQUI
+            }
 
             if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
             {
-                CalcAngleDirection();                
+                if (overtakeProcess == OvertakeProcess.NoneOvertake)
+                    CalcAngleDirection();
+                else
+                    CalcAngleDirectionOvertake();
+
                 if ((int)angleDegrees < (int)this.characterBody3D.RotationDegrees.Y)
                 {
                     DirectPlayer(false);                    

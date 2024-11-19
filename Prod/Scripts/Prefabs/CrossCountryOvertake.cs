@@ -7,7 +7,7 @@ public partial class CrossCountryOvertake : Area3D
     [Export] public ColliderTypes colliderTypes = ColliderTypes.FrontMidle;
     #endregion
     #region Variables
-    public bool isOvertake = false;
+    private bool isOvertake = false;
     public bool GetSetIsOvertake 
     {
         get 
@@ -17,6 +17,38 @@ public partial class CrossCountryOvertake : Area3D
         set 
         {
             isOvertake = value;
+        }
+    }
+    private Node3D crossCountryCollisionML = null;
+    public Node3D GetCrossCountryCollisionML
+    {
+        get
+        {
+            return crossCountryCollisionML;
+        }        
+    }
+    private Node3D crossCountryCollisionMR = null;
+    public Node3D GetCrossCountryCollisionMR
+    {
+        get
+        {
+            return crossCountryCollisionMR;
+        }
+    }
+    private Node3D crossCountryCollisionFL = null;
+    public Node3D GetCrossCountryCollisionFL
+    {
+        get
+        {
+            return crossCountryCollisionFL;
+        }
+    }
+    private Node3D crossCountryCollisionFR = null;
+    public Node3D GetCrossCountryCollisionFR
+    {
+        get
+        {
+            return crossCountryCollisionFR;
         }
     }
     #endregion
@@ -61,7 +93,11 @@ public partial class CrossCountryOvertake : Area3D
         {
             var obj = body as CrossCountryOvertake;
             if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && isInside)
-            {                
+            {
+                crossCountryCollisionML = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionML");
+                crossCountryCollisionMR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionMR");
+                crossCountryCollisionFL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFL");
+                crossCountryCollisionFR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFR");
                 isOvertake = true;
             }
             if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && !isInside)
