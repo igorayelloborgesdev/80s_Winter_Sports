@@ -67,7 +67,8 @@ namespace WinterSports.Scripts.Events
         private bool isAI = false;
         private int currentWayPoint = 0;
         private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
-        private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;        
+        private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;
+        private int waitOvertake = 0;
         #endregion
         #region Enum
         private enum OvertakeProcess
@@ -79,7 +80,8 @@ namespace WinterSports.Scripts.Events
         };
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID, CrossCountryOvertake crossCountryOvertakeM) 
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID,
+            CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null) 
         {
             if (!isPause)
             {
@@ -166,7 +168,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID, crossCountryOvertakeM);
+                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL);
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -519,15 +521,28 @@ namespace WinterSports.Scripts.Events
             this.isAI = isAI;
         }
 
-        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM)
+        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR , CrossCountryOvertake crossCountryOvertakeFL)
         {
             
 
             Vector3 targetPosition = Vector3.Zero;
+            Vector3 targetPositionRear = Vector3.Zero;
+            Vector3 targetPositionFront = Vector3.Zero;
             Vector3 currentPosition = this.characterBody3D.GlobalPosition;
             Vector3 direction = Vector3.Zero;
             float targetYRotation = 0.0f;
             float angleDegrees = 0.0f;
+
+            if (crossCountryOvertakeFR.GetisRightFree)
+            {
+                targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition;
+                targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition;
+            }
+            else if (crossCountryOvertakeFL.GetisRightFree)
+            {
+                targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionML.GlobalPosition;
+                targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFL.GlobalPosition;
+            }            
 
             if (!crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
             {
@@ -550,11 +565,11 @@ namespace WinterSports.Scripts.Events
             }
             else if (overtakeProcess == OvertakeProcess.Start)
             {
-                targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition;
+                targetPosition = targetPositionRear;
                 direction = (targetPosition - currentPosition).Normalized();
                 targetYRotation = Mathf.Atan2(direction.X, direction.Z);
                 angleDegrees = Mathf.RadToDeg(targetYRotation);
-                if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition) < 0.1f)
+                if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionRear) < 0.1f)
                 {
                     overtakeProcess = OvertakeProcess.Passing;
                 }
@@ -563,11 +578,11 @@ namespace WinterSports.Scripts.Events
             }
             else if (overtakeProcess == OvertakeProcess.Passing)
             {
-                targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition;
+                targetPosition = targetPositionFront;
                 direction = (targetPosition - currentPosition).Normalized();
                 targetYRotation = Mathf.Atan2(direction.X, direction.Z);
                 angleDegrees = Mathf.RadToDeg(targetYRotation);
-                if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition) < 0.2f)
+                if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionFront) < 0.2f)
                 {
                     overtakeProcess = OvertakeProcess.Finish;
                 }
@@ -576,7 +591,7 @@ namespace WinterSports.Scripts.Events
             else if (overtakeProcess == OvertakeProcess.Finish)
             {
                 overtakeProcess = OvertakeProcess.NoneOvertake;
-                GD.Print("E");//<-PAREI AQUI
+                GD.Print("E");
             }
 
             if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)

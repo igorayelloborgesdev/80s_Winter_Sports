@@ -213,11 +213,11 @@ public partial class GameplayView : Control
             //    this.AddChild(characterAI);                                
             //    count++;
             //}
-            if (obj.Id != GameModeSingleton.country && obj.Id == 5)
+            if (obj.Id != GameModeSingleton.country && (obj.Id == 2 || obj.Id == 3))
             {
                 Character characterAI = characterPackedScene.Instantiate<Character>();
                 characterAI.SetPrefabName = prefabName;
-                MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(4);
+                MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(obj.Id - 1);//<-
                 gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
                 gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
                 characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());

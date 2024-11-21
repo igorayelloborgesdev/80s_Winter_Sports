@@ -463,13 +463,13 @@ mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")
 
 [node name="InitPoint01" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -792.472, 0.14881, 0.0415871)
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -792.731, 0.14881, 0.393832)
 visible = false
 mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")
 
 [node name="InitPoint02" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -792.471, 0.14881, -0.236978)
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -791.72, 0.14881, 0.570427)
 visible = false
 mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")
@@ -481,7 +481,7 @@ mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")
 
 [node name="InitPoint04" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.621, 0.14881, 0.3987)
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.748, 0.14881, 0.3987)
 visible = false
 mesh = SubResource("BoxMesh_ib4q7")
 skeleton = NodePath("../DonwhillTrack")

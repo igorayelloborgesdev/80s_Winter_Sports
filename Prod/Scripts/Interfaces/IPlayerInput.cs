@@ -11,7 +11,8 @@ namespace WinterSports.Scripts.Interfaces
 {
     public interface IPlayerInput
     {
-        void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0, CrossCountryOvertake crossCountryOvertakeM = null);
+        void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0, 
+            CrossCountryOvertake crossCountryOvertakeM = null, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null);
         void PlayAnimation(AnimationPlayer animationPlayer, int animID);        
         void SetCharacterBody3D(CharacterBody3D characterBody3D);
         void SetPauseScreen(Control pauseScreen);

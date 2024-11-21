@@ -51,6 +51,23 @@ public partial class CrossCountryOvertake : Area3D
             return crossCountryCollisionFR;
         }
     }
+    private bool isLeftFree = false;
+    public bool GetisLeftFree
+    {
+        get
+        {
+            return isLeftFree;
+        }        
+    }
+    private bool isRightFree = false;
+    public bool GetisRightFree
+    {
+        get
+        {
+            return isRightFree;
+        }
+    }
+    private int characterIdCountry = 0;//<- PAREI AQUI
     #endregion
     #region Enum
     public enum ColliderTypes
@@ -103,6 +120,22 @@ public partial class CrossCountryOvertake : Area3D
             if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && !isInside)
             {
                 isOvertake = false;
+            }
+            if (colliderTypes == ColliderTypes.FrontLeft && obj.GetColliderType() != ColliderTypes.RearMidle && isInside)
+            {
+                isLeftFree = true;
+            }
+            if (colliderTypes == ColliderTypes.FrontLeft && obj.GetColliderType() != ColliderTypes.RearMidle && !isInside)
+            {
+                isLeftFree = false;
+            }
+            if (colliderTypes == ColliderTypes.FrontRight && obj.GetColliderType() != ColliderTypes.RearMidle && isInside)
+            {
+                isRightFree = true;
+            }
+            if (colliderTypes == ColliderTypes.FrontRight && obj.GetColliderType() != ColliderTypes.RearMidle && !isInside)
+            {
+                isRightFree = false;
             }
         }        
     }

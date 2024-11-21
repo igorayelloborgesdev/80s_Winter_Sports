@@ -1292,7 +1292,7 @@ namespace WinterSports.Scripts.Controller
         {
             foreach (var crossCountryDTO in this.characterCrossCountryList)
             {
-                if (crossCountryDTO.GetSetCharacterIdCountry == 5)//<-
+                if (crossCountryDTO.GetSetCharacterIdCountry == 2)//<-
                 {
                     crossCountryDTO.statesSki = Character.StatesSki.Running;
                 }                

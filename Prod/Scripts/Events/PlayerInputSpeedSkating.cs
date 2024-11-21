@@ -45,7 +45,8 @@ namespace WinterSports.Scripts.Events
         private List<DirectionArrow> directionArrowList = new List<DirectionArrow>();
         #endregion
         #region Implements
-        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID = 0, CrossCountryOvertake crossCountryOvertakeM = null)
+        public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID = 0, 
+            CrossCountryOvertake crossCountryOvertakeM = null, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null)
         {
             if (!isPause)
             {

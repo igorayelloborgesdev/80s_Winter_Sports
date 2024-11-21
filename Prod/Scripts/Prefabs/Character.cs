@@ -143,7 +143,7 @@ public partial class Character : CharacterBody3D
             {
                 if (GameModeSingleton.sport == 12)
                 {                    
-                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance(), crossCountryOvertakeFM);
+                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance(), crossCountryOvertakeFM, crossCountryOvertakeFR, crossCountryOvertakeFL);
                 }                    
                 else
                     playerInput.PlayerInput(animationPlayer);

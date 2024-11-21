@@ -48,7 +48,7 @@ Esportes
 
 .Cross Country
 ..AI ultrapassar
-...Desviar de outro player//<-
+...Desviar de outro player em sequência//<-
 ...Desviar de outro player ao lado
 ...Desviar de cerca
 ..AI velocidade X energia
