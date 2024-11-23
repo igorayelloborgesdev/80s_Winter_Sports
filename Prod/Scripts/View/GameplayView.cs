@@ -197,23 +197,10 @@ public partial class GameplayView : Control
         this.AddChild(character);
     }
     private void InstantiateCharacterSkiCrossCountryAI()
-    {
-        int count = 1;
+    {        
         foreach (var obj in CountrySingleton.countryObjDTO.countryList)
-        {
-            //if (obj.Id != GameModeSingleton.country)
-            //{
-            //    Character characterAI = characterPackedScene.Instantiate<Character>();
-            //    characterAI.SetPrefabName = prefabName;
-            //    MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(count);                
-            //    gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
-            //    gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
-            //    characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
-            //    characterList.Add(characterAI);
-            //    this.AddChild(characterAI);                                
-            //    count++;
-            //}
-            if (obj.Id != GameModeSingleton.country && (obj.Id == 2 || obj.Id == 3))
+        {            
+            if (obj.Id != GameModeSingleton.country)
             {
                 Character characterAI = characterPackedScene.Instantiate<Character>();
                 characterAI.SetPrefabName = prefabName;

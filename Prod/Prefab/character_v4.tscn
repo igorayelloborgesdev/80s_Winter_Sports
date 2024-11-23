@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=25 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
@@ -38,6 +38,10 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d2lxn"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_keb7y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbgnm"]
+
 [node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "armature", "skiCollision", "crossCountryOvertakeFM", "crossCountryOvertakeFR", "crossCountryOvertakeFL", "crossCountryOvertakeMM", "crossCountryOvertakeMR", "crossCountryOvertakeML", "rayCast3D", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
 script = ExtResource("2_51ifc")
 animationPlayer = NodePath("AnimationPlayer")
@@ -69,36 +73,33 @@ skiPoleBiathlon = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D6/SkiPole")
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.04, 0)
 
 [node name="Skeleton3D" parent="Armature_002" index="0"]
-bones/0/position = Vector3(0.282026, -0.84777, -0.231499)
+bones/0/position = Vector3(0.282026, -0.267163, 0.218266)
+bones/0/rotation = Quaternion(-0.0446426, 1.1909e-07, -5.32182e-09, 0.999003)
 bones/1/rotation = Quaternion(0.107028, 0.0387879, 0.011024, 0.993438)
-bones/2/position = Vector3(1.11332, -1.05859, -0.297005)
-bones/2/rotation = Quaternion(0.938606, -0.0127137, -0.0115984, 0.344561)
-bones/3/rotation = Quaternion(0.567745, -0.000707368, 0.0145575, 0.823075)
-bones/4/position = Vector3(0.936172, -4.755, -0.170813)
-bones/5/position = Vector3(-0.428042, -1.08491, -0.280379)
-bones/5/rotation = Quaternion(0.98655, -0.043212, 0.0107631, -0.157276)
-bones/6/rotation = Quaternion(0.248298, 0.00304177, -0.01598, 0.968547)
-bones/7/position = Vector3(-0.649798, -4.67379, -2.68636)
-bones/8/position = Vector3(1.06015, -2.61085, -0.97124)
-bones/9/position = Vector3(-0.645973, -2.661, -1.48529)
-bones/10/position = Vector3(0.252561, 3.45136, -0.431912)
-bones/10/rotation = Quaternion(-0.0137426, 0.0392174, 0.00938145, 0.999092)
+bones/2/position = Vector3(1.11332, -0.472572, 0.13738)
+bones/2/rotation = Quaternion(0.978806, -0.0434672, -0.0115453, 0.199792)
+bones/3/rotation = Quaternion(0.364298, 0.00178564, -0.0277241, 0.930868)
+bones/5/position = Vector3(-0.428042, -0.500053, 0.152018)
+bones/5/rotation = Quaternion(0.984099, -0.0384886, 0.00385964, 0.173358)
+bones/6/rotation = Quaternion(0.341663, 0.00556953, -0.0516675, 0.938385)
+bones/7/position = Vector3(-0.492435, -4.69021, 0.0189136)
+bones/7/rotation = Quaternion(0.816249, -0.0132141, 0.0503639, 0.575349)
+bones/10/position = Vector3(0.252561, 4.03504, 0.335673)
+bones/10/rotation = Quaternion(0.0231582, 0.0388443, 0.0108232, 0.998918)
 bones/11/rotation = Quaternion(0.00920191, -0.0621795, -0.0114931, 0.997956)
-bones/12/position = Vector3(2.17861, 2.85438, -0.495626)
-bones/12/rotation = Quaternion(-0.0605525, -0.282058, -0.95737, -0.0148371)
-bones/13/rotation = Quaternion(0.319043, 0.00253771, -0.0496426, 0.946436)
-bones/14/position = Vector3(2.15903, 0.403982, 2.59042)
+bones/12/position = Vector3(2.17861, 3.44438, 0.228076)
+bones/12/rotation = Quaternion(0.141433, -0.286737, -0.909956, 0.26412)
+bones/13/rotation = Quaternion(0.409513, 0.072734, -0.213438, 0.883998)
+bones/14/position = Vector3(2.15903, 1.29492, 3.2312)
 bones/14/rotation = Quaternion(-0.303992, -0.355624, -0.855608, -0.221485)
-bones/15/position = Vector3(-1.67922, 2.94515, -0.293542)
-bones/15/rotation = Quaternion(0.0472443, 0.191166, 0.977989, 0.0689977)
-bones/16/rotation = Quaternion(0.424582, -0.00728755, 0.119941, 0.89738)
-bones/17/position = Vector3(-1.47363, 0.3005, 2.34542)
+bones/15/position = Vector3(-1.67922, 3.51999, 0.436307)
+bones/15/rotation = Quaternion(0.0747562, 0.212651, 0.951101, 0.211183)
+bones/16/rotation = Quaternion(0.482981, -0.0812431, 0.281014, 0.825324)
+bones/17/position = Vector3(-1.47363, 1.19144, 2.98621)
 bones/17/rotation = Quaternion(-0.167761, 0.288579, 0.908994, -0.249617)
-bones/18/position = Vector3(2.70334, -6.27487, 0.457974)
-bones/19/position = Vector3(-5.20833, -6.40415, 0.541104)
-bones/20/position = Vector3(1.95858, 0.300017, 2.43623)
+bones/20/position = Vector3(1.95858, 1.19095, 3.07701)
 bones/20/rotation = Quaternion(0.732391, 0.0366761, 0.122801, -0.668714)
-bones/21/position = Vector3(-1.53806, 0.342905, 2.25626)
+bones/21/position = Vector3(-1.53806, 1.23384, 2.89705)
 bones/21/rotation = Quaternion(-0.0989008, -0.639927, 0.739725, 0.18308)
 
 [node name="Body_004" parent="Armature_002/Skeleton3D" index="0"]
@@ -186,7 +187,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
 surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
 
 [node name="BoneAttachment3D6" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="28"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 0.300017, 2.43623)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, 1.19095, 3.07701)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -194,7 +195,7 @@ bone_idx = 20
 transform = Transform3D(1.19768, -0.31452, -0.170739, 0.253889, 1.16704, -0.368871, 0.252221, 0.318752, 1.18207, -0.00801849, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D7" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="29"]
-transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 0.342905, 2.25626)
+transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, 1.23384, 2.89705)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 
@@ -202,7 +203,7 @@ bone_idx = 21
 transform = Transform3D(1.09548, 0.250242, 0.547533, 0.462362, -1.07782, -0.432485, 0.385529, 0.581553, -1.03715, 0.056942, 0.193757, -0.0186019)
 
 [node name="BoneAttachment3D5" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="30"]
-transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.017668, 0.998556, -0.0507351, -0.078622, 0.0519734, 0.995549, 0.282026, 1.18879, -0.566809)
+transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.0234221, 0.991997, -0.124067, -0.0771037, 0.125524, 0.98909, 0.282026, 1.78859, 0.0341672)
 bone_name = "Spine"
 bone_idx = 1
 
@@ -210,7 +211,7 @@ bone_idx = 1
 transform = Transform3D(0.0284631, 0.953198, 0.300999, -0.146026, 0.301855, -0.942104, -0.988873, -0.017139, 0.147784, 0.22944, 0.425279, -1.13563)
 
 [node name="BoneAttachment3D4" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="31"]
-transform = Transform3D(1, -7.10543e-14, 4.7684e-07, 4.67439e-07, -0.197569, -0.980291, 9.42088e-08, 0.980289, -0.19757, -0.649798, -4.67379, -2.68636)
+transform = Transform3D(0.994578, -0.0795257, 0.0670137, 0.0363816, -0.337598, -0.940589, 0.0974245, 0.937925, -0.332875, -0.492435, -4.69021, 0.0189136)
 bone_name = "RFoot"
 bone_idx = 7
 
@@ -218,7 +219,7 @@ bone_idx = 7
 transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
 
 [node name="BoneAttachment3D3" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="32"]
-transform = Transform3D(1, -2.27374e-13, 1.43052e-06, 1.40932e-06, -0.171493, -0.985189, 2.45323e-07, 0.985185, -0.171493, 0.936172, -4.755, -0.170813)
+transform = Transform3D(1, -2.27374e-13, 1.43052e-06, 1.40932e-06, -0.171493, -0.985189, 2.45323e-07, 0.985185, -0.171493, 0.867876, -4.64695, 0.104795)
 bone_name = "LFoot"
 bone_idx = 4
 
@@ -226,7 +227,7 @@ bone_idx = 4
 transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="33"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 0.300017, 2.43623)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, 1.19095, 3.07701)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -234,7 +235,7 @@ bone_idx = 20
 transform = Transform3D(1.22197, -0.213849, 0.153498, 0.185196, 0.180408, -1.22297, 0.187071, 1.21829, 0.208045, -0.00801873, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="34"]
-transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 0.342905, 2.25626)
+transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, 1.23384, 2.89705)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 
@@ -377,3 +378,25 @@ script = ExtResource("11_w80qr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionMR/Area3D" index="0"]
 shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionRL" type="MeshInstance3D" parent="." index="17"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.195383, 0, -0.199903)
+visible = false
+mesh = SubResource("BoxMesh_keb7y")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionRL" index="0"]
+script = ExtResource("11_w80qr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionRL/Area3D" index="0"]
+shape = SubResource("BoxShape3D_tbgnm")
+
+[node name="CrossCountryCollisionRR" type="MeshInstance3D" parent="." index="18"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.193935, 0, -0.199903)
+visible = false
+mesh = SubResource("BoxMesh_keb7y")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionRR" index="0"]
+script = ExtResource("11_w80qr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionRR/Area3D" index="0"]
+shape = SubResource("BoxShape3D_tbgnm")

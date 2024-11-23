@@ -51,6 +51,30 @@ public partial class CrossCountryOvertake : Area3D
             return crossCountryCollisionFR;
         }
     }
+    private Node3D crossCountryCollisionM = null;
+    public Node3D GetCrossCountryCollisionM
+    {
+        get
+        {
+            return crossCountryCollisionM;
+        }
+    }
+    private Node3D crossCountryCollisionRR = null;
+    public Node3D GetCrossCountryCollisionRR
+    {
+        get
+        {
+            return crossCountryCollisionRR;
+        }
+    }
+    private Node3D crossCountryCollisionRL = null;
+    public Node3D GetCrossCountryCollisionRL
+    {
+        get
+        {
+            return crossCountryCollisionRL;
+        }
+    }
     private bool isLeftFree = false;
     public bool GetisLeftFree
     {
@@ -67,7 +91,19 @@ public partial class CrossCountryOvertake : Area3D
             return isRightFree;
         }
     }
-    private int characterIdCountry = 0;//<- PAREI AQUI
+    private int characterIdCountry = 0;
+    public int GetCharacterIdCountry
+    {
+        get
+        {
+            return characterIdCountry;
+        }
+    }
+    private bool isCollided = false;
+    public bool GetIsCollided
+    {
+        get { return isCollided; }
+    }
     #endregion
     #region Enum
     public enum ColliderTypes
@@ -85,6 +121,8 @@ public partial class CrossCountryOvertake : Area3D
     {        
         Connect("area_entered", new Callable(this, nameof(AreaEnter)));
         Connect("area_exited", new Callable(this, nameof(AreaExited)));
+        Connect("body_entered", new Callable(this, nameof(HillFenceEnter)));
+        Connect("body_exited", new Callable(this, nameof(HillFenceExit)));
     }
     #endregion
     #region Method
@@ -115,6 +153,9 @@ public partial class CrossCountryOvertake : Area3D
                 crossCountryCollisionMR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionMR");
                 crossCountryCollisionFL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFL");
                 crossCountryCollisionFR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFR");
+                crossCountryCollisionM = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionM");
+                crossCountryCollisionRL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionRL");
+                crossCountryCollisionRR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionRR");
                 isOvertake = true;
             }
             if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && !isInside)
@@ -137,12 +178,28 @@ public partial class CrossCountryOvertake : Area3D
             {
                 isRightFree = false;
             }
+            Character character = body.GetParent().GetParent() as Character;
+            characterIdCountry = character.GetSetCharacterIdCountry;            
         }        
     }
 
     public ColliderTypes GetColliderType()
     {
         return colliderTypes;        
+    }
+    private void HillFenceEnter(Node body)
+    {
+        if (body.GetParent().Name == "HillFence")
+        {            
+            isCollided = true;
+        }
+    }
+    private void HillFenceExit(Node body)
+    {
+        if (body.GetParent().Name == "HillFence")
+        {         
+            isCollided = false;
+        }
     }
     #endregion
 }
