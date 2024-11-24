@@ -187,7 +187,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
 surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
 
 [node name="BoneAttachment3D6" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="28"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, 1.19095, 3.07701)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 1.19095, 3.07701)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -195,7 +195,7 @@ bone_idx = 20
 transform = Transform3D(1.19768, -0.31452, -0.170739, 0.253889, 1.16704, -0.368871, 0.252221, 0.318752, 1.18207, -0.00801849, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D7" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="29"]
-transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, 1.23384, 2.89705)
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 1.23384, 2.89705)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 
@@ -203,7 +203,7 @@ bone_idx = 21
 transform = Transform3D(1.09548, 0.250242, 0.547533, 0.462362, -1.07782, -0.432485, 0.385529, 0.581553, -1.03715, 0.056942, 0.193757, -0.0186019)
 
 [node name="BoneAttachment3D5" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="30"]
-transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.0234221, 0.991997, -0.124067, -0.0771037, 0.125524, 0.98909, 0.282026, 1.78859, 0.0341672)
+transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.0234221, 0.991997, -0.124068, -0.0771037, 0.125524, 0.98909, 0.282026, 1.78859, 0.0341671)
 bone_name = "Spine"
 bone_idx = 1
 
@@ -211,7 +211,7 @@ bone_idx = 1
 transform = Transform3D(0.0284631, 0.953198, 0.300999, -0.146026, 0.301855, -0.942104, -0.988873, -0.017139, 0.147784, 0.22944, 0.425279, -1.13563)
 
 [node name="BoneAttachment3D4" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="31"]
-transform = Transform3D(0.994578, -0.0795257, 0.0670137, 0.0363816, -0.337598, -0.940589, 0.0974245, 0.937925, -0.332875, -0.492435, -4.69021, 0.0189136)
+transform = Transform3D(0.994578, -0.0795256, 0.0670137, 0.0363816, -0.337598, -0.94059, 0.0974244, 0.937925, -0.332875, -0.492435, -4.69021, 0.0189136)
 bone_name = "RFoot"
 bone_idx = 7
 
@@ -227,7 +227,7 @@ bone_idx = 4
 transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
 
 [node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="33"]
-transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754827, 1.95858, 1.19095, 3.07701)
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 1.19095, 3.07701)
 bone_name = "LArmSkiPoleREF"
 bone_idx = 20
 
@@ -235,7 +235,7 @@ bone_idx = 20
 transform = Transform3D(1.22197, -0.213849, 0.153498, 0.185196, 0.180408, -1.22297, 0.187071, 1.21829, 0.208045, -0.00801873, -0.148504, -0.00412369)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="34"]
-transform = Transform3D(-0.9134, -0.14428, -0.380635, 0.397437, -0.11395, -0.910527, 0.0879972, -0.982954, 0.161424, -1.53806, 1.23384, 2.89705)
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 1.23384, 2.89705)
 bone_name = "RArmSkiPoleREF"
 bone_idx = 21
 

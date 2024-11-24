@@ -27,7 +27,7 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "impulseSkiJumpNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "controlSkiJumpImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel", "controlSkiJump", "windDirectionSkiJump", "windDirectionArrowSkiJump", "controlSkiJumpImpulseHorizontal", "windDirectionArrowHorizontal", "controlSkiJumpImpulseVertical", "windDirectionArrowVertical", "controlSkiCrossCountry", "controlSkiCrossCountryTime", "controlSkiCrossCountrySpeed", "controlSkiCrossCountryEnergy")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "impulseSkiJumpNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "controlSkiJumpImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel", "controlSkiJump", "windDirectionSkiJump", "windDirectionArrowSkiJump", "controlSkiJumpImpulseHorizontal", "windDirectionArrowHorizontal", "controlSkiJumpImpulseVertical", "windDirectionArrowVertical", "controlSkiCrossCountry", "controlSkiCrossCountryTime", "controlSkiCrossCountrySpeed", "controlSkiCrossCountryEnergy", "controlSkiCrossCountryPosition", "crossCountryCountryPositionLabel", "crossCountryCountryCodeLabel", "crossCountryCountryFlagTextureRect")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
@@ -80,6 +80,10 @@ controlSkiCrossCountry = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry")
 controlSkiCrossCountryTime = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/Time")
 controlSkiCrossCountrySpeed = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGSpeed/SpeedNinePatchRect")
 controlSkiCrossCountryEnergy = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGEnergy/SpeedNinePatchRect")
+controlSkiCrossCountryPosition = NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition")
+crossCountryCountryPositionLabel = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode3")]
+crossCountryCountryCodeLabel = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode3")]
+crossCountryCountryFlagTextureRect = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag3")]
 
 [node name="SceneSki" type="Control" parent="."]
 anchors_preset = 0
@@ -323,6 +327,196 @@ offset_top = 7.0
 offset_right = 231.0
 offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
+
+[node name="ControlSkiCrossCountryPosition" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUDBG" type="NinePatchRect" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = -989.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -544.0
+offset_top = -709.0
+offset_right = -491.0
+offset_bottom = -677.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -493.0
+offset_top = -709.0
+offset_right = -383.0
+offset_bottom = -674.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 24
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PosCode" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -709.0
+offset_right = -543.0
+offset_bottom = -674.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 24
+text = "16
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryFlag2" type="TextureRect" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -544.0
+offset_top = -661.0
+offset_right = -491.0
+offset_bottom = -629.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode2" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -493.0
+offset_top = -661.0
+offset_right = -383.0
+offset_bottom = -626.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 24
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PosCode2" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -661.0
+offset_right = -543.0
+offset_bottom = -626.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 24
+text = "16
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryFlag3" type="TextureRect" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -544.0
+offset_top = -613.0
+offset_right = -491.0
+offset_bottom = -581.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode3" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -493.0
+offset_top = -613.0
+offset_right = -383.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 24
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PosCode3" type="Label" parent="CanvasLayer/HUD/ControlSkiCrossCountryPosition"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -613.0
+offset_right = -543.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 24
+text = "16
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ControlSkiSpeedSkatingBiathlon" type="Control" parent="CanvasLayer/HUD"]
 layout_mode = 1

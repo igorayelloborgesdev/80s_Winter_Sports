@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
@@ -73,6 +74,11 @@ namespace WinterSports.Scripts.Controller
         private NinePatchRect controlSkiCrossCountryEnergy = null;        
         private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
         private List<Character> characterCrossCountryList = new List<Character>();        
+        private int crossCountryPlayerPosition = 0;
+        private Control controlSkiCrossCountryPosition = null;
+        private Label[] crossCountryCountryPositionLabel = null;
+        private Label[] crossCountryCountryCodeLabel = null;
+        private TextureRect[] crossCountryCountryFlagTextureRect = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -231,6 +237,9 @@ namespace WinterSports.Scripts.Controller
             timerController.TimerRunning(delta);
             updateTimerCrossCountry();
             UpdateSpeedEnergyLabel();
+            OrderCrossCountryPosition();
+            SetPlayerPosition();
+            SetPlayerPositionUI();//<-
         }
         private void UpdateSpeedSkating(double delta)
         {            
@@ -493,6 +502,7 @@ namespace WinterSports.Scripts.Controller
             this.character.GenerateBotsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].BootsColor);
             this.character.GenerateHairColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].HairColor);
             this.character.SetIsAI(false);
+            characterCrossCountryList.Add(character);
         }
         public void SetCharacterCrossCountryAI(Character characterAI, Vector3 initPositionAI, Vector3 initRotationAI, int id)
         {
@@ -622,10 +632,17 @@ namespace WinterSports.Scripts.Controller
             this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
             character.SetControlSkiSpeedSkatingBiathlon = this.controlSkiSpeedSkatingBiathlon;
         }
-        public void SetControlSkiCrossCountry(Control controlSkiCrossCountry)
+        public void SetControlSkiCrossCountry(Control controlSkiCrossCountry, Control controlSkiCrossCountryPosition, 
+            Label[] crossCountryCountryPositionLabel,
+            Label[] crossCountryCountryCodeLabel,
+            TextureRect[] crossCountryCountryFlagTextureRect)
         {
             this.controlSkiCrossCountry = controlSkiCrossCountry;
             character.SetControlSkiCrossCountry = this.controlSkiCrossCountry;
+            this.controlSkiCrossCountryPosition = controlSkiCrossCountryPosition;
+            this.crossCountryCountryPositionLabel = crossCountryCountryPositionLabel;
+            this.crossCountryCountryCodeLabel = crossCountryCountryCodeLabel;            
+            this.crossCountryCountryFlagTextureRect = crossCountryCountryFlagTextureRect;
         }
         public void SetControlBiathlon(Control controlBiathlon)
         {
@@ -1292,7 +1309,7 @@ namespace WinterSports.Scripts.Controller
         {
             foreach (var crossCountryDTO in this.characterCrossCountryList)
             {
-                if (crossCountryDTO.GetSetCharacterIdCountry == 2)//<-
+                if (crossCountryDTO.GetSetCharacterIdCountry != GameModeSingleton.country)
                 {
                     crossCountryDTO.statesSki = Character.StatesSki.Running;
                 }                
@@ -1304,6 +1321,84 @@ namespace WinterSports.Scripts.Controller
             {                
                 //GD.Print(crossCountryDTO.GetSetCharacterIdCountry);
             }
+        }
+        private void OrderCrossCountryPosition()
+        {
+            characterCrossCountryList = characterCrossCountryList.OrderByDescending(x => x.GetSkiCrossCountryDistance()).ToList();            
+            //for (int i = 0; i < characterCrossCountryList.Count; i++)
+            //{
+            //    GD.Print((i + 1).ToString() + " - " + CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[i].GetSetCharacterIdCountry - 1].Name);
+            //}
+        }
+        private void SetPlayerPosition()
+        {
+            crossCountryPlayerPosition = characterCrossCountryList.IndexOf(characterCrossCountryList.Select(x => x)
+                .Where(x => x.GetSetCharacterIdCountry == GameModeSingleton.country).First());
+        }
+        private void SetFlagCrossCountry(string code, int index)
+        {
+            Texture textureResource = GD.Load<Texture>(flagResource + code + ".png");
+            Texture2D texture2D = textureResource as Texture2D;
+            this.crossCountryCountryFlagTextureRect[index].Texture = texture2D;
+        }
+
+        private void SetPlayerPositionUI()
+        {
+            if (crossCountryPlayerPosition == 0)
+            {
+                this.crossCountryCountryPositionLabel[0].Text = (crossCountryPlayerPosition + 1).ToString();
+                this.crossCountryCountryPositionLabel[1].Text = (crossCountryPlayerPosition + 2).ToString();
+                this.crossCountryCountryPositionLabel[2].Text = (crossCountryPlayerPosition + 3).ToString();
+
+                this.crossCountryCountryCodeLabel[0].Text = CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[0].GetSetCharacterIdCountry - 1].Code;
+                this.crossCountryCountryCodeLabel[1].Text = CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[1].GetSetCharacterIdCountry - 1].Code;
+                this.crossCountryCountryCodeLabel[2].Text = CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[2].GetSetCharacterIdCountry - 1].Code;
+
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[0].GetSetCharacterIdCountry - 1].Code, 0);
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[1].GetSetCharacterIdCountry - 1].Code, 1);
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[2].GetSetCharacterIdCountry - 1].Code, 2);
+            }
+            else if (crossCountryPlayerPosition == characterCrossCountryList.Count - 1)
+            {
+                this.crossCountryCountryPositionLabel[0].Text = (characterCrossCountryList.Count - 2).ToString();
+                this.crossCountryCountryPositionLabel[1].Text = (characterCrossCountryList.Count - 1).ToString();
+                this.crossCountryCountryPositionLabel[2].Text = (characterCrossCountryList.Count).ToString();
+
+                this.crossCountryCountryCodeLabel[0].Text =
+                    CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[characterCrossCountryList.Count - 3].GetSetCharacterIdCountry - 1].Code;
+                this.crossCountryCountryCodeLabel[1].Text =
+                    CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[characterCrossCountryList.Count - 2].GetSetCharacterIdCountry - 1].Code;
+                this.crossCountryCountryCodeLabel[2].Text = 
+                    CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[characterCrossCountryList.Count - 1].GetSetCharacterIdCountry - 1].Code;
+
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[characterCrossCountryList.Count - 3].GetSetCharacterIdCountry - 1].Code, 0);
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[characterCrossCountryList.Count - 2].GetSetCharacterIdCountry - 1].Code, 1);
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[characterCrossCountryList.Count - 1].GetSetCharacterIdCountry - 1].Code, 2);
+            }
+            else
+            {
+                this.crossCountryCountryPositionLabel[0].Text = (crossCountryPlayerPosition).ToString();
+                this.crossCountryCountryPositionLabel[1].Text = (crossCountryPlayerPosition + 1).ToString();
+                this.crossCountryCountryPositionLabel[2].Text = (crossCountryPlayerPosition + 2).ToString();
+
+                this.crossCountryCountryCodeLabel[0].Text =
+                    CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[crossCountryPlayerPosition - 1].GetSetCharacterIdCountry - 1].Code;
+                this.crossCountryCountryCodeLabel[1].Text =
+                    CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[crossCountryPlayerPosition].GetSetCharacterIdCountry - 1].Code;
+                this.crossCountryCountryCodeLabel[2].Text =
+                    CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[crossCountryPlayerPosition + 1].GetSetCharacterIdCountry - 1].Code;
+
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[crossCountryPlayerPosition - 1].GetSetCharacterIdCountry - 1].Code, 0);
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[crossCountryPlayerPosition].GetSetCharacterIdCountry - 1].Code, 1);
+                SetFlagCrossCountry(CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[crossCountryPlayerPosition + 1].GetSetCharacterIdCountry - 1].Code, 2);
+            }
+        }
+        public void ShowHideControlSkiCrossCountryPosition(bool isShow)
+        {
+            if(isShow)
+                this.controlSkiCrossCountryPosition.Show();
+            else
+                this.controlSkiCrossCountryPosition.Hide();
         }
         #endregion
         #region Get Set
@@ -1361,7 +1456,7 @@ namespace WinterSports.Scripts.Controller
             {
                 gamePlayModel.returnFinishButton = value;
             }
-        }        
+        }                
         #endregion
     }
 }
