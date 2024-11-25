@@ -48,8 +48,7 @@ Esportes
 
 .Cross Country
 
-..Animação//<-
-..AI random
+..AI random//<-
 ..Final
 ..Pausa
 ..Reinício

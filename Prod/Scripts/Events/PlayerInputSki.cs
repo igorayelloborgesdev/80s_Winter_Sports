@@ -172,7 +172,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL);
+                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL, animationPlayer);
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -238,7 +238,7 @@ namespace WinterSports.Scripts.Events
             energy = maxEnergy;
             this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);
             if (isAI)
-            {
+            {                
                 crossCountryDTOList = AISingleton.crossCountryObjDTO.CrossCountryDTOList.OrderBy(x => x.id).ToList();                
             }            
         }
@@ -279,26 +279,56 @@ namespace WinterSports.Scripts.Events
         }
         #endregion
         #region Methods
+        private float CalculateDiffcult()
+        {            
+            return (maxSpeed - (2 - GameModeSingleton.difficult));
+        }
+
         private void AccelPlayer()
         {
             if (GameModeSingleton.sport == 12)
             {
                 ManageEnergy();
-                if (speed < maxSpeed)
-                {                                     
-                    speed = speed + speedInc;
+
+                if (isAI)
+                {
+                    if (speed < CalculateDiffcult())
+                    {
+                        speed = speed + speedInc;
+                    }
+                    if (speedEnergy < maxSpeedEnergy)
+                    {
+                        speedEnergy = speedEnergy + speedInc;
+                    }
                 }
-                if (speedEnergy < maxSpeedEnergy)
-                {                 
-                    speedEnergy = speedEnergy + speedInc;
+                else
+                {
+                    if (speed < maxSpeed)
+                    {
+                        speed = speed + speedInc;
+                    }
+                    if (speedEnergy < maxSpeedEnergy)
+                    {
+                        speedEnergy = speedEnergy + speedInc;
+                    }
                 }                
             }
             else
             {
-                if (speed < maxSpeed)
+                if (isAI)
                 {
-                    speed += speedInc;                    
-                }                
+                    if (speed < CalculateDiffcult())
+                    {
+                        speed += speedInc;
+                    }
+                }
+                else
+                {
+                    if (speed < maxSpeed)
+                    {
+                        speed += speedInc;
+                    }
+                }
             }
             isAccel = true;
         }
@@ -531,7 +561,8 @@ namespace WinterSports.Scripts.Events
             this.isAI = isAI;
         }
 
-        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR , CrossCountryOvertake crossCountryOvertakeFL)
+        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR, 
+            CrossCountryOvertake crossCountryOvertakeFL, AnimationPlayer animationPlayer)
         {
             
             Vector3 targetPosition = Vector3.Zero;
@@ -653,13 +684,14 @@ namespace WinterSports.Scripts.Events
                     DirectPlayer(true);
                 }                
             }
+            PlayAnimation(animationPlayer, 5);
             AccelBrakeAI();
             DefineNextWayPointAI(positionID);
             ManageCollisionSpeed();
             MovePlayer();
         }
         private void AccelBrakeAI()
-        {
+        {            
             if (crossCountryDTOList[currentWayPoint].isAccel)
             {
                 AccelPlayer();
@@ -671,9 +703,9 @@ namespace WinterSports.Scripts.Events
             if (crossCountryDTOList[currentWayPoint].isBreak)
             {
                 BrakePlayer();
-            }
+            }            
             if (speed > crossCountryDTOList[currentWayPoint].speed)
-            {
+            {             
                 BrakePlayer();
             }
         }

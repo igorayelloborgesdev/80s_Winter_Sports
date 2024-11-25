@@ -27,4 +27,6 @@ public class CountryDTO
     public Color kit3BodyColor { get; set; }
     public Color kit3ArmsColor { get; set; }
     public Color kit3LegsColor { get; set; }
+
+    public List<int> sportSkill = new List<int>();
 }

@@ -332,7 +332,8 @@ public class MainController
         GameModeSingleton.sport = id;
     }
     public void SelectDiffcult(int id)
-    {        
+    {
+        GameModeSingleton.difficult = id;        
         toggleDifficult.ToggleButton(id);
     }
     #endregion
