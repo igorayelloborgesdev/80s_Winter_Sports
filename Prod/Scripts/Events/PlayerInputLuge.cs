@@ -78,6 +78,7 @@ namespace WinterSports.Scripts.Events
         }
         public bool GetIsFinished() { return false; }
         public void SetIsAI(bool isAI) { }
+        public void SetCharacterIdCountry(int characterIdCountry) { }
         #endregion
         #region Methods
         private void ShowHideFinishSessionScreenMenu(bool isPause)

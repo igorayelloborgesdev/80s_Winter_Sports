@@ -143,7 +143,8 @@ public partial class Character : CharacterBody3D
             {
                 if (GameModeSingleton.sport == 12)
                 {                    
-                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance(), crossCountryOvertakeFM, crossCountryOvertakeFR, crossCountryOvertakeFL);
+                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance(), 
+                        crossCountryOvertakeFM, crossCountryOvertakeFR, crossCountryOvertakeFL);
                 }                    
                 else
                     playerInput.PlayerInput(animationPlayer);
@@ -176,6 +177,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetCharacter(this);
         playerInput.SetSkiCollision(skiCollision);
         playerInput.SetIsAI(isAI);
+        playerInput.SetCharacterIdCountry(characterIdCountry);
         playerInput.Init();            
         //Sport Ski 
         if (prefabName == "skiTrack")

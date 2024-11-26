@@ -181,6 +181,7 @@ namespace WinterSports.Scripts.Events
         public bool GetIsAccel() { return false; }
         public bool GetIsBreak() { return false; }
         public void SetIsAI(bool isAI){}
+        public void SetCharacterIdCountry(int characterIdCountry) { }
         #endregion
         #region Methods
         private void ShowHidePauseMenu(bool isPause)

@@ -63,7 +63,8 @@ namespace WinterSports.Scripts.Events
         private bool isEnergySlow = false;
         private float energyDecrease = 1500.0f;
         private bool isAccel = false;
-        private bool isBreak = false;        
+        private bool isBreak = false;
+        private int characterIdCountry = 0;
         #endregion
         #region Variables AI CrossCountry
         private bool isAI = false;
@@ -72,6 +73,7 @@ namespace WinterSports.Scripts.Events
         private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;        
         private int currentIdOvertake = 0;
         private bool isLeft = true;
+        private float AIDiv = 1.0f;
         #endregion
         #region Enum
         private enum OvertakeProcess
@@ -85,7 +87,7 @@ namespace WinterSports.Scripts.Events
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID,
-            CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null) 
+            CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null)
         {
             if (!isPause)
             {
@@ -277,14 +279,34 @@ namespace WinterSports.Scripts.Events
         {
             return energy;
         }
+
+        public void SetCharacterIdCountry(int characterIdCountry) 
+        { 
+            this.characterIdCountry = characterIdCountry;
+        }
         #endregion
         #region Methods
         private float CalculateDiffcult()
         {            
-            return (maxSpeed - (2 - GameModeSingleton.difficult));
+            return (maxSpeed - (2 - GameModeSingleton.difficult));//<-
         }
-
-        private void AccelPlayer()
+        private void DefineAIDiv(int positionID)
+        {
+            if (positionID % 10 == 0)
+            {
+                Random rnd = new Random();
+                int diceAI = rnd.Next(0, 7);                
+                if (diceAI > CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1])
+                {
+                    AIDiv = 1.0f;
+                }
+                else
+                {
+                    AIDiv = 1.0f;
+                }
+            }
+        }
+        private void AccelPlayer(int positionID = 0)
         {
             if (GameModeSingleton.sport == 12)
             {
@@ -292,9 +314,11 @@ namespace WinterSports.Scripts.Events
 
                 if (isAI)
                 {
+
+                    DefineAIDiv(positionID);
                     if (speed < CalculateDiffcult())
                     {
-                        speed = speed + speedInc;
+                        speed = speed + (speedInc * AIDiv);
                     }
                     if (speedEnergy < maxSpeedEnergy)
                     {
@@ -685,16 +709,16 @@ namespace WinterSports.Scripts.Events
                 }                
             }
             PlayAnimation(animationPlayer, 5);
-            AccelBrakeAI();
+            AccelBrakeAI(positionID);
             DefineNextWayPointAI(positionID);
             ManageCollisionSpeed();
             MovePlayer();
         }
-        private void AccelBrakeAI()
+        private void AccelBrakeAI(int positionID)
         {            
             if (crossCountryDTOList[currentWayPoint].isAccel)
             {
-                AccelPlayer();
+                AccelPlayer(positionID);
             }
             else
             {

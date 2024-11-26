@@ -36,5 +36,6 @@ namespace WinterSports.Scripts.Interfaces
         bool GetIsAccel();
         bool GetIsBreak();
         void SetIsAI(bool isAI);
+        void SetCharacterIdCountry(int characterIdCountry);
     }
 }

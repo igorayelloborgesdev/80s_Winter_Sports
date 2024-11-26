@@ -213,7 +213,7 @@ namespace WinterSports.Scripts.Controller
             else if (this.character.statesSki == Character.StatesSki.Running)
             {
                 MoveAI();
-                //SaveAI();//<-
+                //SaveAI();//<-TESTE
             }
 
             //if (this.character.statesSki == Character.StatesSki.Running)
@@ -239,7 +239,7 @@ namespace WinterSports.Scripts.Controller
             UpdateSpeedEnergyLabel();
             OrderCrossCountryPosition();
             SetPlayerPosition();
-            SetPlayerPositionUI();//<-
+            SetPlayerPositionUI();//<-TESTE
         }
         private void UpdateSpeedSkating(double delta)
         {            
@@ -1325,10 +1325,6 @@ namespace WinterSports.Scripts.Controller
         private void OrderCrossCountryPosition()
         {
             characterCrossCountryList = characterCrossCountryList.OrderByDescending(x => x.GetSkiCrossCountryDistance()).ToList();            
-            //for (int i = 0; i < characterCrossCountryList.Count; i++)
-            //{
-            //    GD.Print((i + 1).ToString() + " - " + CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[i].GetSetCharacterIdCountry - 1].Name);
-            //}
         }
         private void SetPlayerPosition()
         {

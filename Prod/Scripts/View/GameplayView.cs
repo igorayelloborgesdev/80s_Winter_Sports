@@ -138,7 +138,7 @@ public partial class GameplayView : Control
             if (levelId == 11)
             {
                 InstantiateCharacterSkiCrossCountry();
-                InstantiateCharacterSkiCrossCountryAI();
+                InstantiateCharacterSkiCrossCountryAI();//<-TESTE
             }
             else
             {
