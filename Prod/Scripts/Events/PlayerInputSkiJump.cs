@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Static;
 
 namespace WinterSports.Scripts.Events
@@ -99,7 +100,7 @@ namespace WinterSports.Scripts.Events
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHideFinishSessionScreenMenu(isPause);
         }
-        public void Init()
+        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null)
         {
             timerGamePlayController = new TimerController();
             timerGamePlayController.Init();

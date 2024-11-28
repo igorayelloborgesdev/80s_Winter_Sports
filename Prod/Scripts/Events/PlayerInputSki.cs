@@ -174,7 +174,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL, animationPlayer);
+                //MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL, animationPlayer);//<-TESTE
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -231,7 +231,7 @@ namespace WinterSports.Scripts.Events
                 CrossCountryStatic.isPause = isPause;
             }
         }
-        public void Init()
+        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null)
         {            
             angle = angleInit;
             speed = 0.0f;
@@ -240,8 +240,9 @@ namespace WinterSports.Scripts.Events
             energy = maxEnergy;
             this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);
             if (isAI)
-            {                
-                crossCountryDTOList = AISingleton.crossCountryObjDTO.CrossCountryDTOList.OrderBy(x => x.id).ToList();                
+            {
+                GD.Print(crossCountryModelAIList);//<-
+                //crossCountryDTOList = AISingleton.crossCountryObjDTO.CrossCountryDTOList.OrderBy(x => x.id).ToList();//<-TESTE
             }            
         }
         public void Reset()

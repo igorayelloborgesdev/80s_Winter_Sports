@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
+using WinterSports.Scripts.Model;
 
 namespace WinterSports.Scripts.Interfaces
 {
@@ -20,7 +21,7 @@ namespace WinterSports.Scripts.Interfaces
         void Pause();
         void UnPause();
         void ShowHideFinishSessionScreen();
-        void Init();
+        void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null);
         void Reset();
         float GetSpeed();
         float GetMaxSpeed();

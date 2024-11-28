@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6cjftgn674tx"]
+[gd_scene load_steps=13 format=3 uid="uid://b6cjftgn674tx"]
 
 [ext_resource type="Script" path="res://Scripts/Prefabs/Ski.cs" id="1_ob0bs"]
+[ext_resource type="PackedScene" uid="uid://cd3ik7gdxghn7" path="res://Prefab/cross_country_ai_track.tscn" id="2_eis50"]
 [ext_resource type="PackedScene" uid="uid://c2umsr43sib1b" path="res://Prefab/ski_down_hill_cross_country.tscn" id="2_t3vt4"]
 [ext_resource type="PackedScene" uid="uid://n852lgio0j6" path="res://Prefab/donwhill_track.tscn" id="2_vr3bs"]
 [ext_resource type="PackedScene" uid="uid://emem201u3ntr" path="res://Prefab/gate_start.tscn" id="3_trrsa"]
@@ -13,7 +14,7 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_ib4q7"]
 
-[node name="Ski" type="Node3D" node_paths=PackedStringArray("gateStart", "gateFinish", "initPoint", "gates", "initPointCrossCountry", "skiCrossCountry")]
+[node name="Ski" type="Node3D" node_paths=PackedStringArray("gateStart", "gateFinish", "initPoint", "gates", "initPointCrossCountry", "skiCrossCountry", "skiCrossCountryAI")]
 script = ExtResource("1_ob0bs")
 gateStart = [NodePath("GateStart"), NodePath("GateStart3"), NodePath("GateStart2"), NodePath("GateStart"), NodePath("GateStartCrossCountry")]
 gateFinish = [NodePath("GateFinish"), NodePath("GateFinish3"), NodePath("GateFinish2"), NodePath("GateFinish"), NodePath("GateFinishCrossCountry")]
@@ -21,6 +22,11 @@ initPoint = [NodePath("InitPoint"), NodePath("InitPoint3"), NodePath("InitPoint2
 gates = [NodePath("SkiDownhillGates"), NodePath("SkiSlalomGates"), NodePath("SkiGiantSlalomGates"), NodePath("SkiSuperGGates")]
 initPointCrossCountry = [NodePath("InitPoint00"), NodePath("InitPoint01"), NodePath("InitPoint02"), NodePath("InitPoint03"), NodePath("InitPoint04"), NodePath("InitPoint05"), NodePath("InitPoint06"), NodePath("InitPoint07"), NodePath("InitPoint08"), NodePath("InitPoint09"), NodePath("InitPoint10"), NodePath("InitPoint11"), NodePath("InitPoint12"), NodePath("InitPoint13"), NodePath("InitPoint14"), NodePath("InitPoint15")]
 skiCrossCountry = NodePath("SkiDownHillCrossCountry")
+skiCrossCountryAI = NodePath("CrossCountryAITrack")
+
+[node name="CrossCountryAITrack" parent="." instance=ExtResource("2_eis50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.266, 0, -0.119819)
+visible = false
 
 [node name="SkiDownHillCrossCountry" parent="." instance=ExtResource("2_t3vt4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.499, 0.00724279, -0.125)

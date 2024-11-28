@@ -239,7 +239,7 @@ namespace WinterSports.Scripts.Controller
             UpdateSpeedEnergyLabel();
             OrderCrossCountryPosition();
             SetPlayerPosition();
-            SetPlayerPositionUI();//<-TESTE
+            //SetPlayerPositionUI();//<-TESTE
         }
         private void UpdateSpeedSkating(double delta)
         {            

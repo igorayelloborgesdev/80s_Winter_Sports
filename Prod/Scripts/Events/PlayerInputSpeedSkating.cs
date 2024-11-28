@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Static;
 using static Godot.TextServer;
 
@@ -160,7 +161,7 @@ namespace WinterSports.Scripts.Events
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHideFinishSessionScreenMenu(isPause);
         }
-        public void Init()
+        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null)
         {            
             speed = (float)timeSpeedCurrentMax;
             timerGamePlayController = new TimerController();

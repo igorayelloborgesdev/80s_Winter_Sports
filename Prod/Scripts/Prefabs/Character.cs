@@ -124,6 +124,7 @@ public partial class Character : CharacterBody3D
     #endregion
     #region Ski Cross Country
     private List<CrossCountryModel> crossCountryModelList = null;
+    private List<List<CrossCountryModel>> crossCountryModelAIList = null;
     #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
@@ -178,7 +179,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetSkiCollision(skiCollision);
         playerInput.SetIsAI(isAI);
         playerInput.SetCharacterIdCountry(characterIdCountry);
-        playerInput.Init();            
+        playerInput.Init(crossCountryModelAIList);            
         //Sport Ski 
         if (prefabName == "skiTrack")
             InitSki();
@@ -850,13 +851,17 @@ public partial class Character : CharacterBody3D
     {        
         this.crossCountryModelList = crossCountryModelList;
     }
+    public void SetCrossCountryAIModel(List<List<CrossCountryModel>> crossCountryModelAIList)
+    {
+        this.crossCountryModelAIList = crossCountryModelAIList;//<-
+    }
     public int GetSkiCrossCountryDistance()
     {        
         foreach (var crossCountryModel in crossCountryModelList)
         {
             crossCountryModel.distance = this.Position.DistanceTo(crossCountryModel.position);            
         }
-        return crossCountryModelList.OrderBy(x => x.distance).First().id;//<-        
+        return crossCountryModelList.OrderBy(x => x.distance).First().id;
     }
     public bool GetIsFinished() 
     {        

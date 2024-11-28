@@ -13,6 +13,7 @@ public partial class Ski : Node
     [Export] private Node3D[] gates = null;
     [Export] private MeshInstance3D[] initPointCrossCountry = null;
     [Export] private SkiCrossCountry skiCrossCountry = null;
+    [Export] private SkiCrossCountryAI skiCrossCountryAI = null;
     #endregion
     #region Behaviors
     public override void _Ready()
@@ -115,6 +116,10 @@ public partial class Ski : Node
     public List<CrossCountryModel> GetCrossCountryModel()
     {
         return skiCrossCountry.InstantiateArea3D();
+    }
+    public List<CrossCountryModel> GetCrossCountryAIModel(string parentName)
+    {
+        return skiCrossCountryAI.InstantiateArea3D(parentName);
     }
     #endregion
 }

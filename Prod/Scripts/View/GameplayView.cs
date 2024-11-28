@@ -206,10 +206,28 @@ public partial class GameplayView : Control
         this.AddChild(character);
     }
     private void InstantiateCharacterSkiCrossCountryAI()
-    {        
+    {
+        List<List<CrossCountryModel>> crossCountryModel = new List<List<CrossCountryModel>>();
+        for (int i = 0; i < 4; i++)
+        {
+            crossCountryModel.Add(skiTrack.GetCrossCountryAIModel("CrossCountryPosition" + i.ToString()));
+        }
+        
         foreach (var obj in CountrySingleton.countryObjDTO.countryList)
-        {            
-            if (obj.Id != GameModeSingleton.country)
+        {
+            //if (obj.Id != GameModeSingleton.country)
+            //{
+            //    Character characterAI = characterPackedScene.Instantiate<Character>();
+            //    characterAI.SetPrefabName = prefabName;
+            //    MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(obj.Id - 1);
+            //    gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
+            //    gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
+            //    characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
+            //characterAI.SetCrossCountryAIModel(crossCountryModel);
+            //    characterList.Add(characterAI);
+            //    this.AddChild(characterAI);                
+            //}
+            if (obj.Id == 2)
             {
                 Character characterAI = characterPackedScene.Instantiate<Character>();
                 characterAI.SetPrefabName = prefabName;
@@ -217,8 +235,9 @@ public partial class GameplayView : Control
                 gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
                 gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
                 characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
+                characterAI.SetCrossCountryAIModel(crossCountryModel);
                 characterList.Add(characterAI);
-                this.AddChild(characterAI);                
+                this.AddChild(characterAI);
             }
         }
     }

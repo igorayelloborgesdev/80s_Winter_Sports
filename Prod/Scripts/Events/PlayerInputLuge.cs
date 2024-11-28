@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Interfaces;
+using WinterSports.Scripts.Model;
 
 namespace WinterSports.Scripts.Events
 {
@@ -51,7 +52,7 @@ namespace WinterSports.Scripts.Events
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHideFinishSessionScreenMenu(isPause);
         }
-        public void Init()
+        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null)
         { }
         public void Reset()
         { }
