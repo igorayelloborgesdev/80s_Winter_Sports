@@ -68,12 +68,14 @@ namespace WinterSports.Scripts.Events
         #endregion
         #region Variables AI CrossCountry
         private bool isAI = false;
-        private int currentWayPoint = 0;
+        private int currentWayPoint = 2;
         private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
         private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;        
         private int currentIdOvertake = 0;
         private bool isLeft = true;
         private float AIDiv = 1.0f;
+        private List<List<CrossCountryModel>> crossCountryModelAIList = null;
+        private int currentAILine = 0;
         #endregion
         #region Enum
         private enum OvertakeProcess
@@ -174,7 +176,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                //MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL, animationPlayer);//<-TESTE
+                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL, animationPlayer);//<-TESTE
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -231,7 +233,7 @@ namespace WinterSports.Scripts.Events
                 CrossCountryStatic.isPause = isPause;
             }
         }
-        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null)
+        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null, int initLine = 0)
         {            
             angle = angleInit;
             speed = 0.0f;
@@ -241,8 +243,9 @@ namespace WinterSports.Scripts.Events
             this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);
             if (isAI)
             {
-                GD.Print(crossCountryModelAIList);//<-
-                //crossCountryDTOList = AISingleton.crossCountryObjDTO.CrossCountryDTOList.OrderBy(x => x.id).ToList();//<-TESTE
+                this.crossCountryModelAIList = crossCountryModelAIList;
+                currentAILine = initLine;
+                currentWayPoint = 2;
             }            
         }
         public void Reset()
@@ -285,11 +288,20 @@ namespace WinterSports.Scripts.Events
         { 
             this.characterIdCountry = characterIdCountry;
         }
+
+        public int GetLinePosition()
+        {
+            return currentAILine;
+        }
+        public bool GetIsAI()
+        {
+            return isAI;
+        }
         #endregion
         #region Methods
         private float CalculateDiffcult()
         {            
-            return (maxSpeed - (2 - GameModeSingleton.difficult));//<-
+            return (maxSpeed - (0.5f * (2 - GameModeSingleton.difficult)));//<-
         }
         private void DefineAIDiv(int positionID)
         {
@@ -315,11 +327,11 @@ namespace WinterSports.Scripts.Events
 
                 if (isAI)
                 {
-
+                    GD.Print(speed);//<-
                     DefineAIDiv(positionID);
                     if (speed < CalculateDiffcult())
                     {
-                        speed = speed + (speedInc * AIDiv);
+                        speed = speed + speedInc;
                     }
                     if (speedEnergy < maxSpeedEnergy)
                     {
@@ -597,149 +609,173 @@ namespace WinterSports.Scripts.Events
             Vector3 direction = Vector3.Zero;
             float targetYRotation = 0.0f;
             float angleDegrees = 0.0f;
-            
-            if (crossCountryOvertakeM.GetSetIsOvertake)
-            {
-                if (crossCountryOvertakeFR.GetisRightFree)
-                {
-                    targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition;
-                    targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition;
-                    isLeft = false;                    
-                }
-                else if (crossCountryOvertakeFL.GetisLeftFree)
-                {
-                    targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionML.GlobalPosition;
-                    targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFL.GlobalPosition;
-                    isLeft = true;                    
-                }
-            }
-            
-            if (!crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
-            {
-                targetPosition = crossCountryDTOList[currentWayPoint].position;
-                direction = (targetPosition - currentPosition).Normalized();
-                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-                angleDegrees = Mathf.RadToDeg(targetYRotation);                
-            }
-            else if (crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
-            {
-                targetPosition = crossCountryDTOList[currentWayPoint].position;
-                direction = (targetPosition - currentPosition).Normalized();
-                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-                angleDegrees = Mathf.RadToDeg(targetYRotation);
-                overtakeProcess = OvertakeProcess.Start;
-                
-                if (currentIdOvertake == 0)
-                {
-                    currentIdOvertake = crossCountryOvertakeM.GetCharacterIdCountry;
-                }                
-            }
-            else if (overtakeProcess == OvertakeProcess.Start)
-            {
-                targetPosition = targetPositionRear;
-                direction = (targetPosition - currentPosition).Normalized();
-                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-                angleDegrees = Mathf.RadToDeg(targetYRotation);
-                if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionRear) < 0.1f)
-                {
-                    overtakeProcess = OvertakeProcess.Passing;
-                }
-                                
-                if (currentIdOvertake != crossCountryOvertakeM.GetCharacterIdCountry)
-                {
-                    currentIdOvertake = crossCountryOvertakeM.GetCharacterIdCountry;
-                    overtakeProcess = OvertakeProcess.NoneOvertake;                    
-                }
 
-                if (crossCountryOvertakeM.GetCrossCountryCollisionM is not null)
-                {
-                    if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionM.GlobalPosition) < 0.2f)
-                    {                                              
-                        overtakeProcess = OvertakeProcess.Detour;
-                    }                    
-                }                                
-            }
-            else if (overtakeProcess == OvertakeProcess.Passing)
-            {
-                targetPosition = targetPositionFront;
-                direction = (targetPosition - currentPosition).Normalized();
-                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-                angleDegrees = Mathf.RadToDeg(targetYRotation);
-                if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionFront) < 0.2f)
-                {
-                    overtakeProcess = OvertakeProcess.Finish;
-                }                
-            }
-            else if (overtakeProcess == OvertakeProcess.Finish)
-            {
-                overtakeProcess = OvertakeProcess.NoneOvertake;                
-            }
-            else if (overtakeProcess == OvertakeProcess.Detour)
-            {
-                if (isLeft)
-                    targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionRL.GlobalPosition;
-                else
-                    targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionRR.GlobalPosition;
-                direction = (targetPosition - currentPosition).Normalized();
-                targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-                angleDegrees = Mathf.RadToDeg(targetYRotation);                
-                if(this.characterBody3D.GlobalPosition.DistanceTo(targetPosition) < 0.1f)
-                    overtakeProcess = OvertakeProcess.NoneOvertake;
-                CalcAngleDirectionOvertake();                
-            }
+            targetPosition = crossCountryModelAIList[currentAILine][currentWayPoint].position;
+            direction = (targetPosition - currentPosition).Normalized();
+            targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            angleDegrees = Mathf.RadToDeg(targetYRotation);
 
-            if(crossCountryOvertakeM.GetIsCollided || crossCountryOvertakeFR.GetIsCollided || crossCountryOvertakeFL.GetIsCollided)
-            {
-                CalcAngleDirectionOvertakeFence();
-            }
-            
             if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
-            {
-                if (overtakeProcess == OvertakeProcess.NoneOvertake)
-                    CalcAngleDirection();
-                else
-                    CalcAngleDirectionOvertake();
-
+            {                
+                CalcAngleDirection();                
                 if ((int)angleDegrees < (int)this.characterBody3D.RotationDegrees.Y)
                 {
-                    DirectPlayer(false);                    
+                    DirectPlayer(false);
                 }
                 else if ((int)angleDegrees > (int)this.characterBody3D.RotationDegrees.Y)
-                {                    
+                {
                     DirectPlayer(true);
-                }                
+                }
             }
+
             PlayAnimation(animationPlayer, 5);
-            AccelBrakeAI(positionID);
             DefineNextWayPointAI(positionID);
-            ManageCollisionSpeed();
+            AccelBrakeAI(positionID);
             MovePlayer();
+
+            //if (crossCountryOvertakeM.GetSetIsOvertake)
+            //{
+            //    if (crossCountryOvertakeFR.GetisRightFree)
+            //    {
+            //        targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition;
+            //        targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition;
+            //        isLeft = false;                    
+            //    }
+            //    else if (crossCountryOvertakeFL.GetisLeftFree)
+            //    {
+            //        targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionML.GlobalPosition;
+            //        targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFL.GlobalPosition;
+            //        isLeft = true;                    
+            //    }
+            //}
+
+            //if (!crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
+            //{
+            //    targetPosition = crossCountryDTOList[currentWayPoint].position;
+            //    direction = (targetPosition - currentPosition).Normalized();
+            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            //    angleDegrees = Mathf.RadToDeg(targetYRotation);                
+            //}
+            //else if (crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
+            //{
+            //    targetPosition = crossCountryDTOList[currentWayPoint].position;
+            //    direction = (targetPosition - currentPosition).Normalized();
+            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            //    angleDegrees = Mathf.RadToDeg(targetYRotation);
+            //    overtakeProcess = OvertakeProcess.Start;
+
+            //    if (currentIdOvertake == 0)
+            //    {
+            //        currentIdOvertake = crossCountryOvertakeM.GetCharacterIdCountry;
+            //    }                
+            //}
+            //else if (overtakeProcess == OvertakeProcess.Start)
+            //{
+            //    targetPosition = targetPositionRear;
+            //    direction = (targetPosition - currentPosition).Normalized();
+            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            //    angleDegrees = Mathf.RadToDeg(targetYRotation);
+            //    if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionRear) < 0.1f)
+            //    {
+            //        overtakeProcess = OvertakeProcess.Passing;
+            //    }
+
+            //    if (currentIdOvertake != crossCountryOvertakeM.GetCharacterIdCountry)
+            //    {
+            //        currentIdOvertake = crossCountryOvertakeM.GetCharacterIdCountry;
+            //        overtakeProcess = OvertakeProcess.NoneOvertake;                    
+            //    }
+
+            //    if (crossCountryOvertakeM.GetCrossCountryCollisionM is not null)
+            //    {
+            //        if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionM.GlobalPosition) < 0.2f)
+            //        {                                              
+            //            overtakeProcess = OvertakeProcess.Detour;
+            //        }                    
+            //    }                                
+            //}
+            //else if (overtakeProcess == OvertakeProcess.Passing)
+            //{
+            //    targetPosition = targetPositionFront;
+            //    direction = (targetPosition - currentPosition).Normalized();
+            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            //    angleDegrees = Mathf.RadToDeg(targetYRotation);
+            //    if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionFront) < 0.2f)
+            //    {
+            //        overtakeProcess = OvertakeProcess.Finish;
+            //    }                
+            //}
+            //else if (overtakeProcess == OvertakeProcess.Finish)
+            //{
+            //    overtakeProcess = OvertakeProcess.NoneOvertake;                
+            //}
+            //else if (overtakeProcess == OvertakeProcess.Detour)
+            //{
+            //    if (isLeft)
+            //        targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionRL.GlobalPosition;
+            //    else
+            //        targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionRR.GlobalPosition;
+            //    direction = (targetPosition - currentPosition).Normalized();
+            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
+            //    angleDegrees = Mathf.RadToDeg(targetYRotation);                
+            //    if(this.characterBody3D.GlobalPosition.DistanceTo(targetPosition) < 0.1f)
+            //        overtakeProcess = OvertakeProcess.NoneOvertake;
+            //    CalcAngleDirectionOvertake();                
+            //}
+
+            //if(crossCountryOvertakeM.GetIsCollided || crossCountryOvertakeFR.GetIsCollided || crossCountryOvertakeFL.GetIsCollided)
+            //{
+            //    CalcAngleDirectionOvertakeFence();
+            //}
+
+            //if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
+            //{
+            //    if (overtakeProcess == OvertakeProcess.NoneOvertake)
+            //        CalcAngleDirection();
+            //    else
+            //        CalcAngleDirectionOvertake();
+
+            //    if ((int)angleDegrees < (int)this.characterBody3D.RotationDegrees.Y)
+            //    {
+            //        DirectPlayer(false);                    
+            //    }
+            //    else if ((int)angleDegrees > (int)this.characterBody3D.RotationDegrees.Y)
+            //    {                    
+            //        DirectPlayer(true);
+            //    }                
+            //}
+            //PlayAnimation(animationPlayer, 5);
+            //AccelBrakeAI(positionID);
+            //DefineNextWayPointAI(positionID);
+            //ManageCollisionSpeed();
+            //MovePlayer();
         }
         private void AccelBrakeAI(int positionID)
-        {            
-            if (crossCountryDTOList[currentWayPoint].isAccel)
-            {
-                AccelPlayer(positionID);
-            }
-            else
-            {
-                DecreaseSpeedPlayer();
-            }
-            if (crossCountryDTOList[currentWayPoint].isBreak)
-            {
-                BrakePlayer();
-            }            
-            if (speed > crossCountryDTOList[currentWayPoint].speed)
-            {             
-                BrakePlayer();
-            }
+        {
+            AccelPlayer(positionID);
+            //if (crossCountryDTOList[currentWayPoint].isAccel)
+            //{
+            //    AccelPlayer(positionID);
+            //}
+            //else
+            //{
+            //    DecreaseSpeedPlayer();
+            //}
+            //if (crossCountryDTOList[currentWayPoint].isBreak)
+            //{
+            //    BrakePlayer();
+            //}            
+            //if (speed > crossCountryDTOList[currentWayPoint].speed)
+            //{             
+            //    BrakePlayer();
+            //}
         }
         private void DefineNextWayPointAI(int positionID)
-        {
-            if (crossCountryDTOList[currentWayPoint].id == positionID)
+        {            
+            if (crossCountryModelAIList[currentAILine][currentWayPoint].id == positionID)
             {
-                var index = crossCountryDTOList.FindIndex(x => x.id == positionID);
-                if (index < crossCountryDTOList.Count - 1)
+                var index = crossCountryModelAIList[currentAILine].FindIndex(x => x.id == positionID);
+                if (index < crossCountryModelAIList[currentAILine].Count - 1)
                 {
                     currentWayPoint++;
                 }

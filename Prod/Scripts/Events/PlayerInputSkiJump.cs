@@ -100,7 +100,7 @@ namespace WinterSports.Scripts.Events
             Engine.TimeScale = isPause ? 0.0f : 1.0f;
             ShowHideFinishSessionScreenMenu(isPause);
         }
-        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null)
+        public void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null, int initLine = 0)
         {
             timerGamePlayController = new TimerController();
             timerGamePlayController.Init();
@@ -162,7 +162,15 @@ namespace WinterSports.Scripts.Events
         public bool GetIsBreak() { return false; }
         public void SetIsAI(bool isAI) { }
 
-        public void SetCharacterIdCountry(int characterIdCountry){}        
+        public void SetCharacterIdCountry(int characterIdCountry){}
+        public int GetLinePosition()
+        {
+            return 0;
+        }
+        public bool GetIsAI()
+        {
+            return false;
+        }
         #endregion
         #region Methods
         private void MovePlayerInput()

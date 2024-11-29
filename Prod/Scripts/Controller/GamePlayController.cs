@@ -211,8 +211,7 @@ namespace WinterSports.Scripts.Controller
                 CrossCountryStatic.isPause = false;
             }
             else if (this.character.statesSki == Character.StatesSki.Running)
-            {
-                MoveAI();
+            {                
                 //SaveAI();//<-TESTE
             }
 
@@ -1314,14 +1313,7 @@ namespace WinterSports.Scripts.Controller
                     crossCountryDTO.statesSki = Character.StatesSki.Running;
                 }                
             }
-        }
-        private void MoveAI()
-        {
-            foreach (var crossCountryDTO in this.characterCrossCountryList)
-            {                
-                //GD.Print(crossCountryDTO.GetSetCharacterIdCountry);
-            }
-        }
+        }        
         private void OrderCrossCountryPosition()
         {
             characterCrossCountryList = characterCrossCountryList.OrderByDescending(x => x.GetSkiCrossCountryDistance()).ToList();            

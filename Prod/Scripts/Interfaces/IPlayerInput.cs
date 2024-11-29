@@ -21,7 +21,7 @@ namespace WinterSports.Scripts.Interfaces
         void Pause();
         void UnPause();
         void ShowHideFinishSessionScreen();
-        void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null);
+        void Init(List<List<CrossCountryModel>> crossCountryModelAIList = null, int initLine = 0);
         void Reset();
         float GetSpeed();
         float GetMaxSpeed();
@@ -38,5 +38,7 @@ namespace WinterSports.Scripts.Interfaces
         bool GetIsBreak();
         void SetIsAI(bool isAI);
         void SetCharacterIdCountry(int characterIdCountry);
+        int GetLinePosition();
+        bool GetIsAI();
     }
 }

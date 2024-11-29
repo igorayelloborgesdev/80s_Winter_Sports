@@ -138,7 +138,7 @@ public partial class GameplayView : Control
             if (levelId == 11)
             {
                 InstantiateCharacterSkiCrossCountry();
-                InstantiateCharacterSkiCrossCountryAI();//<-TESTE
+                InstantiateCharacterSkiCrossCountryAI();
             }
             else
             {
@@ -236,6 +236,7 @@ public partial class GameplayView : Control
                 gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
                 characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
                 characterAI.SetCrossCountryAIModel(crossCountryModel);
+                characterAI.SetCurrentAILine(obj.Id - 1 < 4 ? obj.Id - 1 : (obj.Id - 1 % 4));
                 characterList.Add(characterAI);
                 this.AddChild(characterAI);
             }

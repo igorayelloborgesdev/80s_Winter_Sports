@@ -125,6 +125,7 @@ public partial class Character : CharacterBody3D
     #region Ski Cross Country
     private List<CrossCountryModel> crossCountryModelList = null;
     private List<List<CrossCountryModel>> crossCountryModelAIList = null;
+    private int currentAILine = 0;
     #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
@@ -144,7 +145,7 @@ public partial class Character : CharacterBody3D
             {
                 if (GameModeSingleton.sport == 12)
                 {                    
-                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryDistance(), 
+                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryCurrentId(), 
                         crossCountryOvertakeFM, crossCountryOvertakeFR, crossCountryOvertakeFL);
                 }                    
                 else
@@ -179,7 +180,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetSkiCollision(skiCollision);
         playerInput.SetIsAI(isAI);
         playerInput.SetCharacterIdCountry(characterIdCountry);
-        playerInput.Init(crossCountryModelAIList);            
+        playerInput.Init(crossCountryModelAIList, currentAILine);            
         //Sport Ski 
         if (prefabName == "skiTrack")
             InitSki();
@@ -853,7 +854,11 @@ public partial class Character : CharacterBody3D
     }
     public void SetCrossCountryAIModel(List<List<CrossCountryModel>> crossCountryModelAIList)
     {
-        this.crossCountryModelAIList = crossCountryModelAIList;//<-
+        this.crossCountryModelAIList = crossCountryModelAIList;
+    }
+    public void SetCurrentAILine(int currentAILine)
+    {
+        this.currentAILine = currentAILine;        
     }
     public int GetSkiCrossCountryDistance()
     {        
@@ -862,6 +867,18 @@ public partial class Character : CharacterBody3D
             crossCountryModel.distance = this.Position.DistanceTo(crossCountryModel.position);            
         }
         return crossCountryModelList.OrderBy(x => x.distance).First().id;
+    }
+    public int GetSkiCrossCountryCurrentId()
+    {        
+        if (playerInput.GetIsAI())
+        {            
+            foreach (var crossCountryModel in crossCountryModelAIList[playerInput.GetLinePosition()])
+            {
+                crossCountryModel.distance = this.Position.DistanceTo(crossCountryModel.position);
+            }
+            return crossCountryModelAIList[playerInput.GetLinePosition()].OrderBy(x => x.distance).First().id;
+        }
+        return 0;
     }
     public bool GetIsFinished() 
     {        
