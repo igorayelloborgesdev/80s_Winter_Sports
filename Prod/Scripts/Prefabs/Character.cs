@@ -857,7 +857,7 @@ public partial class Character : CharacterBody3D
         this.crossCountryModelAIList = crossCountryModelAIList;
     }
     public void SetCurrentAILine(int currentAILine)
-    {
+    {        
         this.currentAILine = currentAILine;        
     }
     public int GetSkiCrossCountryDistance()

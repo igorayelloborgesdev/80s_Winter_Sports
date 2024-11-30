@@ -42,8 +42,8 @@ namespace WinterSports.Scripts.Events
         private const float speedIncCollision = 0.025f;
         private const float maxSpeedEnergy = 4.9f;
         private const float maxSpeedEnergyReturn = 4.75f;
-        private const float angleMinOvertake = 0.5f;
-        private const float angleMaxOvertake = 1.0f;
+        private const float angleMinOvertake = 1.5f;
+        private const float angleMaxOvertake = 2.0f;
         private const float angleMinOvertakeFence = 1.5f;
         private const float angleMaxOvertakeFence = 2.0f;
         #endregion
@@ -73,7 +73,7 @@ namespace WinterSports.Scripts.Events
         private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;        
         private int currentIdOvertake = 0;
         private bool isLeft = true;
-        private float AIDiv = 1.0f;
+        private float AIDiv = 0.0f;        
         private List<List<CrossCountryModel>> crossCountryModelAIList = null;
         private int currentAILine = 0;
         #endregion
@@ -308,30 +308,27 @@ namespace WinterSports.Scripts.Events
             if (positionID % 10 == 0)
             {
                 Random rnd = new Random();
-                int diceAI = rnd.Next(0, 7);                
-                if (diceAI > CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1])
-                {
-                    AIDiv = 1.0f;
-                }
-                else
-                {
-                    AIDiv = 1.0f;
-                }
-            }
+                double range = (double)6.0 - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1];
+                double sample = rnd.NextDouble();
+                double diceAI = (((sample * range) + (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1])
+                    - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1]) * 0.5;
+                AIDiv = (float)diceAI;                
+            }            
         }
         private void AccelPlayer(int positionID = 0)
         {
             if (GameModeSingleton.sport == 12)
-            {
-                ManageEnergy();
-
+            {               
                 if (isAI)
-                {
-                    GD.Print(speed);//<-
+                {                    
                     DefineAIDiv(positionID);
-                    if (speed < CalculateDiffcult())
+                    if (speed < (CalculateDiffcult() - AIDiv))
                     {
                         speed = speed + speedInc;
+                    }
+                    else
+                    {
+                        speed = (CalculateDiffcult() - AIDiv);
                     }
                     if (speedEnergy < maxSpeedEnergy)
                     {
@@ -340,6 +337,7 @@ namespace WinterSports.Scripts.Events
                 }
                 else
                 {
+                    ManageEnergy();
                     if (speed < maxSpeed)
                     {
                         speed = speed + speedInc;
@@ -616,8 +614,8 @@ namespace WinterSports.Scripts.Events
             angleDegrees = Mathf.RadToDeg(targetYRotation);
 
             if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
-            {                
-                CalcAngleDirection();                
+            {
+                CalcAngleDirectionOvertake();
                 if ((int)angleDegrees < (int)this.characterBody3D.RotationDegrees.Y)
                 {
                     DirectPlayer(false);

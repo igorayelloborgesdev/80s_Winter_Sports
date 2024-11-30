@@ -147,39 +147,44 @@ public partial class CrossCountryOvertake : Area3D
         if (body is CrossCountryOvertake)
         {
             var obj = body as CrossCountryOvertake;
-            if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && isInside)
+            if (colliderTypes == ColliderTypes.FrontMidle)
             {
-                crossCountryCollisionML = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionML");
-                crossCountryCollisionMR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionMR");
-                crossCountryCollisionFL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFL");
-                crossCountryCollisionFR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFR");
-                crossCountryCollisionM = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionM");
-                crossCountryCollisionRL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionRL");
-                crossCountryCollisionRR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionRR");
-                isOvertake = true;
+                GD.Print(body.GetParent().GetParent().Name);//<-
             }
-            if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && !isInside)
-            {
-                isOvertake = false;
-            }
-            if (colliderTypes == ColliderTypes.FrontLeft && obj.GetColliderType() != ColliderTypes.RearMidle && isInside)
-            {
-                isLeftFree = true;
-            }
-            if (colliderTypes == ColliderTypes.FrontLeft && obj.GetColliderType() != ColliderTypes.RearMidle && !isInside)
-            {
-                isLeftFree = false;
-            }
-            if (colliderTypes == ColliderTypes.FrontRight && obj.GetColliderType() != ColliderTypes.RearMidle && isInside)
-            {
-                isRightFree = true;
-            }
-            if (colliderTypes == ColliderTypes.FrontRight && obj.GetColliderType() != ColliderTypes.RearMidle && !isInside)
-            {
-                isRightFree = false;
-            }
-            Character character = body.GetParent().GetParent() as Character;
-            characterIdCountry = character.GetSetCharacterIdCountry;            
+
+            //if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && isInside)
+            //{
+            //    crossCountryCollisionML = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionML");
+            //    crossCountryCollisionMR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionMR");
+            //    crossCountryCollisionFL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFL");
+            //    crossCountryCollisionFR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionFR");
+            //    crossCountryCollisionM = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionM");
+            //    crossCountryCollisionRL = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionRL");
+            //    crossCountryCollisionRR = body.GetParent().GetParent().GetNode<Node3D>("CrossCountryCollisionRR");
+            //    isOvertake = true;
+            //}
+            //if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && !isInside)
+            //{
+            //    isOvertake = false;
+            //}
+            //if (colliderTypes == ColliderTypes.FrontLeft && obj.GetColliderType() != ColliderTypes.RearMidle && isInside)
+            //{
+            //    isLeftFree = true;
+            //}
+            //if (colliderTypes == ColliderTypes.FrontLeft && obj.GetColliderType() != ColliderTypes.RearMidle && !isInside)
+            //{
+            //    isLeftFree = false;
+            //}
+            //if (colliderTypes == ColliderTypes.FrontRight && obj.GetColliderType() != ColliderTypes.RearMidle && isInside)
+            //{
+            //    isRightFree = true;
+            //}
+            //if (colliderTypes == ColliderTypes.FrontRight && obj.GetColliderType() != ColliderTypes.RearMidle && !isInside)
+            //{
+            //    isRightFree = false;
+            //}
+            //Character character = body.GetParent().GetParent() as Character;
+            //characterIdCountry = character.GetSetCharacterIdCountry;            
         }        
     }
 

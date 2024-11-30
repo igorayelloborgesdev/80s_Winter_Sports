@@ -227,7 +227,7 @@ public partial class GameplayView : Control
             //    characterList.Add(characterAI);
             //    this.AddChild(characterAI);                
             //}
-            if (obj.Id == 2)
+            if (obj.Id >= 2 && obj.Id <= 8)
             {
                 Character characterAI = characterPackedScene.Instantiate<Character>();
                 characterAI.SetPrefabName = prefabName;
@@ -236,7 +236,7 @@ public partial class GameplayView : Control
                 gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
                 characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
                 characterAI.SetCrossCountryAIModel(crossCountryModel);
-                characterAI.SetCurrentAILine(obj.Id - 1 < 4 ? obj.Id - 1 : (obj.Id - 1 % 4));
+                characterAI.SetCurrentAILine(obj.Id - 1 < 4 ? obj.Id - 1 : ((obj.Id - 1) % 4));
                 characterList.Add(characterAI);
                 this.AddChild(characterAI);
             }
