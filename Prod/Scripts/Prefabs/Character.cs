@@ -146,7 +146,7 @@ public partial class Character : CharacterBody3D
                 if (GameModeSingleton.sport == 12)
                 {                    
                     playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryCurrentId(), 
-                        crossCountryOvertakeFM, crossCountryOvertakeFR, crossCountryOvertakeFL);
+                        crossCountryOvertakeFM, crossCountryOvertakeMR, crossCountryOvertakeML);
                 }                    
                 else
                     playerInput.PlayerInput(animationPlayer);

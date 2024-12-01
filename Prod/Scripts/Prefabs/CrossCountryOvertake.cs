@@ -147,9 +147,47 @@ public partial class CrossCountryOvertake : Area3D
         if (body is CrossCountryOvertake)
         {
             var obj = body as CrossCountryOvertake;
-            if (colliderTypes == ColliderTypes.FrontMidle)
+            if (colliderTypes == ColliderTypes.FrontMidle && isInside)
             {
-                GD.Print(body.GetParent().GetParent().Name);//<-
+                if (body.GetParent().GetParent().Name.ToString().Contains("Character"))
+                {
+                    isOvertake = true;
+                }                
+            }
+            if (colliderTypes == ColliderTypes.FrontMidle && !isInside)
+            {
+                if (body.GetParent().GetParent().Name.ToString().Contains("Character"))
+                {
+                    isOvertake = false;
+                }
+            }
+            if (colliderTypes == ColliderTypes.RearLeft && isInside)
+            {
+                if (body.GetParent().GetParent().Name.ToString().Contains("Character"))
+                {
+                    isLeftFree = true;
+                }
+            }
+            if (colliderTypes == ColliderTypes.RearLeft && !isInside)
+            {
+                if (body.GetParent().GetParent().Name.ToString().Contains("Character"))
+                {
+                    isLeftFree = false;
+                }
+            }
+            if (colliderTypes == ColliderTypes.RearRight && isInside)
+            {
+                if (body.GetParent().GetParent().Name.ToString().Contains("Character"))
+                {
+                    isRightFree = true;
+                }
+            }
+            if (colliderTypes == ColliderTypes.RearRight && !isInside)
+            {
+                if (body.GetParent().GetParent().Name.ToString().Contains("Character"))
+                {
+                    isRightFree = false;
+                }
             }
 
             //if (obj.GetColliderType() == ColliderTypes.RearMidle && colliderTypes == ColliderTypes.FrontMidle && isInside)

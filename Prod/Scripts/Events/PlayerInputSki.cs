@@ -89,7 +89,7 @@ namespace WinterSports.Scripts.Events
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta, int positionID,
-            CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null)
+            CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeMR = null, CrossCountryOvertake crossCountryOvertakeML = null)
         {
             if (!isPause)
             {
@@ -176,7 +176,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeFR, crossCountryOvertakeFL, animationPlayer);//<-TESTE
+                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeMR, crossCountryOvertakeML, animationPlayer);//<-TESTE
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -596,8 +596,8 @@ namespace WinterSports.Scripts.Events
             this.isAI = isAI;
         }
 
-        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeFR, 
-            CrossCountryOvertake crossCountryOvertakeFL, AnimationPlayer animationPlayer)
+        private void MoveDirectionAI(int positionID, CrossCountryOvertake crossCountryOvertakeM, CrossCountryOvertake crossCountryOvertakeMR, 
+            CrossCountryOvertake crossCountryOvertakeML, AnimationPlayer animationPlayer)
         {
             
             Vector3 targetPosition = Vector3.Zero;
@@ -630,6 +630,11 @@ namespace WinterSports.Scripts.Events
             DefineNextWayPointAI(positionID);
             AccelBrakeAI(positionID);
             MovePlayer();
+
+            //GD.Print(crossCountryOvertakeM.GetSetIsOvertake);//<-
+            GD.Print(currentAILine);
+            GD.Print("Right " + crossCountryOvertakeMR.GetisRightFree.ToString());//<-
+            GD.Print("Left " + crossCountryOvertakeML.GetisLeftFree.ToString());//<-
 
             //if (crossCountryOvertakeM.GetSetIsOvertake)
             //{
