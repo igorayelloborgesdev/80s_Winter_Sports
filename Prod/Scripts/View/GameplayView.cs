@@ -82,6 +82,7 @@ public partial class GameplayView : Control
     private SkiJump skiJump = new SkiJump();
     private int levelId = 0;
     private string prefabName = String.Empty;
+    private List<int> numbersStart = new List<int>();
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -137,6 +138,7 @@ public partial class GameplayView : Control
         {
             if (levelId == 11)
             {
+                GenerateStartPosition();
                 InstantiateCharacterSkiCrossCountry();
                 InstantiateCharacterSkiCrossCountryAI();
             }
@@ -182,7 +184,7 @@ public partial class GameplayView : Control
     {
         character = characterPackedScene.Instantiate<Character>();
         character.SetPrefabName = prefabName;
-        initPoint = skiTrack.GetInitPointCrossCountry(GameModeSingleton.country - 1);
+        initPoint = skiTrack.GetInitPointCrossCountry(numbersStart[0]);
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSportSki(gateStart, gateFinish);
@@ -205,6 +207,22 @@ public partial class GameplayView : Control
         characterList.Add(character);
         this.AddChild(character);
     }
+    private void GenerateStartPosition()
+    {
+        numbersStart = new List<int>();
+        for (int i = 0; i < 16; i++)
+        {
+            numbersStart.Add(i);
+        }        
+        Random rand = new Random();
+        for (int i = numbersStart.Count - 1; i > 0; i--)
+        {
+            int j = rand.Next(i + 1);
+            int temp = numbersStart[i];
+            numbersStart[i] = numbersStart[j];
+            numbersStart[j] = temp;
+        }        
+    }
     private void InstantiateCharacterSkiCrossCountryAI()
     {
         List<List<CrossCountryModel>> crossCountryModel = new List<List<CrossCountryModel>>();
@@ -212,26 +230,14 @@ public partial class GameplayView : Control
         {
             crossCountryModel.Add(skiTrack.GetCrossCountryAIModel("CrossCountryPosition" + i.ToString()));
         }
-        
+        int count = 1;
         foreach (var obj in CountrySingleton.countryObjDTO.countryList)
         {
-            //if (obj.Id != GameModeSingleton.country)
-            //{
-            //    Character characterAI = characterPackedScene.Instantiate<Character>();
-            //    characterAI.SetPrefabName = prefabName;
-            //    MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(obj.Id - 1);
-            //    gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
-            //    gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
-            //    characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
-            //characterAI.SetCrossCountryAIModel(crossCountryModel);
-            //    characterList.Add(characterAI);
-            //    this.AddChild(characterAI);                
-            //}
-            if (obj.Id >= 2 && obj.Id <= 8)
+            if (obj.Id != GameModeSingleton.country)
             {
                 Character characterAI = characterPackedScene.Instantiate<Character>();
                 characterAI.SetPrefabName = prefabName;
-                MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(obj.Id - 1);
+                MeshInstance3D initPointAI = skiTrack.GetInitPointCrossCountry(numbersStart[count]);
                 gamePlayController.SetCharacterCrossCountryAI(characterAI, initPointAI.Position, initPointAI.Rotation, obj.Id - 1);
                 gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
                 characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
@@ -239,6 +245,7 @@ public partial class GameplayView : Control
                 characterAI.SetCurrentAILine(obj.Id - 1 < 4 ? obj.Id - 1 : ((obj.Id - 1) % 4));
                 characterList.Add(characterAI);
                 this.AddChild(characterAI);
+                count++;
             }
         }
     }

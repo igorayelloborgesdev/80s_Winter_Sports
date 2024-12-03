@@ -47,9 +47,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Cross Country
-..Melhorar AI//<-
-..Final
-..Pausa
+..Final//<-
 ..Reinício
 ..Reset
 

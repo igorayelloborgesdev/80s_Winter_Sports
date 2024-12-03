@@ -126,6 +126,39 @@ public partial class Character : CharacterBody3D
     private List<CrossCountryModel> crossCountryModelList = null;
     private List<List<CrossCountryModel>> crossCountryModelAIList = null;
     private int currentAILine = 0;
+    private double score = 0.0f;
+    public double GetSetScore
+    {
+        get 
+        {
+            return score;
+        }
+        set 
+        {
+            score = value; 
+        }
+    }
+    private bool isRunFinished = false;
+    public bool GetIsRunFinished
+    { 
+        get 
+        { 
+            return isRunFinished; 
+        }
+    }
+    private int currentPoint = 0;
+    public int GetSetCurrentPoint
+    {
+        get
+        {
+            return currentPoint;
+        }
+        set 
+        {
+            currentPoint = value;
+        }
+    }
+    private bool isScoreSet = false;
     #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
@@ -459,7 +492,7 @@ public partial class Character : CharacterBody3D
     {        
         if (body.Name == this.Name)
         {     
-            statesSki = StatesSki.Running;
+            statesSki = StatesSki.Running;            
         }            
     }
     private void OnAreaEnteredFinishGate(Node body)
@@ -878,7 +911,7 @@ public partial class Character : CharacterBody3D
             }
             return crossCountryModelAIList[playerInput.GetLinePosition()].OrderBy(x => x.distance).First().id;
         }
-        return 0;
+        return GetSkiCrossCountryDistance();
     }
     public bool GetIsFinished() 
     {        
@@ -895,6 +928,18 @@ public partial class Character : CharacterBody3D
     public void SetIsAI(bool isAI)
     { 
         this.isAI = isAI;        
+    }
+    public void SetScore()
+    {        
+        if (!isRunFinished && crossCountryOvertakeFM.GetSetIsFinished)
+        {
+            isRunFinished = true;
+            currentPoint = 10000;            
+        }
+        if (!isRunFinished)
+        {
+            currentPoint = GetSkiCrossCountryCurrentId();
+        }
     }
     #endregion
 }

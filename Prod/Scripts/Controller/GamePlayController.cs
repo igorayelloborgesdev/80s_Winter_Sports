@@ -207,38 +207,70 @@ namespace WinterSports.Scripts.Controller
                 timerGamePlayController.StopTimer();
                 timerGamePlayController.ResetTimer();
                 this.character.statesSki = Character.StatesSki.Running;
-                crossCountryDTOList.Clear();                
+                crossCountryDTOList.Clear();
                 CrossCountryStatic.isPause = false;
             }
-            else if (this.character.statesSki == Character.StatesSki.Running)
-            {                
-                //SaveAI();//<-TESTE
+            else if (this.character.statesSki == Character.StatesSki.Running && timerGamePlayController.GetTimer() < 5.0f)
+            {
+                foreach (var charObj in characterCrossCountryList)
+                {
+                    charObj.SetScore();
+                    if (!charObj.GetIsRunFinished)
+                    {
+                        charObj.GetSetScore = timerController.GetTimer();                        
+                    }
+                    else
+                    {
+                        if (GameModeSingleton.country == charObj.GetSetCharacterIdCountry)
+                        {
+                            timerGamePlayController.StartTimer();                            
+                        }
+                    }
+                }
+            }
+            else if (this.character.statesSki == Character.StatesSki.Running && timerGamePlayController.GetTimer() > 2.0f)
+            {
+                this.character.statesSki = Character.StatesSki.Finish;
+                this.character.Pause();
+
+                characterCrossCountryList = characterCrossCountryList.OrderBy(x => x.GetIsRunFinished).OrderBy(x => x.GetSetScore).OrderByDescending(x => x.GetSetCurrentPoint).ToList();
+
+                GD.Print("-------------------------------");
+                int count = 1;
+                foreach (var charObj in characterCrossCountryList)
+                {
+                    GD.Print(count.ToString() + " - " + CountrySingleton.countryObjDTO.countryList[charObj.GetSetCharacterIdCountry - 1].Name + " : "
+                        + charObj.GetIsRunFinished.ToString() + " : "
+                        + charObj.GetSetScore.ToString() + " : "
+                        + charObj.GetSetCurrentPoint.ToString());//<-
+                    count++;
+                }                    
             }
 
-            //if (this.character.statesSki == Character.StatesSki.Running)
-            //{
+                //if (this.character.statesSki == Character.StatesSki.Running)
+                //{
 
-            //}
-            //if (this.character.statesSki == Character.StatesSki.Finish && !SkiStatic.isCollided)
-            //{
-            //    SetTimeScore();
-            //    timerController.StopTimer();
-            //    TimeToReset(delta);
-            //    ShowControlSkiSpeedSkatingScreen();
-            //}
-            //if (SkiStatic.isCollided)
-            //{
-            //    this.character.statesSki = Character.StatesSki.Disqualified;
-            //    SetTimeScore();
-            //    TimeToReset(delta);
-            //    ShowControlSkiSpeedSkatingScreen();
-            //}
+                //}
+                //if (this.character.statesSki == Character.StatesSki.Finish && !SkiStatic.isCollided)
+                //{
+                //    SetTimeScore();
+                //    timerController.StopTimer();
+                //    TimeToReset(delta);
+                //    ShowControlSkiSpeedSkatingScreen();
+                //}
+                //if (SkiStatic.isCollided)
+                //{
+                //    this.character.statesSki = Character.StatesSki.Disqualified;
+                //    SetTimeScore();
+                //    TimeToReset(delta);
+                //    ShowControlSkiSpeedSkatingScreen();
+                //}
             timerController.TimerRunning(delta);
             updateTimerCrossCountry();
             UpdateSpeedEnergyLabel();
             OrderCrossCountryPosition();
             SetPlayerPosition();
-            //SetPlayerPositionUI();//<-TESTE
+            SetPlayerPositionUI();
         }
         private void UpdateSpeedSkating(double delta)
         {            

@@ -46,6 +46,7 @@ namespace WinterSports.Scripts.Events
         private const float angleMaxOvertake = 2.0f;
         private const float angleMinOvertakeFence = 1.5f;
         private const float angleMaxOvertakeFence = 2.0f;
+        private const int overtakeWaitMax = 50;
         #endregion
         #region Variables
         private string currentAnimation = "";        
@@ -68,14 +69,12 @@ namespace WinterSports.Scripts.Events
         #endregion
         #region Variables AI CrossCountry
         private bool isAI = false;
-        private int currentWayPoint = 2;
-        private List<CrossCountryDTO> crossCountryDTOList = new List<CrossCountryDTO>();
-        private OvertakeProcess overtakeProcess = OvertakeProcess.NoneOvertake;        
-        private int currentIdOvertake = 0;
-        private bool isLeft = true;
+        private int currentWayPoint = 2;        
         private float AIDiv = 0.0f;        
         private List<List<CrossCountryModel>> crossCountryModelAIList = null;
         private int currentAILine = 0;
+        private int overtakeWait = 0;
+        private bool isOvertakeGlockRunning = false;
         #endregion
         #region Enum
         private enum OvertakeProcess
@@ -176,7 +175,7 @@ namespace WinterSports.Scripts.Events
             }            
             if (!CrossCountryStatic.isPause && isAI)
             {
-                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeMR, crossCountryOvertakeML, animationPlayer);//<-TESTE
+                MoveDirectionAI(positionID, crossCountryOvertakeM, crossCountryOvertakeMR, crossCountryOvertakeML, animationPlayer);
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -301,14 +300,14 @@ namespace WinterSports.Scripts.Events
         #region Methods
         private float CalculateDiffcult()
         {            
-            return (maxSpeed - (0.5f * (2 - GameModeSingleton.difficult)));//<-
+            return (maxSpeed - (0.25f * (2 - GameModeSingleton.difficult)));//<-
         }
         private void DefineAIDiv(int positionID)
         {
             if (positionID % 10 == 0)
             {
                 Random rnd = new Random();
-                double range = (double)6.0 - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1];
+                double range = (double)5.7 - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1];
                 double sample = rnd.NextDouble();
                 double diceAI = (((sample * range) + (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1])
                     - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1]) * 0.5;
@@ -444,36 +443,17 @@ namespace WinterSports.Scripts.Events
             }            
         }        
         private void ManageEnergy()
-        {
-            if (!isEnergySlow)
+        {            
+            if (speed < energy)
             {
-                DecreaseEnergy();
-                if (energy < energyArray[1])
-                {
-                    DecreaseSpeed();
-                    if (speed < energy)
-                    {
-                        isEnergySlow = true;
-                    }
-                }
+                IncreaseEnergy();
             }
-            else
-            {
-                if (speed < energy)
-                {
-                    IncreaseEnergy();
-                }
-                if (speed > energy + (maxSpeed / 50.0f))
-                {                    
-                    DecreaseEnergy();
-                    speed -= speedDec;
-                    DecreaseSpeed();
-                }
-                if (energy >= maxSpeedEnergyReturn)
-                {
-                    isEnergySlow = false;
-                }
-            }                                   
+            if (speed > energy)
+            {                    
+                DecreaseEnergy();
+                speed -= speedDec;
+                DecreaseSpeed();
+            }                                                             
             LimitEnergy();
         }        
         private void DecreaseEnergy()
@@ -631,147 +611,45 @@ namespace WinterSports.Scripts.Events
             AccelBrakeAI(positionID);
             MovePlayer();
 
-            //GD.Print(crossCountryOvertakeM.GetSetIsOvertake);//<-
-            GD.Print(currentAILine);
-            GD.Print("Right " + crossCountryOvertakeMR.GetisRightFree.ToString());//<-
-            GD.Print("Left " + crossCountryOvertakeML.GetisLeftFree.ToString());//<-
+            if (crossCountryOvertakeM.GetSetIsOvertake
+                && (crossCountryOvertakeMR.GetisRightFree || crossCountryOvertakeML.GetisLeftFree)
+                && !isOvertakeGlockRunning
+                )//<-
+            {                
+                if (currentAILine == 0 && crossCountryOvertakeML.GetisLeftFree)
+                {
+                    currentAILine = 1;
+                }
+                else if (currentAILine == 3 && crossCountryOvertakeMR.GetisRightFree)
+                {
+                    currentAILine = 2;
+                }
+                else if (crossCountryOvertakeML.GetisLeftFree)
+                {
+                    currentAILine--;
+                }
+                else if (crossCountryOvertakeMR.GetisRightFree)
+                {
+                    
+                    currentAILine++;
+                }
+                isOvertakeGlockRunning = true;
+            }
+            if (isOvertakeGlockRunning)
+            {
+                overtakeWait++;
+                if (overtakeWait > overtakeWaitMax)
+                {
+                    isOvertakeGlockRunning = false;
+                    overtakeWait = 0;
+                }
+            }
 
-            //if (crossCountryOvertakeM.GetSetIsOvertake)
-            //{
-            //    if (crossCountryOvertakeFR.GetisRightFree)
-            //    {
-            //        targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionMR.GlobalPosition;
-            //        targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFR.GlobalPosition;
-            //        isLeft = false;                    
-            //    }
-            //    else if (crossCountryOvertakeFL.GetisLeftFree)
-            //    {
-            //        targetPositionRear = crossCountryOvertakeM.GetCrossCountryCollisionML.GlobalPosition;
-            //        targetPositionFront = crossCountryOvertakeM.GetCrossCountryCollisionFL.GlobalPosition;
-            //        isLeft = true;                    
-            //    }
-            //}
 
-            //if (!crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
-            //{
-            //    targetPosition = crossCountryDTOList[currentWayPoint].position;
-            //    direction = (targetPosition - currentPosition).Normalized();
-            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-            //    angleDegrees = Mathf.RadToDeg(targetYRotation);                
-            //}
-            //else if (crossCountryOvertakeM.GetSetIsOvertake && overtakeProcess == OvertakeProcess.NoneOvertake)
-            //{
-            //    targetPosition = crossCountryDTOList[currentWayPoint].position;
-            //    direction = (targetPosition - currentPosition).Normalized();
-            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-            //    angleDegrees = Mathf.RadToDeg(targetYRotation);
-            //    overtakeProcess = OvertakeProcess.Start;
-
-            //    if (currentIdOvertake == 0)
-            //    {
-            //        currentIdOvertake = crossCountryOvertakeM.GetCharacterIdCountry;
-            //    }                
-            //}
-            //else if (overtakeProcess == OvertakeProcess.Start)
-            //{
-            //    targetPosition = targetPositionRear;
-            //    direction = (targetPosition - currentPosition).Normalized();
-            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-            //    angleDegrees = Mathf.RadToDeg(targetYRotation);
-            //    if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionRear) < 0.1f)
-            //    {
-            //        overtakeProcess = OvertakeProcess.Passing;
-            //    }
-
-            //    if (currentIdOvertake != crossCountryOvertakeM.GetCharacterIdCountry)
-            //    {
-            //        currentIdOvertake = crossCountryOvertakeM.GetCharacterIdCountry;
-            //        overtakeProcess = OvertakeProcess.NoneOvertake;                    
-            //    }
-
-            //    if (crossCountryOvertakeM.GetCrossCountryCollisionM is not null)
-            //    {
-            //        if (this.characterBody3D.GlobalPosition.DistanceTo(crossCountryOvertakeM.GetCrossCountryCollisionM.GlobalPosition) < 0.2f)
-            //        {                                              
-            //            overtakeProcess = OvertakeProcess.Detour;
-            //        }                    
-            //    }                                
-            //}
-            //else if (overtakeProcess == OvertakeProcess.Passing)
-            //{
-            //    targetPosition = targetPositionFront;
-            //    direction = (targetPosition - currentPosition).Normalized();
-            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-            //    angleDegrees = Mathf.RadToDeg(targetYRotation);
-            //    if (this.characterBody3D.GlobalPosition.DistanceTo(targetPositionFront) < 0.2f)
-            //    {
-            //        overtakeProcess = OvertakeProcess.Finish;
-            //    }                
-            //}
-            //else if (overtakeProcess == OvertakeProcess.Finish)
-            //{
-            //    overtakeProcess = OvertakeProcess.NoneOvertake;                
-            //}
-            //else if (overtakeProcess == OvertakeProcess.Detour)
-            //{
-            //    if (isLeft)
-            //        targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionRL.GlobalPosition;
-            //    else
-            //        targetPosition = crossCountryOvertakeM.GetCrossCountryCollisionRR.GlobalPosition;
-            //    direction = (targetPosition - currentPosition).Normalized();
-            //    targetYRotation = Mathf.Atan2(direction.X, direction.Z);
-            //    angleDegrees = Mathf.RadToDeg(targetYRotation);                
-            //    if(this.characterBody3D.GlobalPosition.DistanceTo(targetPosition) < 0.1f)
-            //        overtakeProcess = OvertakeProcess.NoneOvertake;
-            //    CalcAngleDirectionOvertake();                
-            //}
-
-            //if(crossCountryOvertakeM.GetIsCollided || crossCountryOvertakeFR.GetIsCollided || crossCountryOvertakeFL.GetIsCollided)
-            //{
-            //    CalcAngleDirectionOvertakeFence();
-            //}
-
-            //if ((int)angleDegrees != (int)this.characterBody3D.RotationDegrees.Y)
-            //{
-            //    if (overtakeProcess == OvertakeProcess.NoneOvertake)
-            //        CalcAngleDirection();
-            //    else
-            //        CalcAngleDirectionOvertake();
-
-            //    if ((int)angleDegrees < (int)this.characterBody3D.RotationDegrees.Y)
-            //    {
-            //        DirectPlayer(false);                    
-            //    }
-            //    else if ((int)angleDegrees > (int)this.characterBody3D.RotationDegrees.Y)
-            //    {                    
-            //        DirectPlayer(true);
-            //    }                
-            //}
-            //PlayAnimation(animationPlayer, 5);
-            //AccelBrakeAI(positionID);
-            //DefineNextWayPointAI(positionID);
-            //ManageCollisionSpeed();
-            //MovePlayer();
         }
         private void AccelBrakeAI(int positionID)
         {
-            AccelPlayer(positionID);
-            //if (crossCountryDTOList[currentWayPoint].isAccel)
-            //{
-            //    AccelPlayer(positionID);
-            //}
-            //else
-            //{
-            //    DecreaseSpeedPlayer();
-            //}
-            //if (crossCountryDTOList[currentWayPoint].isBreak)
-            //{
-            //    BrakePlayer();
-            //}            
-            //if (speed > crossCountryDTOList[currentWayPoint].speed)
-            //{             
-            //    BrakePlayer();
-            //}
+            AccelPlayer(positionID);            
         }
         private void DefineNextWayPointAI(int positionID)
         {            
