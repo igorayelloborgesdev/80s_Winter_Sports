@@ -62,10 +62,10 @@ public partial class GameplayView : Control
     [Export] NinePatchRect controlSkiCrossCountrySpeed = null;
     [Export] NinePatchRect controlSkiCrossCountryEnergy = null;
     [Export] Control controlSkiCrossCountryPosition = null;
-
     [Export] Label[] crossCountryCountryPositionLabel = null;
     [Export] Label[] crossCountryCountryCodeLabel = null;
     [Export] TextureRect[] crossCountryCountryFlagTextureRect = null;
+    [Export] Control finishResultSessionControl = null;
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
@@ -166,7 +166,8 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
-        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel,
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -191,7 +192,8 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
-        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -260,7 +262,8 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
-        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -286,7 +289,8 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
-        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -313,7 +317,8 @@ public partial class GameplayView : Control
             gamePlayController.SetPauseScreenLuge(pauseScreen);
             gamePlayController.SetFinishSessionScreenLuge(finishSessionScreen);
             gamePlayController.SetControlSkiSpeedSkatingBiathlonLuge(controlSkiSpeedSkatingBiathlon, controlBiathlon);
-            gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+            gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
+                crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
             gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
             gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
             gamePlayController.ShowHideControlLugeImpulse(true);
@@ -338,7 +343,8 @@ public partial class GameplayView : Control
             gamePlayController.SetPauseScreenBobsleigh(pauseScreen);
             gamePlayController.SetFinishSessionScreenBobsleigh(finishSessionScreen);
             gamePlayController.SetControlSkiSpeedSkatingBiathlonBobsleigh(controlSkiSpeedSkatingBiathlon, controlBiathlon);
-            gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+            gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
+                crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
             gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
             gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
             gamePlayController.ShowHideControlLugeImpulse(true);
@@ -364,7 +370,8 @@ public partial class GameplayView : Control
         gamePlayController.SetPauseScreen(pauseScreen);
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
-        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect);
+        gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);

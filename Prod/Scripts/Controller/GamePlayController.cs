@@ -79,6 +79,8 @@ namespace WinterSports.Scripts.Controller
         private Label[] crossCountryCountryPositionLabel = null;
         private Label[] crossCountryCountryCodeLabel = null;
         private TextureRect[] crossCountryCountryFlagTextureRect = null;
+        private Control finishResultSessionControl = null;
+        private List<Node> standingNode = new List<Node>();
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -666,7 +668,8 @@ namespace WinterSports.Scripts.Controller
         public void SetControlSkiCrossCountry(Control controlSkiCrossCountry, Control controlSkiCrossCountryPosition, 
             Label[] crossCountryCountryPositionLabel,
             Label[] crossCountryCountryCodeLabel,
-            TextureRect[] crossCountryCountryFlagTextureRect)
+            TextureRect[] crossCountryCountryFlagTextureRect,
+            Control finishResultSessionControl)
         {
             this.controlSkiCrossCountry = controlSkiCrossCountry;
             character.SetControlSkiCrossCountry = this.controlSkiCrossCountry;
@@ -674,6 +677,55 @@ namespace WinterSports.Scripts.Controller
             this.crossCountryCountryPositionLabel = crossCountryCountryPositionLabel;
             this.crossCountryCountryCodeLabel = crossCountryCountryCodeLabel;            
             this.crossCountryCountryFlagTextureRect = crossCountryCountryFlagTextureRect;
+            this.finishResultSessionControl = finishResultSessionControl;
+            CreateStandingsTable(this.finishResultSessionControl);
+
+            SetStandingsTable();
+        }
+        private void CreateStandingsTable(Control finishResultSessionControl)
+        {
+            var finishResultSessionControlObj = finishResultSessionControl.GetChildren();
+            foreach (var child in finishResultSessionControlObj)
+            {
+                if (child.Name.ToString().Contains("PlayerPos"))
+                {
+                    standingNode.Add(child);                    
+                }                
+            }            
+        }
+        private void SetStandingsTable()
+        {
+            for(int i = 0; i < standingNode.Count; i++) 
+            {
+                var standing = standingNode[i].GetChildren();
+                foreach(var obj in standing)
+                {
+                    if (obj.Name.ToString().Contains("Pos"))
+                    {
+                        var posLabel = obj as Label;
+                        posLabel.Text = (i + 1).ToString();
+                    }
+                    if (obj.Name.ToString().Contains("CountryCode"))
+                    {
+                        var codeLabel = obj as Label;
+                        codeLabel.Text = CountrySingleton.countryObjDTO.countryList[i].Code;
+                    }
+                    if (obj.Name.ToString().Contains("CountryFlag"))
+                    {
+                        var flagLabel = obj as TextureRect;
+                        Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[i].Code + ".png");
+                        Texture2D texture2D = textureResource as Texture2D;
+                        flagLabel.Texture = texture2D;                        
+                    }
+                    if (obj.Name.ToString().Contains("Score"))
+                    {
+                        var scoreLabel = obj as Label;
+                        scoreLabel.Hide();//<-
+                    }
+                }
+            }
+            //CountrySingleton.countryObjDTO.countryList
+            //GD.Print(standingNode.Count);
         }
         public void SetControlBiathlon(Control controlBiathlon)
         {

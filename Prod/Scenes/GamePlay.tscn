@@ -27,7 +27,7 @@ default_font_size = 24
 default_font = ExtResource("10_kdmjr")
 default_font_size = 24
 
-[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "impulseSkiJumpNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "controlSkiJumpImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel", "controlSkiJump", "windDirectionSkiJump", "windDirectionArrowSkiJump", "controlSkiJumpImpulseHorizontal", "windDirectionArrowHorizontal", "controlSkiJumpImpulseVertical", "windDirectionArrowVertical", "controlSkiCrossCountry", "controlSkiCrossCountryTime", "controlSkiCrossCountrySpeed", "controlSkiCrossCountryEnergy", "controlSkiCrossCountryPosition", "crossCountryCountryPositionLabel", "crossCountryCountryCodeLabel", "crossCountryCountryFlagTextureRect")]
+[node name="Gameplay" type="Control" node_paths=PackedStringArray("pauseScreen", "backMenuButton", "returnMenuButton", "resetMenuButton", "timeLabel", "speedNinePatchRect", "impulseNinePatchRect", "impulseSkiJumpNinePatchRect", "readySetGoControl", "readySetGoLabel", "countryCodeLabel", "countryFlagTextureRect", "finishSessionScreen", "backMenuFinishButton", "returnFinishButton", "countryCodeLabelFinish", "countryFlagTextureRectFinish", "timeScoreBestLabelFinish", "timeScoreLastLabelFinish", "controlSkiSpeedSkatingBiathlon", "controlBiathlon", "shoots", "errorLabelScore", "windDirection", "windDirectionArrow", "controlSkiSpeedSkatingScreen", "controlBiathlonScreen", "controlLugeImpulse", "controlSkiJumpImpulse", "bestScoreLabel", "timeScoreLabel", "errorsScoreLabel", "lastScoreLabel", "controlSkiJump", "windDirectionSkiJump", "windDirectionArrowSkiJump", "controlSkiJumpImpulseHorizontal", "windDirectionArrowHorizontal", "controlSkiJumpImpulseVertical", "windDirectionArrowVertical", "controlSkiCrossCountry", "controlSkiCrossCountryTime", "controlSkiCrossCountrySpeed", "controlSkiCrossCountryEnergy", "controlSkiCrossCountryPosition", "crossCountryCountryPositionLabel", "crossCountryCountryCodeLabel", "crossCountryCountryFlagTextureRect", "finishResultSessionControl")]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 1.0
@@ -84,6 +84,7 @@ controlSkiCrossCountryPosition = NodePath("CanvasLayer/HUD/ControlSkiCrossCountr
 crossCountryCountryPositionLabel = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode3")]
 crossCountryCountryCodeLabel = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode3")]
 crossCountryCountryFlagTextureRect = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag3")]
+finishResultSessionControl = NodePath("CanvasLayer/FinishResultSessionControl")
 
 [node name="SceneSki" type="Control" parent="."]
 anchors_preset = 0
@@ -1742,5 +1743,1358 @@ grow_horizontal = 2
 theme = SubResource("Theme_l04wb")
 theme_override_font_sizes/font_size = 30
 text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinishResultSessionControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_canv2")
+expand_mode = 1
+
+[node name="PauseTitle" type="NinePatchRect" parent="CanvasLayer/FinishResultSessionControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 49.0
+offset_right = 262.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("11_12gco")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="PauseTitleLabel" type="Label" parent="CanvasLayer/FinishResultSessionControl/PauseTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rb25c")
+text = "Results"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackMenuButtonFinish" type="Button" parent="CanvasLayer/FinishResultSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -508.0
+offset_top = 598.0
+offset_right = 4.0
+offset_bottom = 654.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishResultSessionControl/BackMenuButtonFinish"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackTitleLabel" type="Label" parent="CanvasLayer/FinishResultSessionControl/BackMenuButtonFinish/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMainMenuButtonFinish" type="Button" parent="CanvasLayer/FinishResultSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 28.0
+offset_top = 598.0
+offset_right = 540.0
+offset_bottom = 654.0
+grow_horizontal = 2
+
+[node name="BackToMainMenuNinePatchRect" type="NinePatchRect" parent="CanvasLayer/FinishResultSessionControl/BackToMainMenuButtonFinish"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToMainMenuTitleLabel" type="Label" parent="CanvasLayer/FinishResultSessionControl/BackToMainMenuButtonFinish/BackToMainMenuNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Quit to main menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos00" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 160.0
+offset_right = -296.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos00"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos00"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos00"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos00"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos01" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 216.0
+offset_right = -296.0
+offset_bottom = 216.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos01"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos01"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos01"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos01"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos02" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 272.0
+offset_right = -296.0
+offset_bottom = 272.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos02"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos02"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos02"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos02"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos03" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 328.0
+offset_right = -296.0
+offset_bottom = 328.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos03"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos03"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos03"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos03"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos04" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 384.0
+offset_right = -296.0
+offset_bottom = 384.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos04"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos04"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos04"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos04"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos05" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 440.0
+offset_right = -296.0
+offset_bottom = 440.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos05"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos05"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos05"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos05"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos06" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 496.0
+offset_right = -296.0
+offset_bottom = 496.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos06"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos06"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos06"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos06"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos07" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -296.0
+offset_top = 552.0
+offset_right = -296.0
+offset_bottom = 552.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos07"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos07"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos07"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos07"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos08" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 160.0
+offset_right = 304.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos08"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos08"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos08"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos08"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos09" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 216.0
+offset_right = 304.0
+offset_bottom = 216.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos09"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos09"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos09"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos09"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos10" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 272.0
+offset_right = 304.0
+offset_bottom = 272.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos10"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos10"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos10"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos10"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos11" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 328.0
+offset_right = 304.0
+offset_bottom = 328.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos11"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos11"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos11"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos11"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos12" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 384.0
+offset_right = 304.0
+offset_bottom = 384.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos12"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos12"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos12"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos12"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos13" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 440.0
+offset_right = 304.0
+offset_bottom = 440.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos13"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos13"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos13"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos13"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos14" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 496.0
+offset_right = 304.0
+offset_bottom = 496.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos14"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos14"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos14"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos14"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPos15" type="Control" parent="CanvasLayer/FinishResultSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.0
+offset_top = 552.0
+offset_right = 304.0
+offset_bottom = 552.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/FinishResultSessionControl/PlayerPos15"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -181.5
+offset_top = -21.0
+offset_right = -88.5
+offset_bottom = 35.0
+grow_horizontal = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="Pos" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos15"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = -19.0
+offset_right = -199.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "16"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos15"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer/FinishResultSessionControl/PlayerPos15"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.5
+offset_top = -20.0
+offset_right = 272.5
+offset_bottom = 13.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "99:99.999"
 horizontal_alignment = 1
 vertical_alignment = 1
