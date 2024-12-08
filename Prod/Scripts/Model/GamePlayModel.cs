@@ -17,6 +17,8 @@ namespace WinterSports.Scripts.Model
         public double bestTimeScore = 0.0;
         public double currentTimeScore = 0.0;
         public double biathlonCurrentTimeScore = 0.0;
-        public int shootErrors = 0;        
+        public int shootErrors = 0;
+        public Button backMenuFinishButtonStandings = null;
+        public Button returnFinishButtonStandings = null;
     }
 }

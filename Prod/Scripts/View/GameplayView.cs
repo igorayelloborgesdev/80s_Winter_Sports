@@ -66,6 +66,8 @@ public partial class GameplayView : Control
     [Export] Label[] crossCountryCountryCodeLabel = null;
     [Export] TextureRect[] crossCountryCountryFlagTextureRect = null;
     [Export] Control finishResultSessionControl = null;
+    [Export] Button backMenuFinishButtonStandings = null;
+    [Export] Button returnFinishButtonStandings = null;
     #endregion
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
@@ -393,6 +395,8 @@ public partial class GameplayView : Control
         gamePlayController.GetSetResetMenu = resetMenuButton;
         gamePlayController.GetSetBackMenuFinishButton = backMenuFinishButton;
         gamePlayController.GetSetReturnFinishButton = returnFinishButton;
+        gamePlayController.GetSetBackMenuFinishButtonStandings = backMenuFinishButtonStandings;
+        gamePlayController.GetSetReturnFinishButtonStandings = returnFinishButtonStandings;        
     }
     private void SetMainGamePlayEvents()
     {
@@ -401,6 +405,8 @@ public partial class GameplayView : Control
         gamePlayController.GetSetResetMenu.Pressed += () => { ResetGameMenu(); };
         gamePlayController.GetSetBackMenuFinishButton.Pressed += () => { QuitToMainMenu(); };
         gamePlayController.GetSetReturnFinishButton.Pressed += () => { ReturnMenuFromFinishScreen(); };
+        gamePlayController.GetSetBackMenuFinishButtonStandings.Pressed += () => { QuitToMainMenu(); };
+        gamePlayController.GetSetReturnFinishButtonStandings.Pressed += () => { ResetGameMenu(); };
     }
     private void InstantiateLevel()
     {        
@@ -500,7 +506,16 @@ public partial class GameplayView : Control
         if (prefabName == "Skijumping")
             gamePlayController.ResetSkiJump();
         if (prefabName == "skiTrack")
-            gamePlayController.Reset();
+        {
+            if (11 == levelId)
+            {                
+                gamePlayController.ResetCrossCountry();
+            }
+            else
+            {
+                gamePlayController.Reset();
+            }            
+        }        
         if (prefabName == "SpeedSkating")
         {            
             gamePlayController.Reset();

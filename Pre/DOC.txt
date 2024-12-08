@@ -47,9 +47,7 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Cross Country
-..Final//<-
-..Reinício
-..Reset
+..Reinício//<-
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 

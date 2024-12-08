@@ -40,5 +40,6 @@ namespace WinterSports.Scripts.Interfaces
         void SetCharacterIdCountry(int characterIdCountry);
         int GetLinePosition();
         bool GetIsAI();
+        void OnlyPause();
     }
 }

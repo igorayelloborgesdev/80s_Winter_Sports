@@ -90,7 +90,7 @@ namespace WinterSports.Scripts.Controller
         #endregion
         #region Methods
         public void Init(string prefabName)
-        {
+        {            
             if (prefabName == "skiTrack")
                 InitSki();
             if (prefabName == "SpeedSkating")
@@ -108,7 +108,7 @@ namespace WinterSports.Scripts.Controller
             {
                 if (levelId == 11)
                 {
-                    UpdateSkiCrossCountry(delta);//<-
+                    UpdateSkiCrossCountry(delta);
                 }
                 else
                 {
@@ -184,6 +184,10 @@ namespace WinterSports.Scripts.Controller
         private void UpdateSkiCrossCountry(double delta)
         {            
             timerGamePlayController.TimerRunning(delta);
+            if (this.character.statesSki == Character.StatesSki.Ready)
+            {
+                ShowHideStandingsTable(false);
+            }
             if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
             {
                 this.character.statesSki = Character.StatesSki.Set;
@@ -212,61 +216,39 @@ namespace WinterSports.Scripts.Controller
                 crossCountryDTOList.Clear();
                 CrossCountryStatic.isPause = false;
             }
-            else if (this.character.statesSki == Character.StatesSki.Running && timerGamePlayController.GetTimer() < 5.0f)
+            else if (this.character.statesSki == Character.StatesSki.Running)
             {
                 foreach (var charObj in characterCrossCountryList)
                 {
                     charObj.SetScore();
                     if (!charObj.GetIsRunFinished)
                     {
-                        charObj.GetSetScore = timerController.GetTimer();                        
+                        charObj.GetSetScore = timerController.GetTimer();
                     }
                     else
                     {
                         if (GameModeSingleton.country == charObj.GetSetCharacterIdCountry)
                         {
-                            timerGamePlayController.StartTimer();                            
+                            timerGamePlayController.StartTimer();
+                            this.character.statesSki = Character.StatesSki.Finish;                            
                         }
                     }
                 }
             }
-            else if (this.character.statesSki == Character.StatesSki.Running && timerGamePlayController.GetTimer() > 2.0f)
+            else if (this.character.statesSki == Character.StatesSki.Finish && timerGamePlayController.GetTimer() > 1.0f)
             {
-                this.character.statesSki = Character.StatesSki.Finish;
-                this.character.Pause();
+                this.character.statesSki = Character.StatesSki.End;                
+                characterCrossCountryList = characterCrossCountryList.OrderBy(x => x.GetIsRunFinished)
+                    .OrderBy(x => x.GetSetScore).OrderByDescending(x => x.GetSetCurrentPoint).ToList();
 
-                characterCrossCountryList = characterCrossCountryList.OrderBy(x => x.GetIsRunFinished).OrderBy(x => x.GetSetScore).OrderByDescending(x => x.GetSetCurrentPoint).ToList();
-
-                GD.Print("-------------------------------");
-                int count = 1;
-                foreach (var charObj in characterCrossCountryList)
+                foreach (var charObj in characterCrossCountryList) 
                 {
-                    GD.Print(count.ToString() + " - " + CountrySingleton.countryObjDTO.countryList[charObj.GetSetCharacterIdCountry - 1].Name + " : "
-                        + charObj.GetIsRunFinished.ToString() + " : "
-                        + charObj.GetSetScore.ToString() + " : "
-                        + charObj.GetSetCurrentPoint.ToString());//<-
-                    count++;
-                }                    
+                    charObj.statesSki = Character.StatesSki.End;
+                }
+                this.character.OnlyPause();
+                ShowHideStandingsTable(true);
+                SetStandingsTable();
             }
-
-                //if (this.character.statesSki == Character.StatesSki.Running)
-                //{
-
-                //}
-                //if (this.character.statesSki == Character.StatesSki.Finish && !SkiStatic.isCollided)
-                //{
-                //    SetTimeScore();
-                //    timerController.StopTimer();
-                //    TimeToReset(delta);
-                //    ShowControlSkiSpeedSkatingScreen();
-                //}
-                //if (SkiStatic.isCollided)
-                //{
-                //    this.character.statesSki = Character.StatesSki.Disqualified;
-                //    SetTimeScore();
-                //    TimeToReset(delta);
-                //    ShowControlSkiSpeedSkatingScreen();
-                //}
             timerController.TimerRunning(delta);
             updateTimerCrossCountry();
             UpdateSpeedEnergyLabel();
@@ -527,6 +509,8 @@ namespace WinterSports.Scripts.Controller
             this.character = character;
             this.character.Position = initPosition;
             this.character.Rotation = initRotation;
+            this.character.GetSetInitPosition = initPosition;
+            this.character.GetSetInitRotation = initRotation;
             this.character.GetSetCharacterIdCountry = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Id;
             this.character.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1BodyColor);            
             this.character.GenerateArmsColor(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit1ArmsColor);
@@ -542,6 +526,8 @@ namespace WinterSports.Scripts.Controller
             Character characterObj = characterAI;
             characterObj.Position = initPositionAI;
             characterObj.Rotation = initRotationAI;
+            characterObj.GetSetInitPosition = initPositionAI;
+            characterObj.GetSetInitRotation = initRotationAI;
             characterObj.GetSetCharacterIdCountry = CountrySingleton.countryObjDTO.countryList[id].Id;
             characterObj.GenerateBodyColor(CountrySingleton.countryObjDTO.countryList[id].kit1BodyColor);
             characterObj.GenerateArmsColor(CountrySingleton.countryObjDTO.countryList[id].kit1ArmsColor);
@@ -593,6 +579,21 @@ namespace WinterSports.Scripts.Controller
             this.character.Rotation = initRotation;
             character.Reset();
             SkiStatic.Reset();
+        }
+        public void ResetCrossCountry()
+        {
+            timerController.ResetTimer();
+            timerGamePlayController.StopTimer();
+            timerGamePlayController.ResetTimer();
+            timerGamePlayController.StartTimer();
+            this.character.statesSki = Character.StatesSki.Ready;
+            foreach (var obj in characterCrossCountryList)
+            {
+                obj.statesSki = StatesSki.Ready;
+                obj.Position = obj.GetSetInitPosition;
+                obj.Rotation = obj.GetSetInitRotation;
+                obj.ResetCrossCountry();
+            }            
         }
         public void ResetSpeedSkating() 
         {
@@ -678,9 +679,7 @@ namespace WinterSports.Scripts.Controller
             this.crossCountryCountryCodeLabel = crossCountryCountryCodeLabel;            
             this.crossCountryCountryFlagTextureRect = crossCountryCountryFlagTextureRect;
             this.finishResultSessionControl = finishResultSessionControl;
-            CreateStandingsTable(this.finishResultSessionControl);
-
-            SetStandingsTable();
+            CreateStandingsTable(this.finishResultSessionControl);                        
         }
         private void CreateStandingsTable(Control finishResultSessionControl)
         {
@@ -707,25 +706,31 @@ namespace WinterSports.Scripts.Controller
                     }
                     if (obj.Name.ToString().Contains("CountryCode"))
                     {
-                        var codeLabel = obj as Label;
-                        codeLabel.Text = CountrySingleton.countryObjDTO.countryList[i].Code;
+                        var codeLabel = obj as Label;                        
+                        codeLabel.Text = CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[i].GetSetCharacterIdCountry - 1].Code;
                     }
                     if (obj.Name.ToString().Contains("CountryFlag"))
                     {
                         var flagLabel = obj as TextureRect;
-                        Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[i].Code + ".png");
+                        Texture textureResource = GD.Load<Texture>(flagResource + 
+                            CountrySingleton.countryObjDTO.countryList[characterCrossCountryList[i].GetSetCharacterIdCountry - 1].Code + ".png");
                         Texture2D texture2D = textureResource as Texture2D;
                         flagLabel.Texture = texture2D;                        
                     }
                     if (obj.Name.ToString().Contains("Score"))
                     {
                         var scoreLabel = obj as Label;
-                        scoreLabel.Hide();//<-
+                        scoreLabel.Hide();
                     }
                 }
-            }
-            //CountrySingleton.countryObjDTO.countryList
-            //GD.Print(standingNode.Count);
+            }            
+        }
+        private void ShowHideStandingsTable(bool isShow)
+        { 
+            if(isShow)
+                finishResultSessionControl.Show();
+            else
+                finishResultSessionControl.Hide();
         }
         public void SetControlBiathlon(Control controlBiathlon)
         {
@@ -1187,7 +1192,7 @@ namespace WinterSports.Scripts.Controller
         {            
             InitTimer();
             SkiStatic.Reset();
-            setScore = true;
+            setScore = true;            
         }
         #endregion
         #region Speed Skating
@@ -1528,7 +1533,29 @@ namespace WinterSports.Scripts.Controller
             {
                 gamePlayModel.returnFinishButton = value;
             }
-        }                
+        }
+        public Button GetSetBackMenuFinishButtonStandings
+        {
+            get
+            {
+                return gamePlayModel.backMenuFinishButtonStandings;
+            }
+            set
+            {
+                gamePlayModel.backMenuFinishButtonStandings = value;
+            }
+        }
+        public Button GetSetReturnFinishButtonStandings
+        {
+            get
+            {
+                return gamePlayModel.returnFinishButtonStandings;
+            }
+            set
+            {
+                gamePlayModel.returnFinishButtonStandings = value;
+            }
+        }
         #endregion
     }
 }

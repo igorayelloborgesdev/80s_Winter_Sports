@@ -214,6 +214,11 @@ namespace WinterSports.Scripts.Events
         {
             return false;
         }
+        public void OnlyPause()
+        {
+            isPause = !isPause;
+            Engine.TimeScale = isPause ? 0.0f : 1.0f;
+        }
         #endregion
         #region Methods  
         private void ShowHideFinishSessionScreenMenu(bool isPause)

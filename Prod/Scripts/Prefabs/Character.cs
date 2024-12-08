@@ -57,6 +57,8 @@ public partial class Character : CharacterBody3D
     private int characterId = 0;
     private int characterIdCountry = 0;
     private bool isAI = false;
+    private Vector3 initPosition = Vector3.Zero;
+    private Vector3 initRotation = Vector3.Zero;
     #endregion
     #region Variables Speed Skating
     private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();
@@ -104,7 +106,8 @@ public partial class Character : CharacterBody3D
         SkiJumpingDown,
         SkiJumpingFly,
         SkiJumpingLand,
-        SkiJumpingFinish
+        SkiJumpingFinish,
+        End
     };
     public StatesSki statesSki = StatesSki.Ready;
     #endregion
@@ -341,6 +344,10 @@ public partial class Character : CharacterBody3D
         }
         return 0.0f;
     }
+    public void OnlyPause()
+    {
+        playerInput.OnlyPause();
+    }
     #endregion
     #region Get Set
     public Control SetPauseScreen
@@ -458,6 +465,28 @@ public partial class Character : CharacterBody3D
         set
         {
             characterIdCountry = value;
+        }
+    }
+    public Vector3 GetSetInitPosition
+    {
+        get
+        {
+            return initPosition;
+        }
+        set
+        {
+            initPosition = value;
+        }
+    }
+    public Vector3 GetSetInitRotation
+    {
+        get
+        {
+            return initRotation;
+        }
+        set
+        {
+            initRotation = value;
         }
     }
     #endregion
@@ -940,6 +969,17 @@ public partial class Character : CharacterBody3D
         {
             currentPoint = GetSkiCrossCountryCurrentId();
         }
+    }
+    public void ResetCrossCountry()
+    {
+        currentAILine = 0;
+        score = 0.0f;
+        isRunFinished = false;
+        currentPoint = 0;
+        isScoreSet = false;
+        playerInput.Init(crossCountryModelAIList, currentAILine);
+        playerInput.Reset();
+        crossCountryOvertakeFM.GetSetIsFinished = false;
     }
     #endregion
 }

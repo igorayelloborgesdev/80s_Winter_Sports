@@ -47,6 +47,7 @@ namespace WinterSports.Scripts.Events
         private const float angleMinOvertakeFence = 1.5f;
         private const float angleMaxOvertakeFence = 2.0f;
         private const int overtakeWaitMax = 50;
+        private const float energyDecrease = 1500.0f;
         #endregion
         #region Variables
         private string currentAnimation = "";        
@@ -61,8 +62,7 @@ namespace WinterSports.Scripts.Events
         private float energyInc = 0.0f;        
         private SkiCollision skiCollision = null;
         private float speedEnergy = 0.0f;
-        private bool isEnergySlow = false;
-        private float energyDecrease = 1500.0f;
+        private bool isEnergySlow = false;        
         private bool isAccel = false;
         private bool isBreak = false;
         private int characterIdCountry = 0;
@@ -253,6 +253,12 @@ namespace WinterSports.Scripts.Events
             speed = 0.0f;
             speedEnergy = 0.0f;
             this.characterBody3D.Rotation = new Vector3(characterBody3D.Rotation.X, Mathf.DegToRad(angle), characterBody3D.Rotation.Z);            
+            energyInc = 0.0f;
+            isEnergySlow = false;
+            isAccel = false;
+            isBreak = false;
+            overtakeWait = 0;
+            isOvertakeGlockRunning = false;            
         }
         public float GetSpeed()
         {
@@ -296,18 +302,25 @@ namespace WinterSports.Scripts.Events
         {
             return isAI;
         }
+
+        public void OnlyPause()
+        {
+            isPause = !isPause;
+            Engine.TimeScale = isPause ? 0.0f : 1.0f;
+            SetStaticPause();
+        }
         #endregion
         #region Methods
         private float CalculateDiffcult()
         {            
-            return (maxSpeed - (0.25f * (2 - GameModeSingleton.difficult)));//<-
+            return (maxSpeed - (0.25f * (2 - GameModeSingleton.difficult)));
         }
         private void DefineAIDiv(int positionID)
         {
             if (positionID % 10 == 0)
             {
                 Random rnd = new Random();
-                double range = (double)5.7 - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1];
+                double range = (double)5.6 - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1];
                 double sample = rnd.NextDouble();
                 double diceAI = (((sample * range) + (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1])
                     - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1]) * 0.5;
@@ -614,7 +627,7 @@ namespace WinterSports.Scripts.Events
             if (crossCountryOvertakeM.GetSetIsOvertake
                 && (crossCountryOvertakeMR.GetisRightFree || crossCountryOvertakeML.GetisLeftFree)
                 && !isOvertakeGlockRunning
-                )//<-
+                )
             {                
                 if (currentAILine == 0 && crossCountryOvertakeML.GetisLeftFree)
                 {
