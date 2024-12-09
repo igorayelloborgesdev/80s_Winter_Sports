@@ -323,7 +323,7 @@ namespace WinterSports.Scripts.Events
                 double range = (double)5.6 - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1];
                 double sample = rnd.NextDouble();
                 double diceAI = (((sample * range) + (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1])
-                    - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1]) * 0.5;
+                                                   - (double)CountrySingleton.countryObjDTO.countryList[characterIdCountry - 1].sportSkill[GameModeSingleton.sport - 1]) * 0.5;
                 AIDiv = (float)diceAI;                
             }            
         }

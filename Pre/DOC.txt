@@ -46,18 +46,73 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Cross Country
-..Reinício//<-
+.Ice Hockey 
+..Modelagem<-
+..Equipamentos
+..Anim
+...GK - Defesa L U
+...GK - Defesa L M
+...GK - Defesa L D
+...GK - Defesa R U
+...GK - Defesa R M
+...GK - Defesa R D
+...Player - Run
+...Player - Pass
+...Player - Defend
+...Player - Attack
+...Referee - walk
+...Referee - drop puck
+..Import
+
+..Posição de jogadores - GK,DF,MF,FW - L,M,R
+..Escolher adversário
+..Escolher uniformes
+..Instantiate
+..Tempo
+..AI
+...Start
+...GK
+....Defend
+....Pass
+...DF
+....Defend
+....Pass
+...MF
+....Defend
+....Pass
+....Attack
+...FW
+....Defend
+....Pass
+....Attack
+..Player
+...Start
+...GK
+....Defend
+....Pass
+...DF
+....Defend
+....Change Player
+....Pass
+...MF
+....Defend
+....Change Player
+....Pass
+....Attack
+...FW
+....Defend
+....Change Player
+....Pass
+....Attack
+..Shootout
+...Player
+...AI
+..Score
+..Finish
+..Restart
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
-.Ice Hockey 
-
-.Main Menu
-..Winter Sports Games
-...Country
-...Difficult
 ....Games
 .Downhill 
 .Slalom
