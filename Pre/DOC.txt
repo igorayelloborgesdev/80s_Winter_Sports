@@ -47,9 +47,10 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Ice Hockey 
-..Modelagem<-
-..Equipamentos
+..Equipamentos<-
 ..Anim
+...Referee - walk
+...Referee - drop puck
 ...GK - Defesa L U
 ...GK - Defesa L M
 ...GK - Defesa L D
@@ -60,8 +61,6 @@ Esportes
 ...Player - Pass
 ...Player - Defend
 ...Player - Attack
-...Referee - walk
-...Referee - drop puck
 ..Import
 
 ..Posição de jogadores - GK,DF,MF,FW - L,M,R
