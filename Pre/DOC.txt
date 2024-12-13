@@ -47,20 +47,16 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Ice Hockey 
-..Equipamentos<-
 ..Anim
-...Referee - walk
-...Referee - drop puck
+...Player - Defend<-
+...Player - Attack
 ...GK - Defesa L U
 ...GK - Defesa L M
 ...GK - Defesa L D
 ...GK - Defesa R U
 ...GK - Defesa R M
 ...GK - Defesa R D
-...Player - Run
-...Player - Pass
-...Player - Defend
-...Player - Attack
+...GK - Passar
 ..Import
 
 ..Posição de jogadores - GK,DF,MF,FW - L,M,R
