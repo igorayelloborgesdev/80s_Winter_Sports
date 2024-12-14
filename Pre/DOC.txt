@@ -48,20 +48,11 @@ Esportes
 
 .Ice Hockey 
 ..Anim
-...Player - Defend<-
-...Player - Attack
-...GK - Defesa L U
-...GK - Defesa L M
-...GK - Defesa L D
-...GK - Defesa R U
-...GK - Defesa R M
-...GK - Defesa R D
-...GK - Passar
-..Import
+..Import<-
 
-..Posição de jogadores - GK,DF,MF,FW - L,M,R
 ..Escolher adversário
 ..Escolher uniformes
+..Posição de jogadores - GK,DF,MF,FW - L,M,R
 ..Instantiate
 ..Tempo
 ..AI
