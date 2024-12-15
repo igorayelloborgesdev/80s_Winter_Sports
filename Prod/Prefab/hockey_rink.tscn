@@ -6,17 +6,17 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xixk0"]
 shading_mode = 0
-albedo_color = Color(0.74902, 0.74902, 0.74902, 1)
+albedo_color = Color(0.862745, 0.862745, 0.862745, 1)
 albedo_texture = ExtResource("2_0dj42")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2waxc"]
-cull_mode = 1
+cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.603922, 0.603922, 0.603922, 1)
+albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7thc3"]
 transparency = 1
-cull_mode = 1
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
 albedo_texture = ExtResource("3_81nb2")

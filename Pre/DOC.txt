@@ -48,8 +48,7 @@ Esportes
 
 .Ice Hockey 
 
-..Instantiate Rink<-
-..Escolher adversário
+..Escolher adversário<-
 ..Escolher uniformes
 ..Instantiate
 ..Instantiate equipamentos
