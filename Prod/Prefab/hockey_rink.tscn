@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2nkp02hqv55g"]
+
+[ext_resource type="PackedScene" uid="uid://btr5gen84khyr" path="res://Art/3d/HockeyRink.glb" id="1_fjb5s"]
+[ext_resource type="Texture2D" uid="uid://detgm8kxwirqa" path="res://Art/3d/HockeyRink_Hockey_Rink.png" id="2_0dj42"]
+[ext_resource type="Texture2D" uid="uid://c86py7utyx4ud" path="res://Art/3d/HockeyRink_HockeyGlass.png" id="3_81nb2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xixk0"]
+shading_mode = 0
+albedo_color = Color(0.74902, 0.74902, 0.74902, 1)
+albedo_texture = ExtResource("2_0dj42")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2waxc"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.603922, 0.603922, 0.603922, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7thc3"]
+transparency = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
+albedo_texture = ExtResource("3_81nb2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqire"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.0431373, 0.141176, 0.286275, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ft67q"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.698039, 0.0705882, 0.105882, 1)
+
+[node name="HockeyRink" instance=ExtResource("1_fjb5s")]
+
+[node name="Field_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xixk0")
+
+[node name="HockeyFloor" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2waxc")
+
+[node name="HockeyGlass" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7thc3")
+
+[node name="HockeyFloorOutside" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xqire")
+
+[node name="HockeyFloorInside" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ft67q")
+
+[node name="HockeyGlassCollider" parent="." index="5"]
+visible = false
+
+[node name="FieldCollider" parent="." index="6"]
+visible = false

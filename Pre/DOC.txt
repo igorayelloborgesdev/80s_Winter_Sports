@@ -47,13 +47,13 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 .Ice Hockey 
-..Anim
-..Import<-
 
+..Instantiate Rink<-
 ..Escolher adversário
 ..Escolher uniformes
-..Posição de jogadores - GK,DF,MF,FW - L,M,R
 ..Instantiate
+..Instantiate equipamentos
+..Posição de jogadores - GK,DF,MF,FW - L,M,R
 ..Tempo
 ..AI
 ...Start

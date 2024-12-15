@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://c64vk2op5xnh"]
+
+[ext_resource type="PackedScene" uid="uid://dtgmax66mbcc0" path="res://Art/3d/HockeyGoal.glb" id="1_xftwb"]
+[ext_resource type="Texture2D" uid="uid://dwtcq3pacuyxm" path="res://Art/3d/HockeyGoal_HockeyGoalNet.png" id="2_rccnb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6m2g"]
+shading_mode = 0
+albedo_color = Color(0.741176, 0.121569, 0.0901961, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ruim8"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2_rccnb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4q6kg"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2_rccnb")
+
+[node name="HockeyGoal" instance=ExtResource("1_xftwb")]
+
+[node name="Goal" parent="." index="0"]
+transform = Transform3D(0.0025, 0, 0, 0, 0.0025, 0, 0, 0, 0.0025, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_o6m2g")
+
+[node name="GoalCollider" parent="Goal" index="0"]
+visible = false
+
+[node name="GoalNet" parent="Goal" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ruim8")
+
+[node name="GoalNetCollider" parent="Goal" index="2"]
+visible = false
+
+[node name="GoalNetColliderArea" parent="Goal" index="3"]
+visible = false
+
+[node name="GoalNetSuperior" parent="Goal" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4q6kg")
+
+[node name="GoalNetSuperiorCollider" parent="Goal" index="5"]
+visible = false
