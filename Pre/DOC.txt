@@ -48,28 +48,8 @@ Esportes
 
 .Ice Hockey 
 
-..Escolher adversário<-
-..Escolher uniformes
-..Instantiate
-..Instantiate equipamentos
+..Instantiate equipamentos<-
 ..Posição de jogadores - GK,DF,MF,FW - L,M,R
-..Tempo
-..AI
-...Start
-...GK
-....Defend
-....Pass
-...DF
-....Defend
-....Pass
-...MF
-....Defend
-....Pass
-....Attack
-...FW
-....Defend
-....Pass
-....Attack
 ..Player
 ...Start
 ...GK
@@ -89,9 +69,27 @@ Esportes
 ....Change Player
 ....Pass
 ....Attack
+..AI
+...Start
+...GK
+....Defend
+....Pass
+...DF
+....Defend
+....Pass
+...MF
+....Defend
+....Pass
+....Attack
+...FW
+....Defend
+....Pass
+....Attack
 ..Shootout
 ...Player
 ...AI
+..Tempo
+..Pause
 ..Score
 ..Finish
 ..Restart

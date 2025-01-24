@@ -10,6 +10,7 @@ public static class GameModeSingleton
     //0 - Trainning
     //1 - Games
     public static int country = 0;
+    public static int countryOppositeHockeyTeam = 0;
     public static int sport = 0;
     public static int difficult = 0;
     //0 - Easy

@@ -20,5 +20,6 @@ namespace WinterSports.Scripts.Model
         public int shootErrors = 0;
         public Button backMenuFinishButtonStandings = null;
         public Button returnFinishButtonStandings = null;
+        public List<Button> iceHockeyFlagSelectButton = new List<Button>();
     }
 }

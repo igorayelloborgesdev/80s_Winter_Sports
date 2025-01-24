@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b25qr0ntq7ns2"]
+[gd_scene load_steps=38 format=3 uid="uid://b25qr0ntq7ns2"]
 
 [ext_resource type="PackedScene" uid="uid://dyc2ihlu1s18b" path="res://Prefab/sky.tscn" id="1_356u1"]
 [ext_resource type="Script" path="res://Scripts/View/GameplayView.cs" id="1_p3jv1"]
@@ -13,7 +13,27 @@
 [ext_resource type="Texture2D" uid="uid://d0o6d60h1hihb" path="res://Art/UI/ArrowIco.png" id="11_scrw1"]
 [ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="13_18oum"]
 [ext_resource type="Texture2D" uid="uid://b2t8m1llbty4e" path="res://Art/UI/RectNeutral.png" id="14_8vguo"]
+[ext_resource type="Texture2D" uid="uid://un4pbc7jsdjn" path="res://Art/2d/flags/CAN.png" id="15_7mjoq"]
+[ext_resource type="Texture2D" uid="uid://si48wfi2l1ng" path="res://Art/UI/Jersey_Outline.png" id="15_auequ"]
+[ext_resource type="Texture2D" uid="uid://bc1csi3q4iuhw" path="res://Art/UI/Jersey_Body.png" id="15_goufj"]
 [ext_resource type="Texture2D" uid="uid://bk2csh7gf8tsr" path="res://Art/2d/flags/AUT.png" id="15_sg524"]
+[ext_resource type="Texture2D" uid="uid://4u4lh1p5r6bg" path="res://Art/UI/Jersey_Arms.png" id="16_3p3wv"]
+[ext_resource type="Texture2D" uid="uid://ce1u37jq4nqjm" path="res://Art/2d/flags/FIN.png" id="16_wy3t6"]
+[ext_resource type="Texture2D" uid="uid://c7oqe2cd7ew7l" path="res://Art/2d/flags/FRA.png" id="17_8qreu"]
+[ext_resource type="Texture2D" uid="uid://b66arfgqdmg2i" path="res://Art/UI/Short_Outline.png" id="17_isx3d"]
+[ext_resource type="Texture2D" uid="uid://bwso0eplwk5e8" path="res://Art/UI/Short_Color.png" id="18_ajmgv"]
+[ext_resource type="Texture2D" uid="uid://d3jjh8ob1h24g" path="res://Art/2d/flags/FRG.png" id="18_id5mx"]
+[ext_resource type="Texture2D" uid="uid://cqyxbjnba7d0a" path="res://Art/2d/flags/GBR.png" id="19_q4y6h"]
+[ext_resource type="Texture2D" uid="uid://b1p0nwp67ow1w" path="res://Art/2d/flags/GDR.png" id="20_ogrq4"]
+[ext_resource type="Texture2D" uid="uid://b2xmo4s62qm5h" path="res://Art/2d/flags/ITA.png" id="21_hiijd"]
+[ext_resource type="Texture2D" uid="uid://cypcx5p4sj3jr" path="res://Art/2d/flags/JPN.png" id="22_i2nfa"]
+[ext_resource type="Texture2D" uid="uid://bilbgx6kn2nj5" path="res://Art/2d/flags/NED.png" id="23_xyrlb"]
+[ext_resource type="Texture2D" uid="uid://n4j4ep3uscjs" path="res://Art/2d/flags/NOR.png" id="24_nshwk"]
+[ext_resource type="Texture2D" uid="uid://c0prxmoh1e2fp" path="res://Art/2d/flags/SUI.png" id="25_qloqg"]
+[ext_resource type="Texture2D" uid="uid://e5d78os1kuh3" path="res://Art/2d/flags/SWE.png" id="26_offa7"]
+[ext_resource type="Texture2D" uid="uid://g8k4gaqgdqas" path="res://Art/2d/flags/TCH.png" id="27_ovapt"]
+[ext_resource type="Texture2D" uid="uid://cpd6wc4xwp001" path="res://Art/2d/flags/URS.png" id="28_fluo7"]
+[ext_resource type="Texture2D" uid="uid://cmgm45fj7wu1w" path="res://Art/2d/flags/USA.png" id="29_yplj1"]
 
 [sub_resource type="Theme" id="Theme_l04wb"]
 default_font = ExtResource("10_kdmjr")
@@ -158,6 +178,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ControlSkiCrossCountry" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -332,6 +353,7 @@ offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
 
 [node name="ControlSkiCrossCountryPosition" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -522,6 +544,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ControlSkiSpeedSkatingBiathlon" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -632,6 +655,7 @@ offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
 
 [node name="ControlBiathlon" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -771,6 +795,7 @@ texture = ExtResource("8_2trn4")
 expand_mode = 1
 
 [node name="ControlLugeImpulse" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -824,6 +849,7 @@ offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
 
 [node name="ControlSkiJumpImpulse" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -877,6 +903,7 @@ offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
 
 [node name="ControlSkiJump" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -940,6 +967,7 @@ texture = ExtResource("8_2trn4")
 expand_mode = 1
 
 [node name="ControlSkiJumpImpulseHorizontal" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1038,6 +1066,7 @@ patch_margin_right = 9
 patch_margin_bottom = 9
 
 [node name="ControlSkiJumpImpulseVertical" type="Control" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3101,3 +3130,853 @@ theme_override_font_sizes/font_size = 30
 text = "99:99.999"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SelectTeamSessionControl" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_canv2")
+expand_mode = 1
+
+[node name="PauseTitle" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 49.0
+offset_right = 262.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("11_12gco")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="InitTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/PauseTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rb25c")
+text = "Pre game"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayMenuButtonFinish" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 502.0
+offset_right = 260.0
+offset_bottom = 558.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl/PlayMenuButtonFinish"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="PlayTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/PlayMenuButtonFinish/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMainMenuButtonFinish" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 574.0
+offset_right = 260.0
+offset_bottom = 630.0
+grow_horizontal = 2
+
+[node name="BackToMainMenuNinePatchRect" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl/BackToMainMenuButtonFinish"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToMainMenuTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/BackToMainMenuButtonFinish/BackToMainMenuNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Quit to main menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Contry1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 248.0
+offset_right = -404.0
+offset_bottom = 309.0
+grow_horizontal = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CountryCode1" type="Label" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 315.0
+offset_right = -404.0
+offset_bottom = 357.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Contry2" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -186.0
+offset_top = 248.0
+offset_right = -84.0
+offset_bottom = 309.0
+grow_horizontal = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CountryCode2" type="Label" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0, 0.498039, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -186.0
+offset_top = 315.0
+offset_right = -84.0
+offset_bottom = 357.0
+grow_horizontal = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 30
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jersey2_1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.0
+offset_top = 198.0
+offset_right = 35.0
+offset_bottom = 291.0
+grow_horizontal = 2
+texture = ExtResource("15_goufj")
+expand_mode = 1
+
+[node name="Jersey2_2" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 198.0
+offset_right = 77.0
+offset_bottom = 260.0
+grow_horizontal = 2
+texture = ExtResource("16_3p3wv")
+expand_mode = 1
+
+[node name="Jersey2" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.0
+offset_top = 198.0
+offset_right = 84.0
+offset_bottom = 297.0
+grow_horizontal = 2
+texture = ExtResource("15_auequ")
+expand_mode = 1
+
+[node name="Short2_1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.0
+offset_top = 310.0
+offset_right = 47.0
+offset_bottom = 358.0
+grow_horizontal = 2
+texture = ExtResource("18_ajmgv")
+expand_mode = 1
+
+[node name="Short2" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.0
+offset_top = 302.0
+offset_right = 55.0
+offset_bottom = 366.0
+grow_horizontal = 2
+texture = ExtResource("17_isx3d")
+expand_mode = 1
+
+[node name="Kit2_2" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_top = 390.0
+offset_right = 76.0
+offset_bottom = 446.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl/Kit2_2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="PlayTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/Kit2_2/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Kit 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Kit2_1" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 390.0
+offset_right = -68.0
+offset_bottom = 446.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl/Kit2_1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="PlayTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/Kit2_1/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Kit 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jersey1_1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -326.0
+offset_top = 198.0
+offset_right = -269.0
+offset_bottom = 291.0
+grow_horizontal = 2
+texture = ExtResource("15_goufj")
+expand_mode = 1
+
+[node name="Jersey1_2" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -368.0
+offset_top = 198.0
+offset_right = -227.0
+offset_bottom = 260.0
+grow_horizontal = 2
+texture = ExtResource("16_3p3wv")
+expand_mode = 1
+
+[node name="Jersey1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -375.0
+offset_top = 198.0
+offset_right = -220.0
+offset_bottom = 297.0
+grow_horizontal = 2
+texture = ExtResource("15_auequ")
+expand_mode = 1
+
+[node name="Short1_1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -337.0
+offset_top = 310.0
+offset_right = -257.0
+offset_bottom = 358.0
+grow_horizontal = 2
+texture = ExtResource("18_ajmgv")
+expand_mode = 1
+
+[node name="Short1" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -345.0
+offset_top = 302.0
+offset_right = -249.0
+offset_bottom = 366.0
+grow_horizontal = 2
+texture = ExtResource("17_isx3d")
+expand_mode = 1
+
+[node name="Kit1_2" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -362.0
+offset_top = 390.0
+offset_right = -228.0
+offset_bottom = 446.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl/Kit1_2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="PlayTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/Kit1_2/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Kit 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Kit1_1" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 390.0
+offset_right = -372.0
+offset_bottom = 446.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/SelectTeamSessionControl/Kit1_1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="PlayTitleLabel" type="Label" parent="CanvasLayer/SelectTeamSessionControl/Kit1_1/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Kit 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryButton0" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 181.0
+offset_top = 214.0
+offset_right = 251.0
+offset_bottom = 256.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryButton1" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 261.0
+offset_top = 214.0
+offset_right = 331.0
+offset_bottom = 256.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_7mjoq")
+expand_mode = 1
+
+[node name="CountryButton2" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 341.0
+offset_top = 214.0
+offset_right = 411.0
+offset_bottom = 256.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_wy3t6")
+expand_mode = 1
+
+[node name="CountryButton3" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 421.0
+offset_top = 214.0
+offset_right = 491.0
+offset_bottom = 256.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_8qreu")
+expand_mode = 1
+
+[node name="CountryButton4" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 181.0
+offset_top = 268.0
+offset_right = 251.0
+offset_bottom = 310.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_id5mx")
+expand_mode = 1
+
+[node name="CountryButton5" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 261.0
+offset_top = 268.0
+offset_right = 331.0
+offset_bottom = 310.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_q4y6h")
+expand_mode = 1
+
+[node name="CountryButton6" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 341.0
+offset_top = 268.0
+offset_right = 411.0
+offset_bottom = 310.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_ogrq4")
+expand_mode = 1
+
+[node name="CountryButton7" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 421.0
+offset_top = 268.0
+offset_right = 491.0
+offset_bottom = 310.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_hiijd")
+expand_mode = 1
+
+[node name="CountryButton8" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 181.0
+offset_top = 321.0
+offset_right = 251.0
+offset_bottom = 363.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_i2nfa")
+expand_mode = 1
+
+[node name="CountryButton9" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 261.0
+offset_top = 321.0
+offset_right = 331.0
+offset_bottom = 363.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_xyrlb")
+expand_mode = 1
+
+[node name="CountryButton10" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 341.0
+offset_top = 321.0
+offset_right = 411.0
+offset_bottom = 363.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_nshwk")
+expand_mode = 1
+
+[node name="CountryButton11" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 421.0
+offset_top = 321.0
+offset_right = 491.0
+offset_bottom = 363.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_qloqg")
+expand_mode = 1
+
+[node name="CountryButton12" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 181.0
+offset_top = 375.0
+offset_right = 251.0
+offset_bottom = 417.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_offa7")
+expand_mode = 1
+
+[node name="CountryButton13" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 261.0
+offset_top = 375.0
+offset_right = 331.0
+offset_bottom = 417.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_ovapt")
+expand_mode = 1
+
+[node name="CountryButton14" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 341.0
+offset_top = 375.0
+offset_right = 411.0
+offset_bottom = 417.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_fluo7")
+expand_mode = 1
+
+[node name="CountryButton15" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 421.0
+offset_top = 375.0
+offset_right = 491.0
+offset_bottom = 417.0
+grow_horizontal = 2
+
+[node name="CountryFlag" type="TextureRect" parent="CanvasLayer/SelectTeamSessionControl/CountryButton15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_yplj1")
+expand_mode = 1

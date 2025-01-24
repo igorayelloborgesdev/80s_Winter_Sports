@@ -247,6 +247,9 @@ public partial class Character : CharacterBody3D
         //Ski jumping        
         if (prefabName == "Skijumping")
             playerInput = new PlayerInputSkiJump();
+        //Ice Hockey
+        if (prefabName == "IceHockeyRink")
+            playerInput = new PlayerInputIceHockey();
     }
     public void Reset()
     {

@@ -81,16 +81,47 @@ namespace WinterSports.Scripts.Controller
         private TextureRect[] crossCountryCountryFlagTextureRect = null;
         private Control finishResultSessionControl = null;
         private List<Node> standingNode = new List<Node>();
+        private string prefabName;
+        private List<Character> iceHockeyTeam1 = new List<Character>();
+        private List<Character> iceHockeyTeam2 = new List<Character>();
+        private TextureRect texture2DCountry1 = null;
+        private TextureRect texture2DCountry2 = null;
+        private Label countryCode1 = null;
+        private Label countryCode2 = null;
+        private Toggle toggleIceHockeyKitTeam1 = new Toggle();
+        private Toggle toggleIceHockeyKitTeam2 = new Toggle();
+        private List<Button> kitTeam1 = new List<Button>();
+        private List<Button> kitTeam2 = new List<Button>();
+        private CanvasItem jersey1_1 = null;
+        private CanvasItem jersey1_2 = null;
+        private CanvasItem short1_1 = null;
+        private CanvasItem jersey2_1 = null;
+        private CanvasItem jersey2_2 = null;
+        private CanvasItem short2_1 = null;
+        private Control selectTeamSessionControlIceHockey = null;
+        private NinePatchRect HUDBG = null;
+        private TextureRect countryFlag = null;
+        private Label countryCode = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
         private const string flagResource = "res://Art//2d//flags//";
         private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
         private string[] prefabNameCountryList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
+        private Vector3[] iceHockeyInitPosition = { 
+            new Vector3 (0.0f, 0.07f, 0.91f),
+            new Vector3 (0.1f, 0.07f, 0.155f),
+            new Vector3 (-0.1f, 0.07f, 0.155f),
+            new Vector3 (0.0f, 0.07f, 0.05f),
+            new Vector3 (-0.125f, 0.07f, 0.05f),
+            new Vector3 (0.125f, 0.07f, 0.05f)
+        };
+        private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);
         #endregion
         #region Methods
         public void Init(string prefabName)
-        {            
+        {
+            this.prefabName = prefabName;
             if (prefabName == "skiTrack")
                 InitSki();
             if (prefabName == "SpeedSkating")
@@ -101,6 +132,8 @@ namespace WinterSports.Scripts.Controller
                 InitLuge();
             if (prefabName == "Skijumping")
                 InitSkiJump();
+            if (prefabName == "IceHockeyRink")
+                InitIceHockey();
         }
         public void Update(double delta, string prefabName, int levelId)
         {
@@ -538,6 +571,13 @@ namespace WinterSports.Scripts.Controller
             characterObj.SetIsAI(true);
             characterCrossCountryList.Add(characterObj);            
         }
+        public void SetIceHockeyCharacter(Character character, bool isTeam1 = true) 
+        { 
+            if(isTeam1)
+                iceHockeyTeam1.Add(character);
+            else 
+                iceHockeyTeam2.Add(character);
+        }
         public void SetCharacter(LugeSled lugeSled)
         {
             this.lugeSled = lugeSled;
@@ -768,8 +808,12 @@ namespace WinterSports.Scripts.Controller
             bobsleighSled.ShowHideControlLuge();
         }
         public void UnPause()
-        {
-            character.UnPause();
+        {            
+            if(this.prefabName == "IceHockeyRink")
+                iceHockeyTeam1[0].UnPause();
+            else
+                character.UnPause();
+
         }
         public void UnPauseLuge()
         {
@@ -1418,7 +1462,6 @@ namespace WinterSports.Scripts.Controller
             Texture2D texture2D = textureResource as Texture2D;
             this.crossCountryCountryFlagTextureRect[index].Texture = texture2D;
         }
-
         private void SetPlayerPositionUI()
         {
             if (crossCountryPlayerPosition == 0)
@@ -1476,6 +1519,184 @@ namespace WinterSports.Scripts.Controller
                 this.controlSkiCrossCountryPosition.Show();
             else
                 this.controlSkiCrossCountryPosition.Hide();
+        }
+        #endregion
+        #region Ice Hockey
+        public void SetSelectionFlagsTexts(TextureRect texture2DCountry1, TextureRect texture2DCountry2, Label countryCode1, Label countryCode2)
+        {
+            this.texture2DCountry1 = texture2DCountry1;
+            this.texture2DCountry2 = texture2DCountry2;
+            this.countryCode1 = countryCode1;
+            this.countryCode2 = countryCode2;
+        }
+        public void InitIceHockey()
+        {
+            Texture textureResource1 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
+            Texture2D texture2D1 = textureResource1 as Texture2D;
+            this.texture2DCountry1.Texture = texture2D1;
+            Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code + ".png");
+            Texture2D texture2D2 = textureResource2 as Texture2D;
+            this.texture2DCountry2.Texture = texture2D2;
+            countryCode1.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
+            countryCode2.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
+            ShowHideSelectTeamSessionControlIceHockey(true);
+            readySetGoControl.Hide();
+            finishSessionScreen.Hide();
+            controlSkiSpeedSkatingBiathlon.Hide();
+            controlBiathlon.Hide();
+            windDirectionArrow.Hide();
+            controlSkiSpeedSkatingScreen.Hide();
+            controlBiathlonScreen.Hide();
+            controlLugeImpulse.Hide();
+            controlSkiJumpImpulse.Hide();
+            controlSkiJump.Hide();            
+            controlSkiJumpImpulseHorizontal.Hide();
+            windDirectionArrowHorizontal.Hide();
+            controlSkiJumpImpulseVertical.Hide();
+            windDirectionArrowVertical.Hide();
+            controlSkiCrossCountry.Hide();
+            controlSkiCrossCountryPosition.Hide();
+            finishResultSessionControl.Hide();
+            HUDBG.Hide();
+            countryFlag.Hide();
+            countryCode.Hide();
+            SetIceHockeyInitPosition();
+            SetIceHockeyInitRotation();
+        }
+        private void SetIceHockeyInitPosition()
+        {
+            for (int i = 0; i < iceHockeyTeam1.Count; i++)
+            {
+                iceHockeyTeam1[i].Position = iceHockeyInitPosition[i];
+            }
+            for (int i = 0; i < iceHockeyTeam1.Count; i++)
+            {
+                iceHockeyTeam2[i].Position = new Vector3(iceHockeyInitPosition[i].X, iceHockeyInitPosition[i].Y, -1.0f * iceHockeyInitPosition[i].Z);
+            }            
+        }
+        private void SetIceHockeyInitRotation()
+        {            
+            for (int i = 0; i < iceHockeyTeam1.Count; i++)
+            {
+                iceHockeyTeam1[i].LookAt(iceHockeyInitRotation);//<-
+                iceHockeyTeam1[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
+            }
+            for (int i = 0; i < iceHockeyTeam1.Count; i++)
+            {
+                iceHockeyTeam2[i].LookAt(iceHockeyInitRotation);
+                iceHockeyTeam2[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
+            }
+        }
+        public void SelectIceHockeyTeam2(int id)
+        {
+            GameModeSingleton.countryOppositeHockeyTeam = id;
+            Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code + ".png");
+            Texture2D texture2D2 = textureResource2 as Texture2D;
+            this.texture2DCountry2.Texture = texture2D2;
+            countryCode2.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
+            SetIceHockeyKitEvent(0, GameModeSingleton.countryOppositeHockeyTeam);
+        }
+        public void SetIceHockeyKitButton(List<Button> kitTeam1, List<Button> kitTeam2)
+        { 
+            this.kitTeam1 = kitTeam1;
+            this.kitTeam2 = kitTeam2;
+            toggleIceHockeyKitTeam1.SetButtonsListBuilder(this.kitTeam1);
+            toggleIceHockeyKitTeam2.SetButtonsListBuilder(this.kitTeam2);
+
+            toggleIceHockeyKitTeam1.ToggleButton(0);
+            toggleIceHockeyKitTeam2.ToggleButton(0);
+        }
+        public void SetIceHockeyKit(CanvasItem jersey1_1, CanvasItem jersey1_2, CanvasItem short1_1, CanvasItem jersey2_1, CanvasItem jersey2_2, CanvasItem short2_1)
+        {
+            this.jersey1_1 = jersey1_1;
+            this.jersey1_2 = jersey1_2;
+            this.short1_1 = short1_1;
+            this.jersey2_1 = jersey2_1;
+            this.jersey2_2 = jersey2_2;
+            this.short2_1 = short2_1;
+        }
+        public void SetIceHockeyKitEvent(int kitId, int teamId)
+        {
+            if (teamId == 0)
+            {
+                toggleIceHockeyKitTeam1.ToggleButton(kitId);
+                SetKitColor(kitId, teamId);
+            }
+            else
+            {
+                toggleIceHockeyKitTeam2.ToggleButton(kitId);
+                SetKitColor(kitId, teamId);
+            }            
+        }
+        private void SetKitColor(int kitId, int teamId)
+        {
+            if (teamId == 0)
+            {
+                jersey1_1.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit2BodyColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit3BodyColor);
+                jersey1_2.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit2ArmsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit3ArmsColor);
+                short1_1.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit2LegsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit3LegsColor);
+            }
+            else
+            {
+                jersey2_1.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].kit2BodyColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].kit3BodyColor);
+                jersey2_2.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].kit2ArmsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].kit3ArmsColor);
+                short2_1.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].kit2LegsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].kit3LegsColor);
+            }
+        }
+        public void SetSelectTeamSessionControlIceHockey(Control selectTeamSessionControlIceHockey)
+        {
+            this.selectTeamSessionControlIceHockey = selectTeamSessionControlIceHockey;
+        }
+        public void SetAllControlsToHideIceHockey(Control readySetGoControl,
+                                                Control finishSessionScreen,
+                                                Control controlSkiSpeedSkatingBiathlon,
+                                                Control controlBiathlon,
+                                                Control windDirectionArrow,
+                                                Control controlSkiSpeedSkatingScreen,
+                                                Control controlBiathlonScreen,
+                                                Control controlLugeImpulse,
+                                                Control controlSkiJumpImpulse,
+                                                Control controlSkiJump,
+                                                Control controlSkiJumpImpulseHorizontal,
+                                                Control windDirectionArrowHorizontal,
+                                                Control controlSkiJumpImpulseVertical,
+                                                Control windDirectionArrowVertical,
+                                                Control controlSkiCrossCountry,
+                                                Control controlSkiCrossCountryPosition,
+                                                Control finishResultSessionControl,
+                                                NinePatchRect HUDBG, TextureRect countryFlag, Label countryCode)
+        {
+            this.readySetGoControl = readySetGoControl;
+            this.finishSessionScreen = finishSessionScreen;
+            this.controlSkiSpeedSkatingBiathlon = controlSkiSpeedSkatingBiathlon;
+            this.controlBiathlon = controlBiathlon;
+            this.windDirectionArrow = windDirectionArrow;
+            this.controlSkiSpeedSkatingScreen = controlSkiSpeedSkatingScreen;
+            this.controlBiathlonScreen = controlBiathlonScreen;
+            this.controlLugeImpulse = controlLugeImpulse;
+            this.controlSkiJumpImpulse = controlSkiJumpImpulse;
+            this.controlSkiJump = controlSkiJump;
+            this.controlSkiJumpImpulseHorizontal = controlSkiJumpImpulseHorizontal;
+            this.windDirectionArrowHorizontal = windDirectionArrowHorizontal;
+            this.controlSkiJumpImpulseVertical = controlSkiJumpImpulseVertical;
+            this.windDirectionArrowVertical = windDirectionArrowVertical;
+            this.controlSkiCrossCountry = controlSkiCrossCountry;
+            this.controlSkiCrossCountryPosition = controlSkiCrossCountryPosition;
+            this.finishResultSessionControl = finishResultSessionControl;
+            this.HUDBG = HUDBG;
+            this.countryFlag = countryFlag;
+            this.countryCode = countryCode;
+        }
+        public void PlayIceHockey()
+        {
+            ShowHideSelectTeamSessionControlIceHockey(false);
+        }
+        public void ShowHideSelectTeamSessionControlIceHockey(bool isShow)
+        {
+            if(isShow)
+                this.selectTeamSessionControlIceHockey.Show();
+            else
+                this.selectTeamSessionControlIceHockey.Hide();
         }
         #endregion
         #region Get Set
@@ -1554,6 +1775,40 @@ namespace WinterSports.Scripts.Controller
             set
             {
                 gamePlayModel.returnFinishButtonStandings = value;
+            }
+        }
+        public List<Button> GetSetIceHockeyFlagSelectButton
+        {
+            get
+            {
+                return gamePlayModel.iceHockeyFlagSelectButton;
+            }
+            set
+            {
+                gamePlayModel.iceHockeyFlagSelectButton = value;
+            }
+        }
+
+        public List<Button> GetSetKitTeam1
+        {
+            get
+            {
+                return kitTeam1;
+            }
+            set
+            {
+                kitTeam1 = value;
+            }
+        }
+        public List<Button> GetSetKitTeam2
+        {
+            get
+            {
+                return kitTeam2;
+            }
+            set
+            {
+                kitTeam2 = value;
             }
         }
         #endregion

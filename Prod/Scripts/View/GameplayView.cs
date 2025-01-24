@@ -72,6 +72,19 @@ public partial class GameplayView : Control
     #region MeshInstance3D
     MeshInstance3D characterMeshInstance3D = null;
     #endregion
+    #region Constant
+    private const string iceHockeyFlagSelectName = "CanvasLayer/SelectTeamSessionControl/CountryButton";
+    private const string iceHockeyFlagSelectContryName = "CanvasLayer/SelectTeamSessionControl/Contry";
+    private const string iceHockeyFlagSelectCountryCodeName = "CanvasLayer/SelectTeamSessionControl/CountryCode";
+    private const string iceHockeyKitTeam1 = "CanvasLayer/SelectTeamSessionControl/Kit1_";
+    private const string iceHockeyKitTeam2 = "CanvasLayer/SelectTeamSessionControl/Kit2_";
+    private const string iceHockeyKitTeam = "CanvasLayer/SelectTeamSessionControl/";
+    private const string iceHockeyBackToMainMenuButtonFinish = "CanvasLayer/SelectTeamSessionControl/BackToMainMenuButtonFinish";
+    private const string iceHockeyPlayToMainMenuButtonFinish = "CanvasLayer/SelectTeamSessionControl/PlayMenuButtonFinish";
+    private const string HUDBGName = "CanvasLayer/HUD/HUDBG";
+    private const string CountryFlagName = "CanvasLayer/HUD/CountryFlag";
+    private const string CountryCodeName = "CanvasLayer/HUD/CountryCode";
+    #endregion
     #region Variables
     private Character character = new Character();
     private List<Character> characterList = new List<Character>();
@@ -82,9 +95,28 @@ public partial class GameplayView : Control
     private Biathlon biathlonTrack = new Biathlon();
     private LugeBobsleigh lugeBobsleigh = new LugeBobsleigh();
     private SkiJump skiJump = new SkiJump();
+    private IceHockey iceHockey = new IceHockey();
     private int levelId = 0;
     private string prefabName = String.Empty;
     private List<int> numbersStart = new List<int>();
+    private TextureRect texture2DCountry1 = null;
+    private TextureRect texture2DCountry2 = null;
+    private Label countryCode1 = null;
+    private Label countryCode2 = null;
+    private List<Button> kitTeam1 = new List<Button>();
+    private List<Button> kitTeam2 = new List<Button>();
+    private CanvasItem jersey1_1 = null;
+    private CanvasItem jersey1_2 = null;
+    private CanvasItem short1_1 = null;
+    private CanvasItem jersey2_1 = null;
+    private CanvasItem jersey2_2 = null;
+    private CanvasItem short2_1 = null;
+    private Button quitButtonIceHockey = null;
+    private Control selectTeamSessionControlIceHockey = null;
+    private Button playButtonIceHockey = null;
+    private NinePatchRect HUDBG = null;
+    private TextureRect countryFlag = null;
+    private Label countryCode = null;
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -93,7 +125,7 @@ public partial class GameplayView : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {        
-        Init();
+        Init();        
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
@@ -105,13 +137,18 @@ public partial class GameplayView : Control
     #region Method
     private void Init()
     {        
-        levelId = GameModeSingleton.sport - 1;
+        levelId = GameModeSingleton.sport - 1;        
         prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;        
         gamePlayController = new GamePlayController();
         InstantiateLevel();
         AssignButtons();
         SetMainGamePlayEvents();
-        gamePlayController.Init(prefabName);
+        AssignIceHockeyUI();
+        SetIceHockeyKitButton(kitTeam1, kitTeam2);
+        SetIceHockeyKit(jersey1_1, jersey1_2, short1_1, jersey2_1, jersey2_2, short2_1);
+        SetIceHockeyKitEvents();
+        InitKit();
+        gamePlayController.SetSelectionFlagsTexts(texture2DCountry1, texture2DCountry2, countryCode1, countryCode2);        
         gamePlayController.SetTimerLabel(prefabName, timeLabel);
         gamePlayController.SetCrossCountryLabel(controlSkiCrossCountryTime, controlSkiCrossCountrySpeed, controlSkiCrossCountryEnergy);
         gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
@@ -122,10 +159,31 @@ public partial class GameplayView : Control
         gamePlayController.SetTimeScoreBestLastLabelFinishBiathlon(bestScoreLabel, timeScoreLabel, errorsScoreLabel, lastScoreLabel);
         gamePlayController.SetTimeScreenControl(controlSkiSpeedSkatingScreen, controlBiathlonScreen, controlLugeImpulse, controlSkiJumpImpulse, controlSkiJump);
         gamePlayController.SetImpulseLabel(impulseNinePatchRect, impulseSkiJumpNinePatchRect);
+        gamePlayController.SetSelectTeamSessionControlIceHockey(selectTeamSessionControlIceHockey);
+        gamePlayController.SetAllControlsToHideIceHockey(readySetGoControl,
+                                                        finishSessionScreen,
+                                                        controlSkiSpeedSkatingBiathlon,
+                                                        controlBiathlon,
+                                                        windDirectionArrow,
+                                                        controlSkiSpeedSkatingScreen,
+                                                        controlBiathlonScreen,
+                                                        controlLugeImpulse,
+                                                        controlSkiJumpImpulse,
+                                                        controlSkiJump,
+                                                        controlSkiJumpImpulseHorizontal,
+                                                        windDirectionArrowHorizontal,
+                                                        controlSkiJumpImpulseVertical,
+                                                        windDirectionArrowVertical,
+                                                        controlSkiCrossCountry,
+                                                        controlSkiCrossCountryPosition,
+                                                        finishResultSessionControl,
+                                                        HUDBG, countryFlag, countryCode);
         SetDirectionArrowList();
         InstantiateCharacter();
         InitStaticVariables();
-        ReturnMenu();
+        SetIceButtonsEvent();
+        gamePlayController.Init(prefabName);
+        ReturnMenu();        
     }
     private void SetDirectionArrowList()
     {
@@ -157,6 +215,23 @@ public partial class GameplayView : Control
             InstantiateCharacterLugeBobsleigh();
         if (prefabName == "Skijumping")
             InstantiateCharacterSkiJump();
+        if (prefabName == "IceHockeyRink")
+            InstantiateCharacterIceHockey();
+    }
+    private void InstantiateCharacterIceHockey()
+    {
+        gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
+        for (int i = 0; i < 2; i++)
+        {            
+            for (int j = 0; j < 6; j++)
+            {
+                Character character = characterPackedScene.Instantiate<Character>();
+                character.SetPrefabName = prefabName;
+                character.ScaleObjectLocal(new Vector3(0.3f, 0.3f, 0.3f));
+                gamePlayController.SetIceHockeyCharacter(character, i == 0);
+                this.AddChild(character);
+            }
+        }        
     }
     private void InstantiateCharacterSki()
     {
@@ -396,7 +471,44 @@ public partial class GameplayView : Control
         gamePlayController.GetSetBackMenuFinishButton = backMenuFinishButton;
         gamePlayController.GetSetReturnFinishButton = returnFinishButton;
         gamePlayController.GetSetBackMenuFinishButtonStandings = backMenuFinishButtonStandings;
-        gamePlayController.GetSetReturnFinishButtonStandings = returnFinishButtonStandings;        
+        gamePlayController.GetSetReturnFinishButtonStandings = returnFinishButtonStandings;
+
+        if (prefabName == "IceHockeyRink")
+        {
+            for (int i = 0; i < 16; i++) 
+            {
+                gamePlayController.GetSetIceHockeyFlagSelectButton.Add(GetNode<Button>(iceHockeyFlagSelectName + i.ToString()));                
+            }            
+        }
+    }
+    private void AssignIceHockeyUI()
+    {
+        texture2DCountry1 = GetNode<TextureRect>(iceHockeyFlagSelectContryName + (1).ToString());
+        texture2DCountry2 = GetNode<TextureRect>(iceHockeyFlagSelectContryName + (2).ToString());
+        countryCode1 = GetNode<Label>(iceHockeyFlagSelectCountryCodeName + (1).ToString());
+        countryCode2 = GetNode<Label>(iceHockeyFlagSelectCountryCodeName + (2).ToString());
+
+        kitTeam1.Add(GetNode<Button>(iceHockeyKitTeam1 + (1).ToString()));
+        kitTeam1.Add(GetNode<Button>(iceHockeyKitTeam1 + (2).ToString()));
+        kitTeam2.Add(GetNode<Button>(iceHockeyKitTeam2 + (1).ToString()));
+        kitTeam2.Add(GetNode<Button>(iceHockeyKitTeam2 + (2).ToString()));
+
+        jersey1_1 = GetNode<CanvasItem>(iceHockeyKitTeam + "Jersey1_1");
+        jersey1_2 = GetNode<CanvasItem>(iceHockeyKitTeam + "Jersey1_2");
+        short1_1 = GetNode<CanvasItem>(iceHockeyKitTeam + "Short1_1");
+
+        jersey2_1 = GetNode<CanvasItem>(iceHockeyKitTeam + "Jersey2_1");
+        jersey2_2 = GetNode<CanvasItem>(iceHockeyKitTeam + "Jersey2_2");
+        short2_1 = GetNode<CanvasItem>(iceHockeyKitTeam + "Short2_1");
+
+        quitButtonIceHockey = GetNode<Button>(iceHockeyBackToMainMenuButtonFinish);
+        playButtonIceHockey = GetNode<Button>(iceHockeyPlayToMainMenuButtonFinish);
+
+        selectTeamSessionControlIceHockey = GetNode<Control>(iceHockeyKitTeam);
+
+        HUDBG = GetNode<NinePatchRect>(HUDBGName);
+        countryFlag = GetNode<TextureRect>(CountryFlagName);
+        countryCode = GetNode<Label>(CountryCodeName);
     }
     private void SetMainGamePlayEvents()
     {
@@ -407,10 +519,35 @@ public partial class GameplayView : Control
         gamePlayController.GetSetReturnFinishButton.Pressed += () => { ReturnMenuFromFinishScreen(); };
         gamePlayController.GetSetBackMenuFinishButtonStandings.Pressed += () => { QuitToMainMenu(); };
         gamePlayController.GetSetReturnFinishButtonStandings.Pressed += () => { ResetGameMenu(); };
+
+        if (prefabName == "IceHockeyRink")
+        {
+            int count = 0;
+            foreach (var obj in gamePlayController.GetSetIceHockeyFlagSelectButton)
+            {
+                int id = count;
+                obj.Pressed += () => { SelectIceHockeyTeam2(id); };
+                count++;
+            }            
+        }
+    }
+    private void SetIceHockeyKitEvents()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            int count = i;
+            gamePlayController.GetSetKitTeam1[i].Pressed += () => { SetIceHockeyKitEvent(count, 0); };
+            gamePlayController.GetSetKitTeam2[i].Pressed += () => { SetIceHockeyKitEvent(count, 1); };
+        }
+    }
+    private void InitKit()
+    {
+        SetIceHockeyKitEvent(0, 0);
+        SetIceHockeyKitEvent(0, 1);
     }
     private void InstantiateLevel()
     {        
-        PackedScene prefabScene = (PackedScene)ResourceLoader.Load("res://Prefab/" + LevelSingleton.levelObjDTO.levelList[levelId].prefabName + ".tscn");
+        PackedScene prefabScene = (PackedScene)ResourceLoader.Load("res://Prefab/" + LevelSingleton.levelObjDTO.levelList[levelId].prefabName + ".tscn");        
         if (prefabName == "skiTrack")
             InstantiateLevelSki(prefabScene, levelId);
         if (prefabName == "SpeedSkating")
@@ -421,6 +558,8 @@ public partial class GameplayView : Control
             InstantiateLevelLugeBobsleigh(prefabScene, levelId - 7);
         if (prefabName == "Skijumping")
             InstantiateLevelSkiJump(prefabScene, levelId);
+        if (prefabName == "IceHockeyRink")
+            InstantiateLevelIceHockey(prefabScene);            
     }
     private void InstantiateLevelSki(PackedScene prefabScene, int id)
     {        
@@ -475,6 +614,20 @@ public partial class GameplayView : Control
         skiJump = prefabScene.Instantiate<SkiJump>();        
         initPoint = skiJump.GetSetInitPoint();
         AddChild(skiJump);
+    }
+    private void InstantiateLevelIceHockey(PackedScene prefabScene)
+    {
+        iceHockey = prefabScene.Instantiate<IceHockey>();
+        initPoint = iceHockey.GetSetInitPoint();
+        AddChild(iceHockey);
+    }
+    public void SetIceHockeyKitButton(List<Button> kitTeam1, List<Button> kitTeam2)
+    {
+        gamePlayController.SetIceHockeyKitButton(kitTeam1, kitTeam2);
+    }
+    public void SetIceHockeyKit(CanvasItem jersey1_1, CanvasItem jersey1_2, CanvasItem short1_1, CanvasItem jersey2_1, CanvasItem jersey2_2, CanvasItem short2_1)
+    {
+        gamePlayController.SetIceHockeyKit(jersey1_1, jersey1_2, short1_1, jersey2_1, jersey2_2, short2_1);
     }
     #endregion
     #region Events
@@ -531,6 +684,25 @@ public partial class GameplayView : Control
         LugeStatic.Reset();
         SkiJumpStatic.Reset();
         CrossCountryStatic.Reset();
+        GameModeSingleton.countryOppositeHockeyTeam = 0;
+    }
+    private void SelectIceHockeyTeam2(int id)
+    {
+        gamePlayController.SelectIceHockeyTeam2(id);        
+    }
+    private void SetIceHockeyKitEvent(int kitId, int teamId)
+    {
+        gamePlayController.SetIceHockeyKitEvent(kitId, teamId);
+    }
+
+    private void SetIceButtonsEvent()
+    {        
+        quitButtonIceHockey.Pressed += () => { QuitToMainMenu(); };
+        playButtonIceHockey.Pressed += () => { PlayIceHockey(); };
+    }
+    private void PlayIceHockey()
+    {
+        gamePlayController.PlayIceHockey();
     }
     #endregion
 
