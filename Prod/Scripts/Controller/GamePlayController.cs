@@ -572,8 +572,9 @@ namespace WinterSports.Scripts.Controller
             characterCrossCountryList.Add(characterObj);            
         }
         public void SetIceHockeyCharacter(Character character, bool isTeam1 = true) 
-        { 
-            if(isTeam1)
+        {
+            character.HideAllNonIceHockeyItems();
+            if (isTeam1)
                 iceHockeyTeam1.Add(character);
             else 
                 iceHockeyTeam2.Add(character);
@@ -1689,6 +1690,7 @@ namespace WinterSports.Scripts.Controller
         }
         public void PlayIceHockey()
         {
+            SetIceHockeyPlayerColors();
             ShowHideSelectTeamSessionControlIceHockey(false);
         }
         public void ShowHideSelectTeamSessionControlIceHockey(bool isShow)
@@ -1698,6 +1700,26 @@ namespace WinterSports.Scripts.Controller
             else
                 this.selectTeamSessionControlIceHockey.Hide();
         }
+        private void SetIceHockeyPlayerColors()
+        {
+            SetIceHockeyPlayerColorsTeams(iceHockeyTeam1, CountrySingleton.countryObjDTO, GameModeSingleton.country - 1,
+                jersey1_1.Modulate, jersey1_2.Modulate, short1_1.Modulate);
+            SetIceHockeyPlayerColorsTeams(iceHockeyTeam2, CountrySingleton.countryObjDTO, GameModeSingleton.countryOppositeHockeyTeam,
+                jersey2_1.Modulate, jersey2_2.Modulate, short2_1.Modulate);
+        }
+        private void SetIceHockeyPlayerColorsTeams(List<Character> characters, CountryObjDTO countryObjDTO, int id, Color jersey1, Color jersey2, Color short1)
+        {
+            foreach (var character in characters)
+            {
+                character.GenerateBodyColor(jersey1);
+                character.GenerateArmsColor(jersey2);                
+                character.GenerateLegsColor(short1);
+                character.GenerateHandsAndHeadColor(countryObjDTO.countryList[id].SkinColor);
+                character.GenerateBotsColor(countryObjDTO.countryList[id].BootsColor);
+                character.GenerateHairColor(countryObjDTO.countryList[id].HairColor);                
+            }
+        }
+
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu

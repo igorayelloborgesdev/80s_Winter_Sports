@@ -226,8 +226,9 @@ public partial class GameplayView : Control
             for (int j = 0; j < 6; j++)
             {
                 Character character = characterPackedScene.Instantiate<Character>();
+                character.GetSetCharacterId = j;
                 character.SetPrefabName = prefabName;
-                character.ScaleObjectLocal(new Vector3(0.3f, 0.3f, 0.3f));
+                character.ScaleObjectLocal(new Vector3(0.4f, 0.4f, 0.4f));
                 gamePlayController.SetIceHockeyCharacter(character, i == 0);
                 this.AddChild(character);
             }

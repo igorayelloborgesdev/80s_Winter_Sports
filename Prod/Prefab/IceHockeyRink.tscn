@@ -34,7 +34,7 @@ mesh = SubResource("BoxMesh_l8r34")
 surface_material_override/0 = SubResource("StandardMaterial3D_5vg7v")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.734477, 0.678634, 0, -0.678634, 0.734477, 0, 0.437, 0.52723)
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 0.521564, 0.466555)
 fov = 50.0
 
 [node name="Grandstand" parent="." instance=ExtResource("3_0q4y3")]

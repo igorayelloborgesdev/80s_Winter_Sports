@@ -693,25 +693,34 @@ public partial class Character : CharacterBody3D
         else
         {            
             ShowHideControlSkiCrossCountry(false);
-            if (isShow)
-                this.controlSkiSpeedSkatingBiathlon.Show();
-            else
-                this.controlSkiSpeedSkatingBiathlon.Hide();
+            if (this.controlSkiSpeedSkatingBiathlon is not null)
+            {
+                if (isShow)
+                    this.controlSkiSpeedSkatingBiathlon.Show();
+                else
+                    this.controlSkiSpeedSkatingBiathlon.Hide();
+            }            
         }        
     }
-    private void ShowHideControlSkiCrossCountry(bool isShow)
+    public void ShowHideControlSkiCrossCountry(bool isShow)
     {
-        if (isShow)
-            this.controlSkiCrossCountry.Show();
-        else
-            this.controlSkiCrossCountry.Hide();
+        if (this.controlSkiCrossCountry is not null)
+        {
+            if (isShow)
+                this.controlSkiCrossCountry.Show();
+            else
+                this.controlSkiCrossCountry.Hide();
+        }        
     }
     public void ShowHideControlBiathlon(bool isShow)
     {
-        if (isShow)
-            this.controlBiathlon.Show();
-        else
-            this.controlBiathlon.Hide();
+        if(this.controlBiathlon is not null)
+        {
+            if (isShow)
+                this.controlBiathlon.Show();
+            else
+                this.controlBiathlon.Hide();
+        }        
     }
     public void SetBiathlonUILabels(Label shoots, Label errorLabelScore, Label windDirection, Control windDirectionArrow)
     {
@@ -983,6 +992,36 @@ public partial class Character : CharacterBody3D
         playerInput.Init(crossCountryModelAIList, currentAILine);
         playerInput.Reset();
         crossCountryOvertakeFM.GetSetIsFinished = false;
+    }
+    #endregion
+    #region Ice Hockey
+    public void HideAllNonIceHockeyItems()
+    {
+        foreach (var item in skiPole)
+        {
+            item.Hide();
+        }
+        foreach (var item in ski)
+        {
+            item.Hide();
+        }
+        foreach (var item in skiPoleBiathlon)
+        {
+            item.Hide();
+        }
+        rifle.Hide();
+        speedBox.Hide();
+        target.Hide();
+        if (this.controlSkiSpeedSkatingBiathlon is not null)                 
+            this.controlSkiSpeedSkatingBiathlon.Hide();
+        if (this.controlSkiCrossCountry is not null)        
+            this.controlSkiCrossCountry.Hide();
+        if (this.controlBiathlon is not null)                 
+            this.controlBiathlon.Hide();        
+        if(this.controlSkiJumpImpulseHorizontal is not null)
+            this.controlSkiJumpImpulseHorizontal.Hide();
+        if (this.controlSkiJumpImpulseVertical is not null)
+            this.controlSkiJumpImpulseVertical.Hide();
     }
     #endregion
 }
