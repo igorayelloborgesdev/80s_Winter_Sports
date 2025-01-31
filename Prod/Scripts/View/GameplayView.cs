@@ -229,6 +229,16 @@ public partial class GameplayView : Control
                 character.GetSetCharacterId = j;
                 character.SetPrefabName = prefabName;
                 character.ScaleObjectLocal(new Vector3(0.4f, 0.4f, 0.4f));
+                if (j > 0)
+                {
+                    character.ShowHideIceHockeyStick(true);
+                    character.ShowHideIceHockeyGoalKeeper(false);
+                }
+                else
+                {
+                    character.ShowHideIceHockeyStick(false);
+                    character.ShowHideIceHockeyGoalKeeper(true);
+                }                    
                 gamePlayController.SetIceHockeyCharacter(character, i == 0);
                 this.AddChild(character);
             }
@@ -257,6 +267,8 @@ public partial class GameplayView : Control
         gamePlayController.ShowHideControlSkiCrossCountryPosition(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
+        character.ShowHideIceHockeyStick(false);
+        character.ShowHideIceHockeyGoalKeeper(false);
         this.AddChild(character);
     }
     private void InstantiateCharacterSkiCrossCountry()
@@ -284,6 +296,8 @@ public partial class GameplayView : Control
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);        
         character.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
+        character.ShowHideIceHockeyStick(false);
+        character.ShowHideIceHockeyGoalKeeper(false);
         characterList.Add(character);
         this.AddChild(character);
     }
@@ -322,6 +336,8 @@ public partial class GameplayView : Control
                 gamePlayController.SetCharacterSportSkiCrossCountryAI(gateStart, gateFinish);
                 characterAI.SetCrossCountryModel(skiTrack.GetCrossCountryModel());
                 characterAI.SetCrossCountryAIModel(crossCountryModel);
+                characterAI.ShowHideIceHockeyStick(false);
+                characterAI.ShowHideIceHockeyGoalKeeper(false);
                 characterAI.SetCurrentAILine(obj.Id - 1 < 4 ? obj.Id - 1 : ((obj.Id - 1) % 4));
                 characterList.Add(characterAI);
                 this.AddChild(characterAI);
@@ -354,6 +370,8 @@ public partial class GameplayView : Control
         gamePlayController.ShowHideControlSkiCrossCountryPosition(false);
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
+        character.ShowHideIceHockeyStick(false);
+        character.ShowHideIceHockeyGoalKeeper(false);
         this.AddChild(character);        
     }
     private void InstantiateCharacterBiathlon()
@@ -382,6 +400,8 @@ public partial class GameplayView : Control
         character.ShowHideControlSkiSpeedSkatingBiathlon(true);
         character.ShowHideControlBiathlon(false);
         character.SetBiathlonUILabels(shoots, errorLabelScore, windDirection, windDirectionArrow);
+        character.ShowHideIceHockeyStick(false);
+        character.ShowHideIceHockeyGoalKeeper(false);
         this.AddChild(character);
     }
     private void InstantiateCharacterLugeBobsleigh()
@@ -405,6 +425,7 @@ public partial class GameplayView : Control
             gamePlayController.ShowHideControlSkiJumpImpulseHorizontal(false);
             gamePlayController.ShowHideControlSkiJumpImpulseVertical(false);
             gamePlayController.ShowHideControlSkiCrossCountryPosition(false);
+            gamePlayController.ShowHideIceHockeyStick(false);
             lugeSled.GetSetStartPointIdInit = lugeBobsleigh.GetSetStartPointId;
             lugeSled.GetSetStartPointId = lugeBobsleigh.GetSetStartPointId;
             lugeSled.SetSpeedSkatingTrackDTOList = lugeBobsleigh.GetLugeTrackDTOList;
@@ -431,6 +452,7 @@ public partial class GameplayView : Control
             gamePlayController.ShowHideControlSkiJumpImpulseHorizontal(false);
             gamePlayController.ShowHideControlSkiJumpImpulseVertical(false);
             gamePlayController.ShowHideControlSkiCrossCountryPosition(false);
+            gamePlayController.ShowHideIceHockeyStick(false);
             bobsleighSled.GetSetStartPointIdInit = lugeBobsleigh.GetSetStartPointId;
             bobsleighSled.GetSetStartPointId = lugeBobsleigh.GetSetStartPointId;
             bobsleighSled.SetSpeedSkatingTrackDTOList = lugeBobsleigh.GetLugeTrackDTOList;
@@ -462,6 +484,8 @@ public partial class GameplayView : Control
         character.ShowHideControlSkiSpeedSkatingBiathlon(false);
         character.ShowHideControlBiathlon(false);
         character.SetWindDirectionSkiJumpUILabels(windDirectionSkiJump, windDirectionArrowSkiJump);
+        character.ShowHideIceHockeyStick(false);
+        character.ShowHideIceHockeyGoalKeeper(false);
         this.AddChild(character);
     }
     private void AssignButtons()

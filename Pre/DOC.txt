@@ -48,8 +48,7 @@ Esportes
 
 .Ice Hockey 
 
-..Instantiate equipamentos<-
-..Posição de jogadores - GK,DF,MF,FW - L,M,R
+..Posição de jogadores - GK,DF,MF,FW - L,M,R<-
 ..Player
 ...Start
 ...GK

@@ -1719,7 +1719,11 @@ namespace WinterSports.Scripts.Controller
                 character.GenerateHairColor(countryObjDTO.countryList[id].HairColor);                
             }
         }
-
+        public void ShowHideIceHockeyStick(bool isShow)
+        {
+            character.ShowHideIceHockeyStick(isShow);
+            character.ShowHideIceHockeyGoalKeeper(isShow);
+        }        
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu

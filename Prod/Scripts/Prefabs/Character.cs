@@ -37,6 +37,8 @@ public partial class Character : CharacterBody3D
     [Export] CrossCountryOvertake crossCountryOvertakeMM = null;
     [Export] CrossCountryOvertake crossCountryOvertakeMR = null;
     [Export] CrossCountryOvertake crossCountryOvertakeML = null;
+    [Export] Node3D stick = null;
+    [Export] Node3D[] goalKeeperItems = null;
     #endregion
     #region Variables    
     private IPlayerInput playerInput = null;
@@ -1022,6 +1024,23 @@ public partial class Character : CharacterBody3D
             this.controlSkiJumpImpulseHorizontal.Hide();
         if (this.controlSkiJumpImpulseVertical is not null)
             this.controlSkiJumpImpulseVertical.Hide();
+    }
+    public void ShowHideIceHockeyStick(bool isShow)
+    {
+        if(isShow)
+            stick.Show();
+        else 
+            stick.Hide();
+    }
+    public void ShowHideIceHockeyGoalKeeper(bool isShow)
+    {
+        foreach (var obj in goalKeeperItems)
+        {
+            if (isShow)
+                obj.Show();
+            else
+                obj.Hide();
+        }        
     }
     #endregion
 }

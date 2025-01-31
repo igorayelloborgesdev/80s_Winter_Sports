@@ -4,6 +4,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdsi1"]
 shading_mode = 0
+albedo_color = Color(0.529412, 0.415686, 0.2, 1)
 
 [node name="GKPadHand" instance=ExtResource("1_wfdvw")]
 
