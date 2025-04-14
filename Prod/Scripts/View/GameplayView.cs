@@ -7,6 +7,7 @@ using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Prefabs;
 using WinterSports.Scripts.Singleton;
 using WinterSports.Scripts.Static;
+using static WinterSports.Scripts.Controller.GamePlayController;
 
 public partial class GameplayView : Control
 {
@@ -117,6 +118,7 @@ public partial class GameplayView : Control
     private NinePatchRect HUDBG = null;
     private TextureRect countryFlag = null;
     private Label countryCode = null;
+    private RigidBody3D puck = null;
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -131,7 +133,7 @@ public partial class GameplayView : Control
     public override void _Process(double delta)
     {
         gamePlayController.UpdateSkiJumpRail(prefabName, skiJump);
-        gamePlayController.Update(delta, prefabName, levelId);                
+        gamePlayController.Update(delta, prefabName, levelId);        
     }
     #endregion
     #region Method
@@ -216,7 +218,13 @@ public partial class GameplayView : Control
         if (prefabName == "Skijumping")
             InstantiateCharacterSkiJump();
         if (prefabName == "IceHockeyRink")
+        {
             InstantiateCharacterIceHockey();
+            InstantiatePuckIceHockey();
+            gamePlayController.SetPuckToCharacter(puck);
+            gamePlayController.SetCamera3DIceHockey(iceHockey.GetSetCamera3D());
+            gamePlayController.SetIceHockeyGoal(iceHockey);            
+        }            
     }
     private void InstantiateCharacterIceHockey()
     {
@@ -228,7 +236,7 @@ public partial class GameplayView : Control
                 Character character = characterPackedScene.Instantiate<Character>();
                 character.GetSetCharacterId = j;
                 character.SetPrefabName = prefabName;
-                character.ScaleObjectLocal(new Vector3(0.4f, 0.4f, 0.4f));
+                character.ScaleObjectLocal(new Vector3(3.0f, 3.0f, 3.0f));//<-
                 if (j > 0)
                 {
                     character.ShowHideIceHockeyStick(true);
@@ -238,12 +246,24 @@ public partial class GameplayView : Control
                 {
                     character.ShowHideIceHockeyStick(false);
                     character.ShowHideIceHockeyGoalKeeper(true);
-                }                    
+                }
+                character.playerNumber = j;
+                character.SetPlayerIceHockeyPosition(j, i);                
                 gamePlayController.SetIceHockeyCharacter(character, i == 0);
-                this.AddChild(character);
+                iceHockey.AddChild(character);
             }
-        }        
+        }
+        gamePlayController.SetIceHockeyTeams();
+        gamePlayController.HideIceHockeyCharacter();//<-TESTE        
     }
+    private void InstantiatePuckIceHockey()
+    {
+        var puckPackedScene = ResourceLoader.Load<PackedScene>("res://Prefab/puckPh2.tscn");
+        Node puckInstance = (Node)puckPackedScene.Instantiate();
+        puck = puckInstance as RigidBody3D;
+        iceHockey.AddChild(puck);        
+        puck.Position = new Vector3(0.0f, 5.0f, 0.0f);
+    }    
     private void InstantiateCharacterSki()
     {
         character = characterPackedScene.Instantiate<Character>();
@@ -712,8 +732,9 @@ public partial class GameplayView : Control
         GameModeSingleton.countryOppositeHockeyTeam = 0;
     }
     private void SelectIceHockeyTeam2(int id)
-    {
-        gamePlayController.SelectIceHockeyTeam2(id);        
+    {        
+        gamePlayController.SelectIceHockeyTeam2(id);
+        gamePlayController.SetIceHockeyKitEvent(0, 1);
     }
     private void SetIceHockeyKitEvent(int kitId, int teamId)
     {

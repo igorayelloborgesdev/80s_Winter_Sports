@@ -48,30 +48,37 @@ Esportes
 
 .Ice Hockey 
 
-..Posição de jogadores - GK,DF,MF,FW - L,M,R<-
-..Player
-...Start
+...MF
+....Attack<-
+.....Lugar do chute
+.....Shoot power
+.....Delimitar área de jogador próximo do gol
+BUG.....Biatlon - não mostra quais alvos foram acertados
+....Pass
+...FW
+....Pass
+....Attack
+...DF
+....Pass
+...GK..AI
+....Defend
+
+
+...MF
+....Defend
+....Change Player
+...FW
+....Defend
+....Change Player
 ...GK
 ....Defend
 ....Pass
 ...DF
 ....Defend
 ....Change Player
-....Pass
-...MF
-....Defend
-....Change Player
-....Pass
-....Attack
-...FW
-....Defend
-....Change Player
-....Pass
-....Attack
 ..AI
 ...Start
 ...GK
-....Defend
 ....Pass
 ...DF
 ....Defend
@@ -84,6 +91,8 @@ Esportes
 ....Defend
 ....Pass
 ....Attack
+...Start
+..Anim
 ..Shootout
 ...Player
 ...AI

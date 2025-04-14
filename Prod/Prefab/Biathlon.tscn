@@ -847,18 +847,25 @@ shape = SubResource("BoxShape3D_d168w")
 
 [node name="TargetBoard" parent="." index="22" instance=ExtResource("6_v8cc0")]
 transform = Transform3D(0.0491415, 0, 0.201068, 0, 0.206986, 0, -0.201068, 0, 0.0491415, 25.8885, 0.71408, 0.421877)
+surface_material_override/0 = null
 
 [node name="TargetBoard2" parent="." index="23" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
 transform = Transform3D(0.0134979, 0, 0.206545, 0, 0.206986, 0, -0.206545, 0, 0.0134979, 64.5186, 0.71408, -0.248623)
+surface_material_override/0 = null
 targetDisable = [NodePath("../TargetBoard/Target1Disable_001"), NodePath("../TargetBoard/Target2Disable_001"), NodePath("../TargetBoard/Target3Disable_001"), NodePath("../TargetBoard/Target4Disable_001"), NodePath("../TargetBoard/Target5Disable_001")]
 targetEnable = [NodePath("../TargetBoard/Target1Disable"), NodePath("../TargetBoard/Target2Disable"), NodePath("../TargetBoard/Target3Disable"), NodePath("../TargetBoard/Target4Disable"), NodePath("../TargetBoard/Target5Disable")]
 
-[node name="TargetBoard3" parent="." index="24" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
+[node name="TargetBoard5" parent="." index="24" instance=ExtResource("6_v8cc0")]
+transform = Transform3D(0.00477902, 0, 0.206931, 0, 0.206986, 0, -0.206931, 0, 0.00477902, 64.579, 0.71408, -0.137628)
+
+[node name="TargetBoard3" parent="." index="25" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
 transform = Transform3D(0.00876874, 0, 0.2068, 0, 0.206986, 0, -0.2068, 0, 0.00876874, 95.3517, 0.71408, -2.7393)
+surface_material_override/0 = null
 targetDisable = [NodePath("../TargetBoard/Target1Disable_001"), NodePath("../TargetBoard/Target2Disable_001"), NodePath("../TargetBoard/Target3Disable_001"), NodePath("../TargetBoard/Target4Disable_001"), NodePath("../TargetBoard/Target5Disable_001")]
 targetEnable = [NodePath("../TargetBoard/Target1Disable"), NodePath("../TargetBoard/Target2Disable"), NodePath("../TargetBoard/Target3Disable"), NodePath("../TargetBoard/Target4Disable"), NodePath("../TargetBoard/Target5Disable")]
 
-[node name="TargetBoard4" parent="." index="25" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
+[node name="TargetBoard4" parent="." index="26" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
 transform = Transform3D(0.0445707, 0, 0.20213, 0, 0.206986, 0, -0.20213, 0, 0.0445707, 139.835, 0.71408, -2.53647)
+surface_material_override/0 = null
 targetDisable = [NodePath("../TargetBoard/Target1Disable_001"), NodePath("../TargetBoard/Target2Disable_001"), NodePath("../TargetBoard/Target3Disable_001"), NodePath("../TargetBoard/Target4Disable_001"), NodePath("../TargetBoard/Target5Disable_001")]
 targetEnable = [NodePath("../TargetBoard/Target1Disable"), NodePath("../TargetBoard/Target2Disable"), NodePath("../TargetBoard/Target3Disable"), NodePath("../TargetBoard/Target4Disable"), NodePath("../TargetBoard/Target5Disable")]

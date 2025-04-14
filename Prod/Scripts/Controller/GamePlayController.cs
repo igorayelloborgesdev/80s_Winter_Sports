@@ -102,6 +102,10 @@ namespace WinterSports.Scripts.Controller
         private NinePatchRect HUDBG = null;
         private TextureRect countryFlag = null;
         private Label countryCode = null;
+        private Node3D camera3DIceHockey = null;
+        private RigidBody3D puck = null;
+        private IceHockeyGoal Goal1 = null;
+        private IceHockeyGoal Goal2 = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -109,14 +113,14 @@ namespace WinterSports.Scripts.Controller
         private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
         private string[] prefabNameCountryList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
         private Vector3[] iceHockeyInitPosition = { 
-            new Vector3 (0.0f, 0.07f, 0.91f),
-            new Vector3 (0.1f, 0.07f, 0.155f),
-            new Vector3 (-0.1f, 0.07f, 0.155f),
-            new Vector3 (0.0f, 0.07f, 0.05f),
-            new Vector3 (-0.125f, 0.07f, 0.05f),
-            new Vector3 (0.125f, 0.07f, 0.05f)
-        };
-        private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);
+            new Vector3 (0.0f, 0.45f, 9.0f),
+            new Vector3 (0.75f, 0.45f, 1.25f),
+            new Vector3 (-0.75f, 0.45f, 1.25f),
+            new Vector3 (0.0f, 0.45f, 0.5f),
+            new Vector3 (-1.275f, 0.45f, 0.5f),
+            new Vector3 (1.275f, 0.45f, 0.5f)
+        };//<-
+        private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);        
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -156,6 +160,8 @@ namespace WinterSports.Scripts.Controller
                 UpdateLuge(delta);
             if (prefabName == "Skijumping")
                 UpdateSkiJump(delta);
+            if (prefabName == "IceHockeyRink")
+                UpdateSkiIcehockey(delta);
         }
         public void UpdateSkiJumpRail(string prefabName, SkiJump skiJump)
         {
@@ -574,10 +580,27 @@ namespace WinterSports.Scripts.Controller
         public void SetIceHockeyCharacter(Character character, bool isTeam1 = true) 
         {
             character.HideAllNonIceHockeyItems();
-            if (isTeam1)
-                iceHockeyTeam1.Add(character);
-            else 
-                iceHockeyTeam2.Add(character);
+            character.SetisPlayerTeam(isTeam1);
+            character.SetisSelected(false);
+            if (isTeam1)                            
+                iceHockeyTeam1.Add(character);            
+            else            
+                iceHockeyTeam2.Add(character);                     
+        }
+
+        public void HideIceHockeyCharacter()
+        {
+            foreach (var obj in iceHockeyTeam1)
+            {
+                obj.Hide();
+            }
+            foreach (var obj in iceHockeyTeam2)
+            {
+                obj.Hide();
+            }
+            iceHockeyTeam1[3].Show();
+            iceHockeyTeam1[3].isSelected = true;
+            iceHockeyTeam1[3].isPuckControl = true;
         }
         public void SetCharacter(LugeSled lugeSled)
         {
@@ -1581,11 +1604,13 @@ namespace WinterSports.Scripts.Controller
             {
                 iceHockeyTeam1[i].LookAt(iceHockeyInitRotation);//<-
                 iceHockeyTeam1[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
+                iceHockeyTeam1[i].Rotation = new Vector3(0.0f, iceHockeyTeam1[i].Rotation.Y, 0.0f);
             }
             for (int i = 0; i < iceHockeyTeam1.Count; i++)
             {
                 iceHockeyTeam2[i].LookAt(iceHockeyInitRotation);
                 iceHockeyTeam2[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
+                iceHockeyTeam2[i].Rotation = new Vector3(0.0f, iceHockeyTeam2[i].Rotation.Y, 0.0f);
             }
         }
         public void SelectIceHockeyTeam2(int id)
@@ -1595,7 +1620,7 @@ namespace WinterSports.Scripts.Controller
             Texture2D texture2D2 = textureResource2 as Texture2D;
             this.texture2DCountry2.Texture = texture2D2;
             countryCode2.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
-            SetIceHockeyKitEvent(0, GameModeSingleton.countryOppositeHockeyTeam);
+            SetIceHockeyKitEvent(0, 1);
         }
         public void SetIceHockeyKitButton(List<Button> kitTeam1, List<Button> kitTeam2)
         { 
@@ -1692,6 +1717,12 @@ namespace WinterSports.Scripts.Controller
         {
             SetIceHockeyPlayerColors();
             ShowHideSelectTeamSessionControlIceHockey(false);
+            IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Init;
+            IceHockeySelectedPlayer();
+        }
+        public void ResetIceHockey()
+        {
+            IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Select;            
         }
         public void ShowHideSelectTeamSessionControlIceHockey(bool isShow)
         {
@@ -1723,7 +1754,171 @@ namespace WinterSports.Scripts.Controller
         {
             character.ShowHideIceHockeyStick(isShow);
             character.ShowHideIceHockeyGoalKeeper(isShow);
+        }
+        private void UpdateSkiIcehockey(double delta)
+        {
+            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Select)
+            {
+                
+            }
+            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
+            {                
+                DefineWhoIsControllingThePuck();                
+            }
+            
+            //timerGamePlayController.TimerRunning(delta);
+            //if (this.character.statesSki == Character.StatesSki.Ready)
+            //{
+            //    ShowHideStandingsTable(false);
+            //}
+            //if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
+            //{
+            //    this.character.statesSki = Character.StatesSki.Set;
+            //    readySetGoControl.Show();
+            //    readySetGoLabel.Text = "Ready";
+            //}
+            //else if (timerGamePlayController.GetTimer() > 2.0f && this.character.statesSki == Character.StatesSki.Set)
+            //{
+            //    this.character.statesSki = Character.StatesSki.Go;
+            //    readySetGoLabel.Text = "Set";
+            //}
+            //else if (timerGamePlayController.GetTimer() > 3.0f && this.character.statesSki == Character.StatesSki.Go)
+            //{
+            //    this.character.statesSki = Character.StatesSki.Init;
+            //    readySetGoLabel.Text = "Go";
+            //    setScore = true;
+            //    timerController.StartTimer();
+            //    StartAI();
+            //}
+            //else if (timerGamePlayController.GetTimer() > 5.0f && this.character.statesSki == Character.StatesSki.Init)
+            //{
+            //    readySetGoControl.Hide();
+            //    timerGamePlayController.StopTimer();
+            //    timerGamePlayController.ResetTimer();
+            //    this.character.statesSki = Character.StatesSki.Running;
+            //    crossCountryDTOList.Clear();
+            //    CrossCountryStatic.isPause = false;
+            //}
+            //else if (this.character.statesSki == Character.StatesSki.Running)
+            //{
+            //    foreach (var charObj in characterCrossCountryList)
+            //    {
+            //        charObj.SetScore();
+            //        if (!charObj.GetIsRunFinished)
+            //        {
+            //            charObj.GetSetScore = timerController.GetTimer();
+            //        }
+            //        else
+            //        {
+            //            if (GameModeSingleton.country == charObj.GetSetCharacterIdCountry)
+            //            {
+            //                timerGamePlayController.StartTimer();
+            //                this.character.statesSki = Character.StatesSki.Finish;
+            //            }
+            //        }
+            //    }
+            //}
+            //else if (this.character.statesSki == Character.StatesSki.Finish && timerGamePlayController.GetTimer() > 1.0f)
+            //{
+            //    this.character.statesSki = Character.StatesSki.End;
+            //    characterCrossCountryList = characterCrossCountryList.OrderBy(x => x.GetIsRunFinished)
+            //        .OrderBy(x => x.GetSetScore).OrderByDescending(x => x.GetSetCurrentPoint).ToList();
+
+            //    foreach (var charObj in characterCrossCountryList)
+            //    {
+            //        charObj.statesSki = Character.StatesSki.End;
+            //    }
+            //    this.character.OnlyPause();
+            //    ShowHideStandingsTable(true);
+            //    SetStandingsTable();
+            //}
+            //timerController.TimerRunning(delta);
+            //updateTimerCrossCountry();
+            //UpdateSpeedEnergyLabel();
+            //OrderCrossCountryPosition();
+            //SetPlayerPosition();
+            //SetPlayerPositionUI();
+        }
+        private void DefineWhoIsControllingThePuck()
+        {
+            Character characterPuck = null;
+            if (iceHockeyTeam1.Where(x => x.isPuckControl).Any())
+            {
+                characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();
+            }
+            if (iceHockeyTeam2.Where(x => x.isPuckControl).Any())
+            {
+                characterPuck = iceHockeyTeam2.Where(x => x.isPuckControl).First();
+            }
+            if (characterPuck is not null)
+            {
+                characterPuck.SetPuckRefPosition();
+            }
+            ControlsCameraIceHockey(characterPuck);
+        }
+        private void ControlsCameraIceHockey(Character characterPuck)
+        {
+            if(characterPuck is not null)
+                this.camera3DIceHockey.Position = new Vector3(this.camera3DIceHockey.Position.X, this.camera3DIceHockey.Position.Y, characterPuck.Position.Z + 3.5f);
+            else
+                this.camera3DIceHockey.Position = new Vector3(this.camera3DIceHockey.Position.X, this.camera3DIceHockey.Position.Y, this.puck.Position.Z + 3.5f);
+            LimitCameraIceHockey();
+        }
+        private void LimitCameraIceHockey()
+        { 
+            if(this.camera3DIceHockey.Position.Z > 12.0f)
+                this.camera3DIceHockey.Position = new Vector3(this.camera3DIceHockey.Position.X, this.camera3DIceHockey.Position.Y, 12.0f);
+            if (this.camera3DIceHockey.Position.Z < -3.5f)
+                this.camera3DIceHockey.Position = new Vector3(this.camera3DIceHockey.Position.X, this.camera3DIceHockey.Position.Y, -3.5f);
+        }
+
+        public void IceHockeySelectedPlayer()
+        {
+            foreach (var obj in iceHockeyTeam1)
+            {
+                obj.ShowHideIceHockeySeletion(obj.isSelected);
+            }
+        }
+        public void SetPuckToCharacter(RigidBody3D puck)
+        {
+            foreach (var obj in iceHockeyTeam1)
+            {
+                obj.SetPuckOriginalTransform(puck);
+            }
+            foreach (var obj in iceHockeyTeam2)
+            {
+                obj.SetPuckOriginalTransform(puck);
+            }            
+            this.puck = puck;
+        }
+        public void SetCamera3DIceHockey(Node3D camera3DIceHockey)
+        {
+            this.camera3DIceHockey = camera3DIceHockey;
+        }
+        public void SetIceHockeyGoal(IceHockey iceHockey)
+        {
+            Goal1 = iceHockey.GetIceHockeyGoal(0);
+            Goal2 = iceHockey.GetIceHockeyGoal(1);
+            foreach (var obj in iceHockeyTeam1)
+            {
+                obj.SetIceHockeyGoal(Goal1, Goal2);                
+            }
+            foreach (var obj in iceHockeyTeam2)
+            {
+                obj.SetIceHockeyGoal(Goal1, Goal2);
+            }
         }        
+        public void SetIceHockeyTeams()
+        {
+            foreach (var obj in iceHockeyTeam1)
+            {
+                obj.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+            }
+            foreach (var obj in iceHockeyTeam2)
+            {
+                obj.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+            }            
+        }
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu
@@ -1814,7 +2009,6 @@ namespace WinterSports.Scripts.Controller
                 gamePlayModel.iceHockeyFlagSelectButton = value;
             }
         }
-
         public List<Button> GetSetKitTeam1
         {
             get

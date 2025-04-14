@@ -11,6 +11,8 @@ using WinterSports.Scripts.Interfaces;
 using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Static;
 using static CrossCountryOvertake;
+using static WinterSports.Scripts.Controller.GamePlayController;
+using static WinterSports.Scripts.Events.PlayerInputIceHockey;
 using static WinterSports.Scripts.Model.TimerModel;
 
 public partial class Character : CharacterBody3D
@@ -39,6 +41,8 @@ public partial class Character : CharacterBody3D
     [Export] CrossCountryOvertake crossCountryOvertakeML = null;
     [Export] Node3D stick = null;
     [Export] Node3D[] goalKeeperItems = null;
+    [Export] Node3D iceHockeySelect = null;
+    [Export] Node3D puckRef = null;
     #endregion
     #region Variables    
     private IPlayerInput playerInput = null;
@@ -58,9 +62,9 @@ public partial class Character : CharacterBody3D
     private List<List<DirectionArrow>> directionArrowBiathlonList = new List<List<DirectionArrow>>();
     private int characterId = 0;
     private int characterIdCountry = 0;
-    private bool isAI = false;
+    private bool isAI = false;    
     private Vector3 initPosition = Vector3.Zero;
-    private Vector3 initRotation = Vector3.Zero;
+    private Vector3 initRotation = Vector3.Zero;    
     #endregion
     #region Variables Speed Skating
     private List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList = new List<SpeedSkatingTrackDTO>();
@@ -165,15 +169,61 @@ public partial class Character : CharacterBody3D
     }
     private bool isScoreSet = false;
     #endregion
+    #region Ice Hockey
+    public enum IceHockeyPosition
+    {
+        GK,
+        DF,
+        MF,
+        FW
+    };
+    public IceHockeyPosition iceHockeyPosition = IceHockeyPosition.GK;
+    public IceHockeyPosition[] iceHockeyPositionArray = {
+        IceHockeyPosition.GK,
+        IceHockeyPosition.DF,
+        IceHockeyPosition.DF,
+        IceHockeyPosition.MF,
+        IceHockeyPosition.FW,
+        IceHockeyPosition.FW
+    };
+    public enum IceHockeyPositionSide
+    {
+        L,
+        M,
+        R
+    };
+    public IceHockeyPositionSide iceHockeyPositionSide = IceHockeyPositionSide.M;
+    public IceHockeyPositionSide[] iceHockeyPositionSideArray = {
+        IceHockeyPositionSide.M,
+        IceHockeyPositionSide.R,
+        IceHockeyPositionSide.L,
+        IceHockeyPositionSide.M,
+        IceHockeyPositionSide.L,
+        IceHockeyPositionSide.R,
+    };
+    public int playerNumber = 0;
+    private bool isPlayerTeam = false;
+    public bool isSelected = false;
+    public bool isPuckControl = false;
+    public RigidBody3D puck = null;
+    private Transform3D originalTransform;
+    private IceHockeyGoal Goal1 = null;
+    private IceHockeyGoal Goal2 = null;
+    public List<Character> iceHockeyTeam1 = null;
+    public List<Character> iceHockeyTeam2 = null;
+    private Node3D ShootRef = null;
+    #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-    {        
+    {
+        DefineShootRef();
         Init();
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        //GD.Print(puck.Position);//<-
     }
     public override void _PhysicsProcess(double delta)
     {        
@@ -204,6 +254,14 @@ public partial class Character : CharacterBody3D
         {            
             playerInput.PlayerInput(animationPlayer, delta);
         }
+        if (prefabName == "IceHockeyRink")
+        {              
+            if (isPlayerTeam && isSelected && IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
+                playerInput.PlayerInput(animationPlayer, delta);
+
+            //if(puck is not null)
+            //    GD.Print(puck.GlobalPosition.Y);//<-
+        }
     }
     #endregion
     #region Methods
@@ -231,6 +289,7 @@ public partial class Character : CharacterBody3D
         //Ski jumping
         if (prefabName == "Skijumping")
             InitSkiJump();
+        ShowHideIceHockeySeletion(false);
     }
     private void PlayerInputSetUp()
     {        
@@ -1041,6 +1100,75 @@ public partial class Character : CharacterBody3D
             else
                 obj.Hide();
         }        
+    }
+    public void SetisPlayerTeam(bool isPlayerTeam)
+    {
+        this.isPlayerTeam = isPlayerTeam;
+    }
+    public void SetisSelected(bool isSelected)
+    {
+        this.isSelected = isSelected;
+    }    
+    public void SetPlayerIceHockeyPosition(int playerId, int teamID)
+    {
+        iceHockeyPosition = iceHockeyPositionArray[playerId];
+        if(teamID == 0)
+            iceHockeyPositionSide = iceHockeyPositionSideArray[playerId];    
+        else
+            if(playerId != 0 && playerId != 3)
+                iceHockeyPositionSide = iceHockeyPositionSideArray[playerId] == IceHockeyPositionSide.R ? IceHockeyPositionSide.L : IceHockeyPositionSide.R;
+            else
+                iceHockeyPositionSide = iceHockeyPositionSideArray[playerId];
+    }
+    public void ShowHideIceHockeySeletion(bool isShow)
+    {
+        if (isShow)
+            iceHockeySelect.Show();
+        else
+            iceHockeySelect.Hide();
+    }
+    public void SetPuckRefPosition()
+    {
+        if (playerInput.GetisPuckControl())
+        {
+            Transform3D newTransform = new Transform3D(originalTransform.Basis, puckRef.GlobalTransform.Origin);
+            puck.Transform = newTransform;
+            puck.LinearVelocity = Vector3.Zero;
+        }//<-        
+    }
+    public void SetPuckOriginalTransform(RigidBody3D puck)
+    {
+        if (isPuckControl)
+        {
+            this.puck = puck;
+            originalTransform = puck.Transform;            
+        }
+        playerInput.SetPuck(puck);
+        playerInput.SetisSelected(ref isSelected);
+        playerInput.SetisPuckControl(ref isPuckControl);
+        playerInput.SetObj<Node3D>(ShootRef);
+    }
+    public void SetIceHockeyGoal(IceHockeyGoal Goal1, IceHockeyGoal Goal2)
+    {
+        this.Goal1 = Goal1;
+        this.Goal2 = Goal2;
+        playerInput.SetIceHockeyGoals(Goal1, Goal2);
+    }
+
+    public void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2)
+    {
+        this.iceHockeyTeam1 = iceHockeyTeam1;
+        this.iceHockeyTeam2 = iceHockeyTeam2;
+        playerInput.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+    }
+    private void DefineShootRef()
+    {
+        var ShootRefChild = this.GetParent().GetChildren();
+        foreach (var obj in ShootRefChild)
+        {
+            if (obj.Name == "MeshInstance3D2")
+                ShootRef = obj as Node3D;
+        }
     }
     #endregion
 }

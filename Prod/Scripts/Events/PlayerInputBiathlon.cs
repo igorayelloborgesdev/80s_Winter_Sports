@@ -12,6 +12,7 @@ using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Static;
 using static Character;
 using static Godot.TextServer;
+using static WinterSports.Scripts.Events.PlayerInputIceHockey;
 
 namespace WinterSports.Scripts.Events
 {
@@ -526,7 +527,24 @@ namespace WinterSports.Scripts.Events
         {
             character.SetWind(angle, power);
         }
+        public void SetIceHockeyGoals(IceHockeyGoal Goal1, IceHockeyGoal Goal2)
+        {
 
+        }
+        public void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2) { }
+        public void SetPuck(RigidBody3D puck) { }
+        public void SetisSelected(ref bool isSelected) { }
+        public void SetisPuckControl(ref bool isPuckControl) { }
+        public bool GetisSelected() { return false; }
+        public bool GetisPuckControl() { return false; }
+        public InputShoot GetinputShoot()
+        {
+            return InputShoot.None;
+        }
+        public void SetObj<T>(T obj)
+        {
+
+        }
         #endregion
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Model;
+using static WinterSports.Scripts.Events.PlayerInputIceHockey;
 
 namespace WinterSports.Scripts.Interfaces
 {
@@ -41,5 +42,15 @@ namespace WinterSports.Scripts.Interfaces
         int GetLinePosition();
         bool GetIsAI();
         void OnlyPause();
+        void SetIceHockeyGoals(IceHockeyGoal Goal1, IceHockeyGoal Goal2);
+        void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2);
+        void SetPuck(RigidBody3D puck);
+        void SetisSelected(ref bool isSelected);
+        void SetisPuckControl(ref bool isPuckControl);
+        bool GetisSelected();
+        bool GetisPuckControl();
+        InputShoot GetinputShoot();
+
+        void SetObj<T>(T obj);
     }
 }
