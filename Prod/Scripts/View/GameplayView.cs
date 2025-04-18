@@ -142,6 +142,11 @@ public partial class GameplayView : Control
         levelId = GameModeSingleton.sport - 1;        
         prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;        
         gamePlayController = new GamePlayController();
+
+        gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));//<-
+        gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));//<-
+        gamePlayController.SetParentNode(this);//<-
+
         InstantiateLevel();
         AssignButtons();
         SetMainGamePlayEvents();
@@ -161,7 +166,7 @@ public partial class GameplayView : Control
         gamePlayController.SetTimeScoreBestLastLabelFinishBiathlon(bestScoreLabel, timeScoreLabel, errorsScoreLabel, lastScoreLabel);
         gamePlayController.SetTimeScreenControl(controlSkiSpeedSkatingScreen, controlBiathlonScreen, controlLugeImpulse, controlSkiJumpImpulse, controlSkiJump);
         gamePlayController.SetImpulseLabel(impulseNinePatchRect, impulseSkiJumpNinePatchRect);
-        gamePlayController.SetSelectTeamSessionControlIceHockey(selectTeamSessionControlIceHockey);
+        gamePlayController.SetSelectTeamSessionControlIceHockey(selectTeamSessionControlIceHockey);                        
         gamePlayController.SetAllControlsToHideIceHockey(readySetGoControl,
                                                         finishSessionScreen,
                                                         controlSkiSpeedSkatingBiathlon,

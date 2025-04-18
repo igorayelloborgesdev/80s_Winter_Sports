@@ -1,7 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://bly2bw1cxk4g5"]
+[gd_scene load_steps=45 format=3 uid="uid://bp5auwrt6cfpc"]
 
-[ext_resource type="Script" path="res://Scripts/Prefabs/Target.cs" id="1_36a08"]
-[ext_resource type="Script" path="res://Scripts/Prefabs/TargetBoard.cs" id="1_hd6hc"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/TargetBoard.cs" id="1_uhv0d"]
+[ext_resource type="Script" path="res://Scripts/Prefabs/Target.cs" id="2_6q6v7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pr6jq"]
 
@@ -401,108 +401,108 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0b62f")
 
-[node name="TargetBoard" type="MeshInstance3D" node_paths=PackedStringArray("targetDisable", "targetEnable")]
+[node name="TargetBoard_3" type="MeshInstance3D" node_paths=PackedStringArray("targetDisable", "targetEnable")]
 transform = Transform3D(0.206986, 0, 0, 0, 0.206986, 0, 0, 0, 0.206986, 0.184923, 0.71408, -0.14716)
 mesh = SubResource("ArrayMesh_hbqjq")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6oouo")
-script = ExtResource("1_hd6hc")
-targetDisable = [NodePath("Target1Disable_001"), NodePath("Target2Disable_001"), NodePath("Target3Disable_001"), NodePath("Target4Disable_001"), NodePath("Target5Disable_001")]
-targetEnable = [NodePath("Target1Disable"), NodePath("Target2Disable"), NodePath("Target3Disable"), NodePath("Target4Disable"), NodePath("Target5Disable")]
+script = ExtResource("1_uhv0d")
+targetDisable = [NodePath("Target1Disable_001_3"), NodePath("Target2Disable_001_3"), NodePath("Target3Disable_001_3"), NodePath("Target4Disable_001_3"), NodePath("Target5Disable_001_3")]
+targetEnable = [NodePath("Target1Disable_3"), NodePath("Target2Disable_3"), NodePath("Target3Disable_3"), NodePath("Target4Disable_3"), NodePath("Target5Disable_3")]
 
-[node name="Target1Disable" type="MeshInstance3D" parent="."]
+[node name="Target1Disable_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -0.907, -0.507, 2.366)
 mesh = SubResource("ArrayMesh_8sofo")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vsc4s")
-script = ExtResource("1_36a08")
+script = ExtResource("2_6q6v7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Target1Disable"]
+[node name="StaticBody3D_3" type="StaticBody3D" parent="Target1Disable_3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Target1Disable/StaticBody3D"]
+[node name="CollisionShape3D_3" type="CollisionShape3D" parent="Target1Disable_3/StaticBody3D_3"]
 shape = SubResource("ConcavePolygonShape3D_l1155")
 
-[node name="Target1Disable_001" type="MeshInstance3D" parent="."]
+[node name="Target1Disable_001_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -1.00136, -0.507061, 2.36599)
 visible = false
 mesh = SubResource("ArrayMesh_wue27")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jums7")
 
-[node name="Target2Disable" type="MeshInstance3D" parent="."]
+[node name="Target2Disable_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -0.907229, -0.507061, 1.46518)
 mesh = SubResource("ArrayMesh_7qkml")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vsc4s")
-script = ExtResource("1_36a08")
+script = ExtResource("2_6q6v7")
 id = 1
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Target2Disable"]
+[node name="StaticBody3D_3" type="StaticBody3D" parent="Target2Disable_3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Target2Disable/StaticBody3D"]
+[node name="CollisionShape3D_3" type="CollisionShape3D" parent="Target2Disable_3/StaticBody3D_3"]
 shape = SubResource("ConcavePolygonShape3D_1j1k3")
 
-[node name="Target2Disable_001" type="MeshInstance3D" parent="."]
+[node name="Target2Disable_001_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -1.00136, -0.507061, 1.46519)
 visible = false
 mesh = SubResource("ArrayMesh_ha0s2")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jums7")
 
-[node name="Target3Disable" type="MeshInstance3D" parent="."]
+[node name="Target3Disable_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -0.907228, -0.507061, 0.568518)
 mesh = SubResource("ArrayMesh_vajps")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vsc4s")
-script = ExtResource("1_36a08")
+script = ExtResource("2_6q6v7")
 id = 2
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Target3Disable"]
+[node name="StaticBody3D_3" type="StaticBody3D" parent="Target3Disable_3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Target3Disable/StaticBody3D"]
+[node name="CollisionShape3D_3" type="CollisionShape3D" parent="Target3Disable_3/StaticBody3D_3"]
 shape = SubResource("ConcavePolygonShape3D_gutey")
 
-[node name="Target3Disable_001" type="MeshInstance3D" parent="."]
+[node name="Target3Disable_001_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -1.00136, -0.507061, 0.568508)
 visible = false
 mesh = SubResource("ArrayMesh_8cnbh")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jums7")
 
-[node name="Target4Disable" type="MeshInstance3D" parent="."]
+[node name="Target4Disable_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -0.907228, -0.507061, -0.336444)
 mesh = SubResource("ArrayMesh_ln2ik")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vsc4s")
-script = ExtResource("1_36a08")
+script = ExtResource("2_6q6v7")
 id = 3
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Target4Disable"]
+[node name="StaticBody3D_3" type="StaticBody3D" parent="Target4Disable_3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Target4Disable/StaticBody3D"]
+[node name="CollisionShape3D_3" type="CollisionShape3D" parent="Target4Disable_3/StaticBody3D_3"]
 shape = SubResource("ConcavePolygonShape3D_ex301")
 
-[node name="Target4Disable_001" type="MeshInstance3D" parent="."]
+[node name="Target4Disable_001_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -1.00136, -0.507061, -0.336431)
 visible = false
 mesh = SubResource("ArrayMesh_ap82h")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jums7")
 
-[node name="Target5Disable" type="MeshInstance3D" parent="."]
+[node name="Target5Disable_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -0.907228, -0.507061, -1.26377)
 mesh = SubResource("ArrayMesh_jddc2")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vsc4s")
-script = ExtResource("1_36a08")
+script = ExtResource("2_6q6v7")
 id = 4
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Target5Disable"]
+[node name="StaticBody3D_3" type="StaticBody3D" parent="Target5Disable_3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Target5Disable/StaticBody3D"]
+[node name="CollisionShape3D_3" type="CollisionShape3D" parent="Target5Disable_3/StaticBody3D_3"]
 shape = SubResource("ConcavePolygonShape3D_lr4lw")
 
-[node name="Target5Disable_001" type="MeshInstance3D" parent="."]
+[node name="Target5Disable_001_3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0, -0.212812, 0, 0.351624, 0, 0, 0, 0, 0.351624, -1.00136, -0.507061, -1.26377)
 visible = false
 mesh = SubResource("ArrayMesh_xyeoq")

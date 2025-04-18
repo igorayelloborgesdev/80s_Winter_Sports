@@ -49,11 +49,8 @@ Esportes
 .Ice Hockey 
 
 ...MF
-....Attack<-
-.....Lugar do chute
-.....Shoot power
-.....Delimitar área de jogador próximo do gol
-BUG.....Biatlon - não mostra quais alvos foram acertados
+....Attack
+.....Delimitar área de jogador próximo do gol<-
 ....Pass
 ...FW
 ....Pass

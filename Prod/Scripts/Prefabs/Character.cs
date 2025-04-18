@@ -212,6 +212,9 @@ public partial class Character : CharacterBody3D
     public List<Character> iceHockeyTeam1 = null;
     public List<Character> iceHockeyTeam2 = null;
     private Node3D ShootRef = null;
+    public NinePatchRect hockeyPower = null;
+    public Node parentNode = null;
+    public Control hockeyPowerControl = null;
     #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.

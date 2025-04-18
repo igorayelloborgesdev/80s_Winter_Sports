@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cnnbicrpa6an2"]
+[gd_scene load_steps=48 format=3 uid="uid://cnnbicrpa6an2"]
 
 [ext_resource type="PackedScene" uid="uid://depcln18g2rt0" path="res://Art/3d/BiathlonTrack.glb" id="1_ldpda"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Biathlon.cs" id="1_m8lly"]
@@ -8,10 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://dwlvxquxshfgg" path="res://Art/3d/DonwhillTrack_DownhillFloor.png" id="4_pv2d2"]
 [ext_resource type="Texture2D" uid="uid://cjj1u0ip64un2" path="res://Art/3d/DonwhillTrack_tree.png" id="5_eoct8"]
 [ext_resource type="Texture2D" uid="uid://dml0jcqyxknu4" path="res://Art/3d/BiathlonTrack_tree.png" id="6_2x1o7"]
-[ext_resource type="PackedScene" uid="uid://bly2bw1cxk4g5" path="res://Prefab/target_board.tscn" id="6_v8cc0"]
 [ext_resource type="PackedScene" uid="uid://emem201u3ntr" path="res://Prefab/gate_start.tscn" id="7_ucrmp"]
 [ext_resource type="PackedScene" uid="uid://nj3mjr6c218v" path="res://Prefab/gate_finish.tscn" id="8_xusd6"]
 [ext_resource type="PackedScene" uid="uid://cisv43q421rkp" path="res://Prefab/grandstand.tscn" id="9_1s1c3"]
+[ext_resource type="PackedScene" uid="uid://bp5auwrt6cfpc" path="res://Prefab/target_board3.tscn" id="12_rhuxd"]
+[ext_resource type="PackedScene" uid="uid://bly2bw1cxk4g5" path="res://Prefab/target_board1.tscn" id="12_vbskk"]
+[ext_resource type="PackedScene" uid="uid://ckxweq0lqje1x" path="res://Prefab/target_board2.tscn" id="13_mpmb5"]
+[ext_resource type="PackedScene" uid="uid://b0t0xu2snl6gn" path="res://Prefab/target_board4.tscn" id="14_fg6vu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mc4n"]
 transparency = 2
@@ -845,27 +848,14 @@ mesh = SubResource("BoxMesh_tbqmx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinishArea3D/Area3DFinish" index="0"]
 shape = SubResource("BoxShape3D_d168w")
 
-[node name="TargetBoard" parent="." index="22" instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.0491415, 0, 0.201068, 0, 0.206986, 0, -0.201068, 0, 0.0491415, 25.8885, 0.71408, 0.421877)
-surface_material_override/0 = null
+[node name="TargetBoard_3" parent="." index="22" instance=ExtResource("12_rhuxd")]
+transform = Transform3D(0.00149199, 0, 0.206981, 0, 0.206986, 0, -0.206981, 0, 0.00149199, 95.4166, 0.714, -1.9886)
 
-[node name="TargetBoard2" parent="." index="23" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.0134979, 0, 0.206545, 0, 0.206986, 0, -0.206545, 0, 0.0134979, 64.5186, 0.71408, -0.248623)
-surface_material_override/0 = null
-targetDisable = [NodePath("../TargetBoard/Target1Disable_001"), NodePath("../TargetBoard/Target2Disable_001"), NodePath("../TargetBoard/Target3Disable_001"), NodePath("../TargetBoard/Target4Disable_001"), NodePath("../TargetBoard/Target5Disable_001")]
-targetEnable = [NodePath("../TargetBoard/Target1Disable"), NodePath("../TargetBoard/Target2Disable"), NodePath("../TargetBoard/Target3Disable"), NodePath("../TargetBoard/Target4Disable"), NodePath("../TargetBoard/Target5Disable")]
+[node name="TargetBoard_2" parent="." index="23" instance=ExtResource("13_mpmb5")]
+transform = Transform3D(0.0132383, 0, 0.206562, 0, 0.206986, 0, -0.206562, 0, 0.0132383, 64.5943, 0.71408, 0.102339)
 
-[node name="TargetBoard5" parent="." index="24" instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.00477902, 0, 0.206931, 0, 0.206986, 0, -0.206931, 0, 0.00477902, 64.579, 0.71408, -0.137628)
+[node name="TargetBoard_4" parent="." index="24" instance=ExtResource("14_fg6vu")]
+transform = Transform3D(0.0403739, 0, 0.20301, 0, 0.206986, 0, -0.20301, 0, 0.0403739, 139.741, 0.714, -1.75946)
 
-[node name="TargetBoard3" parent="." index="25" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.00876874, 0, 0.2068, 0, 0.206986, 0, -0.2068, 0, 0.00876874, 95.3517, 0.71408, -2.7393)
-surface_material_override/0 = null
-targetDisable = [NodePath("../TargetBoard/Target1Disable_001"), NodePath("../TargetBoard/Target2Disable_001"), NodePath("../TargetBoard/Target3Disable_001"), NodePath("../TargetBoard/Target4Disable_001"), NodePath("../TargetBoard/Target5Disable_001")]
-targetEnable = [NodePath("../TargetBoard/Target1Disable"), NodePath("../TargetBoard/Target2Disable"), NodePath("../TargetBoard/Target3Disable"), NodePath("../TargetBoard/Target4Disable"), NodePath("../TargetBoard/Target5Disable")]
-
-[node name="TargetBoard4" parent="." index="26" node_paths=PackedStringArray("targetDisable", "targetEnable") instance=ExtResource("6_v8cc0")]
-transform = Transform3D(0.0445707, 0, 0.20213, 0, 0.206986, 0, -0.20213, 0, 0.0445707, 139.835, 0.71408, -2.53647)
-surface_material_override/0 = null
-targetDisable = [NodePath("../TargetBoard/Target1Disable_001"), NodePath("../TargetBoard/Target2Disable_001"), NodePath("../TargetBoard/Target3Disable_001"), NodePath("../TargetBoard/Target4Disable_001"), NodePath("../TargetBoard/Target5Disable_001")]
-targetEnable = [NodePath("../TargetBoard/Target1Disable"), NodePath("../TargetBoard/Target2Disable"), NodePath("../TargetBoard/Target3Disable"), NodePath("../TargetBoard/Target4Disable"), NodePath("../TargetBoard/Target5Disable")]
+[node name="TargetBoard" parent="." index="25" instance=ExtResource("12_vbskk")]
+transform = Transform3D(0.0360637, 0, 0.20382, 0, 0.206986, 0, -0.20382, 0, 0.0360637, 25.7983, 0.71408, 1.13519)

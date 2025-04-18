@@ -36,6 +36,7 @@ namespace WinterSports.Scripts.Events
         public enum InputShoot
         {
             None,
+            LoadPower,
             Shoot,
             Finish
         };
@@ -49,12 +50,17 @@ namespace WinterSports.Scripts.Events
         public bool isPuckControl = false;
         private string currentAnimation = "";
         private int shootPosition = 0;
+        private float shootPower = 0.0f;
         #endregion
         #region Constant
         private float speed = 3.0f;
         private float angle = 0.0f;
         private const float speedInc = 0.01f;
-        private const float maxSpeed = 5.0f;        
+        private const float maxSpeed = 5.0f;
+        private const float shootPowerMax = 74.0f;
+        private const float shootPowerInc = 2.0f;
+        private const float shootPowerMinAvg = 27.0f;
+        private const float shootPowerMaxAvg = 47.0f;
         IDictionary<int, string> animName = new Dictionary<int, string>()
         {
             {1,"IceHockey_Idle"},
@@ -84,8 +90,24 @@ namespace WinterSports.Scripts.Events
                             }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
                             {
-                                GoalShot();
-                            }                            
+                                if (inputShoot == InputShoot.None)
+                                {
+                                    inputShoot = InputShoot.LoadPower;
+                                }
+                                if (inputShoot == InputShoot.LoadPower)
+                                {
+                                    if (shootPower < shootPowerMax)
+                                    {
+                                        shootPower += shootPowerInc;
+                                        this.iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(shootPower, 18.0f);//<-
+                                    }                                                                        
+                                }
+
+                            }
+                            if (!Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && inputShoot == InputShoot.LoadPower)//Button 1
+                            {                                
+                                GoalShot();//<-                                
+                            }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
                             {
                             
@@ -162,7 +184,7 @@ namespace WinterSports.Scripts.Events
                         //PlayAnimation(animationPlayer, index);
                     }
                     else
-                    {
+                    {                        
                         inputLeftRight = InputLeftRight.None;
                         inputUpDown = InputUpDown.None;
                         PlayAnimation(animationPlayer, 1);
@@ -309,8 +331,17 @@ namespace WinterSports.Scripts.Events
                 RotatePlayer();
                 DefinePuckShootPosition();
                 PlayAnimationLoop(animationPlayer, 2);                
-            }            
+            }
+            MoveShootGraphic();
         }
+
+        private void MoveShootGraphic()
+        {
+            Vector3 objectOfInterestPosition = this.iceHockeyTeam1[3].GlobalPosition;//<-
+            Vector2 hudPosition = this.iceHockeyTeam1[3].parentNode.GetViewport().GetCamera3D().UnprojectPosition(objectOfInterestPosition);
+            this.iceHockeyTeam1[3].hockeyPower.Position = new Vector2(hudPosition.X - 45.0f, hudPosition.Y - 90.0f);
+        }
+
         private void RotatePlayer()
         {
             if (inputLeftRight == InputLeftRight.Right && inputUpDown == InputUpDown.Up)
@@ -410,11 +441,9 @@ namespace WinterSports.Scripts.Events
         }
         public void GoalShot()
         {
-            if (inputShoot == InputShoot.None && isPuckControl && isSelected)
-            {
-
-                GD.Print(shootPosition);//<-
-
+            if (inputShoot == InputShoot.LoadPower && isPuckControl && isSelected)
+            {     
+                
                 float angleRadians = new Vector2(Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.X, Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.Z)
                     .AngleToPoint(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
                 float hypotenuse = 0.5f;
@@ -425,7 +454,22 @@ namespace WinterSports.Scripts.Events
                     .DistanceTo(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
 
                 int xDir = 1;
-                if(puck.GlobalPosition.X < Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.X)
+
+                float shootPwr = 0.0f;
+                if (shootPower > shootPowerMinAvg && shootPower < shootPowerMaxAvg)
+                {
+                    shootPwr = 0.0f;
+                }
+                if (shootPower <= shootPowerMinAvg)
+                {
+                    shootPwr = -1.0f;
+                }
+                if (shootPower >= shootPowerMaxAvg)
+                {
+                    shootPwr = 1.0f;
+                }
+
+                if (puck.GlobalPosition.X < Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.X)
                     xDir = 1;
                 if (puck.GlobalPosition.X > Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.X)
                     xDir = -1;
@@ -441,7 +485,7 @@ namespace WinterSports.Scripts.Events
                 double anguloGraus = anguloRadianos * (180.0 / Math.PI);                
                 float catetoOpostoHeight2 = (float)((double)hypotenuse * Mathf.Sin(anguloRadianos));
 
-                objRef.GlobalPosition = new Vector3(puck.GlobalPosition.X + (xDir * Mathf.Abs(catetoAdjacente)),                    
+                objRef.GlobalPosition = new Vector3(puck.GlobalPosition.X + ((xDir + shootPwr) * Mathf.Abs(catetoAdjacente)),                    
                     puck.GlobalPosition.Y,
                     puck.GlobalPosition.Z + (zDir * Mathf.Abs(catetoOposto)));
 
@@ -454,6 +498,9 @@ namespace WinterSports.Scripts.Events
                 isSelected = false;
                 puck.ApplyImpulse(impulse);
 
+                shootPower = 0.0f;
+                this.iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
+                this.iceHockeyTeam1[3].hockeyPower.Hide();                
             }
         }
         public void GoalShotReset()

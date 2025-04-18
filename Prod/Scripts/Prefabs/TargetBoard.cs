@@ -9,7 +9,7 @@ public partial class TargetBoard : Node
     #endregion
     #region Methods
     public void DisableTargetById(int id)
-    {
+    {     
         targetDisable[id].Show();
         targetEnable[id].Hide();                
     }

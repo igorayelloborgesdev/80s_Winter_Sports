@@ -461,9 +461,9 @@ namespace WinterSports.Scripts.Events
                 var collider = character.GetTargetRayCast().GetCollider() as Node;                
                 if (collider is not null)
                 {                    
-                    var target = collider.GetParent() as Target;
+                    var target = collider.GetParent() as Target;                    
                     if (target.GetSetEnable)
-                    {                        
+                    {
                         var targetBoard = collider.GetParent().GetParent() as TargetBoard;                        
                         targetBoard.DisableTargetById(target.GetId);
                         target.GetSetEnable = false;
@@ -477,7 +477,7 @@ namespace WinterSports.Scripts.Events
                 }                
             }
             else
-            {
+            {                
                 shootingErrors++;
                 character.SetErrors(shootingErrors);                
             }

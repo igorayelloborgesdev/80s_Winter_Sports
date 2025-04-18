@@ -106,6 +106,9 @@ namespace WinterSports.Scripts.Controller
         private RigidBody3D puck = null;
         private IceHockeyGoal Goal1 = null;
         private IceHockeyGoal Goal2 = null;
+        private NinePatchRect hockeyPower = null;
+        private Node parentNode = null;
+        private Control hockeyPowerControl = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -601,6 +604,10 @@ namespace WinterSports.Scripts.Controller
             iceHockeyTeam1[3].Show();
             iceHockeyTeam1[3].isSelected = true;
             iceHockeyTeam1[3].isPuckControl = true;
+            iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
+            iceHockeyTeam1[3].parentNode = this.parentNode;
+            iceHockeyTeam1[3].hockeyPowerControl = this.hockeyPowerControl;
+            iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
         }
         public void SetCharacter(LugeSled lugeSled)
         {
@@ -1260,7 +1267,8 @@ namespace WinterSports.Scripts.Controller
         {            
             InitTimer();
             SkiStatic.Reset();
-            setScore = true;            
+            setScore = true;
+            ShowHockeyPower(false);
         }
         #endregion
         #region Speed Skating
@@ -1273,6 +1281,7 @@ namespace WinterSports.Scripts.Controller
         {
             InitTimer();
             speedSkatingModel.laps = 0;
+            ShowHockeyPower(false);
         }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
         {            
@@ -1344,7 +1353,8 @@ namespace WinterSports.Scripts.Controller
         #region Biathlon
         private void InitBiathlon()
         {
-            InitTimer();            
+            InitTimer();
+            ShowHockeyPower(false);
         }
         
         public void SetCharacterBiathlon()
@@ -1375,6 +1385,7 @@ namespace WinterSports.Scripts.Controller
         private void InitLuge()
         {
             InitTimer();
+            ShowHockeyPower(false);
         }
         public void ResetLuge()
         {
@@ -1405,7 +1416,8 @@ namespace WinterSports.Scripts.Controller
         #region Ski jump
         private void InitSkiJump()
         {
-            InitTimer();            
+            InitTimer();
+            ShowHockeyPower(false);
         }
         public void SetCharacterSportSkiJump()
         {            
@@ -1713,6 +1725,28 @@ namespace WinterSports.Scripts.Controller
             this.countryFlag = countryFlag;
             this.countryCode = countryCode;
         }
+        public void SetHockeyPower(NinePatchRect hockeyPower)
+        { 
+            this.hockeyPower = hockeyPower;
+        }
+        public void SetHockeyPowerControl(Control hockeyPowerControl)
+        {
+            this.hockeyPowerControl = hockeyPowerControl;//<-                        
+        }
+        private void ShowHockeyPower(bool isShow)
+        {
+            if (isShow)
+            {
+                this.hockeyPower.Show();
+                return;
+            }
+            this.hockeyPower.Hide();
+        }
+
+        public void SetParentNode(Node parentNode)
+        {
+            this.parentNode = parentNode;
+        }        
         public void PlayIceHockey()
         {
             SetIceHockeyPlayerColors();
