@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=28 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
@@ -40,6 +40,10 @@ albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_foyeu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d2lxn"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gebid"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vwqi7"]
 
 [node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "armature", "skiCollision", "crossCountryOvertakeFM", "crossCountryOvertakeMR", "crossCountryOvertakeML", "stick", "goalKeeperItems", "iceHockeySelect", "puckRef", "rayCast3D", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
 script = ExtResource("2_51ifc")
@@ -394,3 +398,13 @@ shape = SubResource("BoxShape3D_d2lxn")
 
 [node name="puckRef" type="Node3D" parent="." index="15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.136105, 0.115)
+
+[node name="MeshInstance3DIceHockey" type="MeshInstance3D" parent="." index="16"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0361696, 0.0202809)
+visible = false
+mesh = SubResource("CylinderMesh_gebid")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3DIceHockey" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3DIceHockey/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_vwqi7")

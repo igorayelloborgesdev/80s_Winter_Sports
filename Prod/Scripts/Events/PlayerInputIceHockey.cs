@@ -114,11 +114,25 @@ namespace WinterSports.Scripts.Events
                             }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Up
                             {
-                                inputUpDown = InputUpDown.Up;
+                                if (!this.iceHockeyTeam1[3].iceHockeyMoveLimit["down"])
+                                {
+                                    inputUpDown = InputUpDown.Up;
+                                }
+                                else
+                                {
+                                    inputUpDown = InputUpDown.None;                                    
+                                }                                
                             }
                             else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Down
                             {
-                                inputUpDown = InputUpDown.Down;
+                                if (!this.iceHockeyTeam1[3].iceHockeyMoveLimit["up"])
+                                {
+                                    inputUpDown = InputUpDown.Down;
+                                }
+                                else
+                                {
+                                    inputUpDown = InputUpDown.None;
+                                }
                             }
                             else
                             {
@@ -126,11 +140,26 @@ namespace WinterSports.Scripts.Events
                             }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
                             {
-                                inputLeftRight = InputLeftRight.Left;
+                                if (!this.iceHockeyTeam1[3].iceHockeyMoveLimit["right"])
+                                {
+                                    inputLeftRight = InputLeftRight.Left;
+                                }
+                                else
+                                {
+                                    inputLeftRight = InputLeftRight.None;
+                                }
+                                
                             }
                             else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
                             {
-                                inputLeftRight = InputLeftRight.Right;
+                                if (!this.iceHockeyTeam1[3].iceHockeyMoveLimit["left"])
+                                {
+                                    inputLeftRight = InputLeftRight.Right;
+                                }
+                                else
+                                {
+                                    inputLeftRight = InputLeftRight.None;
+                                }                                
                             }
                             else
                             {
@@ -290,7 +319,7 @@ namespace WinterSports.Scripts.Events
         { }
         #endregion
         private void MovePlayer(AnimationPlayer animationPlayer)
-        {
+        {                        
             var direction = Vector3.Zero;
             if (inputLeftRight == InputLeftRight.Right)
             {

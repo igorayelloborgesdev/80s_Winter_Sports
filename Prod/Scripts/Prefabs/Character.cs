@@ -201,6 +201,13 @@ public partial class Character : CharacterBody3D
         IceHockeyPositionSide.L,
         IceHockeyPositionSide.R,
     };
+    public Dictionary<string, bool> iceHockeyMoveLimit = new Dictionary<string, bool>()
+    {
+        {"up",false},
+        {"down",false},
+        {"left",false},
+        {"right",false}                                        
+    };
     public int playerNumber = 0;
     private bool isPlayerTeam = false;
     public bool isSelected = false;
@@ -292,6 +299,10 @@ public partial class Character : CharacterBody3D
         //Ski jumping
         if (prefabName == "Skijumping")
             InitSkiJump();
+        //IceHockeyRink
+        if (prefabName == "IceHockeyRink")
+            InitIceHockey();     
+
         ShowHideIceHockeySeletion(false);
     }
     private void PlayerInputSetUp()
@@ -1157,7 +1168,6 @@ public partial class Character : CharacterBody3D
         this.Goal2 = Goal2;
         playerInput.SetIceHockeyGoals(Goal1, Goal2);
     }
-
     public void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2)
     {
         this.iceHockeyTeam1 = iceHockeyTeam1;
@@ -1172,6 +1182,14 @@ public partial class Character : CharacterBody3D
             if (obj.Name == "MeshInstance3D2")
                 ShootRef = obj as Node3D;
         }
+    }
+    private void InitIceHockey()
+    {        
+        this.GetNode<Area3D>("MeshInstance3D/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
+        this.GetNode<Area3D>("SkiCollision/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
+        this.GetNode<Area3D>("CrossCountryCollisionF/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
+        this.GetNode<Area3D>("CrossCountryCollisionML/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
+        this.GetNode<Area3D>("CrossCountryCollisionMR/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
     }
     #endregion
 }
