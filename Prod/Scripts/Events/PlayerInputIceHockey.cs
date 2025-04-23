@@ -51,6 +51,13 @@ namespace WinterSports.Scripts.Events
         private string currentAnimation = "";
         private int shootPosition = 0;
         private float shootPower = 0.0f;
+        
+        private float moveTimeRandom = 5.0f;
+        private float moveTime = 0.0f;
+        private float moveTimeInc = 0.01f;
+
+        private float moveSpaceRandomMin = 1.0f;
+        private float moveSpaceRandomMax = 2.5f;                
         #endregion
         #region Constant
         private float speed = 3.0f;
@@ -65,11 +72,19 @@ namespace WinterSports.Scripts.Events
         {
             {1,"IceHockey_Idle"},
             {2,"IceHockey_Run_Puck"}
-        };
-        
+        };        
         private const float iceHockeyMaxPower = 2.5f;
-
         private Node3D objRef = null;
+        public int playerNumber = 0;
+        public bool isPlayerTeam = false;
+
+        private const float moveTimeMin = 5.0f;
+        private const float moveTimeMax = 20.0f;
+
+        private const float moveSpaceMin1 = 1.0f;
+        private const float moveSpaceMin2 = 2.5f;
+        private const float moveSpaceMax1 = 2.5f;
+        private const float moveSpaceMax2 = 4.0f;
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0,
@@ -110,7 +125,7 @@ namespace WinterSports.Scripts.Events
                             }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
                             {
-                            
+                                PuckPass();//<-
                             }
                             if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Up
                             {
@@ -220,6 +235,55 @@ namespace WinterSports.Scripts.Events
                         GoalShotReset();
                     }
                     MovePlayer(animationPlayer);
+                }
+            }
+        }
+
+        public void PlayerInputAI(AnimationPlayer animationPlayer, double delta = 0.0f)
+        {
+            if (!isPause)
+            {
+                if (this.playerNumber == 4)
+                {                    
+                    
+                    float distanciaX = Mathf.Abs(this.iceHockeyTeam1[3].GlobalPosition.X - this.iceHockeyTeam1[this.playerNumber].GlobalPosition.X); // Calcula a distância no eixo X                    
+                    float distanciaZ = Mathf.Abs(this.iceHockeyTeam1[3].GlobalPosition.Z - this.iceHockeyTeam1[this.playerNumber].GlobalPosition.Z); // Calcula a distância no eixo X                                                                                             
+
+                    if (distanciaX < moveSpaceRandomMin)
+                    {                 
+                        inputLeftRight = InputLeftRight.Left;
+                    }                    
+                    else if (distanciaX > moveSpaceRandomMax)
+                    {
+                        inputLeftRight = InputLeftRight.Right;                     
+                    }                        
+                    else
+                    {
+                        inputLeftRight = InputLeftRight.None;
+                    }
+
+                    if (distanciaZ < moveSpaceRandomMin)
+                    {
+                        inputUpDown = InputUpDown.Up;
+                    }
+                    else if (distanciaZ > moveSpaceRandomMax)
+                    {
+                        inputUpDown = InputUpDown.Down;
+                    }
+                    else
+                    {
+                        inputUpDown = InputUpDown.None;
+                    }
+
+                    MovePlayer(animationPlayer);
+
+                    moveTime += moveTimeInc;
+
+                    if (moveTime > moveTimeRandom)
+                    {                        
+                        GenerateRandomMove();
+                        GenerateRandomSpace();
+                    }
                 }
             }
         }
@@ -468,6 +532,7 @@ namespace WinterSports.Scripts.Events
         { 
             this.puck = puck;
         }
+        
         public void GoalShot()
         {
             if (inputShoot == InputShoot.LoadPower && isPuckControl && isSelected)
@@ -520,18 +585,40 @@ namespace WinterSports.Scripts.Events
 
                 var impulse = (objRef.GlobalPosition - puck.GlobalPosition);
                 impulse = new Vector3(impulse.X, 
-                    (shootPosition == 0 || shootPosition == 2 ? Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.Y : catetoOpostoHeight2), impulse.Z);//<-
+                    (shootPosition == 0 || shootPosition == 2 ? Goal1.GetGoalPositionNode3d(shootPosition).GlobalPosition.Y : catetoOpostoHeight2), impulse.Z);
 
                 inputShoot = InputShoot.Shoot;
                 isPuckControl = false;
                 isSelected = false;
+                this.iceHockeyTeam1[3].isPuckControl = false;
+                this.iceHockeyTeam1[3].isSelected = false;
+
                 puck.ApplyImpulse(impulse);
 
                 shootPower = 0.0f;
                 this.iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
-                this.iceHockeyTeam1[3].hockeyPower.Hide();                
+                //this.iceHockeyTeam1[3].hockeyPower.Hide();                
             }
         }
+        public void PuckPass()
+        {
+            if (isSelected && isPuckControl)
+            {
+                Vector3 impulse = ((new Vector3(this.iceHockeyTeam1[4].GlobalPosition.X, puck.GlobalPosition.Y, this.iceHockeyTeam1[4].GlobalPosition.Z 
+                                    //- 2.0f
+                                    ) - puck.GlobalPosition)) * 0.1f;
+                inputShoot = InputShoot.None;
+                isPuckControl = false;
+                isSelected = false;
+                this.iceHockeyTeam1[3].isPuckControl = false;
+                this.iceHockeyTeam1[3].isSelected = false;
+                this.iceHockeyTeam1[3].ShowHideIceHockeySeletion(false);
+                //this.iceHockeyTeam1[3].hockeyPower.Hide();
+                shootPower = 0.0f;
+                puck.ApplyImpulse(impulse);                
+            }
+        }
+
         public void GoalShotReset()
         {
             if (inputShoot == InputShoot.Shoot)
@@ -557,5 +644,28 @@ namespace WinterSports.Scripts.Events
         {
             objRef = obj as Node3D;
         }
+
+        public void SetIsPlayerTeamPlayerNumber(bool isPlayerTeam, int playerNumber)
+        {
+            this.isPlayerTeam = isPlayerTeam;
+            this.playerNumber = playerNumber;
+        }
+        private void GenerateRandomMove()
+        {
+            moveTime = 0;
+            Random rnd = new Random();            
+            moveTimeRandom = moveTimeMin + (float)rnd.NextDouble() * (moveTimeMax - moveTimeMin);            
+        }
+        private void GenerateRandomSpace()
+        {            
+            Random rnd = new Random();
+            moveSpaceRandomMin = moveSpaceMin1 + (float)rnd.NextDouble() * (moveSpaceMin2 - moveSpaceMin1);
+            moveSpaceRandomMax = moveSpaceMax1 + (float)rnd.NextDouble() * (moveSpaceMax2 - moveSpaceMax1);
+        }
+        public RigidBody3D GetPuck()
+        {
+            return this.puck;
+        }
+
     }
 }

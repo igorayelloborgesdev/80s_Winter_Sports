@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7unrelaoyecc"]
+[gd_scene load_steps=29 format=3 uid="uid://c7unrelaoyecc"]
 
 [ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bnir71w3nswcj" path="res://Prefab/target.tscn" id="9_m4ora"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/SkiCollision.cs" id="10_d4d4k"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/CrossCountryOvertake.cs" id="11_w80qr"]
+[ext_resource type="Script" path="res://Prefab/IceHockeyPlayerCollision.cs" id="15_ibjdi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wter0"]
 shading_mode = 0
@@ -400,11 +401,12 @@ shape = SubResource("BoxShape3D_d2lxn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.136105, 0.115)
 
 [node name="MeshInstance3DIceHockey" type="MeshInstance3D" parent="." index="16"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0361696, 0.0202809)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.0361696, 0.0202809)
 visible = false
 mesh = SubResource("CylinderMesh_gebid")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3DIceHockey" index="0"]
+script = ExtResource("15_ibjdi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3DIceHockey/Area3D" index="0"]
 shape = SubResource("CylinderShape3D_vwqi7")

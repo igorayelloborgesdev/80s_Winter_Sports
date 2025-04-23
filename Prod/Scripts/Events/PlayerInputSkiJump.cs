@@ -265,6 +265,10 @@ namespace WinterSports.Scripts.Events
                 }
             }            
         }
+        public void PlayerInputAI(AnimationPlayer animationPlayer, double delta = 0.0f)
+        {
+
+        }
         private void WindDirection(AnimationPlayer animationPlayer)
         {
 
@@ -415,6 +419,14 @@ namespace WinterSports.Scripts.Events
         public void SetObj<T>(T obj)
         {
             
+        }
+        public void SetIsPlayerTeamPlayerNumber(bool isPlayerTeam, int playerNumber)
+        {
+
+        }
+        public RigidBody3D GetPuck()
+        {
+            return null;
         }
         #endregion
     }

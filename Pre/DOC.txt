@@ -48,13 +48,13 @@ Esportes
 
 .Ice Hockey 
 
-...MF
-....Attack
-.....Delimitar área de jogador próximo do gol<-
-....Pass
+BUG.Limitar movimentação AI perto do gol
+BUG.Chutar para o gol
+
 ...FW
+....Attack<-
 ....Pass
-....Attack
+
 ...DF
 ....Pass
 ...GK..AI

@@ -31,6 +31,10 @@ namespace WinterSports.Scripts.Events
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0,
             CrossCountryOvertake crossCountryOvertakeM = null, CrossCountryOvertake crossCountryOvertakeFR = null, CrossCountryOvertake crossCountryOvertakeFL = null) 
         { }
+        public void PlayerInputAI(AnimationPlayer animationPlayer, double delta = 0.0f)
+        {
+
+        }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
         {            
             animationPlayer.Play(animName[animID]);
@@ -122,6 +126,14 @@ namespace WinterSports.Scripts.Events
         public void SetObj<T>(T obj)
         {
          
+        }
+        public void SetIsPlayerTeamPlayerNumber(bool isPlayerTeam, int playerNumber)
+        {
+
+        }
+        public RigidBody3D GetPuck()
+        {
+            return null;
         }
         #endregion
     }

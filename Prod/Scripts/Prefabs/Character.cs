@@ -232,8 +232,7 @@ public partial class Character : CharacterBody3D
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
-    {
-        //GD.Print(puck.Position);//<-
+    {        
     }
     public override void _PhysicsProcess(double delta)
     {        
@@ -265,12 +264,21 @@ public partial class Character : CharacterBody3D
             playerInput.PlayerInput(animationPlayer, delta);
         }
         if (prefabName == "IceHockeyRink")
-        {              
-            if (isPlayerTeam && isSelected && IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
-                playerInput.PlayerInput(animationPlayer, delta);
-
-            //if(puck is not null)
-            //    GD.Print(puck.GlobalPosition.Y);//<-
+        {
+            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
+            {
+                if (isPlayerTeam)
+                {
+                    if (isSelected)
+                    {
+                        playerInput.PlayerInput(animationPlayer, delta);
+                    }
+                    else
+                    {
+                        playerInput.PlayerInputAI(animationPlayer, delta);                        
+                    }                    
+                }
+            }            
         }
     }
     #endregion
@@ -1162,6 +1170,18 @@ public partial class Character : CharacterBody3D
         playerInput.SetisPuckControl(ref isPuckControl);
         playerInput.SetObj<Node3D>(ShootRef);
     }
+    public void SetPuckOriginalTransform()
+    {
+        if (isPuckControl)
+        {
+            this.puck = playerInput.GetPuck();
+            originalTransform = puck.Transform;
+        }
+        playerInput.SetPuck(puck);
+        playerInput.SetisSelected(ref isSelected);
+        playerInput.SetisPuckControl(ref isPuckControl);
+        playerInput.SetObj<Node3D>(ShootRef);
+    }
     public void SetIceHockeyGoal(IceHockeyGoal Goal1, IceHockeyGoal Goal2)
     {
         this.Goal1 = Goal1;
@@ -1173,6 +1193,7 @@ public partial class Character : CharacterBody3D
         this.iceHockeyTeam1 = iceHockeyTeam1;
         this.iceHockeyTeam2 = iceHockeyTeam2;
         playerInput.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+        playerInput.SetIsPlayerTeamPlayerNumber(isPlayerTeam, playerNumber);
     }
     private void DefineShootRef()
     {
@@ -1190,6 +1211,10 @@ public partial class Character : CharacterBody3D
         this.GetNode<Area3D>("CrossCountryCollisionF/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
         this.GetNode<Area3D>("CrossCountryCollisionML/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
         this.GetNode<Area3D>("CrossCountryCollisionMR/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
+    }
+    public IPlayerInput GetPlayerInput()
+    { 
+        return this.playerInput;
     }
     #endregion
 }

@@ -79,6 +79,10 @@ namespace WinterSports.Scripts.Events
                 GetNotScore();
             }
         }
+        public void PlayerInputAI(AnimationPlayer animationPlayer, double delta = 0.0f)
+        {
+
+        }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
         {
             if (animationPlayer is not null)
@@ -544,6 +548,14 @@ namespace WinterSports.Scripts.Events
         public void SetObj<T>(T obj)
         {
 
+        }
+        public void SetIsPlayerTeamPlayerNumber(bool isPlayerTeam, int playerNumber)
+        {
+
+        }
+        public RigidBody3D GetPuck()
+        {
+            return null;
         }
         #endregion
     }

@@ -122,7 +122,7 @@ namespace WinterSports.Scripts.Controller
             new Vector3 (0.0f, 0.45f, 0.5f),
             new Vector3 (-1.275f, 0.45f, 0.5f),
             new Vector3 (1.275f, 0.45f, 0.5f)
-        };//<-
+        };
         private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);        
         #endregion
         #region Methods
@@ -601,13 +601,22 @@ namespace WinterSports.Scripts.Controller
             {
                 obj.Hide();
             }
-            iceHockeyTeam1[3].Show();
-            iceHockeyTeam1[3].isSelected = true;
-            iceHockeyTeam1[3].isPuckControl = true;
+
+            //--------------------------------------------------------------------
+            for (int i = 3; i < 5; i++)
+            {
+                iceHockeyTeam1[i].Show();
+                iceHockeyTeam1[i].isSelected = false;
+                iceHockeyTeam1[i].isPuckControl = false;                
+            }
             iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
             iceHockeyTeam1[3].parentNode = this.parentNode;
             iceHockeyTeam1[3].hockeyPowerControl = this.hockeyPowerControl;
             iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
+            iceHockeyTeam1[3].isSelected = true;
+            iceHockeyTeam1[3].isPuckControl = true;
+            //--------------------------------------------------------------------
+
         }
         public void SetCharacter(LugeSled lugeSled)
         {
@@ -1878,14 +1887,14 @@ namespace WinterSports.Scripts.Controller
             Character characterPuck = null;
             if (iceHockeyTeam1.Where(x => x.isPuckControl).Any())
             {
-                characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();
+                characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();//<-                
             }
             if (iceHockeyTeam2.Where(x => x.isPuckControl).Any())
             {
                 characterPuck = iceHockeyTeam2.Where(x => x.isPuckControl).First();
             }
             if (characterPuck is not null)
-            {
+            {                
                 characterPuck.SetPuckRefPosition();
             }
             ControlsCameraIceHockey(characterPuck);

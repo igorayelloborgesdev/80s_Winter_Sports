@@ -15,6 +15,9 @@ namespace WinterSports.Scripts.Interfaces
     {
         void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0, 
             CrossCountryOvertake crossCountryOvertakeM = null, CrossCountryOvertake crossCountryOvertakeRR = null, CrossCountryOvertake crossCountryOvertakeRL = null);
+
+        void PlayerInputAI(AnimationPlayer animationPlayer, double delta = 0.0f);
+
         void PlayAnimation(AnimationPlayer animationPlayer, int animID);        
         void SetCharacterBody3D(CharacterBody3D characterBody3D);
         void SetPauseScreen(Control pauseScreen);
@@ -50,7 +53,9 @@ namespace WinterSports.Scripts.Interfaces
         bool GetisSelected();
         bool GetisPuckControl();
         InputShoot GetinputShoot();
-
         void SetObj<T>(T obj);
+        void SetIsPlayerTeamPlayerNumber(bool isPlayerTeam, int playerNumber);
+
+        RigidBody3D GetPuck();
     }
 }
