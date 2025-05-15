@@ -268,9 +268,9 @@ public partial class Character : CharacterBody3D
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
             {
                 if (isPlayerTeam)
-                {
+                {                    
                     if (isSelected)
-                    {
+                    {                 
                         playerInput.PlayerInput(animationPlayer, delta);
                     }
                     else
@@ -1188,11 +1188,11 @@ public partial class Character : CharacterBody3D
         this.Goal2 = Goal2;
         playerInput.SetIceHockeyGoals(Goal1, Goal2);
     }
-    public void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2)
+    public void SetIceHockeyTeams(ref List<Character> iceHockeyTeam1, ref List<Character> iceHockeyTeam2)
     {
         this.iceHockeyTeam1 = iceHockeyTeam1;
         this.iceHockeyTeam2 = iceHockeyTeam2;
-        playerInput.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+        playerInput.SetIceHockeyTeams(ref this.iceHockeyTeam1, ref this.iceHockeyTeam2);
         playerInput.SetIsPlayerTeamPlayerNumber(isPlayerTeam, playerNumber);
     }
     private void DefineShootRef()

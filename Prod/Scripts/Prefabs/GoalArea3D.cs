@@ -31,13 +31,11 @@ public partial class GoalArea3D : Area3D
                 }
                 else if (direction.Dot(Vector3.Right) > 0.5f)
                 {
-                    body.GetParent().GetParent<Character>().iceHockeyMoveLimit["right"] = true;
-                    GD.Print("Tocou na parte direita");
+                    body.GetParent().GetParent<Character>().iceHockeyMoveLimit["right"] = true;                    
                 }
                 else if (direction.Dot(Vector3.Left) > 0.5f)
                 {
-                    body.GetParent().GetParent<Character>().iceHockeyMoveLimit["left"] = true;
-                    GD.Print("Tocou na parte esquerda");
+                    body.GetParent().GetParent<Character>().iceHockeyMoveLimit["left"] = true;                    
                 }                
             }
 

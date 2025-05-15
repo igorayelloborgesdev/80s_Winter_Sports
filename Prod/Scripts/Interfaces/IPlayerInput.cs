@@ -46,7 +46,7 @@ namespace WinterSports.Scripts.Interfaces
         bool GetIsAI();
         void OnlyPause();
         void SetIceHockeyGoals(IceHockeyGoal Goal1, IceHockeyGoal Goal2);
-        void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2);
+        void SetIceHockeyTeams(ref List<Character> iceHockeyTeam1, ref List<Character> iceHockeyTeam2);
         void SetPuck(RigidBody3D puck);
         void SetisSelected(ref bool isSelected);
         void SetisPuckControl(ref bool isPuckControl);
@@ -55,7 +55,7 @@ namespace WinterSports.Scripts.Interfaces
         InputShoot GetinputShoot();
         void SetObj<T>(T obj);
         void SetIsPlayerTeamPlayerNumber(bool isPlayerTeam, int playerNumber);
-
         RigidBody3D GetPuck();
+        void ResetControlAndSelected();
     }
 }

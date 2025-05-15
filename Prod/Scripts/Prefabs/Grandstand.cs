@@ -61,7 +61,7 @@ public partial class Grandstand : Node3D
             Vector3 position;
             for (int i = 0; i < numberOfPoints; i++)
             {
-                t = i / (numberOfPoints - 1.0f);
+                t = i / (numberOfPoints - 1.0f);                
                 position = (1.0f - t) * (1.0f - t) * pointsObj[0].Position + 2.0f * (1.0f - t) * t * pointsObj[1].Position + t * t * pointsObj[2].Position;
                 supportersList.Add(supporter.Instantiate<Supporter>());
                 this.AddChild(supportersList[supportersList.Count - 1]);

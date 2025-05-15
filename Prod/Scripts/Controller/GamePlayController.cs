@@ -603,18 +603,34 @@ namespace WinterSports.Scripts.Controller
             }
 
             //--------------------------------------------------------------------
-            for (int i = 3; i < 5; i++)
+            //for (int i = 0; i < iceHockeyTeam1.Count; i++)//<-            
+            //{
+            //    iceHockeyTeam1[i].Show();
+            //    iceHockeyTeam1[i].isSelected = false;
+            //    iceHockeyTeam1[i].isPuckControl = false;                
+            //}
+            //iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
+            //iceHockeyTeam1[3].parentNode = this.parentNode;
+            //iceHockeyTeam1[3].hockeyPowerControl = this.hockeyPowerControl;
+            //iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
+            //iceHockeyTeam1[3].isSelected = true;
+            //iceHockeyTeam1[3].isPuckControl = true;
+            for (int i = 0; i < iceHockeyTeam1.Count; i++)//<-            
             {
-                iceHockeyTeam1[i].Show();
+                iceHockeyTeam1[i].Show();                
+                //iceHockeyTeam1[i].hockeyPower = this.hockeyPower;
+                //iceHockeyTeam1[i].parentNode = this.parentNode;
+
                 iceHockeyTeam1[i].isSelected = false;
-                iceHockeyTeam1[i].isPuckControl = false;                
+                iceHockeyTeam1[i].isPuckControl = false;
             }
-            iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
-            iceHockeyTeam1[3].parentNode = this.parentNode;
-            iceHockeyTeam1[3].hockeyPowerControl = this.hockeyPowerControl;
-            iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
-            iceHockeyTeam1[3].isSelected = true;
-            iceHockeyTeam1[3].isPuckControl = true;
+            iceHockeyTeam1[0].hockeyPower = this.hockeyPower;
+            iceHockeyTeam1[0].parentNode = this.parentNode;
+
+            iceHockeyTeam1[0].hockeyPowerControl = this.hockeyPowerControl;
+            iceHockeyTeam1[0].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
+            iceHockeyTeam1[0].isSelected = true;
+            iceHockeyTeam1[0].isPuckControl = true;
             //--------------------------------------------------------------------
 
         }
@@ -1611,12 +1627,15 @@ namespace WinterSports.Scripts.Controller
         private void SetIceHockeyInitPosition()
         {
             for (int i = 0; i < iceHockeyTeam1.Count; i++)
-            {
-                iceHockeyTeam1[i].Position = iceHockeyInitPosition[i];
+            {                
+                iceHockeyTeam1[i].Position = iceHockeyInitPosition[iceHockeyTeam1[i].playerNumber];
             }
-            for (int i = 0; i < iceHockeyTeam1.Count; i++)
+            for (int i = 0; i < iceHockeyTeam2.Count; i++)
             {
-                iceHockeyTeam2[i].Position = new Vector3(iceHockeyInitPosition[i].X, iceHockeyInitPosition[i].Y, -1.0f * iceHockeyInitPosition[i].Z);
+                iceHockeyTeam2[i].Position = new Vector3(
+                    iceHockeyInitPosition[iceHockeyTeam2[i].playerNumber].X, 
+                    iceHockeyInitPosition[iceHockeyTeam2[i].playerNumber].Y, 
+                    -1.0f * iceHockeyInitPosition[iceHockeyTeam2[i].playerNumber].Z);
             }            
         }
         private void SetIceHockeyInitRotation()
@@ -1627,7 +1646,7 @@ namespace WinterSports.Scripts.Controller
                 iceHockeyTeam1[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
                 iceHockeyTeam1[i].Rotation = new Vector3(0.0f, iceHockeyTeam1[i].Rotation.Y, 0.0f);
             }
-            for (int i = 0; i < iceHockeyTeam1.Count; i++)
+            for (int i = 0; i < iceHockeyTeam2.Count; i++)
             {
                 iceHockeyTeam2[i].LookAt(iceHockeyInitRotation);
                 iceHockeyTeam2[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
@@ -1805,7 +1824,8 @@ namespace WinterSports.Scripts.Controller
                 
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
-            {                
+            {
+                SetIceHockeyTeams();
                 DefineWhoIsControllingThePuck();                
             }
             
@@ -1885,20 +1905,35 @@ namespace WinterSports.Scripts.Controller
         private void DefineWhoIsControllingThePuck()
         {
             Character characterPuck = null;
+            int playerIndex = -1;
             if (iceHockeyTeam1.Where(x => x.isPuckControl).Any())
             {
                 characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();//<-                
+                playerIndex = iceHockeyTeam1.FindIndex(x => x.isPuckControl);
             }
             if (iceHockeyTeam2.Where(x => x.isPuckControl).Any())
             {
                 characterPuck = iceHockeyTeam2.Where(x => x.isPuckControl).First();
+                playerIndex = iceHockeyTeam2.FindIndex(x => x.isPuckControl);
             }
             if (characterPuck is not null)
             {                
                 characterPuck.SetPuckRefPosition();
             }
-            ControlsCameraIceHockey(characterPuck);
+            ControlsCameraIceHockey(characterPuck);            
+            SetHockeyPower(characterPuck, playerIndex);
         }
+        private void SetHockeyPower(Character characterPuck, int playerIndex)
+        {
+            if (characterPuck is not null)
+            {                
+                iceHockeyTeam1[playerIndex].hockeyPower = this.hockeyPower;
+                iceHockeyTeam1[playerIndex].hockeyPower.Show();
+                iceHockeyTeam1[playerIndex].parentNode = this.parentNode;
+                iceHockeyTeam1[playerIndex].hockeyPowerControl = this.hockeyPowerControl;                
+            }
+        }
+
         private void ControlsCameraIceHockey(Character characterPuck)
         {
             if(characterPuck is not null)
@@ -1952,14 +1987,14 @@ namespace WinterSports.Scripts.Controller
             }
         }        
         public void SetIceHockeyTeams()
-        {
+        {            
             foreach (var obj in iceHockeyTeam1)
-            {
-                obj.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+            {                
+                obj.SetIceHockeyTeams(ref iceHockeyTeam1, ref iceHockeyTeam2);                
             }
             foreach (var obj in iceHockeyTeam2)
             {
-                obj.SetIceHockeyTeams(iceHockeyTeam1, iceHockeyTeam2);
+                obj.SetIceHockeyTeams(ref iceHockeyTeam1, ref iceHockeyTeam2);
             }            
         }
         #endregion

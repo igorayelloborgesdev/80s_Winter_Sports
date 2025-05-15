@@ -49,11 +49,11 @@ Esportes
 .Ice Hockey 
 
 BUG.Limitar movimentação AI perto do gol
-BUG.Chutar para o gol
+BUG.Quando o passe dá errado o jogador não se move
 
 ...FW
 ....Attack<-
-....Pass
+....Pass<-
 
 ...DF
 ....Pass

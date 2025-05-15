@@ -358,7 +358,7 @@ namespace WinterSports.Scripts.Events
         {
             
         }
-        public void SetIceHockeyTeams(List<Character> iceHockeyTeam1, List<Character> iceHockeyTeam2) { }
+        public void SetIceHockeyTeams(ref List<Character> iceHockeyTeam1, ref List<Character> iceHockeyTeam2) { }
         public void SetPuck(RigidBody3D puck) { }
         public void SetisSelected(ref bool isSelected) { }
         public void SetisPuckControl(ref bool isPuckControl) { }
@@ -381,6 +381,9 @@ namespace WinterSports.Scripts.Events
         {
             return null;
         }
+
+        public void ResetControlAndSelected()
+        { }
         #endregion
     }
 }
