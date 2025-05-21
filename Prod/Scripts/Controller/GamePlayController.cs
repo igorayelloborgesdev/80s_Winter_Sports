@@ -624,13 +624,12 @@ namespace WinterSports.Scripts.Controller
                 iceHockeyTeam1[i].isSelected = false;
                 iceHockeyTeam1[i].isPuckControl = false;
             }
-            iceHockeyTeam1[0].hockeyPower = this.hockeyPower;
-            iceHockeyTeam1[0].parentNode = this.parentNode;
-
-            iceHockeyTeam1[0].hockeyPowerControl = this.hockeyPowerControl;
-            iceHockeyTeam1[0].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
-            iceHockeyTeam1[0].isSelected = true;
-            iceHockeyTeam1[0].isPuckControl = true;
+            iceHockeyTeam1[1].hockeyPower = this.hockeyPower;
+            iceHockeyTeam1[1].parentNode = this.parentNode;
+            iceHockeyTeam1[1].hockeyPowerControl = this.hockeyPowerControl;
+            iceHockeyTeam1[1].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
+            iceHockeyTeam1[1].isSelected = true;
+            iceHockeyTeam1[1].isPuckControl = true;
             //--------------------------------------------------------------------
 
         }

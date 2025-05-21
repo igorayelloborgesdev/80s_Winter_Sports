@@ -49,17 +49,19 @@ Esportes
 .Ice Hockey 
 
 BUG.Limitar movimentação AI perto do gol
-BUG.Quando o passe dá errado o jogador não se move
+BUG.Puck desaparecendo
+BUG.Limitar posição do jogador no ataque
+BUG.Limitar posição do jogador na defesa
+BUG.Jogador só pode fazer o chute que estiver em posse de bola
+BUG.Jogador só pode fazer o passe que estiver em posse de bola
 
-...FW
-....Attack<-
-....Pass<-
-
+BUG.Dois players selecionados ao mesmo tempo
 ...DF
+....Pass<-
+...GK
 ....Pass
 ...GK..AI
 ....Defend
-
 
 ...MF
 ....Defend
@@ -69,7 +71,6 @@ BUG.Quando o passe dá errado o jogador não se move
 ....Change Player
 ...GK
 ....Defend
-....Pass
 ...DF
 ....Defend
 ....Change Player

@@ -1156,7 +1156,7 @@ public partial class Character : CharacterBody3D
             Transform3D newTransform = new Transform3D(originalTransform.Basis, puckRef.GlobalTransform.Origin);
             puck.Transform = newTransform;
             puck.LinearVelocity = Vector3.Zero;
-        }//<-        
+        }        
     }
     public void SetPuckOriginalTransform(RigidBody3D puck)
     {
