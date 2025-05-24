@@ -50,24 +50,17 @@ Esportes
 
 BUG.Limitar movimentação AI perto do gol
 BUG.Puck desaparecendo
-BUG.Limitar posição do jogador no ataque
-BUG.Limitar posição do jogador na defesa
 BUG.Jogador só pode fazer o chute que estiver em posse de bola
 BUG.Jogador só pode fazer o passe que estiver em posse de bola
 
 
-
+BUG.Limitar posição do jogador no ataque
+BUG.Limitar posição do jogador na defesa
 BUG.Dois players selecionados ao mesmo tempo
-...DF
-....Pass<-
-FW R
-DF L
-DF R
 ...GK
-....Pass
+....Pass<-
 ...GK..AI
 ....Defend
-
 
 
 ...MF
