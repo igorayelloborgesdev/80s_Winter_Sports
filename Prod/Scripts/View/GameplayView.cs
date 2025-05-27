@@ -236,9 +236,8 @@ public partial class GameplayView : Control
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         //for (int i = 0; i < 2; i++)//<-
         for (int i = 0; i < 1; i++)
-        {
-            //for (int j = 0; j < 7; j++)//<-
-            for (int j = 1; j < 6; j++)
+        {            
+            for (int j = 0; j < 6; j++)//<-
             {
                 Character character = characterPackedScene.Instantiate<Character>();
                 character.GetSetCharacterId = j;

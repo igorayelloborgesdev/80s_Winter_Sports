@@ -54,13 +54,10 @@ BUG.Jogador só pode fazer o chute que estiver em posse de bola
 BUG.Jogador só pode fazer o passe que estiver em posse de bola
 
 
-BUG.Limitar posição do jogador no ataque
+BUG.Limitar posição do jogador no ataque<-
 BUG.Limitar posição do jogador na defesa
-BUG.Dois players selecionados ao mesmo tempo
-...GK
-....Pass<-
-...GK..AI
-....Defend
+
+...GK..AI....Defend
 
 
 ...MF

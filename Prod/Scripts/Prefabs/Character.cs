@@ -222,6 +222,7 @@ public partial class Character : CharacterBody3D
     public NinePatchRect hockeyPower = null;
     public Node parentNode = null;
     public Control hockeyPowerControl = null;
+    public bool isIceHockeySeletion = false;
     #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
@@ -1148,6 +1149,7 @@ public partial class Character : CharacterBody3D
             iceHockeySelect.Show();
         else
             iceHockeySelect.Hide();
+        isIceHockeySeletion = isShow;
     }
     public void SetPuckRefPosition()
     {
