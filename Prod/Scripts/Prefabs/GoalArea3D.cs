@@ -20,21 +20,21 @@ public partial class GoalArea3D : Area3D
             Vector3 direction = (collisionPoint - areaCenter).Normalized();
 
             if (body.GetParent().GetParent<Character>().iceHockeyPosition != Character.IceHockeyPosition.GK)
-            {
+            {                
                 if (direction.Dot(Vector3.Forward) > 0.5f)
-                {
+                {                 
                     body.GetParent().GetParent<Character>().iceHockeyMoveLimit["up"] = true;                    
                 }
                 else if (direction.Dot(Vector3.Back) > 0.5f)
-                {
+                {                 
                     body.GetParent().GetParent<Character>().iceHockeyMoveLimit["down"] = true;                    
                 }
                 else if (direction.Dot(Vector3.Right) > 0.5f)
-                {
+                {                 
                     body.GetParent().GetParent<Character>().iceHockeyMoveLimit["right"] = true;                    
                 }
                 else if (direction.Dot(Vector3.Left) > 0.5f)
-                {
+                {                 
                     body.GetParent().GetParent<Character>().iceHockeyMoveLimit["left"] = true;                    
                 }                
             }

@@ -34,13 +34,6 @@ Esportes
 
 ------------------------------------------------
 
-..Cenario
-..Personagem
-..Gameplay
-..UI
-..Banco de dados
-..Carregar
-
 .Main Menu
 ..Practice
 
@@ -48,15 +41,14 @@ Esportes
 
 .Ice Hockey 
 
-BUG.Limitar movimentação AI perto do gol
 BUG.Puck desaparecendo
 BUG.Puck não pode atravessar a rede
+
 BUG.Jogador só pode fazer o chute que estiver em posse de bola
 BUG.Jogador só pode fazer o passe que estiver em posse de bola
-
+BUG.Limitar movimentação AI perto do gol
 
 ...GK..AI....Defend
-
 
 ...MF
 ....Defend

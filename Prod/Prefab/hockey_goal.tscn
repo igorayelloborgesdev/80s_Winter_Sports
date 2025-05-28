@@ -104,9 +104,6 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/GoalNetCollider2/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_ckweo")
 
-[node name="GoalNetCollider" parent="Goal" index="3"]
-visible = false
-
 [node name="StaticBody3D" type="StaticBody3D" parent="Goal/GoalNetCollider" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/GoalNetCollider/StaticBody3D" index="0"]
