@@ -286,11 +286,11 @@ namespace WinterSports.Scripts.Events
             {                
                 DefineWhoIsControllingThePuck();                
                 int playerNumberIndex = this.iceHockeyTeam1.FindIndex(x => x.playerNumber == this.playerNumber);
-
+                
                 if (playerNumberIndex != playerIndex && playerIndex != -1)
-                {                    
-                    
-                    int playerNumberIndexPuckControl = this.iceHockeyTeam1.FindIndex(x => x.isPuckControl);                    
+                {
+
+                    int playerNumberIndexPuckControl = this.iceHockeyTeam1.FindIndex(x => x.isPuckControl);
                     float distanciaX = Mathf.Abs(this.iceHockeyTeam1[playerIndex].GlobalPosition.X - this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.X); // Calcula a distância no eixo X                    
                     float distanciaZ = Mathf.Abs(this.iceHockeyTeam1[playerIndex].GlobalPosition.Z - this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z); // Calcula a distância no eixo X                                                                                             
 
@@ -491,7 +491,7 @@ namespace WinterSports.Scripts.Events
                                 inputUpDown = InputUpDown.Down;
                             }
                             else if (distanciaZ < moveSpaceRandomMin)
-                            {                                
+                            {
                                 inputUpDown = InputUpDown.Up;
                             }
                             else
@@ -568,9 +568,9 @@ namespace WinterSports.Scripts.Events
                     {
                         if (puck.GlobalPosition.X <= goalKeeperMoveSpaceMax &&
                             puck.GlobalPosition.X >= -1.0f * goalKeeperMoveSpaceMax)
-                        {                            
-                            iceHockeyTeam1[playerNumberIndex].GlobalPosition = 
-                                new Vector3(puck.GlobalPosition.X, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Y, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z);                            
+                        {
+                            iceHockeyTeam1[playerNumberIndex].GlobalPosition =
+                                new Vector3(puck.GlobalPosition.X, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Y, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z);
                         }
                         else
                         {
@@ -583,9 +583,36 @@ namespace WinterSports.Scripts.Events
                             {
                                 iceHockeyTeam1[playerNumberIndex].GlobalPosition =
                                 new Vector3(-goalKeeperMoveSpaceMax, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Y, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z);
-                            }                            
-                        }                        
+                            }
+                        }
                         PlayAnimationLoop(animationPlayer, 3);
+                    }
+
+                    if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.25f || this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z < -9.25f)
+                    {
+
+                        if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.5f)
+                        {
+                            inputUpDown = InputUpDown.Up;                         
+                        }
+                        else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z < -9.5f)
+                        {
+                            inputUpDown = InputUpDown.Down;                            
+                        }
+                        else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.25f)
+                        {
+                            this.iceHockeyTeam1[playerNumberIndex].GlobalPosition = new Vector3(
+                                this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.X,
+                                this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Y,
+                                9.25f);                            
+                        }
+                        else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z < -9.25f)
+                        {                            
+                            this.iceHockeyTeam1[playerNumberIndex].GlobalPosition = new Vector3(
+                                this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.X,
+                                this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Y,
+                                -9.25f);
+                        }
                     }
 
                     MovePlayer(animationPlayer, playerNumberIndex);
@@ -593,11 +620,11 @@ namespace WinterSports.Scripts.Events
                     moveTime += moveTimeInc;
 
                     if (moveTime > moveTimeRandom)
-                    {                        
+                    {
                         GenerateRandomMove();
                         GenerateRandomSpace();
                     }
-                }
+                }                
             }
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
