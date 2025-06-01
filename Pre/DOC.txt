@@ -41,26 +41,28 @@ Esportes
 
 .Ice Hockey 
 
-BUG.Puck desaparecendo
+
+
+BUG.Puck desaparecendo<-
 BUG.Puck não pode atravessar a rede
-
-BUG.Jogador só pode fazer o chute que estiver em posse de bola
-BUG.Jogador só pode fazer o passe que estiver em posse de bola
-BUG.Limitar movimentação AI perto do gol
-
+...MF
+....Change Player
+...FW
+....Change Player
+...DF
+....Change Player
 ...GK..AI....Defend
+
+
 
 ...MF
 ....Defend
-....Change Player
 ...FW
 ....Defend
-....Change Player
 ...GK
 ....Defend
 ...DF
 ....Defend
-....Change Player
 ..AI
 ...Start
 ...GK

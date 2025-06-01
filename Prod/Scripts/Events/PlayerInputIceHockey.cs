@@ -96,6 +96,13 @@ namespace WinterSports.Scripts.Events
                 DefineWhoIsControllingThePuck();
                 if (!isAI)
                 {
+
+                    GD.Print("----------------------------");
+                    for (int i = 0; i < this.iceHockeyTeam1.Count(); i++)
+                    {
+                        GD.Print(this.iceHockeyTeam1[i].isPuckControl);
+                    }
+
                     JoystickInput.GetJoyPressed();
                     if (Input.IsAnythingPressed())
                     {                        
@@ -119,7 +126,7 @@ namespace WinterSports.Scripts.Events
                                 }
                                 if (inputShoot == InputShoot.LoadPower)
                                 {                                    
-                                    if (shootPower < shootPowerMax)
+                                    if (shootPower < shootPowerMax && isPuckControl && this.iceHockeyTeam1[playerIndex].hockeyPowerControl is not null)
                                     {                                        
                                         shootPower += shootPowerInc;
                                         this.iceHockeyTeam1[playerIndex].hockeyPowerControl.Size = new Vector2(shootPower, 18.0f);
@@ -276,7 +283,8 @@ namespace WinterSports.Scripts.Events
 
             if (jogadorMaisProximo != null)
             {                
-                playerIndex = indiceJogadorMaisProximo;                
+                playerIndex = indiceJogadorMaisProximo;
+                this.iceHockeyTeam1[playerIndex].isSelected = true;
             }
         }
 
@@ -817,11 +825,13 @@ namespace WinterSports.Scripts.Events
 
                         if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.5f)
                         {
-                            inputUpDown = InputUpDown.Up;                         
+                            inputUpDown = InputUpDown.Up;
+                            GD.Print("TESTE A");
                         }
                         else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z < -9.5f)
                         {
-                            inputUpDown = InputUpDown.Down;                            
+                            inputUpDown = InputUpDown.Down;
+                            GD.Print("TESTE B");
                         }
                         else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.25f)
                         {
@@ -1224,8 +1234,8 @@ namespace WinterSports.Scripts.Events
 
                 shootPower = 0.0f;
                 this.iceHockeyTeam1[playerIndex].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);
-
                 this.iceHockeyTeam1[playerIndex].hockeyPower.Hide();
+                GetPlayerNextPuck();//<-
             }
         }
         private void PuckPassposition()
@@ -1482,7 +1492,8 @@ namespace WinterSports.Scripts.Events
                 this.iceHockeyTeam1[playerIndex].isPuckControl = false;
                 this.iceHockeyTeam1[playerIndex].isSelected = false;
                 this.iceHockeyTeam1[playerIndex].ShowHideIceHockeySeletion(false);
-                this.iceHockeyTeam1[playerIndex].hockeyPower.Hide();
+                if(this.iceHockeyTeam1[playerIndex].hockeyPower is not null)
+                    this.iceHockeyTeam1[playerIndex].hockeyPower.Hide();
 
                 this.iceHockeyTeam1[playerNumberIndexPass].isSelected = true;
                 this.iceHockeyTeam1[playerNumberIndexPass].ShowHideIceHockeySeletion(true);                
