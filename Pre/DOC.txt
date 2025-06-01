@@ -41,10 +41,7 @@ Esportes
 
 .Ice Hockey 
 
-
-
-BUG.Puck desaparecendo<-
-BUG.Puck não pode atravessar a rede
+BUG.Puck não pode atravessar a rede<-
 ...MF
 ....Change Player
 ...FW

@@ -12,8 +12,7 @@ public partial class IceHockeyPlayerCollision : Area3D
     {
         try
         {
-            //GD.Print(body.GetParent().Name);
-
+            
         }
         catch (Exception ex) { }
     }

@@ -97,11 +97,11 @@ namespace WinterSports.Scripts.Events
                 if (!isAI)
                 {
 
-                    GD.Print("----------------------------");
-                    for (int i = 0; i < this.iceHockeyTeam1.Count(); i++)
-                    {
-                        GD.Print(this.iceHockeyTeam1[i].isPuckControl);
-                    }
+                    //GD.Print("----------------------------");
+                    //for (int i = 0; i < this.iceHockeyTeam1.Count(); i++)
+                    //{
+                    //    GD.Print(this.iceHockeyTeam1[i].isPuckControl);
+                    //}
 
                     JoystickInput.GetJoyPressed();
                     if (Input.IsAnythingPressed())
@@ -601,13 +601,11 @@ namespace WinterSports.Scripts.Events
 
                         if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.5f)
                         {
-                            inputUpDown = InputUpDown.Up;
-                            GD.Print("TESTE A");
+                            inputUpDown = InputUpDown.Up;                            
                         }
                         else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z < -9.5f)
                         {
                             inputUpDown = InputUpDown.Down;
-                            GD.Print("TESTE B");
                         }
                         else if (this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z > 9.25f)
                         {
