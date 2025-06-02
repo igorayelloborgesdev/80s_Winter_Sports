@@ -41,9 +41,10 @@ Esportes
 
 .Ice Hockey 
 
-BUG.Puck não pode atravessar a rede<-
+
+
 ...MF
-....Change Player
+....Change Player<-
 ...FW
 ....Change Player
 ...DF
