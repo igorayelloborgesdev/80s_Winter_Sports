@@ -271,7 +271,7 @@ public partial class Character : CharacterBody3D
                 if (isPlayerTeam)
                 {                    
                     if (isSelected)
-                    {                 
+                    {                        
                         playerInput.PlayerInput(animationPlayer, delta);
                     }
                     else

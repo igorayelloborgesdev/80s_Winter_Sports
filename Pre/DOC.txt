@@ -43,13 +43,7 @@ Esportes
 
 
 
-...MF
-....Change Player<-
-...FW
-....Change Player
-...DF
-....Change Player
-...GK..AI....Defend
+...GK..AI....Defend//<-
 
 
 
