@@ -600,29 +600,18 @@ namespace WinterSports.Scripts.Controller
             foreach (var obj in iceHockeyTeam2)
             {
                 obj.Hide();
-            }
-
-            //--------------------------------------------------------------------
-            //for (int i = 0; i < iceHockeyTeam1.Count; i++)//<-            
-            //{
-            //    iceHockeyTeam1[i].Show();
-            //    iceHockeyTeam1[i].isSelected = false;
-            //    iceHockeyTeam1[i].isPuckControl = false;                
-            //}
-            //iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
-            //iceHockeyTeam1[3].parentNode = this.parentNode;
-            //iceHockeyTeam1[3].hockeyPowerControl = this.hockeyPowerControl;
-            //iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
-            //iceHockeyTeam1[3].isSelected = true;
-            //iceHockeyTeam1[3].isPuckControl = true;
-            for (int i = 0; i < iceHockeyTeam1.Count; i++)//<-            
+            }            
+            for (int i = 0; i < iceHockeyTeam1.Count; i++)
             {
-                iceHockeyTeam1[i].Show();                
-                //iceHockeyTeam1[i].hockeyPower = this.hockeyPower;
-                //iceHockeyTeam1[i].parentNode = this.parentNode;
-
+                iceHockeyTeam1[i].Show();                                
                 iceHockeyTeam1[i].isSelected = false;
                 iceHockeyTeam1[i].isPuckControl = false;
+            }
+            for (int i = 0; i < iceHockeyTeam2.Count; i++)
+            {
+                iceHockeyTeam2[i].Show();
+                iceHockeyTeam2[i].isSelected = false;
+                iceHockeyTeam2[i].isPuckControl = false;
             }
             iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
             iceHockeyTeam1[3].parentNode = this.parentNode;

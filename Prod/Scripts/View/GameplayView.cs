@@ -234,7 +234,7 @@ public partial class GameplayView : Control
     private void InstantiateCharacterIceHockey()
     {
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
-        //for (int i = 0; i < 2; i++)//<-
+        //for (int i = 0; i < 2; i++)
         for (int i = 0; i < 1; i++)
         {            
             for (int j = 0; j < 6; j++)//<-
@@ -259,6 +259,32 @@ public partial class GameplayView : Control
                 iceHockey.AddChild(character);
             }
         }
+
+        for (int i = 1; i < 2; i++)
+        {
+            for (int j = 0; j < 1; j++)//<-
+            {
+                Character character = characterPackedScene.Instantiate<Character>();
+                character.GetSetCharacterId = j;
+                character.SetPrefabName = prefabName;
+                character.ScaleObjectLocal(new Vector3(3.0f, 3.0f, 3.0f));//<-
+                if (j > 0)
+                {
+                    character.ShowHideIceHockeyStick(true);
+                    character.ShowHideIceHockeyGoalKeeper(false);
+                }
+                else
+                {
+                    character.ShowHideIceHockeyStick(false);
+                    character.ShowHideIceHockeyGoalKeeper(true);
+                }
+                character.playerNumber = j;
+                character.SetPlayerIceHockeyPosition(j, i);
+                gamePlayController.SetIceHockeyCharacter(character, i == 0);
+                iceHockey.AddChild(character);
+            }
+        }
+
         gamePlayController.SetIceHockeyTeams();
         gamePlayController.HideIceHockeyCharacter();//<-TESTE        
     }

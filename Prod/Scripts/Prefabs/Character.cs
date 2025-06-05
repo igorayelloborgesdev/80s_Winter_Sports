@@ -271,13 +271,17 @@ public partial class Character : CharacterBody3D
                 if (isPlayerTeam)
                 {                    
                     if (isSelected)
-                    {                        
+                    {
                         playerInput.PlayerInput(animationPlayer, delta);
                     }
                     else
-                    {
-                        playerInput.PlayerInputAI(animationPlayer, delta);                        
-                    }                    
+                    {                        
+                        playerInput.PlayerInputAI(animationPlayer, delta);
+                    }
+                }
+                else
+                {
+                    playerInput.PlayerInputAIOpponent(animationPlayer, delta);
                 }
             }            
         }
@@ -1217,6 +1221,10 @@ public partial class Character : CharacterBody3D
     public IPlayerInput GetPlayerInput()
     { 
         return this.playerInput;
+    }
+    public void SetGoalKeeperShoot(AnimationPlayer animationPlayer, int xDir, int zDir)
+    {
+        this.playerInput.SetGoalKeeperShoot(animationPlayer, xDir, zDir);
     }
     #endregion
 }

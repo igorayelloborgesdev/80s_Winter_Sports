@@ -559,6 +559,11 @@ namespace WinterSports.Scripts.Events
         }
         public void ResetControlAndSelected()
         { }
+        public void PlayerInputAIOpponent(AnimationPlayer animationPlayer, double delta = 0.0f)
+        {
+        }
+        public void SetGoalKeeperShoot(AnimationPlayer animationPlayer, int xDir, int zDir)
+        { }
         #endregion
     }
 }

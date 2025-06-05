@@ -43,7 +43,9 @@ Esportes
 
 
 
-...GK..AI....Defend//<-
+...DF..AI....Defend//<-
+...MF..AI....Defend
+...FW..AI....Defend
 
 
 
@@ -60,16 +62,14 @@ Esportes
 ...GK
 ....Pass
 ...DF
-....Defend
 ....Pass
 ...MF
-....Defend
 ....Pass
 ....Attack
 ...FW
-....Defend
 ....Pass
 ....Attack
+
 ...Start
 ..Anim
 ..Shootout
