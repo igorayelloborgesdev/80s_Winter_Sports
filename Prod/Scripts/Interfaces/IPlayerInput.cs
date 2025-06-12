@@ -59,5 +59,8 @@ namespace WinterSports.Scripts.Interfaces
         void ResetControlAndSelected();
         void PlayerInputAIOpponent(AnimationPlayer animationPlayer, double delta = 0.0f);
         void SetGoalKeeperShoot(AnimationPlayer animationPlayer, int xDir, int zDir);
+        void ResetControlAndSelectedTeam1();
+
+        void SetisCollidedWithTeamMate(bool isCollidedWithTeamMate, bool isMove);
     }
 }

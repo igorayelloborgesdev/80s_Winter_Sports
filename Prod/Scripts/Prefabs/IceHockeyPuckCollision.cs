@@ -12,7 +12,7 @@ public partial class IceHockeyPuckCollision : Area3D
     {
         try
         {            
-            var character = body.GetParent().GetParent<Character>();
+            var character = body.GetParent().GetParent<Character>();            
             body.GetParent().GetParent<Character>().GetPlayerInput().ResetControlAndSelected();
             body.GetParent().GetParent<Character>().isSelected = true;
             body.GetParent().GetParent<Character>().isPuckControl = true;            
@@ -21,8 +21,9 @@ public partial class IceHockeyPuckCollision : Area3D
             body.GetParent().GetParent<Character>().SetPuckOriginalTransform();
             body.GetParent().GetParent<Character>().ShowHideIceHockeySeletion(true);
             //body.GetParent().GetParent<Character>().hockeyPower.Show();
-
         }
-        catch (Exception ex) { }
+        catch (Exception ex) {
+            var msg = ex.Message;
+        }
     }
 }

@@ -262,7 +262,7 @@ public partial class GameplayView : Control
 
         for (int i = 1; i < 2; i++)
         {
-            for (int j = 0; j < 1; j++)//<-
+            for (int j = 0; j < 6; j++)//<-
             {
                 Character character = characterPackedScene.Instantiate<Character>();
                 character.GetSetCharacterId = j;

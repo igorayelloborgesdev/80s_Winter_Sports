@@ -435,6 +435,8 @@ namespace WinterSports.Scripts.Events
         }
         public void SetGoalKeeperShoot(AnimationPlayer animationPlayer, int xDir, int zDir)
         { }
+        public void ResetControlAndSelectedTeam1() { }
+        public void SetisCollidedWithTeamMate(bool isCollidedWithTeamMate, bool isMove) { }
         #endregion
     }
 }

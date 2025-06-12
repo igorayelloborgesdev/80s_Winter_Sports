@@ -209,7 +209,7 @@ public partial class Character : CharacterBody3D
         {"right",false}                                        
     };
     public int playerNumber = 0;
-    private bool isPlayerTeam = false;
+    public bool isPlayerTeam = false;
     public bool isSelected = false;
     public bool isPuckControl = false;
     public RigidBody3D puck = null;
@@ -280,7 +280,7 @@ public partial class Character : CharacterBody3D
                     }
                 }
                 else
-                {
+                {                    
                     playerInput.PlayerInputAIOpponent(animationPlayer, delta);
                 }
             }            
@@ -1153,7 +1153,7 @@ public partial class Character : CharacterBody3D
             iceHockeySelect.Show();
         else
             iceHockeySelect.Hide();
-        isIceHockeySeletion = isShow;
+        isIceHockeySeletion = isShow;        
     }
     public void SetPuckRefPosition()
     {
@@ -1174,7 +1174,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetPuck(puck);
         playerInput.SetisSelected(ref isSelected);
         playerInput.SetisPuckControl(ref isPuckControl);
-        playerInput.SetObj<Node3D>(ShootRef);
+        playerInput.SetObj<Node3D>(ShootRef);        
     }
     public void SetPuckOriginalTransform()
     {
@@ -1186,7 +1186,7 @@ public partial class Character : CharacterBody3D
         playerInput.SetPuck(puck);
         playerInput.SetisSelected(ref isSelected);
         playerInput.SetisPuckControl(ref isPuckControl);
-        playerInput.SetObj<Node3D>(ShootRef);
+        playerInput.SetObj<Node3D>(ShootRef);        
     }
     public void SetIceHockeyGoal(IceHockeyGoal Goal1, IceHockeyGoal Goal2)
     {

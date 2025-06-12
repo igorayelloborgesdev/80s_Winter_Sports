@@ -1896,7 +1896,7 @@ namespace WinterSports.Scripts.Controller
             int playerIndex = -1;
             if (iceHockeyTeam1.Where(x => x.isPuckControl).Any())
             {
-                characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();//<-                
+                characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();
                 playerIndex = iceHockeyTeam1.FindIndex(x => x.isPuckControl);
             }
             if (iceHockeyTeam2.Where(x => x.isPuckControl).Any())
@@ -1906,7 +1906,7 @@ namespace WinterSports.Scripts.Controller
             }
             if (characterPuck is not null)
             {                
-                characterPuck.SetPuckRefPosition();
+                characterPuck.SetPuckRefPosition();                
             }
             ControlsCameraIceHockey(characterPuck);            
             SetHockeyPower(characterPuck, playerIndex);

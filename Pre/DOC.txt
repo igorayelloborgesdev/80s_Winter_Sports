@@ -41,43 +41,29 @@ Esportes
 
 .Ice Hockey 
 
+..BUG.tirar selecção de time adversário
+..BUG.tirar shoot power de time adversário
+..BUG.Limitar time adversário área do goleiro
+..BUG.Definir posição dos jogadores quando o goleiro estiver com a bola
+..BUG.Jogadores do time do player se movimentando quando não estão com a bola
 
+...GK..AI....Pass
+...DF..AI....Pass
+...MF..AI....Pass
+...FW..AI....Pass
+...MF..AI....Attack//<-
+...FW..AI....Attack
 
-...DF..AI....Defend//<-
-...MF..AI....Defend
-...FW..AI....Defend
+..Score
 
-
-
-...MF
-....Defend
-...FW
-....Defend
-...GK
-....Defend
-...DF
-....Defend
-..AI
+..AI...Start
 ...Start
-...GK
-....Pass
-...DF
-....Pass
-...MF
-....Pass
-....Attack
-...FW
-....Pass
-....Attack
 
-...Start
 ..Anim
-..Shootout
-...Player
-...AI
+..Shootout...Player
+..Shootout...AI
 ..Tempo
 ..Pause
-..Score
 ..Finish
 ..Restart
 
