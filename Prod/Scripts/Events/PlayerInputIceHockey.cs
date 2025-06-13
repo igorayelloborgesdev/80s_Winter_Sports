@@ -64,6 +64,7 @@ namespace WinterSports.Scripts.Events
         private float moveSpaceRandomAIMax = 0.75f;
         public bool isCollidedWithTeamMate = false;
         public bool isMove = false;
+        private float moveSpaceRandomShootAI = 2.0f;        
         public enum ChangePlayerEnum
         {
             None,
@@ -119,6 +120,9 @@ namespace WinterSports.Scripts.Events
         private const float moveSpaceMinAI2 = 0.5f;
         private const float moveSpaceMaxAI1 = 0.5f;
         private const float moveSpaceMaxAI2 = 0.75f;
+
+        private const float moveSpaceRandomShootAIMin1 = 2.0f;        
+        private const float moveSpaceRandomShootAIMax1 = 3.0f;
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0,
@@ -894,8 +898,32 @@ namespace WinterSports.Scripts.Events
                     }
                 }
                 else if (iceHockeyTeam2.Any(x => x.isPuckControl))
-                { 
-                
+                {
+                    if (iceHockeyTeam2.Where(x => x.isPuckControl).First().playerNumber == playerNumber)
+                    {
+                        float distanciaZ = Mathf.Abs(iceHockeyTeam2[playerNumber].GlobalPosition.Z - ((this.Goal2.GetGoalPosition(0).Z + this.Goal2.GetGoalPosition(2).Z) / 2.0f));
+                        if (distanciaZ > moveSpaceRandomShootAI)
+                        {
+                            GD.Print("A");
+                            inputUpDown = InputUpDown.Down;
+                        }
+                        else
+                        {
+                            GD.Print("B");
+                            GoalShotAI();
+                            inputUpDown = InputUpDown.None;
+                            GD.Print(distanciaZ);
+                            GD.Print(moveSpaceRandomShootAI);
+                        }
+                        //GD.Print(distanciaZ);
+                        //GD.Print(moveSpaceRandomShootAI);
+                    }
+                    else
+                    {
+                        GD.Print("C");
+                    }
+                    
+
                 }
                 
             }
@@ -1010,9 +1038,51 @@ namespace WinterSports.Scripts.Events
             {
                 GenerateRandomMove();
                 GenerateRandomSpaceAI();
+                GenerateRandomShootAI();
             }
             PlayAnimationLoop(animationPlayer, 2);
             MovePlayer(animationPlayer, playerNumber, iceHockeyTeam2);
+        }
+
+        private void GoalShotAI()
+        {
+            Random rnd = new Random();
+            var pos = rnd.Next(0, 4);
+
+            float angleRadians = new Vector2(Goal2.GetGoalPositionNode3d(pos).GlobalPosition.X, Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Z)
+             .AngleToPoint(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
+            float hypotenuse = 0.5f;
+            float catetoOposto = hypotenuse * Mathf.Sin(angleRadians);
+            float catetoAdjacente = hypotenuse * Mathf.Cos(angleRadians);
+            float catetoOpostoHeight = Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Y;
+            float dist = new Vector2(Goal2.GetGoalPositionNode3d(pos).GlobalPosition.X, Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Z)
+             .DistanceTo(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
+            float catetoAdjacenteHeight = dist;
+            double anguloRadianos = Math.Atan(catetoOpostoHeight / catetoAdjacenteHeight);
+            float catetoOpostoHeight2 = (float)((double)hypotenuse * Mathf.Sin(anguloRadianos));
+            float shootPwr = 0.0f;
+            int xDir = 1;
+            if (puck.GlobalPosition.X < Goal2.GetGoalPositionNode3d(pos).GlobalPosition.X)
+                xDir = 1;
+            if (puck.GlobalPosition.X > Goal2.GetGoalPositionNode3d(pos).GlobalPosition.X)
+                xDir = -1;
+            int zDir = 1;
+            if (puck.GlobalPosition.Z < Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Z)
+                zDir = 1;
+            if (puck.GlobalPosition.Z > Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Z)
+                zDir = -1;
+            objRef.GlobalPosition = new Vector3(puck.GlobalPosition.X + ((xDir + shootPwr) * Mathf.Abs(catetoAdjacente)),
+                puck.GlobalPosition.Y,
+                puck.GlobalPosition.Z + (zDir * Mathf.Abs(catetoOposto)));
+
+            var impulse = (objRef.GlobalPosition - puck.GlobalPosition);
+            impulse = new Vector3(impulse.X,
+                (pos == 0 || pos == 2 ? Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Y : catetoOpostoHeight2), impulse.Z);
+            puck.ApplyImpulse(impulse);
+            
+            this.iceHockeyTeam2[playerNumber].isPuckControl = false;
+            this.iceHockeyTeam2[playerNumber].isSelected = false;
+            this.iceHockeyTeam2[playerNumber].ShowHideIceHockeySeletion(false);
         }
 
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
@@ -1769,6 +1839,11 @@ namespace WinterSports.Scripts.Events
             Random rnd = new Random();
             moveSpaceRandomAIMin = moveSpaceMinAI1 + (float)rnd.NextDouble() * (moveSpaceMinAI2 - moveSpaceMinAI1);
             moveSpaceRandomAIMax = moveSpaceMaxAI1 + (float)rnd.NextDouble() * (moveSpaceMaxAI2 - moveSpaceMaxAI1);
+        }
+        private void GenerateRandomShootAI()
+        {
+            Random rnd = new Random();
+            moveSpaceRandomShootAI = moveSpaceRandomShootAIMin1 + (float)rnd.NextDouble() * (moveSpaceRandomShootAIMax1 - moveSpaceRandomShootAIMin1);            
         }
         public RigidBody3D GetPuck()
         {
