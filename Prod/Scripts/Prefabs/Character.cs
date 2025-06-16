@@ -223,6 +223,7 @@ public partial class Character : CharacterBody3D
     public Node parentNode = null;
     public Control hockeyPowerControl = null;
     public bool isIceHockeySeletion = false;
+    public IceHockeyPlayerCollision iceHockeyPlayerCollision = null;
     #endregion
     #region Behavior
     // Called when the node enters the scene tree for the first time.
@@ -285,7 +286,7 @@ public partial class Character : CharacterBody3D
                 }
             }            
         }
-    }
+    }    
     #endregion
     #region Methods
     private void Init()
@@ -1217,6 +1218,8 @@ public partial class Character : CharacterBody3D
         this.GetNode<Area3D>("CrossCountryCollisionF/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
         this.GetNode<Area3D>("CrossCountryCollisionML/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
         this.GetNode<Area3D>("CrossCountryCollisionMR/Area3D/").ProcessMode = ProcessModeEnum.Disabled;
+
+        iceHockeyPlayerCollision = this.GetNode<IceHockeyPlayerCollision>("MeshInstance3DIceHockey/Area3D/");
     }
     public IPlayerInput GetPlayerInput()
     { 
