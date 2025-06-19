@@ -997,6 +997,13 @@ namespace WinterSports.Scripts.Events
                             //GD.Print("C");
                         }
 
+                        GD.Print("---------------------------------");
+                        foreach (var obj in DefineIfOpponentIsBlocking())
+                        {
+                            GD.Print(obj);
+                        }
+                        
+                        //DefineIfOpponentIsBlocking();//<-
 
                     }
                 }
@@ -1223,15 +1230,11 @@ namespace WinterSports.Scripts.Events
                     {
                         inputUpDown = InputUpDown.Up;
                         inputLeftRight = InputLeftRight.Left;
-                    }
-                    GD.Print("TESTE");
+                    }                    
                 }
             }
 
-            GD.Print("----------------------------------");
-            GD.Print(playerNumber);
-            GD.Print(inputUpDown);
-            GD.Print(inputLeftRight);
+            //DefineIfOpponentIsBlocking();//<-
 
             moveTime += moveTimeInc;
             if (moveTime > moveTimeRandom)
@@ -1243,6 +1246,72 @@ namespace WinterSports.Scripts.Events
             }
             PlayAnimationLoop(animationPlayer, 2);
             MovePlayer(animationPlayer, playerNumber, iceHockeyTeam2);
+        }
+
+        private List<int> DefineIfOpponentIsBlocking()
+        {
+            List<int> listNoBlocked = new List<int>();
+            foreach (var obj in iceHockeyTeam2) 
+            {
+                if (obj != iceHockeyTeam2[playerNumber] && obj.iceHockeyPosition != IceHockeyPosition.GK)
+                {
+                    float angleRadians = new Vector2(
+                                                obj.GlobalPosition.X,
+                                                obj.GlobalPosition.Z
+                                            ).AngleToPoint(new Vector2(
+                                                iceHockeyTeam2[playerNumber].GlobalPosition.X,
+                                                iceHockeyTeam2[playerNumber].GlobalPosition.Z
+                                            ));
+
+                    float hypotenuse = new Vector2(
+                                                obj.GlobalPosition.X,
+                                                obj.GlobalPosition.Z
+                                            ).DistanceTo(new Vector2(
+                                                iceHockeyTeam2[playerNumber].GlobalPosition.X,
+                                                iceHockeyTeam2[playerNumber].GlobalPosition.Z
+                                            )); ;
+
+                    foreach (var objOp in iceHockeyTeam1)
+                    {
+                        for (float i = 0.0f; i < hypotenuse; i += 0.7f)
+                        {
+                            float catetoAdjacente = i * Mathf.Cos(angleRadians);
+                            float catetoOposto = i * Mathf.Sin(angleRadians);
+
+                            int xDir = 1;
+                            if (obj.GlobalPosition.X < iceHockeyTeam2[playerNumber].GlobalPosition.X)
+                                xDir = 1;
+                            if (obj.GlobalPosition.X > iceHockeyTeam2[playerNumber].GlobalPosition.X)
+                                xDir = -1;
+                            int zDir = 1;
+                            if (obj.GlobalPosition.Z < iceHockeyTeam2[playerNumber].GlobalPosition.Z)
+                                zDir = 1;
+                            if (obj.GlobalPosition.Z > iceHockeyTeam2[playerNumber].GlobalPosition.Z)
+                                zDir = -1;
+
+                            var pos = new Vector2(
+                                                  obj.GlobalPosition.X + (xDir * Mathf.Abs(catetoAdjacente)),
+                                                  obj.GlobalPosition.Z + (zDir * Mathf.Abs(catetoOposto))
+                                                  );
+                        
+                            if (objOp.iceHockeyPosition != IceHockeyPosition.GK)
+                            { 
+                                var dist = new Vector2(objOp.GlobalPosition.X, objOp.GlobalPosition.Z).DistanceTo(pos);;
+
+                                if (dist > 0.7f)
+                                {
+                                    if (!listNoBlocked.Any(x => x == obj.playerNumber))
+                                        listNoBlocked.Add(obj.playerNumber);                                    
+                                }
+                                
+                            }                            
+                        }                        
+
+                    }
+
+                }
+            }
+            return listNoBlocked;
         }
 
         private void GoalShotAI()
