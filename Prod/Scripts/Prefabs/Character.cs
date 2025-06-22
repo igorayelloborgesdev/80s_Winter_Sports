@@ -1228,6 +1228,6 @@ public partial class Character : CharacterBody3D
     public void SetGoalKeeperShoot(AnimationPlayer animationPlayer, int xDir, int zDir)
     {
         this.playerInput.SetGoalKeeperShoot(animationPlayer, xDir, zDir);
-    }
+    }    
     #endregion
 }

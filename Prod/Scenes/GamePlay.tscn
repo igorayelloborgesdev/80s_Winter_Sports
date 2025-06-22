@@ -1170,6 +1170,7 @@ patch_margin_right = 9
 patch_margin_bottom = 9
 
 [node name="ShootPower" type="NinePatchRect" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

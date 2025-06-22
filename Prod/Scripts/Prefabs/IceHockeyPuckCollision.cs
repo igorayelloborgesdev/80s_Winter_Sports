@@ -15,12 +15,15 @@ public partial class IceHockeyPuckCollision : Area3D
             var character = body.GetParent().GetParent<Character>();            
             body.GetParent().GetParent<Character>().GetPlayerInput().ResetControlAndSelected();
             body.GetParent().GetParent<Character>().isSelected = true;
-            body.GetParent().GetParent<Character>().isPuckControl = true;            
-            body.GetParent().GetParent<Character>().GetPlayerInput().SetisSelected(ref body.GetParent().GetParent<Character>().isSelected);
-            body.GetParent().GetParent<Character>().GetPlayerInput().SetisPuckControl(ref body.GetParent().GetParent<Character>().isPuckControl);
+            body.GetParent().GetParent<Character>().isPuckControl = true;
+            if (body.GetParent().GetParent<Character>().isPlayerTeam)
+            {
+                body.GetParent().GetParent<Character>().GetPlayerInput().SetisSelected(ref body.GetParent().GetParent<Character>().isSelected);
+                body.GetParent().GetParent<Character>().GetPlayerInput().SetisPuckControl(ref body.GetParent().GetParent<Character>().isPuckControl);
+            }            
             body.GetParent().GetParent<Character>().SetPuckOriginalTransform();
-            body.GetParent().GetParent<Character>().ShowHideIceHockeySeletion(true);
-            //body.GetParent().GetParent<Character>().hockeyPower.Show();
+            if (body.GetParent().GetParent<Character>().isPlayerTeam)
+                body.GetParent().GetParent<Character>().ShowHideIceHockeySeletion(true);            
         }
         catch (Exception ex) {
             var msg = ex.Message;

@@ -1898,11 +1898,17 @@ namespace WinterSports.Scripts.Controller
             {
                 characterPuck = iceHockeyTeam1.Where(x => x.isPuckControl).First();
                 playerIndex = iceHockeyTeam1.FindIndex(x => x.isPuckControl);
+                ShowHidehockeyPowerControl(true);                
             }
             if (iceHockeyTeam2.Where(x => x.isPuckControl).Any())
             {
                 characterPuck = iceHockeyTeam2.Where(x => x.isPuckControl).First();
                 playerIndex = iceHockeyTeam2.FindIndex(x => x.isPuckControl);
+                ShowHidehockeyPowerControl(false);                
+            }
+            if (!iceHockeyTeam1.Where(x => x.isPuckControl).Any() && !iceHockeyTeam2.Where(x => x.isPuckControl).Any())
+            {
+                ShowHidehockeyPowerControl(false);                
             }
             if (characterPuck is not null)
             {                
@@ -1910,7 +1916,7 @@ namespace WinterSports.Scripts.Controller
             }
             ControlsCameraIceHockey(characterPuck);            
             SetHockeyPower(characterPuck, playerIndex);
-        }
+        }        
         private void SetHockeyPower(Character characterPuck, int playerIndex)
         {
             if (characterPuck is not null)
@@ -1984,6 +1990,24 @@ namespace WinterSports.Scripts.Controller
             {
                 obj.SetIceHockeyTeams(ref iceHockeyTeam1, ref iceHockeyTeam2);
             }            
+        }
+        public void ShowHidehockeyPowerControl(bool isShow)
+        {            
+            if (hockeyPowerControl is not null)
+            {
+                Control obj = hockeyPowerControl.GetParent<Control>();
+                if (isShow)
+                {
+                    obj.Show();
+                    GD.Print("TESTE 3");
+                }
+                else
+                {
+                    obj.Hide();
+                    GD.Print("TESTE 4");
+                }
+                obj.Hide();
+            }
         }
         #endregion
         #region Get Set
