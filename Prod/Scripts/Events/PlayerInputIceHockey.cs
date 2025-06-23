@@ -959,7 +959,12 @@ namespace WinterSports.Scripts.Events
                         if (iceHockeyTeam2.Where(x => x.isPuckControl).First().playerNumber == playerNumber)
                         {
                             float distanciaZ = Mathf.Abs(iceHockeyTeam2[playerNumber].GlobalPosition.Z - ((this.Goal2.GetGoalPosition(0).Z + this.Goal2.GetGoalPosition(2).Z) / 2.0f));
-                            if (distanciaZ > moveSpaceRandomShootAI)
+
+                            float angleRadians = new Vector2((Goal2.GetGoalPositionNode3d(2).GlobalPosition.X - Goal2.GetGoalPositionNode3d(0).GlobalPosition.X) / 2.0f, Goal2.GetGoalPositionNode3d(0).GlobalPosition.Z)
+                                                    .AngleToPoint(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
+                            var angleToshoot = Mathf.Abs(Mathf.RadToDeg(angleRadians));
+
+                            if (distanciaZ > moveSpaceRandomShootAI && (angleToshoot < 150.0f && angleToshoot > 30.0f))
                             {
                                 inputUpDown = InputUpDown.Down;
                                 if (moveSpaceRandomPositionAI == 0)
@@ -1107,10 +1112,14 @@ namespace WinterSports.Scripts.Events
                         if (iceHockeyTeam2.Where(x => x.isPuckControl).First().playerNumber == playerNumber)
                         {
                             float distanciaZ = Mathf.Abs(iceHockeyTeam2[playerNumber].GlobalPosition.Z - ((this.Goal2.GetGoalPosition(0).Z + this.Goal2.GetGoalPosition(2).Z) / 2.0f));
-                            if (distanciaZ > moveSpaceRandomShootAI)
+                            float angleRadians = new Vector2((Goal2.GetGoalPositionNode3d(2).GlobalPosition.X - Goal2.GetGoalPositionNode3d(0).GlobalPosition.X) / 2.0f, Goal2.GetGoalPositionNode3d(0).GlobalPosition.Z)
+                                                    .AngleToPoint(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
+                            var angleToshoot = Mathf.Abs(Mathf.RadToDeg(angleRadians));
+
+                            if (distanciaZ > moveSpaceRandomShootAI && (angleToshoot < 150.0f && angleToshoot > 30.0f))
                             {
                                 inputUpDown = InputUpDown.Down;
-
+                                
                                 if (iceHockeyTeam2[playerNumber].iceHockeyPositionSide == IceHockeyPositionSide.L)
                                 {
                                     if (moveSpaceRandomPositionAI == 0)
@@ -1175,6 +1184,23 @@ namespace WinterSports.Scripts.Events
                     }
                 }
 
+            }
+
+            if (this.iceHockeyTeam2[playerNumber].iceHockeyMoveLimit["down"])
+            {
+                inputUpDown = InputUpDown.None;
+            }
+            if (this.iceHockeyTeam2[playerNumber].iceHockeyMoveLimit["up"])
+            {
+                inputUpDown = InputUpDown.None;
+            }
+            if (this.iceHockeyTeam2[playerNumber].iceHockeyMoveLimit["right"])
+            {
+                inputLeftRight = InputLeftRight.None;
+            }
+            if (this.iceHockeyTeam2[playerNumber].iceHockeyMoveLimit["left"])
+            {
+                inputLeftRight = InputLeftRight.None;
             }
 
             moveTimeOppononent += moveTimeInc;

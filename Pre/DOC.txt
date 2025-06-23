@@ -41,10 +41,7 @@ Esportes
 
 .Ice Hockey 
 
-..BUG.Limitar time adversário área do goleiro//<-
-..BUG.Chutar para o gol dependendo do ângulo
-
-..BUG.Definir posição dos jogadores quando o goleiro estiver com a bola
+..BUG.Definir posição dos jogadores quando o goleiro estiver com a bola//<-
 ...GK..AI....Pass
 
 ..BUG.Jogadores do time do player se movimentando quando não estão com a bola

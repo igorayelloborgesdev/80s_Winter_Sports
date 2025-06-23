@@ -1998,13 +1998,11 @@ namespace WinterSports.Scripts.Controller
                 Control obj = hockeyPowerControl.GetParent<Control>();
                 if (isShow)
                 {
-                    obj.Show();
-                    GD.Print("TESTE 3");
+                    obj.Show();                    
                 }
                 else
                 {
-                    obj.Hide();
-                    GD.Print("TESTE 4");
+                    obj.Hide();                    
                 }
                 obj.Hide();
             }
