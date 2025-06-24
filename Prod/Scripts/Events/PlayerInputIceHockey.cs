@@ -362,7 +362,8 @@ namespace WinterSports.Scripts.Events
 
                 if (playerNumberIndex != playerIndex && playerIndex != -1)
                 {
-                    int playerNumberIndexPuckControl = this.iceHockeyTeam1.FindIndex(x => x.isPuckControl);
+                    int playerNumberIndexPuckControl = this.iceHockeyTeam1.FindIndex(x => x.isPuckControl);                    
+
                     if (playerNumberIndexPuckControl != -1)
                     {
                         float distanciaX = Mathf.Abs(this.iceHockeyTeam1[playerIndex].GlobalPosition.X - this.iceHockeyTeam1[playerNumberIndex].GlobalPosition.X); // Calcula a distância no eixo X                    
@@ -703,7 +704,8 @@ namespace WinterSports.Scripts.Events
                         if (!this.iceHockeyTeam1.Any(x => x.isSelected))
                         {
                             GetPlayerNextPuck();
-                        }                        
+                        }
+                        PlayerInputAINoPuckControl(this.animationPlayer, delta);                        
                     }
 
                 }
@@ -732,7 +734,15 @@ namespace WinterSports.Scripts.Events
                         iceHockeyTeam2[playerNumber].GlobalPosition =
                         new Vector3(-goalKeeperMoveSpaceMax, iceHockeyTeam2[playerNumber].GlobalPosition.Y, iceHockeyTeam2[playerNumber].GlobalPosition.Z);
                     }
-                }//<-
+                }
+                if (iceHockeyTeam2.Any(x => x.isPuckControl))
+                {
+                    if (iceHockeyTeam2.Where(x => x.isPuckControl).First().iceHockeyPosition == IceHockeyPosition.GK)
+                    {
+                        var noBlockingPlayers = DefineIfOpponentIsBlocking();
+                        PuckPassAI(noBlockingPlayers.First<int>());
+                    }                    
+                }
                 PlayAnimationLoop(animationPlayer, 3);
             }
             else if (iceHockeyTeam2[playerNumber].iceHockeyPosition == IceHockeyPosition.DF)
@@ -1217,8 +1227,7 @@ namespace WinterSports.Scripts.Events
                         if (isMove)
                             MoveFromOpponent();
                         else
-                            PuckPassAI(noBlockingPlayers.Last<int>());
-                        //GD.Print(noBlockingPlayers.Last<int>());//<-
+                            PuckPassAI(noBlockingPlayers.Last<int>());                        
                     }
                     else
                     {
@@ -1237,6 +1246,301 @@ namespace WinterSports.Scripts.Events
             }
             PlayAnimationLoop(animationPlayer, 2);
             MovePlayer(animationPlayer, playerNumber, iceHockeyTeam2);
+        }
+
+        public void PlayerInputAINoPuckControl(AnimationPlayer animationPlayer, double delta = 0.0f)
+        {
+            if (iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.GK)
+            {
+                if (puck.GlobalPosition.X <= goalKeeperMoveSpaceMax &&
+                   puck.GlobalPosition.X >= -1.0f * goalKeeperMoveSpaceMax)
+                {
+                    iceHockeyTeam1[playerNumber].GlobalPosition =
+                        new Vector3(puck.GlobalPosition.X, iceHockeyTeam1[playerNumber].GlobalPosition.Y, iceHockeyTeam1[playerNumber].GlobalPosition.Z);
+                }
+                else
+                {
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.X < puck.GlobalPosition.X)
+                    {
+                        iceHockeyTeam1[playerNumber].GlobalPosition =
+                        new Vector3(goalKeeperMoveSpaceMax, iceHockeyTeam1[playerNumber].GlobalPosition.Y, iceHockeyTeam1[playerNumber].GlobalPosition.Z);
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > puck.GlobalPosition.X)
+                    {
+                        iceHockeyTeam1[playerNumber].GlobalPosition =
+                        new Vector3(-goalKeeperMoveSpaceMax, iceHockeyTeam1[playerNumber].GlobalPosition.Y, iceHockeyTeam1[playerNumber].GlobalPosition.Z);
+                    }
+                }
+                PlayAnimationLoop(animationPlayer, 3);
+            }
+            else if (iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.DF)
+            {
+                if (!iceHockeyTeam1.Any(x => x.isPuckControl) && !iceHockeyTeam2.Any(x => x.isPuckControl))
+                {
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.X < puck.GlobalPosition.X)
+                    {
+                        inputLeftRight = InputLeftRight.Right;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > puck.GlobalPosition.X)
+                    {
+                        inputLeftRight = InputLeftRight.Left;
+                    }
+                    else
+                    {
+                        inputLeftRight = InputLeftRight.None;
+                    }
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < puck.GlobalPosition.Z)
+                    {
+                        inputUpDown = InputUpDown.Down;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > puck.GlobalPosition.Z)
+                    {
+                        inputUpDown = InputUpDown.Up;
+                    }
+                    else
+                    {
+                        inputUpDown = InputUpDown.None;
+                    }
+                }
+                else if (iceHockeyTeam2.Any(x => x.isPuckControl))//<-
+                {
+                    if (iceHockeyTeam1[playerNumber].iceHockeyPositionSide == IceHockeyPositionSide.L && iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.DF)
+                    {
+                        var playericeHockeyTeam1 = this.iceHockeyTeam2.Where(x => x.iceHockeyPosition == IceHockeyPosition.FW
+                                                        && x.iceHockeyPositionSide == IceHockeyPositionSide.R).First();
+
+                        float distanciaX = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.X - playericeHockeyTeam1.GlobalPosition.X);
+                        float distanciaZ = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.Z - playericeHockeyTeam1.GlobalPosition.Z);
+
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.X < playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Right;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Left;
+                        }
+                        else
+                        {
+                            inputLeftRight = InputLeftRight.None;
+                        }
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Down;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Up;
+                        }
+                        else
+                        {
+                            inputUpDown = InputUpDown.None;
+                        }
+                    }
+                    else if (iceHockeyTeam1[playerNumber].iceHockeyPositionSide == IceHockeyPositionSide.R && iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.DF)
+                    {
+                        var playericeHockeyTeam1 = this.iceHockeyTeam2.Where(x => x.iceHockeyPosition == IceHockeyPosition.FW
+                                                        && x.iceHockeyPositionSide == IceHockeyPositionSide.L).First();
+
+                        float distanciaX = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.X - playericeHockeyTeam1.GlobalPosition.X);
+                        float distanciaZ = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.Z - playericeHockeyTeam1.GlobalPosition.Z);
+
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.X < playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Right;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Left;
+                        }
+                        else
+                        {
+                            inputLeftRight = InputLeftRight.None;
+                        }
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Down;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Up;
+                        }
+                        else
+                        {
+                            inputUpDown = InputUpDown.None;
+                        }
+                    }
+                }
+            }
+            else if (iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.MF)
+            {
+                if (!iceHockeyTeam1.Any(x => x.isPuckControl) && !iceHockeyTeam2.Any(x => x.isPuckControl))
+                {
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.X < puck.GlobalPosition.X)
+                    {
+                        inputLeftRight = InputLeftRight.Right;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > puck.GlobalPosition.X)
+                    {
+                        inputLeftRight = InputLeftRight.Left;
+                    }
+                    else
+                    {
+                        inputLeftRight = InputLeftRight.None;
+                    }
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < puck.GlobalPosition.Z)
+                    {
+                        inputUpDown = InputUpDown.Down;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > puck.GlobalPosition.Z)
+                    {
+                        inputUpDown = InputUpDown.Up;
+                    }
+                    else
+                    {
+                        inputUpDown = InputUpDown.None;
+                    }
+                }
+                else if (iceHockeyTeam2.Any(x => x.isPuckControl))
+                {
+                    var playericeHockeyTeam1 = this.iceHockeyTeam2.Where(x => x.iceHockeyPosition == IceHockeyPosition.MF).First();
+
+                    float distanciaX = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.X - playericeHockeyTeam1.GlobalPosition.X);
+                    float distanciaZ = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.Z - playericeHockeyTeam1.GlobalPosition.Z);
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.X < playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                    {
+                        inputLeftRight = InputLeftRight.Right;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                    {
+                        inputLeftRight = InputLeftRight.Left;
+                    }
+                    else
+                    {
+                        inputLeftRight = InputLeftRight.None;
+                    }
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                    {
+                        inputUpDown = InputUpDown.Down;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                    {
+                        inputUpDown = InputUpDown.Up;
+                    }
+                    else
+                    {
+                        inputUpDown = InputUpDown.None;
+                    }                
+
+                }
+            }
+            else if (iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.FW)
+            {
+                if (!iceHockeyTeam1.Any(x => x.isPuckControl) && !iceHockeyTeam2.Any(x => x.isPuckControl))
+                {
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.X < puck.GlobalPosition.X)
+                    {
+                        inputLeftRight = InputLeftRight.Right;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > puck.GlobalPosition.X)
+                    {
+                        inputLeftRight = InputLeftRight.Left;
+                    }
+                    else
+                    {
+                        inputLeftRight = InputLeftRight.None;
+                    }
+                    if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < puck.GlobalPosition.Z)
+                    {
+                        inputUpDown = InputUpDown.Down;
+                    }
+                    else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > puck.GlobalPosition.Z)
+                    {
+                        inputUpDown = InputUpDown.Up;
+                    }
+                    else
+                    {
+                        inputUpDown = InputUpDown.None;
+                    }
+                }
+                else if (iceHockeyTeam2.Any(x => x.isPuckControl))
+                {
+                    if (iceHockeyTeam1[playerNumber].iceHockeyPositionSide == IceHockeyPositionSide.L && iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.FW)
+                    {
+                        var playericeHockeyTeam1 = this.iceHockeyTeam2.Where(x => x.iceHockeyPosition == IceHockeyPosition.DF
+                                                        && x.iceHockeyPositionSide == IceHockeyPositionSide.R).First();
+
+                        float distanciaX = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.X - playericeHockeyTeam1.GlobalPosition.X);
+                        float distanciaZ = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.Z - playericeHockeyTeam1.GlobalPosition.Z);
+
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.X < playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Right;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Left;
+                        }
+                        else
+                        {
+                            inputLeftRight = InputLeftRight.None;
+                        }
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Down;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Up;
+                        }
+                        else
+                        {
+                            inputUpDown = InputUpDown.None;
+                        }
+                    }
+                    else if (iceHockeyTeam1[playerNumber].iceHockeyPositionSide == IceHockeyPositionSide.R && iceHockeyTeam1[playerNumber].iceHockeyPosition == IceHockeyPosition.FW)
+                    {
+                        var playericeHockeyTeam1 = this.iceHockeyTeam2.Where(x => x.iceHockeyPosition == IceHockeyPosition.DF
+                                                        && x.iceHockeyPositionSide == IceHockeyPositionSide.L).First();
+
+                        float distanciaX = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.X - playericeHockeyTeam1.GlobalPosition.X);
+                        float distanciaZ = Mathf.Abs(iceHockeyTeam1[playerNumber].GlobalPosition.Z - playericeHockeyTeam1.GlobalPosition.Z);
+
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.X < playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Right;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.X > playericeHockeyTeam1.GlobalPosition.X && distanciaX > moveSpaceRandomAIMax)
+                        {
+                            inputLeftRight = InputLeftRight.Left;
+                        }
+                        else
+                        {
+                            inputLeftRight = InputLeftRight.None;
+                        }
+                        if (iceHockeyTeam1[playerNumber].GlobalPosition.Z < playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Down;
+                        }
+                        else if (iceHockeyTeam1[playerNumber].GlobalPosition.Z > playericeHockeyTeam1.GlobalPosition.Z && distanciaZ > moveSpaceRandomAIMax)
+                        {
+                            inputUpDown = InputUpDown.Up;
+                        }
+                        else
+                        {
+                            inputUpDown = InputUpDown.None;
+                        }
+                    }
+                }
+            }
+            moveTime += moveTimeInc;
+            if (moveTime > moveTimeRandom)
+            {
+                GenerateRandomMove();
+                GenerateRandomSpaceAI();                                
+            }
+            PlayAnimationLoop(animationPlayer, 2);
+            MovePlayer(animationPlayer, playerNumber, iceHockeyTeam1);
         }
         private void MoveFromOpponent()
         {

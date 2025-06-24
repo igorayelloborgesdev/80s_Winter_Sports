@@ -41,19 +41,11 @@ Esportes
 
 .Ice Hockey 
 
-..BUG.Definir posição dos jogadores quando o goleiro estiver com a bola//<-
-...GK..AI....Pass
-
-..BUG.Jogadores do time do player se movimentando quando não estão com a bola
-..BUG.Melhorar passe player
-
+..Anim//<-
+..Dificuldade/ Skill de oponente
 ..Score
-..AI...Start
 ...Start
-
-..Anim
-..Shootout...Player
-..Shootout...AI
+..Golden Goal
 ..Tempo
 ..Pause
 ..Finish
