@@ -41,12 +41,12 @@ Esportes
 
 .Ice Hockey 
 
-..Anim//<-
-..Dificuldade/ Skill de oponente
+..Dificuldade/ Skill de oponente//<-
 ..Score
-...Start
-..Golden Goal
+..Start
 ..Tempo
+
+..Golden Goal
 ..Pause
 ..Finish
 ..Restart

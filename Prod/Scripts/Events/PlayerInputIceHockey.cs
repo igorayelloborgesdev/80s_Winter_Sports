@@ -119,18 +119,26 @@ namespace WinterSports.Scripts.Events
         private const float moveSpaceMax2 = 4.0f;
         private const float goalKeeperMoveSpaceMax = 0.1f;
 
-        private const float moveSpaceMinAI1 = 0.25f;
-        private const float moveSpaceMinAI2 = 0.5f;
-        private const float moveSpaceMaxAI1 = 0.5f;
-        private const float moveSpaceMaxAI2 = 0.75f;
+        //private const float moveSpaceMinAI1 = 0.25f;
+        //private const float moveSpaceMinAI2 = 0.5f;
+        //private const float moveSpaceMaxAI1 = 0.5f;
+        //private const float moveSpaceMaxAI2 = 0.75f;
 
-        private const float moveSpaceRandomShootAIMin1 = 2.0f;        
-        private const float moveSpaceRandomShootAIMax1 = 3.0f;
+        private const float moveSpaceMinAI1 = 0.0025f;
+        private const float moveSpaceMinAI2 = 0.005f;
+        private const float moveSpaceMaxAI1 = 0.005f;
+        private const float moveSpaceMaxAI2 = 0.0075f;
+
+        private const float moveSpaceRandomShootAIMin1 = 0.0025f;        
+        private const float moveSpaceRandomShootAIMax1 = 0.005f;
         #endregion
         #region Implements
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0,
             CrossCountryOvertake crossCountryOvertakeM = null, CrossCountryOvertake crossCountryOvertakeRR = null, CrossCountryOvertake crossCountryOvertakeRL = null)
         {
+            GD.Print(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].sportSkill[GameModeSingleton.sport - 1]);//<-
+            GD.Print(GameModeSingleton.difficult * 2);//<-
+
             this.animationPlayer = animationPlayer;
             if (!isPause)
             {
@@ -180,59 +188,63 @@ namespace WinterSports.Scripts.Events
                                     changePlayerEnumSelect = ChangePlayerEnum.Press;                                    
                                 }
                             }
-                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Up
+                            if (iceHockeyTeam1[playerNumber].iceHockeyPosition != IceHockeyPosition.GK)
                             {
-                                if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["down"])
+                                if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Up
                                 {
-                                    inputUpDown = InputUpDown.Up;
+                                    if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["down"])
+                                    {
+                                        inputUpDown = InputUpDown.Up;
+                                    }
+                                    else
+                                    {
+                                        inputUpDown = InputUpDown.None;
+                                    }
+                                }
+                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Down
+                                {
+                                    if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["up"])
+                                    {
+                                        inputUpDown = InputUpDown.Down;
+                                    }
+                                    else
+                                    {
+                                        inputUpDown = InputUpDown.None;
+                                    }
                                 }
                                 else
                                 {
                                     inputUpDown = InputUpDown.None;
                                 }
-                            }
-                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Down
-                            {
-                                if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["up"])
+                                if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
                                 {
-                                    inputUpDown = InputUpDown.Down;
-                                }
-                                else
-                                {
-                                    inputUpDown = InputUpDown.None;
-                                }
-                            }
-                            else
-                            {
-                                inputUpDown = InputUpDown.None;
-                            }
-                            if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
-                            {
-                                if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["right"])
-                                {
-                                    inputLeftRight = InputLeftRight.Left;
-                                }
-                                else
-                                {
-                                    inputLeftRight = InputLeftRight.None;
-                                }
+                                    if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["right"])
+                                    {
+                                        inputLeftRight = InputLeftRight.Left;
+                                    }
+                                    else
+                                    {
+                                        inputLeftRight = InputLeftRight.None;
+                                    }
 
-                            }
-                            else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
-                            {
-                                if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["left"])
+                                }
+                                else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
                                 {
-                                    inputLeftRight = InputLeftRight.Right;
+                                    if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["left"])
+                                    {
+                                        inputLeftRight = InputLeftRight.Right;
+                                    }
+                                    else
+                                    {
+                                        inputLeftRight = InputLeftRight.None;
+                                    }
                                 }
                                 else
                                 {
                                     inputLeftRight = InputLeftRight.None;
                                 }
                             }
-                            else
-                            {
-                                inputLeftRight = InputLeftRight.None;
-                            }
+                            
                         }
                         else
                         {
@@ -288,7 +300,8 @@ namespace WinterSports.Scripts.Events
                         }                        
                         inputLeftRight = InputLeftRight.None;
                         inputUpDown = InputUpDown.None;
-                        PlayAnimation(animationPlayer, 1);
+                        if (iceHockeyTeam1[playerNumber].iceHockeyPosition != IceHockeyPosition.GK)
+                            PlayAnimation(animationPlayer, 1);
                         GoalShotReset();
                     }
 
@@ -659,7 +672,7 @@ namespace WinterSports.Scripts.Events
                                     iceHockeyTeam1[playerNumberIndex].GlobalPosition =
                                     new Vector3(-goalKeeperMoveSpaceMax, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Y, iceHockeyTeam1[playerNumberIndex].GlobalPosition.Z);
                                 }
-                            }//<-
+                            }
                             PlayAnimationLoop(animationPlayer, 3);
                         }
 
@@ -1244,7 +1257,8 @@ namespace WinterSports.Scripts.Events
                 GenerateRandomShootAI();
                 GenerateRandomAttackPositionAI();
             }
-            PlayAnimationLoop(animationPlayer, 2);
+            if (iceHockeyTeam2[playerNumber].iceHockeyPosition != IceHockeyPosition.GK)
+                PlayAnimationLoop(animationPlayer, 2);
             MovePlayer(animationPlayer, playerNumber, iceHockeyTeam2);
         }
 
@@ -1539,7 +1553,8 @@ namespace WinterSports.Scripts.Events
                 GenerateRandomMove();
                 GenerateRandomSpaceAI();                                
             }
-            PlayAnimationLoop(animationPlayer, 2);
+            if(iceHockeyTeam1[playerNumber].iceHockeyPosition != IceHockeyPosition.GK)
+                PlayAnimationLoop(animationPlayer, 2);
             MovePlayer(animationPlayer, playerNumber, iceHockeyTeam1);
         }
         private void MoveFromOpponent()
