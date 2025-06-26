@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c64vk2op5xnh"]
+[gd_scene load_steps=28 format=3 uid="uid://c64vk2op5xnh"]
 
 [ext_resource type="PackedScene" uid="uid://dtgmax66mbcc0" path="res://Art/3d/HockeyGoal.glb" id="1_xftwb"]
 [ext_resource type="Script" path="res://Scripts/Prefabs/IceHockeyGoal.cs" id="2_a50q5"]
@@ -59,6 +59,8 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 0)
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ur72r"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4q6kg"]
 transparency = 1
 cull_mode = 2
@@ -116,6 +118,10 @@ albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ecdd2"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_dplrv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dhbjb"]
+
 [node name="HockeyGoal" node_paths=PackedStringArray("goalRightDown", "goalRightUp", "goalLeftDown", "goalLeftUp") instance=ExtResource("1_xftwb")]
 transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
 script = ExtResource("2_a50q5")
@@ -162,6 +168,11 @@ shape = SubResource("ConcavePolygonShape3D_ckweo")
 [node name="GoalNetColliderArea" parent="Goal" index="4"]
 transform = Transform3D(0.932, 0, 0, 0, 1.072, 0, 0, 0, 0.812, 0, -1.36002, 1.43668)
 visible = false
+
+[node name="Area3D" type="Area3D" parent="Goal/GoalNetColliderArea" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/GoalNetColliderArea/Area3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_ur72r")
 
 [node name="GoalNetSuperior" parent="Goal" index="5"]
 surface_material_override/0 = SubResource("StandardMaterial3D_4q6kg")
@@ -248,3 +259,13 @@ mesh = SubResource("BoxMesh_ljdjt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D" index="0"]
 shape = SubResource("BoxShape3D_ecdd2")
+
+[node name="GoalArea" type="MeshInstance3D" parent="." index="9"]
+transform = Transform3D(0.095, 0, 0, 0, 0.05, 0, 0, 0, 0.03, 0, 0.0234747, -0.0168795)
+visible = false
+mesh = SubResource("BoxMesh_dplrv")
+
+[node name="Area3D" type="Area3D" parent="GoalArea" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalArea/Area3D" index="0"]
+shape = SubResource("BoxShape3D_dhbjb")

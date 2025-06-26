@@ -11,7 +11,10 @@ public partial class IceHockeyPuckCollision : Area3D
     private void OnBodyEntered(Node body)
     {
         try
-        {            
+        {
+            GD.Print("-----------------------------");
+            GD.Print(body.GetParent().GetParent().Name);            
+            
             var character = body.GetParent().GetParent<Character>();            
             body.GetParent().GetParent<Character>().GetPlayerInput().ResetControlAndSelected();
             body.GetParent().GetParent<Character>().isSelected = true;

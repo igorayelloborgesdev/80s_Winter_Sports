@@ -136,9 +136,7 @@ namespace WinterSports.Scripts.Events
         public void PlayerInput(AnimationPlayer animationPlayer, double delta = 0.0f, int positionID = 0,
             CrossCountryOvertake crossCountryOvertakeM = null, CrossCountryOvertake crossCountryOvertakeRR = null, CrossCountryOvertake crossCountryOvertakeRL = null)
         {
-            GD.Print(CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].sportSkill[GameModeSingleton.sport - 1]);//<-
-            GD.Print(GameModeSingleton.difficult * 2);//<-
-
+            
             this.animationPlayer = animationPlayer;
             if (!isPause)
             {
@@ -884,6 +882,14 @@ namespace WinterSports.Scripts.Events
                                     inputLeftRight = InputLeftRight.None;
                                 }
                             }
+                            if (iceHockeyTeam2[playerNumber].GlobalPosition.Z < -9.0f)
+                            {
+                                inputUpDown = InputUpDown.Up;
+                            }
+                            else if (iceHockeyTeam2[playerNumber].GlobalPosition.Z > 9.0f)
+                            {
+                                inputUpDown = InputUpDown.Down;
+                            }                            
                         }
                         else
                         {
@@ -909,11 +915,18 @@ namespace WinterSports.Scripts.Events
                                     inputLeftRight = InputLeftRight.None;
                                 }
                             }
+                            if (iceHockeyTeam2[playerNumber].GlobalPosition.Z < -9.0f)
+                            {
+                                inputUpDown = InputUpDown.Down;
+                            }
+                            else if (iceHockeyTeam2[playerNumber].GlobalPosition.Z > 9.0f)
+                            {
+                                inputUpDown = InputUpDown.Up;
+                            }
                         }
+
                     }
-                }
-                
-                
+                }                
             }
             else if (iceHockeyTeam2[playerNumber].iceHockeyPosition == IceHockeyPosition.MF)
             {
@@ -1018,6 +1031,14 @@ namespace WinterSports.Scripts.Events
                             {
                                 GoalShotAI();
                                 inputUpDown = InputUpDown.None;
+                            }
+                            if (iceHockeyTeam2[playerNumber].GlobalPosition.Z < -9.0f)
+                            {
+                                inputUpDown = InputUpDown.Down;
+                            }
+                            else if (iceHockeyTeam2[playerNumber].GlobalPosition.Z > 9.0f)
+                            {
+                                inputUpDown = InputUpDown.Up;
                             }
                         }
                         else
@@ -1198,6 +1219,14 @@ namespace WinterSports.Scripts.Events
                             {
                                 GoalShotAI();
                                 inputUpDown = InputUpDown.None;
+                            }
+                            if (iceHockeyTeam2[playerNumber].GlobalPosition.Z < -9.0f)
+                            {
+                                inputUpDown = InputUpDown.Down;
+                            }
+                            else if (iceHockeyTeam2[playerNumber].GlobalPosition.Z > 9.0f)
+                            {
+                                inputUpDown = InputUpDown.Up;
                             }
                         }
                         else
@@ -1668,9 +1697,26 @@ namespace WinterSports.Scripts.Events
         }
 
         private void GoalShotAI()
-        {
+        {            
             Random rnd = new Random();
-            var pos = rnd.Next(0, 4);            
+            int pos = 0;
+
+            if (DefineAIDifficult())//<-
+            {
+                if (puck.GlobalPosition.X > 0.0f)
+                {
+                    pos = 0;
+                }
+                else
+                {
+                    pos = 1;
+                }
+            }
+            else
+            {
+                pos = rnd.Next(0, 4);
+            }            
+
             float angleRadians = new Vector2(Goal2.GetGoalPositionNode3d(pos).GlobalPosition.X, Goal2.GetGoalPositionNode3d(pos).GlobalPosition.Z)
              .AngleToPoint(new Vector2(puck.GlobalPosition.X, puck.GlobalPosition.Z));
             float hypotenuse = 0.5f;
@@ -1705,6 +1751,17 @@ namespace WinterSports.Scripts.Events
             this.iceHockeyTeam2[playerNumber].isPuckControl = false;
             this.iceHockeyTeam2[playerNumber].isSelected = false;
             this.iceHockeyTeam2[playerNumber].ShowHideIceHockeySeletion(false);
+        }
+
+        private bool DefineAIDifficult()
+        {
+            var difficultMax = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].sportSkill[GameModeSingleton.sport - 1] + (GameModeSingleton.difficult * 2);
+            Random rnd = new Random();
+            var randomNum = (float)rnd.NextDouble() * 10.0f;            
+            if (randomNum < (float)difficultMax)
+                return true;
+            else
+                return false;
         }
 
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)

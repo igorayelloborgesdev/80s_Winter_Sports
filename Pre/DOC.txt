@@ -41,8 +41,7 @@ Esportes
 
 .Ice Hockey 
 
-..Dificuldade/ Skill de oponente//<-
-..Score
+..Score//<-
 ..Start
 ..Tempo
 
