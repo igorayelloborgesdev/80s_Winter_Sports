@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using WinterSports.Scripts.Static;
 
 public partial class IceHockeyPuckCollision : Area3D
 {
@@ -12,9 +13,23 @@ public partial class IceHockeyPuckCollision : Area3D
     {
         try
         {
-            GD.Print("-----------------------------");
-            GD.Print(body.GetParent().GetParent().Name);            
+            if (body.GetParent().Name == "GoalArea")
+            {
+                if (body.GetParent().GetParent().Name == "HockeyGoal2")
+                {                 
+                    IceHockeyStatic.isGoal = true;
+                    IceHockeyStatic.score2 += 1;
+                    IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Goal;
+                }
+                if (body.GetParent().GetParent().Name == "HockeyGoal1")
+                {                 
+                    IceHockeyStatic.isGoal = true;
+                    IceHockeyStatic.score1 += 1;
+                    IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Goal;
+                }
+            }
             
+
             var character = body.GetParent().GetParent<Character>();            
             body.GetParent().GetParent<Character>().GetPlayerInput().ResetControlAndSelected();
             body.GetParent().GetParent<Character>().isSelected = true;

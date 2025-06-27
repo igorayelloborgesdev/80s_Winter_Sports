@@ -143,9 +143,20 @@ public partial class GameplayView : Control
         prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;        
         gamePlayController = new GamePlayController();
 
-        gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));//<-
-        gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));//<-
-        gamePlayController.SetParentNode(this);//<-
+        gamePlayController.SetHockeyScoreControl(GetNode<Control>("CanvasLayer/IceHockeyScore"));
+        gamePlayController.SetIceHockeyScoreBoard(
+                GetNode<TextureRect>("CanvasLayer/IceHockeyScore/CountryFlag1"),
+                GetNode<TextureRect>("CanvasLayer/IceHockeyScore/CountryFlag2"),
+                GetNode<Label>("CanvasLayer/IceHockeyScore/CountryCode1"),
+                GetNode<Label>("CanvasLayer/IceHockeyScore/CountryCode2"),
+                GetNode<Label>("CanvasLayer/IceHockeyScore/Score1"),
+                GetNode<Label>("CanvasLayer/IceHockeyScore/Score2"),
+                GetNode<Label>("CanvasLayer/IceHockeyScore/TimerBoard")
+            );
+
+        gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));
+        gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));
+        gamePlayController.SetParentNode(this);
 
         InstantiateLevel();
         AssignButtons();

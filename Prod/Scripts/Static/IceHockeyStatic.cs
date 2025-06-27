@@ -12,14 +12,21 @@ namespace WinterSports.Scripts.Static
         public enum StatesIceHockey
         {
             Select,
-            Init
+            Init,
+            Goal
         };
         public static StatesIceHockey statesIceHockey = StatesIceHockey.Select;
+        public static bool isGoal = false;
+        public static int score1 = 0;
+        public static int score2 = 0;
         #endregion
         #region Method
         public static void Reset()
         {
             statesIceHockey = StatesIceHockey.Select;
+            isGoal = false;
+            score1 = 0;
+            score2 = 0;
         }
         #endregion
     }

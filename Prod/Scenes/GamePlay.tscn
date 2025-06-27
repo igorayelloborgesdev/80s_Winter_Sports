@@ -4044,3 +4044,135 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_yplj1")
 expand_mode = 1
+
+[node name="IceHockeyScore" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 288.0
+offset_bottom = 232.0
+size_flags_horizontal = 0
+
+[node name="HUDBG" type="NinePatchRect" parent="CanvasLayer/IceHockeyScore"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -54.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_8vguo")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="CountryFlag1" type="TextureRect" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -107.0
+offset_right = 54.0
+offset_bottom = -74.0
+grow_vertical = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode1" type="Label" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = -118.0
+offset_right = 167.0
+offset_bottom = -52.0
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score1" type="Label" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 159.0
+offset_top = -118.0
+offset_right = 237.0
+offset_bottom = -52.0
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryFlag2" type="TextureRect" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -59.0
+offset_right = 54.0
+offset_bottom = -26.0
+grow_vertical = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode2" type="Label" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = -74.0
+offset_right = 167.0
+offset_bottom = -8.0
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score2" type="Label" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 159.0
+offset_top = -74.0
+offset_right = 237.0
+offset_bottom = -8.0
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerBoard" type="Label" parent="CanvasLayer/IceHockeyScore"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -141.0
+offset_right = 89.0
+offset_bottom = -94.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_l04wb")
+theme_override_font_sizes/font_size = 25
+text = "02:00"
+horizontal_alignment = 1
+vertical_alignment = 1
