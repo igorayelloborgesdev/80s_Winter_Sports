@@ -41,8 +41,7 @@ Esportes
 
 .Ice Hockey 
 
-..Start//<-
-..Tempo
+..Tempo//<-
 
 ..Golden Goal
 ..Pause

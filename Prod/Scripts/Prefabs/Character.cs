@@ -267,7 +267,7 @@ public partial class Character : CharacterBody3D
         }
         if (prefabName == "IceHockeyRink")
         {
-            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
+            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.InGame)
             {
                 if (isPlayerTeam)
                 {                    

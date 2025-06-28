@@ -121,8 +121,8 @@ namespace WinterSports.Scripts.Controller
         #region const
         private const float rectXSize = 225.0f;
         private const string flagResource = "res://Art//2d//flags//";
-        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
-        private string[] prefabNameCountryList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping" };
+        private string[] prefabNameTimerList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping", "IceHockeyRink"};
+        private string[] prefabNameCountryList = { "skiTrack", "SpeedSkating", "Biathlon", "LugeBobsleigh", "Skijumping", "IceHockeyRink" };
         private Vector3[] iceHockeyInitPosition = { 
             new Vector3 (0.0f, 0.45f, 9.0f),
             new Vector3 (0.75f, 0.45f, 1.25f),
@@ -1593,6 +1593,7 @@ namespace WinterSports.Scripts.Controller
         }
         public void InitIceHockey()
         {
+            InitTimer();
             Texture textureResource1 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
             Texture2D texture2D1 = textureResource1 as Texture2D;
             this.texture2DCountry1.Texture = texture2D1;
@@ -1842,94 +1843,46 @@ namespace WinterSports.Scripts.Controller
             character.ShowHideIceHockeyGoalKeeper(isShow);
         }
         private void UpdateSkiIcehockey(double delta)
-        {
+        {            
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Select)
             {
                 
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
             {
-                SetIceHockeyTeams();
-                DefineWhoIsControllingThePuck();                
+                timerGamePlayController.TimerRunning(delta);
+                if (timerGamePlayController.GetTimer() > 0.5f && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.Ready)
+                {
+                    IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.Set;
+                    readySetGoControl.Show();
+                    readySetGoLabel.Text = "Ready";
+                }
+                else if (timerGamePlayController.GetTimer() > 1.0f && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.Set)
+                {
+                    IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.Go;
+                    readySetGoControl.Show();
+                    readySetGoLabel.Text = "Set";
+                }
+                else if (timerGamePlayController.GetTimer() > 1.5f && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.Go)
+                {
+                    IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.InGame;
+                    readySetGoControl.Show();
+                    readySetGoLabel.Text = "Go";
+                    timerGamePlayController.StopTimer();
+                    timerGamePlayController.ResetTimer();
+                }
+                else if (IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.InGame)
+                {
+                    readySetGoControl.Hide();
+                    SetIceHockeyTeams();
+                    DefineWhoIsControllingThePuck();
+                }                                        
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal)
             {                
                 this.countryIceHockey1ScoreLabel.Text = (IceHockeyStatic.score1).ToString();
                 this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();
             }
-
-            //timerGamePlayController.TimerRunning(delta);
-            //if (this.character.statesSki == Character.StatesSki.Ready)
-            //{
-            //    ShowHideStandingsTable(false);
-            //}
-            //if (timerGamePlayController.GetTimer() > 1.0f && this.character.statesSki == Character.StatesSki.Ready)
-            //{
-            //    this.character.statesSki = Character.StatesSki.Set;
-            //    readySetGoControl.Show();
-            //    readySetGoLabel.Text = "Ready";
-            //}
-            //else if (timerGamePlayController.GetTimer() > 2.0f && this.character.statesSki == Character.StatesSki.Set)
-            //{
-            //    this.character.statesSki = Character.StatesSki.Go;
-            //    readySetGoLabel.Text = "Set";
-            //}
-            //else if (timerGamePlayController.GetTimer() > 3.0f && this.character.statesSki == Character.StatesSki.Go)
-            //{
-            //    this.character.statesSki = Character.StatesSki.Init;
-            //    readySetGoLabel.Text = "Go";
-            //    setScore = true;
-            //    timerController.StartTimer();
-            //    StartAI();
-            //}
-            //else if (timerGamePlayController.GetTimer() > 5.0f && this.character.statesSki == Character.StatesSki.Init)
-            //{
-            //    readySetGoControl.Hide();
-            //    timerGamePlayController.StopTimer();
-            //    timerGamePlayController.ResetTimer();
-            //    this.character.statesSki = Character.StatesSki.Running;
-            //    crossCountryDTOList.Clear();
-            //    CrossCountryStatic.isPause = false;
-            //}
-            //else if (this.character.statesSki == Character.StatesSki.Running)
-            //{
-            //    foreach (var charObj in characterCrossCountryList)
-            //    {
-            //        charObj.SetScore();
-            //        if (!charObj.GetIsRunFinished)
-            //        {
-            //            charObj.GetSetScore = timerController.GetTimer();
-            //        }
-            //        else
-            //        {
-            //            if (GameModeSingleton.country == charObj.GetSetCharacterIdCountry)
-            //            {
-            //                timerGamePlayController.StartTimer();
-            //                this.character.statesSki = Character.StatesSki.Finish;
-            //            }
-            //        }
-            //    }
-            //}
-            //else if (this.character.statesSki == Character.StatesSki.Finish && timerGamePlayController.GetTimer() > 1.0f)
-            //{
-            //    this.character.statesSki = Character.StatesSki.End;
-            //    characterCrossCountryList = characterCrossCountryList.OrderBy(x => x.GetIsRunFinished)
-            //        .OrderBy(x => x.GetSetScore).OrderByDescending(x => x.GetSetCurrentPoint).ToList();
-
-            //    foreach (var charObj in characterCrossCountryList)
-            //    {
-            //        charObj.statesSki = Character.StatesSki.End;
-            //    }
-            //    this.character.OnlyPause();
-            //    ShowHideStandingsTable(true);
-            //    SetStandingsTable();
-            //}
-            //timerController.TimerRunning(delta);
-            //updateTimerCrossCountry();
-            //UpdateSpeedEnergyLabel();
-            //OrderCrossCountryPosition();
-            //SetPlayerPosition();
-            //SetPlayerPositionUI();
         }
         private void DefineWhoIsControllingThePuck()
         {
