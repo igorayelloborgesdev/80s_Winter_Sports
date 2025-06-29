@@ -13,7 +13,8 @@ namespace WinterSports.Scripts.Static
         {
             Select,
             Init,
-            Goal
+            Goal,
+            Finish
         };
         public static StatesIceHockey statesIceHockey = StatesIceHockey.Select;
         public static bool isGoal = false;

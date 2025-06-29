@@ -624,11 +624,9 @@ namespace WinterSports.Scripts.Controller
             iceHockeyTeam1[3].hockeyPower = this.hockeyPower;
             iceHockeyTeam1[3].parentNode = this.parentNode;
             iceHockeyTeam1[3].hockeyPowerControl = this.hockeyPowerControl;
-            iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);//<-
+            iceHockeyTeam1[3].hockeyPowerControl.Size = new Vector2(0.0f, 18.0f);
             iceHockeyTeam1[3].isSelected = true;
-            iceHockeyTeam1[3].isPuckControl = true;
-            //--------------------------------------------------------------------
-
+            iceHockeyTeam1[3].isPuckControl = true;            
         }
         public void SetCharacter(LugeSled lugeSled)
         {
@@ -1645,7 +1643,7 @@ namespace WinterSports.Scripts.Controller
         {            
             for (int i = 0; i < iceHockeyTeam1.Count; i++)
             {
-                iceHockeyTeam1[i].LookAt(iceHockeyInitRotation);//<-
+                iceHockeyTeam1[i].LookAt(iceHockeyInitRotation);
                 iceHockeyTeam1[i].RotateObjectLocal(Vector3.Up, Mathf.DegToRad(180.0f));
                 iceHockeyTeam1[i].Rotation = new Vector3(0.0f, iceHockeyTeam1[i].Rotation.Y, 0.0f);
             }
@@ -1870,18 +1868,25 @@ namespace WinterSports.Scripts.Controller
                     readySetGoLabel.Text = "Go";
                     timerGamePlayController.StopTimer();
                     timerGamePlayController.ResetTimer();
+                    timerController.StartTimer();
                 }
                 else if (IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.InGame)
                 {
                     readySetGoControl.Hide();
                     SetIceHockeyTeams();
                     DefineWhoIsControllingThePuck();
+                    timerController.TimerRunning(delta);                    
+                    var regressiveTimer = 120.0f - timerController.GetTimer();
+                    if (regressiveTimer <= 0.0f)
+                        IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
+                    this.timerIceHockeyLabel.Text = TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss");
                 }                                        
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal)
             {                
                 this.countryIceHockey1ScoreLabel.Text = (IceHockeyStatic.score1).ToString();
                 this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();
+                timerController.StopTimer();
             }
         }
         private void DefineWhoIsControllingThePuck()
