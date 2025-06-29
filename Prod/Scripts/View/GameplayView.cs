@@ -236,7 +236,7 @@ public partial class GameplayView : Control
         if (prefabName == "IceHockeyRink")
         {
             InstantiateCharacterIceHockey();
-            InstantiatePuckIceHockey();
+            InstantiatePuckIceHockey();//<-
             gamePlayController.SetPuckToCharacter(puck);
             gamePlayController.SetCamera3DIceHockey(iceHockey.GetSetCamera3D());
             gamePlayController.SetIceHockeyGoal(iceHockey);            

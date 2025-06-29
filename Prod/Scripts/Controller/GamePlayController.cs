@@ -117,6 +117,7 @@ namespace WinterSports.Scripts.Controller
         private Label countryIceHockey1ScoreLabel = null;
         private Label countryIceHockey2ScoreLabel = null;
         private Label timerIceHockeyLabel = null;
+        private bool isChangeIceHockeyScoreBoard = true;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -1869,6 +1870,7 @@ namespace WinterSports.Scripts.Controller
                     timerGamePlayController.StopTimer();
                     timerGamePlayController.ResetTimer();
                     timerController.StartTimer();
+                    timerController.UnstopTimer();
                 }
                 else if (IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.InGame)
                 {
@@ -1877,18 +1879,58 @@ namespace WinterSports.Scripts.Controller
                     DefineWhoIsControllingThePuck();
                     timerController.TimerRunning(delta);                    
                     var regressiveTimer = 120.0f - timerController.GetTimer();
+                    GD.Print(timerController.GetTimer());//<-
                     if (regressiveTimer <= 0.0f)
                         IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
                     this.timerIceHockeyLabel.Text = TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss");
                 }                                        
             }
-            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal)
-            {                
-                this.countryIceHockey1ScoreLabel.Text = (IceHockeyStatic.score1).ToString();
-                this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();
+            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal && timerGamePlayController.GetTimer() <= 1.5f)
+            {
+                if (isChangeIceHockeyScoreBoard)
+                {
+                    isChangeIceHockeyScoreBoard = false;
+                    if (IceHockeyStatic.isScorePlayer)
+                    {
+                        IceHockeyStatic.score1++;
+                        this.countryIceHockey1ScoreLabel.Text = (IceHockeyStatic.score1).ToString();
+                    }
+                    else
+                    {
+                        IceHockeyStatic.score2++;
+                        this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();//<-
+                    }                    
+                }                
                 timerController.StopTimer();
+                timerGamePlayController.StartTimer();
+                timerGamePlayController.TimerRunning(delta);
+            }
+            else if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal && timerGamePlayController.GetTimer() > 1.5f)
+            {
+                isChangeIceHockeyScoreBoard = true;
+                ResetIceHockeyAfterGoal();
+                timerGamePlayController.StopTimer();
+                timerGamePlayController.ResetTimer();
+                timerGamePlayController.StartTimer();
+                IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Init;
+                IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.Ready;
             }
         }
+        private void ResetIceHockeyAfterGoal()
+        {
+            puck.Position = new Vector3(0.0f, 5.0f, 0.0f);
+            foreach (var obj in iceHockeyTeam1)
+            {
+                obj.isPuckControl = false;
+            }
+            iceHockeyTeam1[3].isPuckControl = true;
+            foreach (var obj in iceHockeyTeam2)
+            {
+                obj.isPuckControl = false;
+            }
+            SetIceHockeyInitPosition();            
+        }
+
         private void DefineWhoIsControllingThePuck()
         {
             Character characterPuck = null;

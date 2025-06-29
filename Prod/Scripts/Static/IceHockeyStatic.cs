@@ -20,7 +20,7 @@ namespace WinterSports.Scripts.Static
         public static bool isGoal = false;
         public static int score1 = 0;
         public static int score2 = 0;
-
+        public static bool isScorePlayer = true;
         public enum StatesIceHockeyStart
         {
             Ready,
@@ -29,6 +29,7 @@ namespace WinterSports.Scripts.Static
             InGame
         };
         public static StatesIceHockeyStart statesIceHockeyStart = StatesIceHockeyStart.Ready;
+        public static bool isGoldenGoal = false;
         #endregion
         #region Method
         public static void Reset()
@@ -38,6 +39,8 @@ namespace WinterSports.Scripts.Static
             score1 = 0;
             score2 = 0;
             statesIceHockeyStart = StatesIceHockeyStart.Ready;
+            isGoldenGoal = false;
+            isScorePlayer = true;
         }
         #endregion
     }

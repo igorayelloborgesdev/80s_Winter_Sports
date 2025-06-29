@@ -18,13 +18,15 @@ public partial class IceHockeyPuckCollision : Area3D
                 if (body.GetParent().GetParent().Name == "HockeyGoal2")
                 {                 
                     IceHockeyStatic.isGoal = true;
-                    IceHockeyStatic.score2 += 1;
+                    //IceHockeyStatic.score2 += 1;
+                    IceHockeyStatic.isScorePlayer = false;
                     IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Goal;
                 }
                 if (body.GetParent().GetParent().Name == "HockeyGoal1")
                 {                 
                     IceHockeyStatic.isGoal = true;
-                    IceHockeyStatic.score1 += 1;
+                    //IceHockeyStatic.score1 += 1;
+                    IceHockeyStatic.isScorePlayer = true;
                     IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Goal;
                 }
             }
