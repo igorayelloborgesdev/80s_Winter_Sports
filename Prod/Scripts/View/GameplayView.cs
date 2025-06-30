@@ -244,6 +244,7 @@ public partial class GameplayView : Control
     }
     private void InstantiateCharacterIceHockey()
     {
+        
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);
         //for (int i = 0; i < 2; i++)
         for (int i = 0; i < 1; i++)
@@ -265,6 +266,7 @@ public partial class GameplayView : Control
                     character.ShowHideIceHockeyGoalKeeper(true);
                 }
                 character.playerNumber = j;
+                gamePlayController.SetPauseScreenIceHockey(pauseScreen, ref character);
                 character.SetPlayerIceHockeyPosition(j, i);                
                 gamePlayController.SetIceHockeyCharacter(character, i == 0);
                 iceHockey.AddChild(character);
@@ -290,6 +292,7 @@ public partial class GameplayView : Control
                     character.ShowHideIceHockeyGoalKeeper(true);
                 }
                 character.playerNumber = j;
+                gamePlayController.SetPauseScreenIceHockey(pauseScreen, ref character);
                 character.SetPlayerIceHockeyPosition(j, i);
                 gamePlayController.SetIceHockeyCharacter(character, i == 0);
                 iceHockey.AddChild(character);

@@ -734,6 +734,11 @@ namespace WinterSports.Scripts.Controller
             }            
             bobsleighSled.SetPauseScreen = this.pauseScreen;
         }
+        public void SetPauseScreenIceHockey(Control pauseScreen, ref Character character)
+        {
+            this.pauseScreen = pauseScreen;
+            character.SetPauseScreen = this.pauseScreen;
+        }
         public void SetFinishSessionScreen(Control finishSessionSession)
         {
             this.finishSessionScreen = finishSessionSession;
@@ -1842,10 +1847,11 @@ namespace WinterSports.Scripts.Controller
             character.ShowHideIceHockeyGoalKeeper(isShow);
         }
         private void UpdateSkiIcehockey(double delta)
-        {            
+        {
+
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Select)
             {
-                
+
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init)
             {
@@ -1855,6 +1861,7 @@ namespace WinterSports.Scripts.Controller
                     IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.Set;
                     readySetGoControl.Show();
                     readySetGoLabel.Text = "Ready";
+                    DefineWhoIsControllingThePuck();
                 }
                 else if (timerGamePlayController.GetTimer() > 1.0f && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.Set)
                 {
@@ -1877,13 +1884,12 @@ namespace WinterSports.Scripts.Controller
                     readySetGoControl.Hide();
                     SetIceHockeyTeams();
                     DefineWhoIsControllingThePuck();
-                    timerController.TimerRunning(delta);                    
-                    var regressiveTimer = 120.0f - timerController.GetTimer();
-                    GD.Print(timerController.GetTimer());//<-
+                    timerController.TimerRunning(delta);
+                    var regressiveTimer = 120.0f - timerController.GetTimer();                    
                     if (regressiveTimer <= 0.0f)
                         IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
                     this.timerIceHockeyLabel.Text = TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss");
-                }                                        
+                }
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal && timerGamePlayController.GetTimer() <= 1.5f)
             {
@@ -1899,8 +1905,8 @@ namespace WinterSports.Scripts.Controller
                     {
                         IceHockeyStatic.score2++;
                         this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();//<-
-                    }                    
-                }                
+                    }
+                }
                 timerController.StopTimer();
                 timerGamePlayController.StartTimer();
                 timerGamePlayController.TimerRunning(delta);
@@ -1915,6 +1921,7 @@ namespace WinterSports.Scripts.Controller
                 IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Init;
                 IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.Ready;
             }
+            
         }
         private void ResetIceHockeyAfterGoal()
         {

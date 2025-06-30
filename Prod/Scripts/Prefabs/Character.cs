@@ -314,8 +314,8 @@ public partial class Character : CharacterBody3D
         if (prefabName == "Skijumping")
             InitSkiJump();
         //IceHockeyRink
-        if (prefabName == "IceHockeyRink")
-            InitIceHockey();     
+        if (prefabName == "IceHockeyRink")        
+            InitIceHockey();                    
 
         ShowHideIceHockeySeletion(false);
     }
@@ -439,6 +439,10 @@ public partial class Character : CharacterBody3D
     public void OnlyPause()
     {
         playerInput.OnlyPause();
+    }
+    public bool GetPause()
+    {
+        return playerInput.GetPause();
     }
     #endregion
     #region Get Set
