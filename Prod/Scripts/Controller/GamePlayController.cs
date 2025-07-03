@@ -110,6 +110,7 @@ namespace WinterSports.Scripts.Controller
         private Node parentNode = null;
         private Control hockeyPowerControl = null;
         private Control iceHockeyScoreControl = null;
+        private Control iceHockeyEndGameControl = null;
         private TextureRect countryFlagIceHockey1TextureRect = null;
         private TextureRect countryFlagIceHockey2TextureRect = null;
         private Label countryIceHockey1CodeLabel = null;
@@ -118,6 +119,12 @@ namespace WinterSports.Scripts.Controller
         private Label countryIceHockey2ScoreLabel = null;
         private Label timerIceHockeyLabel = null;
         private bool isChangeIceHockeyScoreBoard = true;
+        private TextureRect countryFlag1TextureRect = null;
+        private TextureRect countryFlag2TextureRect = null;
+        private Label countryCode1Label = null;
+        private Label countryCode2Label = null;
+        private Label countryCodeScore1Label = null;
+        private Label countryCodeScore2Label = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -1295,6 +1302,7 @@ namespace WinterSports.Scripts.Controller
             setScore = true;
             ShowHockeyPower(false);
             ShowHidehockeyScoreControl(false);
+            ShowHideIceHockeyEndGameControl(false);
         }
         #endregion
         #region Speed Skating
@@ -1309,6 +1317,7 @@ namespace WinterSports.Scripts.Controller
             speedSkatingModel.laps = 0;
             ShowHockeyPower(false);
             ShowHidehockeyScoreControl(false);
+            ShowHideIceHockeyEndGameControl(false);
         }
         public void SetRailSpeedSkating(int startPointId, List<SpeedSkatingTrackDTO> speedSkatingTrackDTOList)
         {            
@@ -1383,6 +1392,7 @@ namespace WinterSports.Scripts.Controller
             InitTimer();
             ShowHockeyPower(false);
             ShowHidehockeyScoreControl(false);
+            ShowHideIceHockeyEndGameControl(false);
         }
         
         public void SetCharacterBiathlon()
@@ -1415,6 +1425,7 @@ namespace WinterSports.Scripts.Controller
             InitTimer();
             ShowHockeyPower(false);
             ShowHidehockeyScoreControl(false);
+            ShowHideIceHockeyEndGameControl(false);
         }
         public void ResetLuge()
         {
@@ -1448,6 +1459,7 @@ namespace WinterSports.Scripts.Controller
             InitTimer();
             ShowHockeyPower(false);
             ShowHidehockeyScoreControl(false);
+            ShowHideIceHockeyEndGameControl(false);
         }
         public void SetCharacterSportSkiJump()
         {            
@@ -1630,6 +1642,7 @@ namespace WinterSports.Scripts.Controller
             SetIceHockeyInitPosition();
             SetIceHockeyInitRotation();
             ShowHidehockeyScoreControl(false);
+            ShowHideIceHockeyEndGameControl(false);
         }
         private void SetIceHockeyInitPosition()
         {
@@ -1773,6 +1786,12 @@ namespace WinterSports.Scripts.Controller
         {
             this.iceHockeyScoreControl = iceHockeyScoreControl;
         }
+
+        public void SetIceHockeyEndGameControl(Control iceHockeyEndGameControl)
+        {
+            this.iceHockeyEndGameControl = iceHockeyEndGameControl;
+        }
+
         private void ShowHockeyPower(bool isShow)
         {
             if (isShow)
@@ -1808,8 +1827,21 @@ namespace WinterSports.Scripts.Controller
             this.countryIceHockey1CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
             this.countryIceHockey2CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
             this.countryIceHockey1ScoreLabel.Text = (0).ToString();
-            this.countryIceHockey2ScoreLabel.Text = (0).ToString();
-            //<-
+            this.countryIceHockey2ScoreLabel.Text = (0).ToString();            
+        }
+        private void SetIceHockeyFinalBoard()
+        {
+            Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
+            Texture2D texture2D = textureResource as Texture2D;
+            this.countryFlag1TextureRect.Texture = texture2D;
+            Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code + ".png");
+            Texture2D texture2D2 = textureResource2 as Texture2D;
+            this.countryFlag2TextureRect.Texture = texture2D2;
+
+            this.countryCode1Label.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
+            this.countryCode2Label.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
+            this.countryCodeScore1Label.Text = (IceHockeyStatic.score1).ToString();
+            this.countryCodeScore2Label.Text = (IceHockeyStatic.score2).ToString();
         }
         public void ResetIceHockey()
         {
@@ -1885,9 +1917,12 @@ namespace WinterSports.Scripts.Controller
                     SetIceHockeyTeams();
                     DefineWhoIsControllingThePuck();
                     timerController.TimerRunning(delta);
-                    var regressiveTimer = 120.0f - timerController.GetTimer();                    
+                    var regressiveTimer = 5.0f - timerController.GetTimer();
                     if (regressiveTimer <= 0.0f)
+                    {
                         IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
+                        SetIceHockeyFinalBoard();
+                    }                        
                     this.timerIceHockeyLabel.Text = TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss");
                 }
             }
@@ -1920,6 +1955,15 @@ namespace WinterSports.Scripts.Controller
                 timerGamePlayController.StartTimer();
                 IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Init;
                 IceHockeyStatic.statesIceHockeyStart = IceHockeyStatic.StatesIceHockeyStart.Ready;
+            }
+            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Finish)
+            {
+                timerGamePlayController.StopTimer();
+                timerGamePlayController.ResetTimer();
+                timerController.StopTimer();
+                timerController.ResetTimer();
+                ShowHidehockeyScoreControl(false);
+                ShowHideIceHockeyEndGameControl(true);
             }
             
         }
@@ -2066,6 +2110,17 @@ namespace WinterSports.Scripts.Controller
                 iceHockeyScoreControl.Hide();
             }
         }
+        public void ShowHideIceHockeyEndGameControl(bool isShow)
+        {
+            if (isShow)
+            {
+                iceHockeyEndGameControl.Show();
+            }
+            else
+            {
+                iceHockeyEndGameControl.Hide();
+            }
+        }
         public void SetIceHockeyScoreBoard(TextureRect countryFlagIceHockey1TextureRect, TextureRect countryFlagIceHockey2TextureRect, 
             Label countryIceHockey1CodeLabel, Label countryIceHockey2CodeLabel, Label countryIceHockey1ScoreLabel, Label countryIceHockey2ScoreLabel, Label timerIceHockeyLabel)
         {
@@ -2076,6 +2131,17 @@ namespace WinterSports.Scripts.Controller
             this.countryIceHockey1ScoreLabel = countryIceHockey1ScoreLabel;
             this.countryIceHockey2ScoreLabel = countryIceHockey2ScoreLabel;
             this.timerIceHockeyLabel = timerIceHockeyLabel;
+        }
+
+        public void SetIceHockeyEndGame(TextureRect countryFlag1TextureRect, TextureRect countryFlag2TextureRect,
+            Label countryCode1Label, Label countryCode2Label, Label countryCodeScore1Label, Label countryCodeScore2Label)
+        {
+            this.countryFlag1TextureRect = countryFlag1TextureRect;
+            this.countryFlag2TextureRect = countryFlag2TextureRect;
+            this.countryCode1Label = countryCode1Label;
+            this.countryCode2Label = countryCode2Label;
+            this.countryCodeScore1Label = countryCodeScore1Label;
+            this.countryCodeScore2Label = countryCodeScore2Label;            
         }
 
         #endregion

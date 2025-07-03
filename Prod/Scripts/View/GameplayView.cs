@@ -144,6 +144,7 @@ public partial class GameplayView : Control
         gamePlayController = new GamePlayController();
 
         gamePlayController.SetHockeyScoreControl(GetNode<Control>("CanvasLayer/IceHockeyScore"));
+        gamePlayController.SetIceHockeyEndGameControl(GetNode<Control>("CanvasLayer/IceHockeyEndGameControl"));
         gamePlayController.SetIceHockeyScoreBoard(
                 GetNode<TextureRect>("CanvasLayer/IceHockeyScore/CountryFlag1"),
                 GetNode<TextureRect>("CanvasLayer/IceHockeyScore/CountryFlag2"),
@@ -153,6 +154,16 @@ public partial class GameplayView : Control
                 GetNode<Label>("CanvasLayer/IceHockeyScore/Score2"),
                 GetNode<Label>("CanvasLayer/IceHockeyScore/TimerBoard")
             );
+
+        gamePlayController.SetIceHockeyEndGame(
+                GetNode<TextureRect>("CanvasLayer/IceHockeyEndGameControl/CountryFlag1"),
+                GetNode<TextureRect>("CanvasLayer/IceHockeyEndGameControl/CountryFlag2"),
+                GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryCode1"),
+                GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryCode2"),
+                GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryScore1"),
+                GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryScore2")
+            );
+
 
         gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));
         gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));

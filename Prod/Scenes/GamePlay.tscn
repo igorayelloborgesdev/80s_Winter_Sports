@@ -3249,7 +3249,6 @@ theme = SubResource("Theme_rb25c")
 text = "Pre game"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="PlayMenuButtonFinish" type="Button" parent="CanvasLayer/SelectTeamSessionControl"]
 modulate = Color(0.862745, 0.862745, 0.862745, 1)
@@ -4046,6 +4045,7 @@ texture = ExtResource("29_yplj1")
 expand_mode = 1
 
 [node name="IceHockeyScore" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 288.0
@@ -4174,5 +4174,233 @@ grow_vertical = 0
 theme = SubResource("Theme_l04wb")
 theme_override_font_sizes/font_size = 25
 text = "02:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IceHockeyEndGameControl" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_canv2")
+expand_mode = 1
+
+[node name="CountryFlag1" type="TextureRect" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -107.0
+offset_right = -239.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode1" type="Label" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.0
+offset_top = 39.0
+offset_right = -253.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_colors/font_color = Color(0, 0, 0.647059, 1)
+theme_override_font_sizes/font_size = 50
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryScore1" type="Label" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -25.0
+offset_right = -53.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_colors/font_color = Color(0, 0, 0.647059, 1)
+theme_override_font_sizes/font_size = 50
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryFlag2" type="TextureRect" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 249.0
+offset_top = -107.0
+offset_right = 433.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_sg524")
+expand_mode = 1
+
+[node name="CountryCode2" type="Label" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 269.0
+offset_top = 39.0
+offset_right = 419.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_colors/font_color = Color(0, 0, 0.647059, 1)
+theme_override_font_sizes/font_size = 50
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryScore2" type="Label" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 61.0
+offset_top = -25.0
+offset_right = 211.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_colors/font_color = Color(0, 0, 0.647059, 1)
+theme_override_font_sizes/font_size = 50
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryCode-" type="Label" parent="CanvasLayer/IceHockeyEndGameControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -17.0
+offset_right = 23.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l04wb")
+theme_override_colors/font_color = Color(0, 0, 0.647059, 1)
+theme_override_font_sizes/font_size = 50
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseTitle" type="NinePatchRect" parent="CanvasLayer/IceHockeyEndGameControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -253.0
+offset_top = 49.0
+offset_right = 262.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("11_12gco")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="InitTitleLabel" type="Label" parent="CanvasLayer/IceHockeyEndGameControl/PauseTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rb25c")
+text = "Final Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayMenuButtonFinish" type="Button" parent="CanvasLayer/IceHockeyEndGameControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -252.0
+offset_top = 574.0
+offset_right = 260.0
+offset_bottom = 630.0
+grow_horizontal = 2
+
+[node name="BackNinePatchRect" type="NinePatchRect" parent="CanvasLayer/IceHockeyEndGameControl/PlayMenuButtonFinish"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_18oum")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="PlayTitleLabel" type="Label" parent="CanvasLayer/IceHockeyEndGameControl/PlayMenuButtonFinish/BackNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bdmbr")
+theme_override_font_sizes/font_size = 18
+text = "Back"
 horizontal_alignment = 1
 vertical_alignment = 1

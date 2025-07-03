@@ -41,8 +41,7 @@ Esportes
 
 .Ice Hockey 
 
-..Finish//<-
-..Golden Goal
+..Golden Goal//<-
 ..Restart
 
 .Melhorar retorno quando a AI estiver atrás do gol do player
