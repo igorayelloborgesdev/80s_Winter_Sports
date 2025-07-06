@@ -1848,7 +1848,7 @@ namespace WinterSports.Scripts.Controller
         {
             IceHockeyStatic.Reset();
             ShowHideSelectTeamSessionControlIceHockey(true);
-            ShowHideIceHockeyEndGameControl(false);//<-
+            ShowHideIceHockeyEndGameControl(false);
         }        
         public void ShowHideSelectTeamSessionControlIceHockey(bool isShow)
         {
@@ -1920,7 +1920,7 @@ namespace WinterSports.Scripts.Controller
                     SetIceHockeyTeams();
                     DefineWhoIsControllingThePuck();
                     timerController.TimerRunning(delta);
-                    var regressiveTimer = 5.0f - timerController.GetTimer();
+                    var regressiveTimer = 120.0f - timerController.GetTimer();
                     if (regressiveTimer <= 0.0f && IceHockeyStatic.score1 != IceHockeyStatic.score2)
                     {
                         IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
@@ -1968,7 +1968,7 @@ namespace WinterSports.Scripts.Controller
                 timerController.ResetTimer();
                 timerController.StartTimer();
                 ShowHidehockeyScoreControl(false);
-                ShowHideIceHockeyEndGameControl(true);//<-
+                ShowHideIceHockeyEndGameControl(true);
                 ResetIceHockeyAfterGoal();
             }
             

@@ -35,17 +35,6 @@ Esportes
 ------------------------------------------------
 
 .Main Menu
-..Practice
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-.Ice Hockey 
-
-.Melhorar retorno quando a AI estiver atrás do gol do player//<-
-.AI não pode passar o puck para trás
-.AI melhorar a finalização da AI
-.Melhorar botão de trocar de jogador
-.Melhorar camera seguindo o puck
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 

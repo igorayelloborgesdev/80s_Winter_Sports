@@ -248,7 +248,7 @@ public partial class GameplayView : Control
         if (prefabName == "IceHockeyRink")
         {
             InstantiateCharacterIceHockey();
-            InstantiatePuckIceHockey();//<-
+            InstantiatePuckIceHockey();
             gamePlayController.SetPuckToCharacter(puck);
             gamePlayController.SetCamera3DIceHockey(iceHockey.GetSetCamera3D());
             gamePlayController.SetIceHockeyGoal(iceHockey);            
@@ -261,12 +261,12 @@ public partial class GameplayView : Control
         //for (int i = 0; i < 2; i++)
         for (int i = 0; i < 1; i++)
         {            
-            for (int j = 0; j < 6; j++)//<-
+            for (int j = 0; j < 6; j++)
             {
                 Character character = characterPackedScene.Instantiate<Character>();
                 character.GetSetCharacterId = j;
                 character.SetPrefabName = prefabName;
-                character.ScaleObjectLocal(new Vector3(3.0f, 3.0f, 3.0f));//<-
+                character.ScaleObjectLocal(new Vector3(3.0f, 3.0f, 3.0f));
                 if (j > 0)
                 {
                     character.ShowHideIceHockeyStick(true);
@@ -287,12 +287,12 @@ public partial class GameplayView : Control
 
         for (int i = 1; i < 2; i++)
         {
-            for (int j = 0; j < 6; j++)//<-
+            for (int j = 0; j < 6; j++)
             {
                 Character character = characterPackedScene.Instantiate<Character>();
                 character.GetSetCharacterId = j;
                 character.SetPrefabName = prefabName;
-                character.ScaleObjectLocal(new Vector3(3.0f, 3.0f, 3.0f));//<-
+                character.ScaleObjectLocal(new Vector3(3.0f, 3.0f, 3.0f));
                 if (j > 0)
                 {
                     character.ShowHideIceHockeyStick(true);
@@ -312,7 +312,7 @@ public partial class GameplayView : Control
         }
 
         gamePlayController.SetIceHockeyTeams();
-        gamePlayController.HideIceHockeyCharacter();//<-TESTE        
+        gamePlayController.HideIceHockeyCharacter();
     }
     private void InstantiatePuckIceHockey()
     {
