@@ -161,7 +161,8 @@ public partial class GameplayView : Control
                 GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryCode1"),
                 GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryCode2"),
                 GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryScore1"),
-                GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryScore2")
+                GetNode<Label>("CanvasLayer/IceHockeyEndGameControl/CountryScore2"),
+                GetNode<Button>("CanvasLayer/IceHockeyEndGameControl/PlayMenuButtonFinish")
             );
 
 
@@ -574,7 +575,7 @@ public partial class GameplayView : Control
         gamePlayController.GetSetReturnFinishButton = returnFinishButton;
         gamePlayController.GetSetBackMenuFinishButtonStandings = backMenuFinishButtonStandings;
         gamePlayController.GetSetReturnFinishButtonStandings = returnFinishButtonStandings;
-
+        
         if (prefabName == "IceHockeyRink")
         {
             for (int i = 0; i < 16; i++) 
@@ -610,7 +611,7 @@ public partial class GameplayView : Control
 
         HUDBG = GetNode<NinePatchRect>(HUDBGName);
         countryFlag = GetNode<TextureRect>(CountryFlagName);
-        countryCode = GetNode<Label>(CountryCodeName);
+        countryCode = GetNode<Label>(CountryCodeName);        
     }
     private void SetMainGamePlayEvents()
     {
@@ -621,6 +622,7 @@ public partial class GameplayView : Control
         gamePlayController.GetSetReturnFinishButton.Pressed += () => { ReturnMenuFromFinishScreen(); };
         gamePlayController.GetSetBackMenuFinishButtonStandings.Pressed += () => { QuitToMainMenu(); };
         gamePlayController.GetSetReturnFinishButtonStandings.Pressed += () => { ResetGameMenu(); };
+        gamePlayController.GetSetPlayMenuButtonFinish.Pressed += () => { ResetIceHockey(); };
 
         if (prefabName == "IceHockeyRink")
         {
@@ -806,6 +808,10 @@ public partial class GameplayView : Control
     private void PlayIceHockey()
     {
         gamePlayController.PlayIceHockey();
+    }
+    private void ResetIceHockey()
+    {
+        gamePlayController.ResetIceHockey();        
     }
     #endregion
 

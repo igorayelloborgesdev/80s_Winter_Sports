@@ -125,6 +125,7 @@ namespace WinterSports.Scripts.Controller
         private Label countryCode2Label = null;
         private Label countryCodeScore1Label = null;
         private Label countryCodeScore2Label = null;
+        private Button playMenuButtonFinish = null;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -1845,8 +1846,10 @@ namespace WinterSports.Scripts.Controller
         }
         public void ResetIceHockey()
         {
-            IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Select;            
-        }
+            IceHockeyStatic.Reset();
+            ShowHideSelectTeamSessionControlIceHockey(true);
+            ShowHideIceHockeyEndGameControl(false);//<-
+        }        
         public void ShowHideSelectTeamSessionControlIceHockey(bool isShow)
         {
             if(isShow)
@@ -1918,12 +1921,12 @@ namespace WinterSports.Scripts.Controller
                     DefineWhoIsControllingThePuck();
                     timerController.TimerRunning(delta);
                     var regressiveTimer = 5.0f - timerController.GetTimer();
-                    if (regressiveTimer <= 0.0f)
+                    if (regressiveTimer <= 0.0f && IceHockeyStatic.score1 != IceHockeyStatic.score2)
                     {
                         IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
                         SetIceHockeyFinalBoard();
                     }                        
-                    this.timerIceHockeyLabel.Text = TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss");
+                    this.timerIceHockeyLabel.Text = regressiveTimer >= 0.0f ? TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss") : "G.Goal";
                 }
             }
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Goal && timerGamePlayController.GetTimer() <= 1.5f)
@@ -1939,7 +1942,7 @@ namespace WinterSports.Scripts.Controller
                     else
                     {
                         IceHockeyStatic.score2++;
-                        this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();//<-
+                        this.countryIceHockey2ScoreLabel.Text = (IceHockeyStatic.score2).ToString();
                     }
                 }
                 timerController.StopTimer();
@@ -1960,10 +1963,13 @@ namespace WinterSports.Scripts.Controller
             {
                 timerGamePlayController.StopTimer();
                 timerGamePlayController.ResetTimer();
+                timerGamePlayController.StartTimer();
                 timerController.StopTimer();
                 timerController.ResetTimer();
+                timerController.StartTimer();
                 ShowHidehockeyScoreControl(false);
-                ShowHideIceHockeyEndGameControl(true);
+                ShowHideIceHockeyEndGameControl(true);//<-
+                ResetIceHockeyAfterGoal();
             }
             
         }
@@ -2134,7 +2140,8 @@ namespace WinterSports.Scripts.Controller
         }
 
         public void SetIceHockeyEndGame(TextureRect countryFlag1TextureRect, TextureRect countryFlag2TextureRect,
-            Label countryCode1Label, Label countryCode2Label, Label countryCodeScore1Label, Label countryCodeScore2Label)
+            Label countryCode1Label, Label countryCode2Label, Label countryCodeScore1Label, Label countryCodeScore2Label,
+            Button playMenuButtonFinish)
         {
             this.countryFlag1TextureRect = countryFlag1TextureRect;
             this.countryFlag2TextureRect = countryFlag2TextureRect;
@@ -2142,6 +2149,7 @@ namespace WinterSports.Scripts.Controller
             this.countryCode2Label = countryCode2Label;
             this.countryCodeScore1Label = countryCodeScore1Label;
             this.countryCodeScore2Label = countryCodeScore2Label;            
+            this.playMenuButtonFinish = playMenuButtonFinish;
         }
 
         #endregion
@@ -2254,6 +2262,18 @@ namespace WinterSports.Scripts.Controller
             set
             {
                 kitTeam2 = value;
+            }
+        }
+
+        public Button GetSetPlayMenuButtonFinish
+        {
+            get
+            {
+                return playMenuButtonFinish;
+            }
+            set
+            {
+                playMenuButtonFinish = value;
             }
         }
         #endregion
