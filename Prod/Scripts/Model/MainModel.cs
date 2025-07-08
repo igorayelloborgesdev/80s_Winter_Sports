@@ -23,7 +23,7 @@ public class MainModel
     public string sportButtonName = "SportSelectControl/SportButton";
     public string goToGamePlayButtonName = "DifficultControl/GoToGamePlay";
     public string backToSportButtonButtonName = "DifficultControl/BackToSportButton";
-    public string difficultButtonName = "DifficultControl/DifficultButton";
+    public string difficultButtonName = "DifficultControl/DifficultButton";    
     #endregion
     #region Variables
     public List<Control> menuControlsList = null;

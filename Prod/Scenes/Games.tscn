@@ -1,0 +1,257 @@
+[gd_scene load_steps=8 format=3 uid="uid://dugoqdlo4ij7e"]
+
+[ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="1_vmu4k"]
+[ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="2_0s3on"]
+[ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="3_uxeih"]
+[ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="4_rk6ok"]
+[ext_resource type="Texture2D" uid="uid://csa838503ighy" path="res://Art/UI/SaveIco.png" id="5_x8w5e"]
+
+[sub_resource type="Theme" id="Theme_b40ck"]
+default_font = ExtResource("3_uxeih")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_8davc"]
+default_font = ExtResource("3_uxeih")
+default_font_size = 24
+
+[node name="Games" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vmu4k")
+expand_mode = 1
+
+[node name="MainScreenTitle" type="NinePatchRect" parent="."]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -499.0
+offset_top = 49.0
+offset_right = 326.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("2_0s3on")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="MainScreenTitleLabel" type="Label" parent="MainScreenTitle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312121
+anchor_top = 0.5
+anchor_right = 0.687879
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_b40ck")
+text = "Games"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 407.0
+offset_top = 48.0
+offset_right = 473.0
+offset_bottom = 112.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="ExitButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ExitTitleLabel" type="Label" parent="ExitButton/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 45
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 332.0
+offset_top = 49.0
+offset_right = 398.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="SaveNinePatchRect" type="NinePatchRect" parent="SaveButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTextureRect" type="TextureRect" parent="SaveButton/SaveNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -23.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_x8w5e")
+expand_mode = 1
+
+[node name="SportsButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -499.0
+offset_top = 120.0
+offset_right = -5.0
+offset_bottom = 190.0
+grow_horizontal = 2
+
+[node name="SportsNinePatchRect" type="NinePatchRect" parent="SportsButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportsLabel" type="Label" parent="SportsButton/SportsNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -14.0
+offset_right = 150.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_uxeih")
+theme_override_font_sizes/font_size = 25
+text = "Sports"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportsButton2" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 7.0
+offset_top = 120.0
+offset_right = 466.0
+offset_bottom = 190.0
+grow_horizontal = 2
+
+[node name="SportsNinePatchRect" type="NinePatchRect" parent="SportsButton2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportsLabel" type="Label" parent="SportsButton2/SportsNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -14.0
+offset_right = 150.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_uxeih")
+theme_override_font_sizes/font_size = 25
+text = "Medal table"
+horizontal_alignment = 1
+vertical_alignment = 1

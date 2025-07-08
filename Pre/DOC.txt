@@ -59,3 +59,7 @@ Esportes
 .Joystick
 .Sound
 .Tutorial
+
+.Gravar video
+.Itch.io
+.Linkedin

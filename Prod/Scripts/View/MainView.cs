@@ -179,12 +179,13 @@ public partial class MainView : Control
     #region Events
     private void SetMainMenuButtonEvents()
     {
-        mainController.GetSetMainMenuModeTrainningButton.Pressed += () => { GoToCountrySelection(mainController.GetSetMenuControlsNameList.Count - 3, 1); };
+        mainController.GetSetMainMenuModeTrainningButton.Pressed += () => { SelectGameMode(0); };
         mainController.GetSetMainMenuGoToSportsButton.Pressed += () => { GoToSportsSelection(); };
         mainController.GetSetGoToDifficultButton.Pressed += () => { GoToDifficult(); };
         mainController.GetSetBackToCountryButton.Pressed += () => { BackToCountry(); };
         mainController.GetSetGoToGamePlayButton.Pressed += () => { GotoGamePlay(); };
         mainController.GetSetBackToSportButtonButton.Pressed += () => { BackToSport(); };
+        mainController.GetSetMainMenuModeGamesButton.Pressed += () => { SelectGameMode(1); };
     }
     private void SetAllMenuModeCountryEvents()
     {
@@ -238,8 +239,8 @@ public partial class MainView : Control
     }
     private void GoToCountrySelection(int id, int gameModeID)
     {
-        ShowHidePanels(id);
-    }
+        ShowHidePanels(id);        
+    }    
     private void SelectCountry(int id)
     {
         mainController.SelectCountry(id);
@@ -250,7 +251,10 @@ public partial class MainView : Control
     }
     private void GoToSportsSelection()
     {        
-        ShowHidePanels(mainController.GetSetMenuControlsNameList.Count - 1);        
+        if(GameModeSingleton.gameMode == 0)
+            ShowHidePanels(mainController.GetSetMenuControlsNameList.Count - 1);        
+        else
+            ShowHidePanels(mainController.GetSetMenuControlsNameList.Count - 2);        
     }
     private void GoToDifficult()
     {
@@ -270,16 +274,28 @@ public partial class MainView : Control
         timerController.TimerRunning(delta);
         if (timerController.GetTimer() > 0.5f)
         {
-            GetTree().ChangeSceneToFile("res://Scenes/GamePlay.tscn");
+            if (GameModeSingleton.gameMode == 0)
+                GetTree().ChangeSceneToFile("res://Scenes/GamePlay.tscn");
+            else if (GameModeSingleton.gameMode == 1)
+                GetTree().ChangeSceneToFile("res://Scenes/Games.tscn");
         }
     }
     private void BackToSport()
     {
-        ShowHidePanels(mainController.GetSetMenuControlsNameList.Count - 1);
+        if(GameModeSingleton.gameMode == 0)
+            ShowHidePanels(mainController.GetSetMenuControlsNameList.Count - 1);
+        else if (GameModeSingleton.gameMode == 1)
+            ShowHidePanels(6);
     }
     private void SetDifficult(int id)
     {
         mainController.SelectDiffcult(id);
+    }
+
+    private void SelectGameMode(int gameModeID)
+    {
+        GoToCountrySelection(mainController.GetSetMenuControlsNameList.Count - 3, 0);
+        GameModeSingleton.gameMode = gameModeID;
     }
     #endregion
 }
