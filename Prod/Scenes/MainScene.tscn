@@ -2570,7 +2570,6 @@ texture = ExtResource("30_yoygm")
 expand_mode = 1
 
 [node name="SportSelectControl" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

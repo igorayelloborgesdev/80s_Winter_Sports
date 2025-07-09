@@ -1,16 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://dugoqdlo4ij7e"]
+[gd_scene load_steps=24 format=3 uid="uid://dugoqdlo4ij7e"]
 
+[ext_resource type="Script" path="res://Scripts/View/GamesView.cs" id="1_bq5n5"]
 [ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="1_vmu4k"]
 [ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="2_0s3on"]
 [ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="3_uxeih"]
 [ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="4_rk6ok"]
 [ext_resource type="Texture2D" uid="uid://csa838503ighy" path="res://Art/UI/SaveIco.png" id="5_x8w5e"]
+[ext_resource type="Texture2D" uid="uid://xl2i1nfydbi" path="res://Art/UI/ConfirmCheckIco.png" id="6_gb2vh"]
+[ext_resource type="Texture2D" uid="uid://c0piryd85hoom" path="res://Art/2d/Pictograms/ski.png" id="8_1mdo5"]
+[ext_resource type="Texture2D" uid="uid://df1bp5hxc4dyl" path="res://Art/2d/goldMedal.png" id="9_lhxip"]
+[ext_resource type="Texture2D" uid="uid://bk2csh7gf8tsr" path="res://Art/2d/flags/AUT.png" id="10_burw6"]
+[ext_resource type="Texture2D" uid="uid://cqwhklgi5b4qn" path="res://Art/2d/silverMedal.png" id="11_li32y"]
+[ext_resource type="Texture2D" uid="uid://ce3dj8mnuj23q" path="res://Art/2d/bronzeMedal.png" id="12_tk6va"]
+[ext_resource type="Texture2D" uid="uid://bngnclb0xajuo" path="res://Art/2d/Pictograms/SpeedSkating.png" id="13_bi6fj"]
+[ext_resource type="Texture2D" uid="uid://dhtss4vcxfvnx" path="res://Art/2d/Pictograms/Biathlon.png" id="14_mmif6"]
+[ext_resource type="Texture2D" uid="uid://clv12fd31cbt6" path="res://Art/2d/Pictograms/Luge.png" id="15_h3nic"]
+[ext_resource type="Texture2D" uid="uid://c4rveud80mw4a" path="res://Art/2d/Pictograms/Bobsleigh.png" id="16_nomc6"]
+[ext_resource type="Texture2D" uid="uid://cspxgjep7t0jt" path="res://Art/2d/Pictograms/SkiJjumping.png" id="17_4gjr6"]
+[ext_resource type="Texture2D" uid="uid://bd7112mo8b5gh" path="res://Art/2d/Pictograms/IceHockey.png" id="18_ir7bk"]
+[ext_resource type="Texture2D" uid="uid://c81vqhtoi36ye" path="res://Art/2d/Pictograms/CrossCountry.png" id="19_yvk4u"]
 
 [sub_resource type="Theme" id="Theme_b40ck"]
 default_font = ExtResource("3_uxeih")
 default_font_size = 24
 
 [sub_resource type="Theme" id="Theme_8davc"]
+default_font = ExtResource("3_uxeih")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_kn0qb"]
+default_font = ExtResource("3_uxeih")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_3bqv8"]
 default_font = ExtResource("3_uxeih")
 default_font_size = 24
 
@@ -21,6 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bq5n5")
 
 [node name="BG" type="TextureRect" parent="."]
 layout_mode = 1
@@ -39,9 +62,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -499.0
+offset_left = -513.0
 offset_top = 49.0
-offset_right = 326.0
+offset_right = 337.0
 offset_bottom = 113.0
 grow_horizontal = 2
 texture = ExtResource("2_0s3on")
@@ -76,9 +99,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 407.0
+offset_left = 420.0
 offset_top = 48.0
-offset_right = 473.0
+offset_right = 486.0
 offset_bottom = 112.0
 grow_horizontal = 2
 
@@ -123,9 +146,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 332.0
+offset_left = 345.0
 offset_top = 49.0
-offset_right = 398.0
+offset_right = 411.0
 offset_bottom = 113.0
 grow_horizontal = 2
 
@@ -179,6 +202,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -14.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_rk6ok")
@@ -208,7 +232,7 @@ text = "Sports"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SportsButton2" type="Button" parent="."]
+[node name="MedalTable" type="Button" parent="."]
 modulate = Color(0.862745, 0.862745, 0.862745, 1)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -217,11 +241,11 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 7.0
 offset_top = 120.0
-offset_right = 466.0
+offset_right = 487.0
 offset_bottom = 190.0
 grow_horizontal = 2
 
-[node name="SportsNinePatchRect" type="NinePatchRect" parent="SportsButton2"]
+[node name="SportsNinePatchRect" type="NinePatchRect" parent="MedalTable"]
 modulate = Color(0, 0.607843, 0.941176, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -236,7 +260,7 @@ patch_margin_top = 8
 patch_margin_right = 7
 patch_margin_bottom = 9
 
-[node name="SportsLabel" type="Label" parent="SportsButton2/SportsNinePatchRect"]
+[node name="SportsLabel" type="Label" parent="MedalTable/SportsNinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -255,3 +279,2843 @@ theme_override_font_sizes/font_size = 25
 text = "Medal table"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="QuitControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="BG" type="TextureRect" parent="QuitControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vmu4k")
+expand_mode = 1
+
+[node name="QuitLabel" type="Label" parent="QuitControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -46.0
+offset_right = 375.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+theme_override_fonts/font = ExtResource("3_uxeih")
+theme_override_font_sizes/font_size = 25
+text = "Are you sure you want to quit?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="QuitControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = 72.0
+offset_right = 81.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuitNinePatchRect" type="NinePatchRect" parent="QuitControl/BackButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="QuitTextureRect" type="TextureRect" parent="QuitControl/BackButton/QuitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_gb2vh")
+expand_mode = 1
+
+[node name="QuitButton" type="Button" parent="QuitControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = 72.0
+offset_right = -7.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="QuitControl/QuitButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ExitTitleLabel" type="Label" parent="QuitControl/QuitButton/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kn0qb")
+theme_override_font_sizes/font_size = 45
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="BG" type="TextureRect" parent="SaveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vmu4k")
+expand_mode = 1
+
+[node name="SaveWarningControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="BG" type="TextureRect" parent="SaveWarningControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vmu4k")
+expand_mode = 1
+
+[node name="SportsControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_top = 221.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="SportButton1" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -513.0
+offset_top = 7.0
+offset_right = -353.0
+offset_bottom = 162.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton1/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Downhill"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton1/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1mdo5")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton2" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -345.0
+offset_top = 7.0
+offset_right = -185.0
+offset_bottom = 162.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton2/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Slalom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton2/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1mdo5")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton3" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -177.0
+offset_top = 7.0
+offset_right = -17.0
+offset_bottom = 162.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton3/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Giant
+ slalom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton3/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1mdo5")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton4" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.0
+offset_top = 7.0
+offset_right = 151.0
+offset_bottom = 162.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton4"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton4/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Super G"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton4/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_1mdo5")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton5" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 159.0
+offset_top = 7.0
+offset_right = 319.0
+offset_bottom = 162.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton5"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton5/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 8
+text = "Speed skating
+500 metres "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton5/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_bi6fj")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton6" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 327.0
+offset_top = 7.0
+offset_right = 487.0
+offset_bottom = 162.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton6"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton6/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 8
+text = "Speed skating
+1500 metres "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton6/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_bi6fj")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton7" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -513.0
+offset_top = 175.0
+offset_right = -353.0
+offset_bottom = 330.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton7"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton7/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Biathlon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton7/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_mmif6")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton8" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -345.0
+offset_top = 175.0
+offset_right = -185.0
+offset_bottom = 330.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton8"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton8/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Luge"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton8/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_h3nic")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton9" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -177.0
+offset_top = 175.0
+offset_right = -17.0
+offset_bottom = 330.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton9"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton9/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Bobsleigh"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton9/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_nomc6")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton10" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.0
+offset_top = 175.0
+offset_right = 151.0
+offset_bottom = 330.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton10"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton10/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Ski
+ jumping "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton10/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_4gjr6")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton11" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 159.0
+offset_top = 175.0
+offset_right = 319.0
+offset_bottom = 330.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton11"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton11/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Ice Hockey"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton11/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_ir7bk")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportButton12" type="Button" parent="SportsControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 327.0
+offset_top = 175.0
+offset_right = 487.0
+offset_bottom = 330.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportsControl/SportButton12"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton12/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -148.0
+offset_right = 74.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_font_sizes/font_size = 10
+text = "Cross 
+Country"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportsControl/SportButton12/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -65.5
+offset_right = -37.0
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_yvk4u")
+expand_mode = 1
+
+[node name="Medal1" type="TextureRect" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -25.5
+offset_right = -35.0
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_lhxip")
+expand_mode = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -23.5
+offset_right = 15.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel1" type="Label" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -101.0
+offset_right = 74.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal2" type="TextureRect" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 6.5
+offset_right = -35.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_li32y")
+expand_mode = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 8.5
+offset_right = 15.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel2" type="Label" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -69.0
+offset_right = 74.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Medal3" type="TextureRect" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 38.5
+offset_right = -35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tk6va")
+expand_mode = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 40.5
+offset_right = 15.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_burw6")
+expand_mode = 1
+
+[node name="SportTitleLabel3" type="Label" parent="SportsControl/SportButton12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -37.0
+offset_right = 74.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_3bqv8")
+theme_override_colors/font_color = Color(0, 0.513726, 0.792157, 1)
+theme_override_font_sizes/font_size = 16
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MedalTableControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_top = 224.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
