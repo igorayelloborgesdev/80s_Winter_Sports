@@ -38,6 +38,9 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
+.Joystick<-
+..AI init
+
 ....Games
 .Downhill 
 .Slalom
@@ -51,12 +54,15 @@ Esportes
 .Ski jumping 
 .Ice Hockey
 .Cross Country
+..Results
+..Medal Table
+..AI generative
+..Save
 
 .load
 ..load
 ..delete
 
-.Joystick
 .Sound
 .Tutorial
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinterSports.Scripts.Model;
 
 namespace WinterSports.Scripts.Controller
 {
@@ -23,6 +24,7 @@ namespace WinterSports.Scripts.Controller
         private Button medalTable = null;
         private Button quitButton = null;
         private Button backButton = null;
+        private GamesModel gamesModel = null;
         #endregion
         #region Methods
         public void SetControls(Control quitControl, Control saveControl, Control saveWarningControl, Control sportsControl, Control medalTableControl)
@@ -59,7 +61,23 @@ namespace WinterSports.Scripts.Controller
             }
             screenListControl[id].Show();
         }
+        public void SetGamesModel(GamesModel gamesModel)
+        {
+            this.gamesModel = gamesModel;
+        }
 
+        public void HideAllMedalInfo()
+        {
+            for (int i = 0; i < this.gamesModel.flagGame.Count; i++)
+            {
+                this.gamesModel.flagGame[i][0].Hide();
+                this.gamesModel.flagGame[i][1].Hide();
+                this.gamesModel.flagGame[i][2].Hide();
+                this.gamesModel.flagGameLabel[i][0].Hide();
+                this.gamesModel.flagGameLabel[i][1].Hide();
+                this.gamesModel.flagGameLabel[i][2].Hide();
+            }            
+        }
         #endregion
         #region Get Set
         public Button GetExitButton

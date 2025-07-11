@@ -428,6 +428,7 @@ public partial class GameplayView : Control
         character = characterPackedScene.Instantiate<Character>();
         character.SetPrefabName = prefabName;
         character.SetDirectionArrowList(speedSkatingTrack.GetDirectionArrowList);
+        character.Init();
         gamePlayController.SetDefaultPositionRotation(initPoint.Position, initPoint.Rotation);        
         gamePlayController.SetCharacter(character);
         gamePlayController.SetCharacterSpeedSkating();

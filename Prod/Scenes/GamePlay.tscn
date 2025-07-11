@@ -102,9 +102,9 @@ controlSkiCrossCountryTime = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/Ti
 controlSkiCrossCountrySpeed = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGSpeed/SpeedNinePatchRect")
 controlSkiCrossCountryEnergy = NodePath("CanvasLayer/HUD/ControlSkiCrossCountry/HUDBGEnergy/SpeedNinePatchRect")
 controlSkiCrossCountryPosition = NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition")
-crossCountryCountryPositionLabel = []
-crossCountryCountryCodeLabel = []
-crossCountryCountryFlagTextureRect = []
+crossCountryCountryPositionLabel = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/PosCode3")]
+crossCountryCountryCodeLabel = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryCode3")]
+crossCountryCountryFlagTextureRect = [NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag2"), NodePath("CanvasLayer/HUD/ControlSkiCrossCountryPosition/CountryFlag3")]
 finishResultSessionControl = NodePath("CanvasLayer/FinishResultSessionControl")
 backMenuFinishButtonStandings = NodePath("CanvasLayer/FinishResultSessionControl/BackToMainMenuButtonFinish")
 returnFinishButtonStandings = NodePath("CanvasLayer/FinishResultSessionControl/BackMenuButtonFinish")
@@ -354,7 +354,6 @@ offset_bottom = 37.0
 texture = ExtResource("14_8vguo")
 
 [node name="ControlSkiCrossCountryPosition" type="Control" parent="CanvasLayer/HUD"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4178,6 +4177,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="IceHockeyEndGameControl" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

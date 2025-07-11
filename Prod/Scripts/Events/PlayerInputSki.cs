@@ -133,6 +133,7 @@ namespace WinterSports.Scripts.Events
                         else
                         {
                             var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
+                            
                             if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
                             {
                                 Pause();
@@ -151,12 +152,13 @@ namespace WinterSports.Scripts.Events
                                 index = 6;
                                 BrakePlayer();
                             }
-                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                            float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);                            
+                            if (axisX < 0)//Left
                             {
                                 index = 3;
                                 DirectPlayer(true);
                             }
-                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                            if (axisX > 0)//Right
                             {
                                 index = 4;
                                 DirectPlayer(false);

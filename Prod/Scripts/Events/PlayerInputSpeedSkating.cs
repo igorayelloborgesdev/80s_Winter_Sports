@@ -95,7 +95,38 @@ namespace WinterSports.Scripts.Events
                         if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[0].keyId) && !isPause)//Pause
                         {
                             Pause();
-                        }                                               
+                        }
+                        if (!isPause)
+                        {
+
+                            float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                            float axisY = Input.GetJoyAxis(joystickInput, JoyAxis.LeftY);
+
+                            if (axisY < 0 && !keyEnable)//Button 1
+                            {
+                                keyPressedId = 20;
+                                indexSpeed = 3;
+                                keyEnable = true;
+                            }
+                            else if (axisY > 0 && !keyEnable)//Button 2
+                            {
+                                keyPressedId = 21;
+                                indexSpeed = 4;
+                                keyEnable = true;
+                            }
+                            else if (axisX < 0 && !keyEnable)//Button 3
+                            {
+                                keyPressedId = 22;
+                                indexSpeed = 2;
+                                keyEnable = true;
+                            }
+                            else if (axisX > 0 && !keyEnable)//Button 4
+                            {
+                                keyPressedId = 23;
+                                indexSpeed = 1;
+                                keyEnable = true;
+                            }
+                        }
                     }                    
                 }
                 else
@@ -108,10 +139,22 @@ namespace WinterSports.Scripts.Events
                             {
                                 keyEnable = false;
                                 SpeedManager(indexSpeed);
-                                indexSpeed = 0;                                
+                                indexSpeed = 0;
                             }
                         }
-                    }                    
+                    }
+                    else
+                    {
+                        if (!isPause)
+                        {
+                            if (keyEnable)
+                            {
+                                keyEnable = false;
+                                SpeedManager(indexSpeed);
+                                indexSpeed = 0;
+                            }
+                        }
+                    }
                 }
                 MovePlayer(delta); 
                 PlayAnimation(animationPlayer, 2);

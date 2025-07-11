@@ -289,7 +289,7 @@ public partial class Character : CharacterBody3D
     }    
     #endregion
     #region Methods
-    private void Init()
+    public void Init()
     {        
         PlayerInputSetUp();        
         playerInput.SetCharacterBody3D(this);
