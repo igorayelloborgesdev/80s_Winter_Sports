@@ -139,6 +139,8 @@ public partial class BobsleighSled : Node3D
             obj.DisableCamera();
             obj.HideItemsForLuge();
             obj.SetPlayerInputAnim(3);
+            obj.ShowHideIceHockeyStick(false);
+            obj.ShowHideIceHockeyGoalKeeper(false);
         }
     }
     public void RunAnim()
@@ -315,14 +317,24 @@ public partial class BobsleighSled : Node3D
                     {
                         DefineImpulse();
                     }
-                    if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                    float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                    if (axisX < 0)//Button 3
                     {
                         DirectPlayer(true);
                     }
-                    if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                    else if (axisX > 0)//Button 4
                     {
                         DirectPlayer(false);
                     }
+
+                    //if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                    //{
+                    //    DirectPlayer(true);
+                    //}
+                    //if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                    //{
+                    //    DirectPlayer(false);
+                    //}
                 }
             }
             else

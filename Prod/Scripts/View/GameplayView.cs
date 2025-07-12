@@ -484,7 +484,10 @@ public partial class GameplayView : Control
         this.AddChild(character);
     }
     private void InstantiateCharacterLugeBobsleigh()
-    {        
+    {
+        character = characterPackedScene.Instantiate<Character>();
+        character.SetPrefabName = prefabName;
+        gamePlayController.SetCharacter(character);
         if (levelId == 7)
         {
             lugeSled = lugePackedScene.Instantiate<LugeSled>();

@@ -67,6 +67,8 @@ public partial class LugeSled : Node3D
         character.DisableCamera();
         character.HideItemsForLuge();
         character.SetPlayerInputAnim(1);
+        character.ShowHideIceHockeyStick(false);
+        character.ShowHideIceHockeyGoalKeeper(false);
         InstantiateRail();
         timerGamePlayController = new TimerController();
         timerGamePlayController.Init();
@@ -157,14 +159,23 @@ public partial class LugeSled : Node3D
                     {
                         DefineImpulse();                        
                     }
-                    if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                    float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                    if (axisX < 0)//Button 3
                     {
                         DirectPlayer(true);
                     }
-                    if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                    else if (axisX > 0)//Button 4
                     {
                         DirectPlayer(false);
                     }
+                    //if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
+                    //{
+                    //    DirectPlayer(true);
+                    //}
+                    //if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
+                    //{
+                    //    DirectPlayer(false);
+                    //}
                 }
             }            
             MovePlayer(delta);

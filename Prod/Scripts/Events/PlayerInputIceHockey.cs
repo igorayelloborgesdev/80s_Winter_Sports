@@ -253,50 +253,116 @@ namespace WinterSports.Scripts.Events
                                 {
                                     Pause();
                                 }
-                                if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId))//Button 1
+                                if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && isPuckControl && isSelected)//Button 1
                                 {
-                                    GoalShot();
+                                    if (inputShoot == InputShoot.None)
+                                    {
+                                        inputShoot = InputShoot.LoadPower;
+                                    }
+                                    if (inputShoot == InputShoot.LoadPower)
+                                    {
+                                        if (shootPower < shootPowerMax && isPuckControl && this.iceHockeyTeam1[playerIndex].hockeyPowerControl is not null)
+                                        {
+                                            shootPower += shootPowerInc;
+                                            this.iceHockeyTeam1[playerIndex].hockeyPowerControl.Size = new Vector2(shootPower, 18.0f);
+                                        }
+                                    }
                                 }
-                                else
+                                if (!Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && inputShoot == InputShoot.LoadPower)//Button 1
                                 {
-
+                                    if (this.iceHockeyTeam1.Any(x => x.isPuckControl))
+                                        GoalShot();
                                 }
                                 if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
                                 {
-
+                                    if (this.iceHockeyTeam1.Any(x => x.isPuckControl) && passPlayerEnum == PassPlayerEnum.None)
+                                    {
+                                        passPlayerEnum = PassPlayerEnum.Press;
+                                    }
+                                    else if (!this.iceHockeyTeam1.Any(x => x.isPuckControl) && changePlayerEnumSelect == ChangePlayerEnum.None)
+                                    {
+                                        changePlayerEnumSelect = ChangePlayerEnum.Press;
+                                    }
                                 }
-                                if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Up
+                                if (iceHockeyTeam1[playerNumber].iceHockeyPosition != IceHockeyPosition.GK)
                                 {
+                                    float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                                    float axisY = Input.GetJoyAxis(joystickInput, JoyAxis.LeftY);
 
-                                }
-                                else if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Down
-                                {
+                                    if (axisY < 0)//Up
+                                    {
+                                        if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["down"])
+                                        {
+                                            inputUpDown = InputUpDown.Up;
+                                        }
+                                        else
+                                        {
+                                            inputUpDown = InputUpDown.None;
+                                        }
+                                    }
+                                    else if (axisY > 0)//Down
+                                    {
+                                        if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["up"])
+                                        {
+                                            inputUpDown = InputUpDown.Down;
+                                        }
+                                        else
+                                        {
+                                            inputUpDown = InputUpDown.None;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        inputUpDown = InputUpDown.None;
+                                    }
+                                    if (axisX < 0)//Left
+                                    {
+                                        if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["right"])
+                                        {
+                                            inputLeftRight = InputLeftRight.Left;
+                                        }
+                                        else
+                                        {
+                                            inputLeftRight = InputLeftRight.None;
+                                        }
 
+                                    }
+                                    else if (axisX > 0)//Right
+                                    {
+                                        if (!this.iceHockeyTeam1[playerNumber].iceHockeyMoveLimit["left"])
+                                        {
+                                            inputLeftRight = InputLeftRight.Right;
+                                        }
+                                        else
+                                        {
+                                            inputLeftRight = InputLeftRight.None;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        inputLeftRight = InputLeftRight.None;
+                                    }
                                 }
-                                else
-                                {
 
-                                }
-                                if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Left
-                                {
-
-                                }
-                                else if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Right
-                                {
-
-                                }
-                                else
-                                {
-
-                                }
                             }
                             //PlayAnimation(animationPlayer, index);
                         }
                         else
                         {
-                            if (!Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && inputShoot == InputShoot.LoadPower)//Button 1
+                            if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
                             {
-                                GoalShot();
+                                if (!Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && inputShoot == InputShoot.LoadPower)//Button 1
+                                {
+                                    GoalShot();
+                                }
+                            }
+                            else
+                            {
+                                var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
+                                if (!Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && inputShoot == InputShoot.LoadPower)//Button 1
+                                {
+                                    GoalShot();
+                                }
                             }
                             inputLeftRight = InputLeftRight.None;
                             inputUpDown = InputUpDown.None;
@@ -305,12 +371,26 @@ namespace WinterSports.Scripts.Events
                             GoalShotReset();
                         }
 
-                        if (!Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
+                        if (ConfigSingleton.saveConfigDTO.keyboardJoystick == 0)
                         {
-                            if (!this.iceHockeyTeam1.Any(x => x.isPuckControl))
-                                ChangePlayer();
-                            else
-                                PuckPass();
+                            if (!Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
+                            {
+                                if (!this.iceHockeyTeam1.Any(x => x.isPuckControl))
+                                    ChangePlayer();
+                                else
+                                    PuckPass();
+                            }
+                        }
+                        else
+                        {
+                            var joystickInput = Input.GetConnectedJoypads().FirstOrDefault();
+                            if (!Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[6].keyId))//Button 2
+                            {
+                                if (!this.iceHockeyTeam1.Any(x => x.isPuckControl))
+                                    ChangePlayer();
+                                else
+                                    PuckPass();
+                            }
                         }
 
                         MovePlayer(animationPlayer, -1, iceHockeyTeam1);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
@@ -399,6 +400,119 @@ namespace WinterSports.Scripts.Events
                     {
                         Pause();
                     }
+                    if (!BiathlonStatic.isShooting)
+                    {
+                        if (!isPause)
+                        {
+                            //if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId) && !keyEnable)//Button 1
+                            //{
+                            //    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId;
+                            //    indexSpeed = 3;
+                            //    keyEnable = true;
+                            //}
+                            //else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId) && !keyEnable)//Button 2
+                            //{
+                            //    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId;
+                            //    indexSpeed = 4;
+                            //    keyEnable = true;
+                            //}
+                            //else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId) && !keyEnable)//Button 3
+                            //{
+                            //    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId;
+                            //    indexSpeed = 2;
+                            //    keyEnable = true;
+                            //}
+                            //else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId) && !keyEnable)//Button 4
+                            //{
+                            //    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId;
+                            //    indexSpeed = 1;
+                            //    keyEnable = true;
+                            //}
+
+                            float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                            float axisY = Input.GetJoyAxis(joystickInput, JoyAxis.LeftY);
+
+                            if (axisY < 0 && !keyEnable)//Button 1
+                            {
+                                keyPressedId = 21;
+                                indexSpeed = 3;
+                                keyEnable = true;
+                            }
+                            else if (axisY > 0 && !keyEnable)//Button 2
+                            {
+                                keyPressedId = 22;
+                                indexSpeed = 4;
+                                keyEnable = true;
+                            }
+                            else if (axisX < 0 && !keyEnable)//Button 3
+                            {
+                                keyPressedId = 23;
+                                indexSpeed = 2;
+                                keyEnable = true;
+                            }
+                            else if (axisX > 0 && !keyEnable)//Button 4
+                            {
+                                keyPressedId = 24;
+                                indexSpeed = 1;
+                                keyEnable = true;
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        if (!isPause)
+                        {
+                            //if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Button 1 UP
+                            //{
+                            //    character.MoveCameraX(false);
+                            //}
+                            //else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Button 2 DOWN
+                            //{
+                            //    character.MoveCameraX(true);
+                            //}
+                            //if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Button 3 LEFT
+                            //{
+                            //    character.MoveCameraY(false);
+                            //}
+                            //else if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Button 4 RIGHT
+                            //{
+                            //    character.MoveCameraY(true);
+                            //}
+                            //if (Input.IsKeyPressed((Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && !keyEnable)//Shoot
+                            //{
+                            //    Shoot();
+                            //    keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId;
+                            //    keyEnable = true;
+                            //}
+
+                            float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                            float axisY = Input.GetJoyAxis(joystickInput, JoyAxis.LeftY);
+
+                            if (axisY < 0)//Button 1
+                            {
+                                character.MoveCameraX(false);
+                            }
+                            else if (axisY > 0)//Button 2
+                            {
+                                character.MoveCameraX(true);
+                            }
+                            if (axisX < 0)//Button 3
+                            {
+                                character.MoveCameraY(false);
+                            }
+                            else if (axisX > 0)//Button 4
+                            {
+                                character.MoveCameraY(true);
+                            }
+                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId) && !keyEnable)//Button 1
+                            {
+                                Shoot();
+                                keyPressedId = ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId;
+                                keyEnable = true;
+                            }
+                        }
+                    }
                 }
             }
             else
@@ -423,6 +537,28 @@ namespace WinterSports.Scripts.Events
                                 }                                
                             }                            
                         }                        
+                    }
+                }
+                else
+                {
+                    if (!isPause)
+                    {
+                        if (!Input.IsKeyPressed((Key)keyPressedId) && keyEnable)
+                        {
+                            if (!BiathlonStatic.isShooting)
+                            {
+                                keyEnable = false;
+                                SpeedManager(indexSpeed);
+                                indexSpeed = 0;
+                            }
+                            else
+                            {
+                                if ((Key)keyPressedId == (Key)ConfigSingleton.saveConfigDTO.keysControlArray[5].keyId)
+                                {
+                                    keyEnable = false;
+                                }
+                            }
+                        }
                     }
                 }
             }

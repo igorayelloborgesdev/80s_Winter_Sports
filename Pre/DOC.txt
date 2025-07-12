@@ -38,8 +38,8 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-.Joystick<-
-..AI init
+..AI init<-
+..AI generative
 
 ....Games
 .Downhill 
@@ -56,7 +56,6 @@ Esportes
 .Cross Country
 ..Results
 ..Medal Table
-..AI generative
 ..Save
 
 .load

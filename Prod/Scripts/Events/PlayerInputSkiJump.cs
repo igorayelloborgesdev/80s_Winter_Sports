@@ -241,22 +241,43 @@ namespace WinterSports.Scripts.Events
                     {
                         if (currentPointId > this.flyPoints[0] && currentPointId <= this.flyPoints[1])
                         {
-                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Button 3 LEFT
+                            //if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[3].keyId))//Button 3 LEFT
+                            //{
+                            //    character.RotateZ(true, inc);
+                            //}
+                            //else if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Button 4 RIGHT
+                            //{
+                            //    character.RotateZ(false, inc);
+                            //}
+
+                            float axisX = Input.GetJoyAxis(joystickInput, JoyAxis.LeftX);
+                            if (axisX < 0 )//Button 3
                             {
                                 character.RotateZ(true, inc);
                             }
-                            else if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[4].keyId))//Button 4 RIGHT
+                            else if (axisX > 0 )//Button 4
                             {
                                 character.RotateZ(false, inc);
                             }
+
                         }
                         else if (currentPointId > this.flyPoints[1] && currentPointId <= this.flyPoints[2])
                         {
-                            if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Button 1 UP
+                            //if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[1].keyId))//Button 1 UP
+                            //{
+                            //    character.RotateX(false, inc);
+                            //}
+                            //else if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Button 2 DOWN
+                            //{
+                            //    character.RotateX(true, inc);
+                            //}
+
+                            float axisY = Input.GetJoyAxis(joystickInput, JoyAxis.LeftY);
+                            if (axisY < 0)//Button 1
                             {
                                 character.RotateX(false, inc);
                             }
-                            else if (Input.IsJoyButtonPressed(joystickInput, (JoyButton)ConfigSingleton.saveConfigDTO.keysControlArray[2].keyId))//Button 2 DOWN
+                            else if (axisY > 0)//Button 2
                             {
                                 character.RotateX(true, inc);
                             }
