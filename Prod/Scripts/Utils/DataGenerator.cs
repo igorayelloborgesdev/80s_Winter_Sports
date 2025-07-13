@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.DTO;
+using static System.Formats.Asn1.AsnWriter;
 
 public static class DataGenerator
 {
@@ -406,5 +407,21 @@ public static class DataGenerator
         SaveLoad.SaveData<LevelObjDTO>(levelObjDTO, "Data//level.json");
     }
     #endregion
-
+    #region AI
+    public static void CreateAIData() 
+    {
+        var aiDTO = new AIDTO();
+        aiDTO.aiObjDTOList = new List<AIObjDTO>();
+        for (int i = 0; i < levelName.Length; i++)
+        {
+            var obj = new AIObjDTO()
+            {
+                id = i + 1,
+                score = 6000
+            };
+            aiDTO.aiObjDTOList.Add(obj);            
+        }        
+        SaveLoad.SaveData<AIDTO>(aiDTO, "Data//AIInit.json");
+    }
+    #endregion
 }

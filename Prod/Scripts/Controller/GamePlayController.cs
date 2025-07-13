@@ -980,6 +980,14 @@ namespace WinterSports.Scripts.Controller
                 {
                     gamePlayModel.bestTimeScore = timerController.GetTimer();                                     
                 }
+                
+                if (gamePlayModel.bestTimeScore > 0.0 &&
+                    gamePlayModel.bestTimeScore < AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score)
+                {
+                    AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score = gamePlayModel.bestTimeScore;
+                    SaveLoad.SaveData<AIDTO>(AISingleton.aiDTO, "Data//AIGen.json");
+                }                
+
                 SetFinishTimeLabel();
                 setScore = false;
             }            
@@ -998,6 +1006,12 @@ namespace WinterSports.Scripts.Controller
                 {
                     gamePlayModel.bestTimeScore = timerController.GetTimer();
                 }
+                if (gamePlayModel.bestTimeScore > 0.0 &&
+    gamePlayModel.bestTimeScore < AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score)
+                {
+                    AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score = gamePlayModel.bestTimeScore;
+                    SaveLoad.SaveData<AIDTO>(AISingleton.aiDTO, "Data//AIGen.json");
+                }
                 SetFinishTimeLabelBobsleigh();
                 setScore = false;
             }
@@ -1015,6 +1029,12 @@ namespace WinterSports.Scripts.Controller
                 if (gamePlayModel.bestTimeScore == 0.0f && this.lugeSled.GetCharacter.statesSki != Character.StatesSki.Disqualified)
                 {
                     gamePlayModel.bestTimeScore = timerController.GetTimer();
+                }
+                if (gamePlayModel.bestTimeScore > 0.0 &&
+    gamePlayModel.bestTimeScore < AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score)
+                {
+                    AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score = gamePlayModel.bestTimeScore;
+                    SaveLoad.SaveData<AIDTO>(AISingleton.aiDTO, "Data//AIGen.json");
                 }
                 SetFinishTimeLabelLuge();
                 setScore = false;
@@ -1090,6 +1110,14 @@ namespace WinterSports.Scripts.Controller
                 {
                     gamePlayModel.bestTimeScore = gamePlayModel.currentTimeScore;
                 }
+
+                if (gamePlayModel.bestTimeScore > 0.0 &&
+                    gamePlayModel.bestTimeScore < AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score)
+                {
+                    AISingleton.aiDTO.aiObjDTOList[AISingleton.aiDTO.aiObjDTOList.FindIndex(x => x.id == GameModeSingleton.sport)].score = gamePlayModel.bestTimeScore;
+                    SaveLoad.SaveData<AIDTO>(AISingleton.aiDTO, "Data//AIGen.json");
+                }
+
                 SetFinishTimeLabelBiathlon();
                 setScore = false;
             }

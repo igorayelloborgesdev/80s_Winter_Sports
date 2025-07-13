@@ -487,6 +487,7 @@ public partial class GameplayView : Control
     {
         character = characterPackedScene.Instantiate<Character>();
         character.SetPrefabName = prefabName;
+        character.Init();
         gamePlayController.SetCharacter(character);
         if (levelId == 7)
         {
@@ -579,7 +580,10 @@ public partial class GameplayView : Control
         gamePlayController.GetSetReturnFinishButton = returnFinishButton;
         gamePlayController.GetSetBackMenuFinishButtonStandings = backMenuFinishButtonStandings;
         gamePlayController.GetSetReturnFinishButtonStandings = returnFinishButtonStandings;
-        
+
+        //gamePlayController.GetSetBackMenuFinishButtonStandings.Hide();
+        //gamePlayController.GetSetReturnFinishButtonStandings.Hide();//<-
+
         if (prefabName == "IceHockeyRink")
         {
             for (int i = 0; i < 16; i++) 

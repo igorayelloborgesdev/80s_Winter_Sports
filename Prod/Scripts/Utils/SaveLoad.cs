@@ -115,4 +115,28 @@ public class SaveLoad
         }
 
     }
+
+    public static T LoadData<T>(string path, string path1)
+    {
+        try
+        {
+            var loadPath = Path.Join(pathData, path);
+
+            if (!File.Exists(loadPath))
+            {
+                var loadPath1 = Path.Join(pathData, path1);
+                var file = File.ReadAllText(loadPath1);
+                return JsonConvert.DeserializeObject<T>(file);
+            }
+
+            var file1 = File.ReadAllText(loadPath);
+            return JsonConvert.DeserializeObject<T>(file1);
+        }
+        catch (Exception ex)
+        {
+            return default(T);
+        }
+
+    }
+
 }

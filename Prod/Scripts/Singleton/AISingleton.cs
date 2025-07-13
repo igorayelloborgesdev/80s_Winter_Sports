@@ -10,5 +10,6 @@ namespace WinterSports.Scripts.Singleton
     public static class AISingleton
     {
         public static CrossCountryObjDTO crossCountryObjDTO = null;
+        public static AIDTO aiDTO = null;
     }
 }

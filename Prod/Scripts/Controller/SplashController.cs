@@ -32,6 +32,10 @@ public class SplashController
     {
         LevelSingleton.levelObjDTO = SaveLoad.LoadData<LevelObjDTO>("Data//level.json");
     }
+    public void LoadAIInitDate()
+    {
+        AISingleton.aiDTO = SaveLoad.LoadData<AIDTO>("Data//AIGen.json", "Data//AIInit.json");
+    }
     public void Init()
     {
         ConfigDefaultInputs.Init();        

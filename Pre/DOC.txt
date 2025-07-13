@@ -38,11 +38,8 @@ Esportes
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
-..AI init<-
-..AI generative
-
 ....Games
-.Downhill 
+.Downhill <-
 .Slalom
 .Giant slalom 
 .Super G
@@ -54,6 +51,7 @@ Esportes
 .Ski jumping 
 .Ice Hockey
 .Cross Country
+
 ..Results
 ..Medal Table
 ..Save
