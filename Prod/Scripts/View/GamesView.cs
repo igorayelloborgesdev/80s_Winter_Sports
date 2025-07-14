@@ -8,6 +8,7 @@ public partial class GamesView : Control
     #region Variables
     private GamesController gamesController = null;
     private GamesModel gamesModel = null;
+    private TimerController timerController = new TimerController();
     #endregion
     #region Behaviors
     // Called when the node enters the scene tree for the first time.
@@ -17,8 +18,8 @@ public partial class GamesView : Control
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
-    {
-        
+    {     
+        LoadGameplay(delta);
     }
     #endregion
     #region Methods
@@ -29,6 +30,7 @@ public partial class GamesView : Control
         AssignControls();
         AssignInput();
         gamesController.ShowScreen(3);
+        timerController.Init();
     }
          
     private void AssignControls()
@@ -62,9 +64,14 @@ public partial class GamesView : Control
             gamesModel.flagGameLabel[i - 1].Add(GetNode<Label>("SportsControl/SportButton" + i.ToString() + "/SportTitleLabel1"));
             gamesModel.flagGameLabel[i - 1].Add(GetNode<Label>("SportsControl/SportButton" + i.ToString() + "/SportTitleLabel2"));
             gamesModel.flagGameLabel[i - 1].Add(GetNode<Label>("SportsControl/SportButton" + i.ToString() + "/SportTitleLabel3"));
+            gamesModel.gamesButton.Add(GetNode<Button>("SportsControl/SportButton" + i.ToString()));
         }        
         gamesController.SetGamesModel(gamesModel);
         gamesController.HideAllMedalInfo();
+
+        gamesController.GetSetLoadingControl = GetNode<Control>("LoadingControl");
+        gamesController.ShowHideLoadingControl(false);
+
     }
     private void AssignInput()
     {
@@ -74,6 +81,13 @@ public partial class GamesView : Control
         gamesController.GetMedalTable.Pressed += () => { MedalTableMenuScreen(); };
         gamesController.GetQuitButton.Pressed += () => { QuitMenuScreen(); };
         gamesController.GetBackButton.Pressed += () => { QuitBackMenuScreen(); };
+        int count = 1;
+        foreach (var obj in gamesModel.gamesButton)
+        {
+            var countP = count;
+            obj.Pressed += () => { GoToGamePlay(countP); };
+            count++;
+        }
     }
     #endregion
     #region Event
@@ -100,6 +114,20 @@ public partial class GamesView : Control
     private void QuitBackMenuScreen()
     {
         GetTree().ChangeSceneToFile("res://Scenes/MainScene.tscn");
+    }
+    private void GoToGamePlay(int id)
+    {
+        timerController.StartTimer();
+        gamesController.ShowHideLoadingControl(true);
+        GameModeSingleton.sport = id;        
+    }
+    private void LoadGameplay(double delta)
+    {
+        timerController.TimerRunning(delta);
+        if (timerController.GetTimer() > 0.5f)
+        {
+            GetTree().ChangeSceneToFile("res://Scenes/GamePlay.tscn");
+        }
     }
     #endregion
 }

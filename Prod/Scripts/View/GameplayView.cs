@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Model;
@@ -118,7 +119,7 @@ public partial class GameplayView : Control
     private NinePatchRect HUDBG = null;
     private TextureRect countryFlag = null;
     private Label countryCode = null;
-    private RigidBody3D puck = null;
+    private RigidBody3D puck = null;    
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -132,6 +133,8 @@ public partial class GameplayView : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        if(gamePlayController is null)
+            gamePlayController = new GamePlayController();
         gamePlayController.UpdateSkiJumpRail(prefabName, skiJump);
         gamePlayController.Update(delta, prefabName, levelId);        
     }
@@ -140,8 +143,9 @@ public partial class GameplayView : Control
     private void Init()
     {        
         levelId = GameModeSingleton.sport - 1;        
-        prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;        
-        gamePlayController = new GamePlayController();
+        prefabName = LevelSingleton.levelObjDTO.levelList[levelId].prefabName;
+        if (gamePlayController is null)
+            gamePlayController = new GamePlayController();
 
         gamePlayController.SetHockeyScoreControl(GetNode<Control>("CanvasLayer/IceHockeyScore"));
         gamePlayController.SetIceHockeyEndGameControl(GetNode<Control>("CanvasLayer/IceHockeyEndGameControl"));
@@ -169,7 +173,7 @@ public partial class GameplayView : Control
         gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));
         gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));
         gamePlayController.SetParentNode(this);
-
+                
         InstantiateLevel();
         AssignButtons();
         SetMainGamePlayEvents();
@@ -178,6 +182,7 @@ public partial class GameplayView : Control
         SetIceHockeyKit(jersey1_1, jersey1_2, short1_1, jersey2_1, jersey2_2, short2_1);
         SetIceHockeyKitEvents();
         InitKit();
+        SetAIResults();
         gamePlayController.SetSelectionFlagsTexts(texture2DCountry1, texture2DCountry2, countryCode1, countryCode2);        
         gamePlayController.SetTimerLabel(prefabName, timeLabel);
         gamePlayController.SetCrossCountryLabel(controlSkiCrossCountryTime, controlSkiCrossCountrySpeed, controlSkiCrossCountryEnergy);
@@ -361,7 +366,7 @@ public partial class GameplayView : Control
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
         gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
-            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);//<-
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -576,13 +581,23 @@ public partial class GameplayView : Control
         gamePlayController.GetSetGoToMainMenu = backMenuButton;
         gamePlayController.GetSetReturnMenu = returnMenuButton;
         gamePlayController.GetSetResetMenu = resetMenuButton;
-        gamePlayController.GetSetBackMenuFinishButton = backMenuFinishButton;
+        if (GameModeSingleton.gameMode == 1)
+            gamePlayController.GetSetResetMenu.Hide();
+        gamePlayController.GetSetBackMenuFinishButton = backMenuFinishButton;        
         gamePlayController.GetSetReturnFinishButton = returnFinishButton;
+
         gamePlayController.GetSetBackMenuFinishButtonStandings = backMenuFinishButtonStandings;
         gamePlayController.GetSetReturnFinishButtonStandings = returnFinishButtonStandings;
-
-        //gamePlayController.GetSetBackMenuFinishButtonStandings.Hide();
-        //gamePlayController.GetSetReturnFinishButtonStandings.Hide();//<-
+        gamePlayController.GetSetReturnBackGamesMenuButtonFinish = GetNode<Button>("CanvasLayer/FinishResultSessionControl/BackGamesMenuButtonFinish");
+        if (GameModeSingleton.gameMode == 1)
+        {
+            gamePlayController.GetSetBackMenuFinishButtonStandings.Hide();
+            gamePlayController.GetSetReturnFinishButtonStandings.Hide();
+        }
+        else
+        {
+            gamePlayController.GetSetReturnBackGamesMenuButtonFinish.Hide();
+        }
 
         if (prefabName == "IceHockeyRink")
         {
@@ -629,6 +644,7 @@ public partial class GameplayView : Control
         gamePlayController.GetSetBackMenuFinishButton.Pressed += () => { QuitToMainMenu(); };
         gamePlayController.GetSetReturnFinishButton.Pressed += () => { ReturnMenuFromFinishScreen(); };
         gamePlayController.GetSetBackMenuFinishButtonStandings.Pressed += () => { QuitToMainMenu(); };
+        gamePlayController.GetSetReturnBackGamesMenuButtonFinish.Pressed += () => { BackToGamesMenu(); };
         gamePlayController.GetSetReturnFinishButtonStandings.Pressed += () => { ResetGameMenu(); };
         gamePlayController.GetSetPlayMenuButtonFinish.Pressed += () => { ResetIceHockey(); };
 
@@ -672,7 +688,12 @@ public partial class GameplayView : Control
             InstantiateLevelSkiJump(prefabScene, levelId);
         if (prefabName == "IceHockeyRink")
             InstantiateLevelIceHockey(prefabScene);            
+    }    
+    private void SetAIResults()
+    {
+        gamePlayController.SetAIResults();
     }
+
     private void InstantiateLevelSki(PackedScene prefabScene, int id)
     {        
         if (id != 11)
@@ -747,6 +768,11 @@ public partial class GameplayView : Control
     {     
         Engine.TimeScale = 1.0f;
         GetTree().ChangeSceneToFile("res://Scenes/MainScene.tscn");
+    }
+    private void BackToGamesMenu()
+    {
+        Engine.TimeScale = 1.0f;
+        GetTree().ChangeSceneToFile("res://Scenes/Games.tscn");
     }
     private void ReturnMenu()
     {        

@@ -48,12 +48,15 @@ Esportes
 .Biathlon 
 .Luge 
 .Bobsleigh 
+
 .Ski jumping 
-.Ice Hockey
+
 .Cross Country
+.Ice Hockey
 
 ..Results
 ..Medal Table
+
 ..Save
 
 .load

@@ -126,6 +126,8 @@ namespace WinterSports.Scripts.Controller
         private Label countryCodeScore1Label = null;
         private Label countryCodeScore2Label = null;
         private Button playMenuButtonFinish = null;
+        private Button backGamesMenuButtonFinish = null;
+        public List<CountryResultDTO> countryResultDTOList = new List<CountryResultDTO>();
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -140,7 +142,10 @@ namespace WinterSports.Scripts.Controller
             new Vector3 (-1.275f, 0.45f, 0.5f),
             new Vector3 (1.275f, 0.45f, 0.5f)
         };
-        private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);        
+        private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);
+        private double[] skillArray = new double[] { 0, 10, 8, 6, 4, 2 };
+        private double[] skillDifficultArray = new double[] { 3, 2, 1 };
+
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -227,18 +232,36 @@ namespace WinterSports.Scripts.Controller
                 SetTimeScore();
                 timerController.StopTimer();
                 TimeToReset(delta);
-                ShowControlSkiSpeedSkatingScreen();
+                if (GameModeSingleton.gameMode == 0)
+                    ShowControlSkiSpeedSkatingScreen();
+                else
+                {
+                    ShowHideStandingsTable(true);
+                    SetStandingsTable();//<- PAREI AQUI
+                }
+                    
             }
             if (SkiStatic.isCollided)
             {                
                 this.character.statesSki = Character.StatesSki.Disqualified;                
                 SetTimeScore();
                 TimeToReset(delta);
-                ShowControlSkiSpeedSkatingScreen();
+                if (GameModeSingleton.gameMode == 0)
+                    ShowControlSkiSpeedSkatingScreen();
+                else
+                {
+                    ShowHideStandingsTable(true);
+                    SetStandingsTable();
+                }
             }
             timerController.TimerRunning(delta);
             updateTimer();
             UpdateSpeedLabel();
+        }
+        public void ShowControlFinishStandings()
+        {
+            controlSkiSpeedSkatingScreen.Hide();
+            controlBiathlonScreen.Hide();
         }
         private void UpdateSkiCrossCountry(double delta)
         {            
@@ -2180,6 +2203,41 @@ namespace WinterSports.Scripts.Controller
             this.playMenuButtonFinish = playMenuButtonFinish;
         }
 
+        public void SetAIResults()
+        {
+            if (GameModeSingleton.gameMode == 1)
+            {
+                if (GameModeSingleton.sport < 10)
+                {
+                    foreach (var obj in CountrySingleton.countryObjDTO.countryList)
+                    {
+                        countryResultDTOList.Add(new CountryResultDTO() { id = obj.Id, score = 0.0, isFinished = GameModeSingleton.country == obj.Id ? 0 : 1 });
+                    }
+                    foreach (var obj in countryResultDTOList)
+                    {
+                        if (obj.id != GameModeSingleton.country)
+                        {
+                            var skill = CountrySingleton.countryObjDTO.countryList.Where(x => x.Id == obj.id).First().sportSkill[GameModeSingleton.sport - 1];
+                            var skillPerc = skillArray[skill];
+                            var score = AISingleton.aiDTO.aiObjDTOList.Where(x => x.id == GameModeSingleton.sport).First().score;
+                            var maxScore = ((skillPerc * score) / 100.0) * skillDifficultArray[GameModeSingleton.difficult];
+                            double randomScore = GD.Randf() * maxScore;
+                            obj.score = score + randomScore;
+                        }
+                    }
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();//<-
+                }
+                else if (GameModeSingleton.sport == 10)
+                {
+
+                }
+                else if (GameModeSingleton.sport == 11)
+                {
+
+                }
+            }
+        }
+
         #endregion
         #region Get Set
         public Button GetSetGoToMainMenu
@@ -2257,6 +2315,17 @@ namespace WinterSports.Scripts.Controller
             set
             {
                 gamePlayModel.returnFinishButtonStandings = value;
+            }
+        }
+        public Button GetSetReturnBackGamesMenuButtonFinish//<-
+        {
+            get
+            {
+                return this.backGamesMenuButtonFinish;
+            }
+            set
+            {
+                this.backGamesMenuButtonFinish = value;
             }
         }
         public List<Button> GetSetIceHockeyFlagSelectButton

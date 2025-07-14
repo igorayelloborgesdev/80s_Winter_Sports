@@ -25,6 +25,7 @@ namespace WinterSports.Scripts.Controller
         private Button quitButton = null;
         private Button backButton = null;
         private GamesModel gamesModel = null;
+        public Control loadingControl = null;
         #endregion
         #region Methods
         public void SetControls(Control quitControl, Control saveControl, Control saveWarningControl, Control sportsControl, Control medalTableControl)
@@ -78,6 +79,13 @@ namespace WinterSports.Scripts.Controller
                 this.gamesModel.flagGameLabel[i][2].Hide();
             }            
         }
+        public void ShowHideLoadingControl(bool show)
+        {
+            if (show)
+                this.loadingControl.Show();
+            else
+                this.loadingControl.Hide();
+        }
         #endregion
         #region Get Set
         public Button GetExitButton
@@ -109,6 +117,17 @@ namespace WinterSports.Scripts.Controller
         {
             get { return this.backButton; }
             set { this.backButton = value; }
+        }
+        public Control GetSetLoadingControl
+        {
+            get
+            {
+                return this.loadingControl;
+            }
+            set
+            {
+                this.loadingControl = value;
+            }
         }
         #endregion
     }
