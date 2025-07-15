@@ -39,25 +39,15 @@ Esportes
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ....Games
-.Downhill <-
-.Slalom
-.Giant slalom 
-.Super G
-.Speed skating 500 metres 
-.Speed skating 1500 metres 
-.Biathlon 
-.Luge 
-.Bobsleigh 
-
-.Ski jumping 
-
-.Cross Country
-.Ice Hockey
-
-..Results
+.Ski jumping<-
 ..Medal Table
+.Ice Hockey
+..Results
 
 ..Save
+...País
+...Dificuldade
+...Resultados
 
 .load
 ..load

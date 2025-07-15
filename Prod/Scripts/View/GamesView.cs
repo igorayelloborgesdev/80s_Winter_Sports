@@ -1,7 +1,9 @@
 using Godot;
 using System;
+using System.Linq;
 using WinterSports.Scripts.Controller;
 using WinterSports.Scripts.Model;
+using WinterSports.Scripts.Singleton;
 
 public partial class GamesView : Control
 {    
@@ -68,6 +70,7 @@ public partial class GamesView : Control
         }        
         gamesController.SetGamesModel(gamesModel);
         gamesController.HideAllMedalInfo();
+        gamesController.SetResults();
 
         gamesController.GetSetLoadingControl = GetNode<Control>("LoadingControl");
         gamesController.ShowHideLoadingControl(false);
@@ -117,9 +120,12 @@ public partial class GamesView : Control
     }
     private void GoToGamePlay(int id)
     {
-        timerController.StartTimer();
-        gamesController.ShowHideLoadingControl(true);
-        GameModeSingleton.sport = id;        
+        if (!GamesSingleton.sportSingleton.Where(x => x.id == id).First().isFinished)
+        {
+            timerController.StartTimer();
+            gamesController.ShowHideLoadingControl(true);
+            GameModeSingleton.sport = id;
+        }                
     }
     private void LoadGameplay(double delta)
     {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinterSports.Scripts.Model;
+using WinterSports.Scripts.Singleton;
 
 namespace WinterSports.Scripts.Controller
 {
@@ -26,6 +27,9 @@ namespace WinterSports.Scripts.Controller
         private Button backButton = null;
         private GamesModel gamesModel = null;
         public Control loadingControl = null;
+        #endregion
+        #region const
+        private const string flagResource = "res://Art//2d//flags//";
         #endregion
         #region Methods
         public void SetControls(Control quitControl, Control saveControl, Control saveWarningControl, Control sportsControl, Control medalTableControl)
@@ -79,6 +83,31 @@ namespace WinterSports.Scripts.Controller
                 this.gamesModel.flagGameLabel[i][2].Hide();
             }            
         }
+        public void SetResults()
+        {
+            for (int i = 0; i < this.gamesModel.flagGame.Count; i++)
+            {
+                if (GamesSingleton.sportSingleton[i].isFinished)
+                {
+                    this.gamesModel.flagGame[i][0].Show();
+                    this.gamesModel.flagGame[i][1].Show();
+                    this.gamesModel.flagGame[i][2].Show();
+                    this.gamesModel.flagGameLabel[i][0].Show();
+                    this.gamesModel.flagGameLabel[i][1].Show();
+                    this.gamesModel.flagGameLabel[i][2].Show();
+                    for (int j = 0; j < 3; j++)
+                    {
+                        var index = CountrySingleton.countryObjDTO.countryList.FindIndex(x => x.Id == GamesSingleton.sportSingleton[i].results[j]);
+                        Texture textureResource = GD.Load<Texture>(flagResource +
+                        CountrySingleton.countryObjDTO.countryList[index].Code + ".png");
+                        Texture2D texture2D = textureResource as Texture2D;
+                        this.gamesModel.flagGame[i][j].Texture = texture2D;
+                        this.gamesModel.flagGameLabel[i][j].Text = CountrySingleton.countryObjDTO.countryList[index].Code;
+                    }
+                }                
+            }
+        }
+
         public void ShowHideLoadingControl(bool show)
         {
             if (show)

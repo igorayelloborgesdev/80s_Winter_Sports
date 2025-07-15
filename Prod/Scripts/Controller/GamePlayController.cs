@@ -144,7 +144,7 @@ namespace WinterSports.Scripts.Controller
         };
         private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);
         private double[] skillArray = new double[] { 0, 10, 8, 6, 4, 2 };
-        private double[] skillDifficultArray = new double[] { 3, 2, 1 };
+        private double[] skillDifficultArray = new double[] { 5, 3, 1 };
 
         #endregion
         #region Methods
@@ -237,7 +237,10 @@ namespace WinterSports.Scripts.Controller
                 else
                 {
                     ShowHideStandingsTable(true);
-                    SetStandingsTable();//<- PAREI AQUI
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].score = gamePlayModel.bestTimeScore;
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].isFinished = 1;
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
+                    SetStandingsTableGames();
                 }
                     
             }
@@ -250,13 +253,53 @@ namespace WinterSports.Scripts.Controller
                     ShowControlSkiSpeedSkatingScreen();
                 else
                 {
-                    ShowHideStandingsTable(true);
-                    SetStandingsTable();
+                    ShowHideStandingsTable(true);                    
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
+                    SetStandingsTableGames();
                 }
             }
             timerController.TimerRunning(delta);
             updateTimer();
             UpdateSpeedLabel();
+        }
+        private void SetStandingsTableGames()
+        {
+            var index = GamesSingleton.sportSingleton.FindIndex(x => x.id == GameModeSingleton.sport);
+            GamesSingleton.sportSingleton[index].isFinished = true;
+            for (int i = 0; i < 3; i++)
+            {
+                GamesSingleton.sportSingleton[index].results[i] = countryResultDTOList[i].id;
+            }            
+            for (int i = 0; i < standingNode.Count; i++)
+            {
+                var standing = standingNode[i].GetChildren();
+                foreach (var obj in standing)
+                {
+                    if (obj.Name.ToString().Contains("Pos"))
+                    {
+                        var posLabel = obj as Label;
+                        posLabel.Text = (i + 1).ToString();
+                    }
+                    if (obj.Name.ToString().Contains("CountryCode"))
+                    {
+                        var codeLabel = obj as Label;
+                        codeLabel.Text = CountrySingleton.countryObjDTO.countryList[countryResultDTOList[i].id - 1].Code;
+                    }
+                    if (obj.Name.ToString().Contains("CountryFlag"))
+                    {
+                        var flagLabel = obj as TextureRect;
+                        Texture textureResource = GD.Load<Texture>(flagResource +
+                            CountrySingleton.countryObjDTO.countryList[countryResultDTOList[i].id - 1].Code + ".png");
+                        Texture2D texture2D = textureResource as Texture2D;
+                        flagLabel.Texture = texture2D;
+                    }
+                    if (obj.Name.ToString().Contains("Score"))
+                    {
+                        var scoreLabel = obj as Label;
+                        scoreLabel.Text = TimeSpan.FromSeconds(countryResultDTOList[i].score).ToString("mm':'ss':'fff");
+                    }
+                }
+            }
         }
         public void ShowControlFinishStandings()
         {
@@ -329,6 +372,15 @@ namespace WinterSports.Scripts.Controller
                 }
                 this.character.OnlyPause();
                 ShowHideStandingsTable(true);
+                if (GameModeSingleton.gameMode == 1)                   
+                {                    
+                    var index = GamesSingleton.sportSingleton.FindIndex(x => x.id == GameModeSingleton.sport);
+                    GamesSingleton.sportSingleton[index].isFinished = true;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        GamesSingleton.sportSingleton[index].results[i] = characterCrossCountryList[i].GetSetCharacterIdCountry;
+                    }
+                }
                 SetStandingsTable();
             }
             timerController.TimerRunning(delta);
@@ -376,7 +428,16 @@ namespace WinterSports.Scripts.Controller
                 SetTimeScore();
                 TimeToReset(delta);
                 ResetSpeedSkating();
-                ShowControlSkiSpeedSkatingScreen();
+                if (GameModeSingleton.gameMode == 0)
+                    ShowControlSkiSpeedSkatingScreen();
+                else
+                {
+                    ShowHideStandingsTable(true);
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].score = gamePlayModel.bestTimeScore;
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].isFinished = 1;
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
+                    SetStandingsTableGames();
+                }
             }
             timerController.TimerRunning(delta);
             updateTimer();
@@ -427,8 +488,17 @@ namespace WinterSports.Scripts.Controller
                 timerController.StopTimer();
                 SetTimeScoreBiathlon();
                 TimeToReset(delta);
-                ResetBiathlon();
-                ShowControlBiathlonScreen();
+                ResetBiathlon();                
+                if (GameModeSingleton.gameMode == 0)
+                    ShowControlBiathlonScreen();
+                else
+                {
+                    ShowHideStandingsTable(true);
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].score = gamePlayModel.bestTimeScore;
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].isFinished = 1;
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
+                    SetStandingsTableGames();
+                }
             }
             timerController.TimerRunning(delta);
             updateTimer();
@@ -462,9 +532,19 @@ namespace WinterSports.Scripts.Controller
                 {
                     this.lugeSled.GetCharacter.statesSki = Character.StatesSki.Finish;
                     timerGamePlayController.StopTimer();
-                    setScore = true;
-                    ShowControlSkiSpeedSkatingScreen();
-                    SetTimeScoreLuge();
+                    setScore = true;                    
+                    SetTimeScoreLuge();                    
+                    if (GameModeSingleton.gameMode == 0)
+                        ShowControlSkiSpeedSkatingScreen();
+                    else
+                    {
+                        ShowHideStandingsTable(true);
+                        countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].score = gamePlayModel.bestTimeScore;
+                        countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].isFinished = 1;
+                        countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
+                        SetStandingsTableGames();
+                    }
+
                     this.lugeSled.GetCharacter.ShowHideFinishSessionScreen();
                     ShowHideControlLugeImpulse(true);
                     ResetLuge();
@@ -526,9 +606,19 @@ namespace WinterSports.Scripts.Controller
                 {
                     this.bobsleighSled.GetCharacter[0].statesSki = Character.StatesSki.Finish;
                     timerGamePlayController.StopTimer();
-                    setScore = true;
-                    ShowControlSkiSpeedSkatingScreen();
+                    setScore = true;                    
                     SetTimeScoreBobsleigh();
+                    if (GameModeSingleton.gameMode == 0)
+                        ShowControlSkiSpeedSkatingScreen();
+                    else
+                    {
+                        ShowHideStandingsTable(true);
+                        countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].score = gamePlayModel.bestTimeScore;
+                        countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].isFinished = 1;
+                        countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
+                        SetStandingsTableGames();
+                    }
+
                     this.bobsleighSled.GetCharacter[0].ShowHideFinishSessionScreen();
                     ShowHideControlLugeImpulse(true);
                     ResetBobsleigh();

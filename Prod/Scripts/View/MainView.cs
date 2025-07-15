@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Xml.Linq;
 using WinterSports.Scripts.Controller;
+using WinterSports.Scripts.Singleton;
 
 public partial class MainView : Control
 {    
@@ -277,7 +278,10 @@ public partial class MainView : Control
             if (GameModeSingleton.gameMode == 0)
                 GetTree().ChangeSceneToFile("res://Scenes/GamePlay.tscn");
             else if (GameModeSingleton.gameMode == 1)
+            {
+                GamesSingleton.Init();
                 GetTree().ChangeSceneToFile("res://Scenes/Games.tscn");
+            }            
         }
     }
     private void BackToSport()
