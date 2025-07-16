@@ -83,6 +83,61 @@ namespace WinterSports.Scripts.Controller
                 this.gamesModel.flagGameLabel[i][2].Hide();
             }            
         }
+        public void SetMedalTable()
+        {
+            for (int i = 0; i < CountrySingleton.countryObjDTO.countryList.Count; i++)
+            {
+                var country = new CountryMedalTableModel() { id = CountrySingleton.countryObjDTO.countryList[i].Id };
+                this.gamesModel.countryMedalTableModel.Add(country);
+            }
+            foreach (var obj in GamesSingleton.sportSingleton)
+            {
+                if (obj.isFinished)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (j == 0)
+                        {
+                            this.gamesModel.countryMedalTableModel[this.gamesModel.countryMedalTableModel.FindIndex(x => x.id == obj.results[j])].gold++;
+                        }
+                        else if (j == 1)
+                        {
+                            this.gamesModel.countryMedalTableModel[this.gamesModel.countryMedalTableModel.FindIndex(x => x.id == obj.results[j])].silver++;
+                        }
+                        else if (j == 2)
+                        {
+                            this.gamesModel.countryMedalTableModel[this.gamesModel.countryMedalTableModel.FindIndex(x => x.id == obj.results[j])].bronze++;
+                        }                        
+                        
+                    }                    
+                }
+            }
+            foreach (var obj in this.gamesModel.countryMedalTableModel)
+            {
+                obj.total = obj.gold + obj.silver + obj.bronze;
+            }
+            gamesModel.countryMedalTableModel = gamesModel.countryMedalTableModel.OrderByDescending(x => x.bronze).OrderByDescending(x => x.silver).OrderByDescending(x => x.gold).ToList();
+            SetMedalTableGraph();
+        }
+        private void SetMedalTableGraph()
+        {
+            for (int i = 0; i < gamesModel.countryMedalTableModel.Count; i++)
+            {
+                gamesModel.sportPosLabel[i].Text = (i + 1).ToString();
+                gamesModel.sportGoldLabel[i].Text = gamesModel.countryMedalTableModel[i].gold.ToString();
+                gamesModel.sportSilverLabel[i].Text = gamesModel.countryMedalTableModel[i].silver.ToString();
+                gamesModel.sportBronzeLabel[i].Text = gamesModel.countryMedalTableModel[i].bronze.ToString();
+                gamesModel.sportTotalLabel[i].Text = gamesModel.countryMedalTableModel[i].total.ToString();
+
+                var index = CountrySingleton.countryObjDTO.countryList.FindIndex(x => x.Id == gamesModel.countryMedalTableModel[i].id);
+                Texture textureResource = GD.Load<Texture>(flagResource +
+                        CountrySingleton.countryObjDTO.countryList[index].Code + ".png");
+                Texture2D texture2D = textureResource as Texture2D;
+                this.gamesModel.countryTextureRect[i].Texture = texture2D;
+                this.gamesModel.sportCodeLabel[i].Text = CountrySingleton.countryObjDTO.countryList[index].Code;
+            }
+        }
+
         public void SetResults()
         {
             for (int i = 0; i < this.gamesModel.flagGame.Count; i++)

@@ -67,10 +67,22 @@ public partial class GamesView : Control
             gamesModel.flagGameLabel[i - 1].Add(GetNode<Label>("SportsControl/SportButton" + i.ToString() + "/SportTitleLabel2"));
             gamesModel.flagGameLabel[i - 1].Add(GetNode<Label>("SportsControl/SportButton" + i.ToString() + "/SportTitleLabel3"));
             gamesModel.gamesButton.Add(GetNode<Button>("SportsControl/SportButton" + i.ToString()));
-        }        
+        }
+        for (int i = 1; i < 17; i++)
+        {
+            gamesModel.sportPosLabel.Add(GetNode<Label>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/SportPosLabel1"));
+            gamesModel.countryTextureRect.Add(GetNode<TextureRect>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/CountryTextureRect1"));
+            gamesModel.sportCodeLabel.Add(GetNode<Label>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/SportTitleLabel1"));
+            gamesModel.sportGoldLabel.Add(GetNode<Label>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/SportMedalLabel1"));
+            gamesModel.sportSilverLabel.Add(GetNode<Label>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/SportMedalLabel2"));
+            gamesModel.sportBronzeLabel.Add(GetNode<Label>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/SportMedalLabel3"));
+            gamesModel.sportTotalLabel.Add(GetNode<Label>("MedalTableControl/ScrollContainer/VBoxContainer/MedalTable" + i.ToString() + "/SportMedalLabel4"));
+        }
+
         gamesController.SetGamesModel(gamesModel);
         gamesController.HideAllMedalInfo();
         gamesController.SetResults();
+        gamesController.SetMedalTable();
 
         gamesController.GetSetLoadingControl = GetNode<Control>("LoadingControl");
         gamesController.ShowHideLoadingControl(false);

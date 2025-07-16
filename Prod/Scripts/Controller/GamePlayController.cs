@@ -262,7 +262,7 @@ namespace WinterSports.Scripts.Controller
             updateTimer();
             UpdateSpeedLabel();
         }
-        private void SetStandingsTableGames()
+        private void SetStandingsTableGames(bool isSkyJump = false)
         {
             var index = GamesSingleton.sportSingleton.FindIndex(x => x.id == GameModeSingleton.sport);
             GamesSingleton.sportSingleton[index].isFinished = true;
@@ -296,7 +296,7 @@ namespace WinterSports.Scripts.Controller
                     if (obj.Name.ToString().Contains("Score"))
                     {
                         var scoreLabel = obj as Label;
-                        scoreLabel.Text = TimeSpan.FromSeconds(countryResultDTOList[i].score).ToString("mm':'ss':'fff");
+                        scoreLabel.Text = isSkyJump ? ((int)countryResultDTOList[i].score).ToString() : TimeSpan.FromSeconds(countryResultDTOList[i].score).ToString("mm':'ss':'fff");
                     }
                 }
             }
@@ -656,7 +656,18 @@ namespace WinterSports.Scripts.Controller
             else if (this.character.statesSki == Character.StatesSki.SkiJumpingFinish)
             {
                 CalculateScore();
-                ShowControlSkiSpeedSkatingScreen();
+
+                if (GameModeSingleton.gameMode == 0)
+                    ShowControlSkiSpeedSkatingScreen();
+                else
+                {
+                    ShowHideStandingsTable(true);
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].score = gamePlayModel.bestTimeScore;
+                    countryResultDTOList[countryResultDTOList.FindIndex(x => x.id == GameModeSingleton.country)].isFinished = 1;
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenByDescending(x => x.score).ToList();
+                    SetStandingsTableGames(true);
+                }
+                
                 SetFinishTimeLabelSkiJump();                
                 this.character.statesSki = Character.StatesSki.Finish;
             }
@@ -2315,11 +2326,27 @@ namespace WinterSports.Scripts.Controller
                             obj.score = score + randomScore;
                         }
                     }
-                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();//<-
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
                 }
                 else if (GameModeSingleton.sport == 10)
                 {
-
+                    foreach (var obj in CountrySingleton.countryObjDTO.countryList)
+                    {
+                        countryResultDTOList.Add(new CountryResultDTO() { id = obj.Id, score = 0.0, isFinished = GameModeSingleton.country == obj.Id ? 0 : 1 });
+                    }
+                    foreach (var obj in countryResultDTOList)
+                    {
+                        if (obj.id != GameModeSingleton.country)
+                        {
+                            var skill = CountrySingleton.countryObjDTO.countryList.Where(x => x.Id == obj.id).First().sportSkill[GameModeSingleton.sport - 1];
+                            var skillPerc = skillArray[skill];
+                            var score = 300;
+                            var maxScore = ((skillPerc * score) / 100.0) * skillDifficultArray[GameModeSingleton.difficult];
+                            double randomScore = GD.Randf() * maxScore;
+                            obj.score = score - randomScore;
+                        }
+                    }
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();//<-
                 }
                 else if (GameModeSingleton.sport == 11)
                 {

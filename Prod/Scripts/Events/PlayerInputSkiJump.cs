@@ -59,16 +59,20 @@ namespace WinterSports.Scripts.Events
         }
         public void PlayAnimation(AnimationPlayer animationPlayer, int animID)
         {
-            if (animID == 4)
+            try
             {
-                if (!isLandPlayed)
+                if (animID == 4)
                 {
+                    if (!isLandPlayed)
+                    {
+                        animationPlayer.Play(animName[animID]);
+                        isLandPlayed = true;
+                    }
+                }
+                else
                     animationPlayer.Play(animName[animID]);
-                    isLandPlayed = true;
-                }                
-            }            
-            else
-                animationPlayer.Play(animName[animID]);
+            }
+            catch (Exception ex) { }            
         }
         public void SetCharacterBody3D(CharacterBody3D rigidBody3D)
         {
@@ -292,36 +296,39 @@ namespace WinterSports.Scripts.Events
         }
         private void WindDirection(AnimationPlayer animationPlayer)
         {
-
-            if (this.character.statesSki == Character.StatesSki.Ready)
+            try
             {
-                character.ShoHideControlSkiJumpImpulseHorizontal(false);
-                character.ShoHideControlSkiJumpImpulseVertical(false);
-            }            
-            if (this.character.statesSki == Character.StatesSki.SkiJumpingDown)
-            {                
-                if (currentPointId > this.flyPoints[0] && currentPointId <= this.flyPoints[1])
-                {             
-                    var incWind = MoveCameraZWind(power, -1.0f * angle);
-                    character.RotateZWind(incWind);
-                    character.ShoHideControlSkiJumpImpulseHorizontal(true);
-                    character.ShoHideControlSkiJumpImpulseVertical(false);
-                    PlayAnimation(animationPlayer, 2);
-                }
-                else if (currentPointId > this.flyPoints[1] && currentPointId <= this.flyPoints[2])
+                if (this.character.statesSki == Character.StatesSki.Ready)
                 {
-                    var incWind = MoveCameraXWind(power, -1.0f * angle);
-                    character.RotateXWind(incWind);
                     character.ShoHideControlSkiJumpImpulseHorizontal(false);
-                    character.ShoHideControlSkiJumpImpulseVertical(true);
-                    PlayAnimation(animationPlayer, 3);
-                }
-                else if (currentPointId > this.flyPoints[2])
-                {                    
                     character.ShoHideControlSkiJumpImpulseVertical(false);
-                    PlayAnimation(animationPlayer, 4);
+                }
+                if (this.character.statesSki == Character.StatesSki.SkiJumpingDown)
+                {
+                    if (currentPointId > this.flyPoints[0] && currentPointId <= this.flyPoints[1])
+                    {
+                        var incWind = MoveCameraZWind(power, -1.0f * angle);
+                        character.RotateZWind(incWind);
+                        character.ShoHideControlSkiJumpImpulseHorizontal(true);
+                        character.ShoHideControlSkiJumpImpulseVertical(false);
+                        PlayAnimation(animationPlayer, 2);
+                    }
+                    else if (currentPointId > this.flyPoints[1] && currentPointId <= this.flyPoints[2])
+                    {
+                        var incWind = MoveCameraXWind(power, -1.0f * angle);
+                        character.RotateXWind(incWind);
+                        character.ShoHideControlSkiJumpImpulseHorizontal(false);
+                        character.ShoHideControlSkiJumpImpulseVertical(true);
+                        PlayAnimation(animationPlayer, 3);
+                    }
+                    else if (currentPointId > this.flyPoints[2])
+                    {
+                        character.ShoHideControlSkiJumpImpulseVertical(false);
+                        PlayAnimation(animationPlayer, 4);
+                    }
                 }
             }
+            catch (Exception e) { }            
         }
         private void MovePlayer(double delta)
         {

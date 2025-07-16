@@ -34,13 +34,8 @@ Esportes
 
 ------------------------------------------------
 
-.Main Menu
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 ....Games
-.Ski jumping<-
-..Medal Table
+..Medal Table<-
 .Ice Hockey
 ..Results
 

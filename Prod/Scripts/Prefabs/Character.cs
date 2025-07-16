@@ -237,55 +237,59 @@ public partial class Character : CharacterBody3D
     {        
     }
     public override void _PhysicsProcess(double delta)
-    {        
-        if (prefabName == "skiTrack")
+    {
+        try
         {
-            if (statesSki > StatesSki.Go)
+            if (prefabName == "skiTrack")
             {
-                if (GameModeSingleton.sport == 12)
-                {                    
-                    playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryCurrentId(), 
-                        crossCountryOvertakeFM, crossCountryOvertakeMR, crossCountryOvertakeML);
-                }                    
-                else
-                    playerInput.PlayerInput(animationPlayer);
-            }            
-        }
-        if (prefabName == "SpeedSkating")
-        {
-            if (statesSki > StatesSki.Go)
-                playerInput.PlayerInput(animationPlayer, delta);                            
-        }
-        if (prefabName == "Biathlon")
-        {
-            if (statesSki > StatesSki.Go)
-                playerInput.PlayerInput(animationPlayer, delta);
-        }
-        if (prefabName == "Skijumping")
-        {            
-            playerInput.PlayerInput(animationPlayer, delta);
-        }
-        if (prefabName == "IceHockeyRink")
-        {
-            if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.InGame)
-            {
-                if (isPlayerTeam)
-                {                    
-                    if (isSelected)
+                if (statesSki > StatesSki.Go)
+                {
+                    if (GameModeSingleton.sport == 12)
                     {
-                        playerInput.PlayerInput(animationPlayer, delta);
+                        playerInput.PlayerInput(animationPlayer, 0, GetSkiCrossCountryCurrentId(),
+                            crossCountryOvertakeFM, crossCountryOvertakeMR, crossCountryOvertakeML);
                     }
                     else
-                    {                        
-                        playerInput.PlayerInputAI(animationPlayer, delta);
+                        playerInput.PlayerInput(animationPlayer);
+                }
+            }
+            if (prefabName == "SpeedSkating")
+            {
+                if (statesSki > StatesSki.Go)
+                    playerInput.PlayerInput(animationPlayer, delta);
+            }
+            if (prefabName == "Biathlon")
+            {
+                if (statesSki > StatesSki.Go)
+                    playerInput.PlayerInput(animationPlayer, delta);
+            }
+            if (prefabName == "Skijumping")
+            {
+                playerInput.PlayerInput(animationPlayer, delta);
+            }
+            if (prefabName == "IceHockeyRink")
+            {
+                if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Init && IceHockeyStatic.statesIceHockeyStart == IceHockeyStatic.StatesIceHockeyStart.InGame)
+                {
+                    if (isPlayerTeam)
+                    {
+                        if (isSelected)
+                        {
+                            playerInput.PlayerInput(animationPlayer, delta);
+                        }
+                        else
+                        {
+                            playerInput.PlayerInputAI(animationPlayer, delta);
+                        }
+                    }
+                    else
+                    {
+                        playerInput.PlayerInputAIOpponent(animationPlayer, delta);
                     }
                 }
-                else
-                {                    
-                    playerInput.PlayerInputAIOpponent(animationPlayer, delta);
-                }
-            }            
+            }
         }
+        catch (Exception ex) { }        
     }    
     #endregion
     #region Methods
