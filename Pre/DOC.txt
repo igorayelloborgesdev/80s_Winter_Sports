@@ -35,9 +35,7 @@ Esportes
 ------------------------------------------------
 
 ....Games
-..Medal Table<-
-.Ice Hockey
-..Results
+.Ice Hockey<-
 
 ..Save
 ...País

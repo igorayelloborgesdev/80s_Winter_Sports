@@ -86,6 +86,7 @@ public partial class GameplayView : Control
     private const string HUDBGName = "CanvasLayer/HUD/HUDBG";
     private const string CountryFlagName = "CanvasLayer/HUD/CountryFlag";
     private const string CountryCodeName = "CanvasLayer/HUD/CountryCode";
+    private const string iceHockeyControlGames= "CanvasLayer/SelectTeamSessionControlGames/";
     #endregion
     #region Variables
     private Character character = new Character();
@@ -119,7 +120,8 @@ public partial class GameplayView : Control
     private NinePatchRect HUDBG = null;
     private TextureRect countryFlag = null;
     private Label countryCode = null;
-    private RigidBody3D puck = null;    
+    private RigidBody3D puck = null;
+    private Control iceHockeyControl = null;
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -169,9 +171,20 @@ public partial class GameplayView : Control
                 GetNode<Button>("CanvasLayer/IceHockeyEndGameControl/PlayMenuButtonFinish")
             );
 
+        for (int i = 1; i < 5; i++)
+        {
+            gamePlayController.flagsIceHockeyBracket.Add(new List<TextureRect>());
+            for (int j = 1; j < 17; j++)
+            {
+                var flagBracket = GetNode<TextureRect>("CanvasLayer/SelectTeamSessionControlGames/CountryFlag" + i.ToString() + "_" + j.ToString());
+                if(flagBracket is not null)
+                    gamePlayController.flagsIceHockeyBracket[i - 1].Add(flagBracket);//<-
+            }
+        }
 
         gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));
-        gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));
+        gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));        
+
         gamePlayController.SetParentNode(this);
                 
         InstantiateLevel();
@@ -194,7 +207,8 @@ public partial class GameplayView : Control
         gamePlayController.SetTimeScoreBestLastLabelFinishBiathlon(bestScoreLabel, timeScoreLabel, errorsScoreLabel, lastScoreLabel);
         gamePlayController.SetTimeScreenControl(controlSkiSpeedSkatingScreen, controlBiathlonScreen, controlLugeImpulse, controlSkiJumpImpulse, controlSkiJump);
         gamePlayController.SetImpulseLabel(impulseNinePatchRect, impulseSkiJumpNinePatchRect);
-        gamePlayController.SetSelectTeamSessionControlIceHockey(selectTeamSessionControlIceHockey);                        
+        gamePlayController.SetSelectTeamSessionControlIceHockey(selectTeamSessionControlIceHockey);
+        gamePlayController.SetIceHockeyControl(iceHockeyControl);
         gamePlayController.SetAllControlsToHideIceHockey(readySetGoControl,
                                                         finishSessionScreen,
                                                         controlSkiSpeedSkatingBiathlon,
@@ -366,7 +380,7 @@ public partial class GameplayView : Control
         gamePlayController.SetFinishSessionScreen(finishSessionScreen);
         gamePlayController.SetControlSkiSpeedSkatingBiathlon(controlSkiSpeedSkatingBiathlon);
         gamePlayController.SetControlSkiCrossCountry(controlSkiCrossCountry, controlSkiCrossCountryPosition, crossCountryCountryPositionLabel, 
-            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);//<-
+            crossCountryCountryCodeLabel, crossCountryCountryFlagTextureRect, finishResultSessionControl);
         gamePlayController.SetControlBiathlon(controlBiathlon);
         gamePlayController.SetControlSkiJumpImpulseHorizontal(controlSkiJumpImpulseHorizontal, windDirectionArrowHorizontal);
         gamePlayController.SetControlSkiJumpImpulseVertical(controlSkiJumpImpulseVertical, windDirectionArrowVertical);
@@ -631,6 +645,7 @@ public partial class GameplayView : Control
         playButtonIceHockey = GetNode<Button>(iceHockeyPlayToMainMenuButtonFinish);
 
         selectTeamSessionControlIceHockey = GetNode<Control>(iceHockeyKitTeam);
+        iceHockeyControl = GetNode<Control>(iceHockeyControlGames);
 
         HUDBG = GetNode<NinePatchRect>(HUDBGName);
         countryFlag = GetNode<TextureRect>(CountryFlagName);

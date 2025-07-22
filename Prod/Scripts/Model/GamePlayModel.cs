@@ -21,5 +21,20 @@ namespace WinterSports.Scripts.Model
         public Button backMenuFinishButtonStandings = null;
         public Button returnFinishButtonStandings = null;
         public List<Button> iceHockeyFlagSelectButton = new List<Button>();
+        public List<CountryDTO> iceHockeyCountry = new List<CountryDTO>();
+        public List<CountryDTO> pot1 = new List<CountryDTO>();
+        public List<CountryDTO> pot2 = new List<CountryDTO>();
+        public List<CountryDTO> pot3 = new List<CountryDTO>();
+        public List<List<Bracket>> bracketList = new List<List<Bracket>>();
+        public int iceHockeyRound = 0;
     }
+    public class Bracket
+    {
+        public int team1 = 0;
+        public int team2 = 0;
+        public int teamWinner = 0;
+        public int id = -1;
+        public int nextBracketId = -1;
+    }
+
 }

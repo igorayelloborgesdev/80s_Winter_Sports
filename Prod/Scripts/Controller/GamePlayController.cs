@@ -99,6 +99,7 @@ namespace WinterSports.Scripts.Controller
         private CanvasItem jersey2_2 = null;
         private CanvasItem short2_1 = null;
         private Control selectTeamSessionControlIceHockey = null;
+        private Control iceHockeyControl = null;
         private NinePatchRect HUDBG = null;
         private TextureRect countryFlag = null;
         private Label countryCode = null;
@@ -128,6 +129,7 @@ namespace WinterSports.Scripts.Controller
         private Button playMenuButtonFinish = null;
         private Button backGamesMenuButtonFinish = null;
         public List<CountryResultDTO> countryResultDTOList = new List<CountryResultDTO>();
+        public List<List<TextureRect>> flagsIceHockeyBracket = new List<List<TextureRect>>();
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -1771,7 +1773,95 @@ namespace WinterSports.Scripts.Controller
             this.texture2DCountry2.Texture = texture2D2;
             countryCode1.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
             countryCode2.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
-            ShowHideSelectTeamSessionControlIceHockey(true);
+
+            if (GameModeSingleton.gameMode == 0)
+            {
+                ShowHideSelectTeamSessionControlIceHockey(true);
+                ShowHideiceHockeyControl(false);
+            }
+            else
+            {
+
+                gamePlayModel.iceHockeyCountry = CountrySingleton.countryObjDTO.countryList.Select(x => x).ToList();
+                gamePlayModel.iceHockeyCountry = gamePlayModel.iceHockeyCountry.OrderByDescending(x => x.sportSkill[GameModeSingleton.sport - 1]).ToList();
+                gamePlayModel.pot1 = gamePlayModel.iceHockeyCountry.Take(4).ToList();
+                gamePlayModel.pot2 = gamePlayModel.iceHockeyCountry.Skip(4).Take(4).ToList();
+                gamePlayModel.pot3 = gamePlayModel.iceHockeyCountry.Skip(8).Take(8).ToList();
+                for (int i = 0; i < 4; i++)
+                {
+                    int nextBracket = 0;
+                    gamePlayModel.bracketList.Add(new List<Bracket>());
+                    if (i == 0)
+                    {
+                        gamePlayModel.bracketList[i] = new List<Bracket>();
+                        for (int j = 0; j < 8; j++)
+                        {
+                            gamePlayModel.bracketList[i].Add(new Bracket() { id = j, nextBracketId = nextBracket });
+                            if(j % 2 != 0)
+                                nextBracket++;
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        gamePlayModel.bracketList[i] = new List<Bracket>();
+                        for (int j = 0; j < 4; j++)
+                        {
+                            gamePlayModel.bracketList[i].Add(new Bracket() { id = j, nextBracketId = nextBracket });
+                            if (j % 2 != 0)
+                                nextBracket++;
+                        }
+                    }
+                    else if (i == 2)
+                    {
+                        gamePlayModel.bracketList[i] = new List<Bracket>();
+                        for (int j = 0; j < 2; j++)
+                        {
+                            gamePlayModel.bracketList[i].Add(new Bracket() { id = j, nextBracketId = nextBracket });
+                            if (j % 2 != 0)
+                                nextBracket++;
+                        }
+                    }
+                    else if (i == 3)
+                    {
+                        gamePlayModel.bracketList[i] = new List<Bracket>();
+                        for (int j = 0; j < 2; j++)
+                        {
+                            gamePlayModel.bracketList[i].Add(new Bracket() { id = j, nextBracketId = nextBracket });
+                            if (j % 2 != 0)
+                                nextBracket++;
+                        }
+                    }
+                }
+                var rng = new RandomNumberGenerator();
+                rng.Randomize();
+                for (int i = 0; i < 4; i++)
+                {
+                    int index = rng.RandiRange(0, gamePlayModel.pot1.Count - 1);
+                    var sorteado = gamePlayModel.pot1[index];
+                    gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i * 2].team1 = sorteado.Id;
+                    gamePlayModel.pot1.RemoveAt(index);
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    int index = rng.RandiRange(0, gamePlayModel.pot2.Count - 1);
+                    var sorteado = gamePlayModel.pot2[index];
+                    gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][(i * 2) + 1].team1 = sorteado.Id;
+                    gamePlayModel.pot2.RemoveAt(index);
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    int index = rng.RandiRange(0, gamePlayModel.pot3.Count - 1);
+                    var sorteado = gamePlayModel.pot3[index];
+                    gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team2 = sorteado.Id;
+                    gamePlayModel.pot3.RemoveAt(index);
+                }
+
+                SetIceHockeyBracket();//<-PAREI AQUI
+
+                ShowHideSelectTeamSessionControlIceHockey(false);
+                ShowHideiceHockeyControl(true);
+            }
+            
             readySetGoControl.Hide();
             finishSessionScreen.Hide();
             controlSkiSpeedSkatingBiathlon.Hide();
@@ -1797,6 +1887,36 @@ namespace WinterSports.Scripts.Controller
             ShowHidehockeyScoreControl(false);
             ShowHideIceHockeyEndGameControl(false);
         }
+
+        private void SetIceHockeyBracket()
+        {
+            //for(int i = 0; i < gamePlayModel.bracketList[gamePlayModel.iceHockeyRound].Count; i++)
+            //{
+            //    this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound]
+            //    gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i]
+            //}                    
+
+            int count = 0;
+            int countbracket = 0;
+            for (int i = 0; i < this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound].Count; i++)
+            {
+                Texture textureResource1 = GD.Load<Texture>(flagResource + 
+                    CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][countbracket].team1 - 1].Code + ".png");
+                Texture2D texture2D1 = textureResource1 as Texture2D;
+                this.countryFlag1TextureRect.Texture = texture2D1;
+                this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound][count].Texture = this.countryFlag1TextureRect.Texture;
+                count++;
+
+                Texture textureResource2 = GD.Load<Texture>(flagResource +
+                    CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][countbracket].team2 - 1].Code + ".png");
+                Texture2D texture2D2 = textureResource2 as Texture2D;
+                this.countryFlag2TextureRect.Texture = texture2D2;
+                this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound][count].Texture = this.countryFlag2TextureRect.Texture;
+                count++;
+                countbracket++;
+            }
+        }
+
         private void SetIceHockeyInitPosition()
         {
             for (int i = 0; i < iceHockeyTeam1.Count; i++)
@@ -1886,6 +2006,10 @@ namespace WinterSports.Scripts.Controller
         {
             this.selectTeamSessionControlIceHockey = selectTeamSessionControlIceHockey;
         }
+        public void SetIceHockeyControl(Control iceHockeyControl)
+        {
+            this.iceHockeyControl = iceHockeyControl;
+        }        
         public void SetAllControlsToHideIceHockey(Control readySetGoControl,
                                                 Control finishSessionScreen,
                                                 Control controlSkiSpeedSkatingBiathlon,
@@ -2008,6 +2132,13 @@ namespace WinterSports.Scripts.Controller
                 this.selectTeamSessionControlIceHockey.Show();
             else
                 this.selectTeamSessionControlIceHockey.Hide();
+        }
+        public void ShowHideiceHockeyControl(bool isShow)//<- PAREI AQUI
+        {
+            if (isShow)
+                this.iceHockeyControl.Show();
+            else
+                this.iceHockeyControl.Hide();
         }
         private void SetIceHockeyPlayerColors()
         {
