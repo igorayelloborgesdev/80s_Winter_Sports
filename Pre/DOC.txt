@@ -34,13 +34,11 @@ Esportes
 
 ------------------------------------------------
 
-....Games
-.Ice Hockey<-
-
 ..Save
 ...País
 ...Dificuldade
 ...Resultados
+...Data - dia e horário
 
 .load
 ..load

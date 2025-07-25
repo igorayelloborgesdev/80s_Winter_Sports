@@ -87,6 +87,14 @@ public partial class GameplayView : Control
     private const string CountryFlagName = "CanvasLayer/HUD/CountryFlag";
     private const string CountryCodeName = "CanvasLayer/HUD/CountryCode";
     private const string iceHockeyControlGames= "CanvasLayer/SelectTeamSessionControlGames/";
+
+    private const string iceHockeyFlagSelectContryNameGame = "CanvasLayer/SelectTeamSessionControlGames/ControlKit/Contry";
+    private const string iceHockeyFlagSelectCountryCodeNameGame = "CanvasLayer/SelectTeamSessionControlGames/ControlKit/CountryCode";
+    private const string iceHockeyKitTeam1Games = "CanvasLayer/SelectTeamSessionControlGames/ControlKit/Kit1_";
+    private const string iceHockeyKitTeam2Games = "CanvasLayer/SelectTeamSessionControlGames/ControlKit/Kit2_";
+    private const string iceHockeyKitTeamGames = "CanvasLayer/SelectTeamSessionControlGames/ControlKit/";
+    private const string controlKitGames = "CanvasLayer/SelectTeamSessionControlGames/ControlKit/";
+    private const string backToMainMenuButtonFinish = "CanvasLayer/SelectTeamSessionControlGames/BackToMainMenuButtonFinish";
     #endregion
     #region Variables
     private Character character = new Character();
@@ -122,6 +130,21 @@ public partial class GameplayView : Control
     private Label countryCode = null;
     private RigidBody3D puck = null;
     private Control iceHockeyControl = null;
+
+    private Control controlKit = null;
+    private TextureRect texture2DCountry1Games = null;
+    private TextureRect texture2DCountry2Games = null;
+    private Label countryCode1Games = null;
+    private Label countryCode2Games = null;
+    private List<Button> kitTeam1Games = new List<Button>();
+    private List<Button> kitTeam2Games = new List<Button>();
+    private CanvasItem jersey1_1Games = null;
+    private CanvasItem jersey1_2Games = null;
+    private CanvasItem short1_1Games = null;
+    private CanvasItem jersey2_1Games = null;
+    private CanvasItem jersey2_2Games = null;
+    private CanvasItem short2_1Games = null;
+    private Button playButtonIceHockeyGames = null;
     #endregion
     #region Controller
     private GamePlayController gamePlayController = null;
@@ -176,11 +199,21 @@ public partial class GameplayView : Control
             gamePlayController.flagsIceHockeyBracket.Add(new List<TextureRect>());
             for (int j = 1; j < 17; j++)
             {
-                var flagBracket = GetNode<TextureRect>("CanvasLayer/SelectTeamSessionControlGames/CountryFlag" + i.ToString() + "_" + j.ToString());
-                if(flagBracket is not null)
-                    gamePlayController.flagsIceHockeyBracket[i - 1].Add(flagBracket);//<-
+                try
+                {
+                    var flagBracket = GetNode<TextureRect>("CanvasLayer/SelectTeamSessionControlGames/CountryFlag" + i.ToString() + "_" + j.ToString());
+                    if (flagBracket is not null)
+                        gamePlayController.flagsIceHockeyBracket[i - 1].Add(flagBracket);
+                }
+                catch(Exception ex) 
+                {         
+                }
+                
             }
         }
+
+        gamePlayController.countryFlagGold = GetNode<TextureRect>("CanvasLayer/SelectTeamSessionControlGames/CountryFlag5_1");
+        gamePlayController.countryFlagBronze = GetNode<TextureRect>("CanvasLayer/SelectTeamSessionControlGames/CountryFlag5_2");
 
         gamePlayController.SetHockeyPower(GetNode<NinePatchRect>("CanvasLayer/HUD/ShootPower"));
         gamePlayController.SetHockeyPowerControl(GetNode<Control>("CanvasLayer/HUD/ShootPower/Control"));        
@@ -193,10 +226,14 @@ public partial class GameplayView : Control
         AssignIceHockeyUI();
         SetIceHockeyKitButton(kitTeam1, kitTeam2);
         SetIceHockeyKit(jersey1_1, jersey1_2, short1_1, jersey2_1, jersey2_2, short2_1);
+        SetIceHockeyKitButtonGames(kitTeam1Games, kitTeam2Games);
+        SetIceHockeyKitGames(jersey1_1Games, jersey1_2Games, short1_1Games, jersey2_1Games, jersey2_2Games, short2_1Games);
         SetIceHockeyKitEvents();
+        SetIceHockeyKitEventsGames();
         InitKit();
         SetAIResults();
-        gamePlayController.SetSelectionFlagsTexts(texture2DCountry1, texture2DCountry2, countryCode1, countryCode2);        
+        gamePlayController.SetSelectionFlagsTexts(texture2DCountry1, texture2DCountry2, countryCode1, countryCode2);
+        gamePlayController.SetSelectionFlagsTextsGames(texture2DCountry1Games, texture2DCountry2Games, countryCode1Games, countryCode2Games);
         gamePlayController.SetTimerLabel(prefabName, timeLabel);
         gamePlayController.SetCrossCountryLabel(controlSkiCrossCountryTime, controlSkiCrossCountrySpeed, controlSkiCrossCountryEnergy);
         gamePlayController.SetSpeedLabel(prefabName, speedNinePatchRect);
@@ -649,7 +686,30 @@ public partial class GameplayView : Control
 
         HUDBG = GetNode<NinePatchRect>(HUDBGName);
         countryFlag = GetNode<TextureRect>(CountryFlagName);
-        countryCode = GetNode<Label>(CountryCodeName);        
+        countryCode = GetNode<Label>(CountryCodeName);
+
+        texture2DCountry1Games = GetNode<TextureRect>(iceHockeyFlagSelectContryNameGame + (1).ToString());
+        texture2DCountry2Games = GetNode<TextureRect>(iceHockeyFlagSelectContryNameGame + (2).ToString());
+        countryCode1Games = GetNode<Label>(iceHockeyFlagSelectCountryCodeNameGame + (1).ToString());
+        countryCode2Games = GetNode<Label>(iceHockeyFlagSelectCountryCodeNameGame + (2).ToString());
+
+        kitTeam1Games.Add(GetNode<Button>(iceHockeyKitTeam1Games + (1).ToString()));
+        kitTeam1Games.Add(GetNode<Button>(iceHockeyKitTeam1Games + (2).ToString()));
+        kitTeam2Games.Add(GetNode<Button>(iceHockeyKitTeam2Games + (1).ToString()));
+        kitTeam2Games.Add(GetNode<Button>(iceHockeyKitTeam2Games + (2).ToString()));
+
+        jersey1_1Games = GetNode<CanvasItem>(iceHockeyKitTeamGames + "Jersey1_1");
+        jersey1_2Games = GetNode<CanvasItem>(iceHockeyKitTeamGames + "Jersey1_2");
+        short1_1Games = GetNode<CanvasItem>(iceHockeyKitTeamGames + "Short1_1");
+
+        jersey2_1Games = GetNode<CanvasItem>(iceHockeyKitTeamGames + "Jersey2_1");
+        jersey2_2Games = GetNode<CanvasItem>(iceHockeyKitTeamGames + "Jersey2_2");
+        short2_1Games = GetNode<CanvasItem>(iceHockeyKitTeamGames + "Short2_1");
+
+        playButtonIceHockeyGames = GetNode<Button>(backToMainMenuButtonFinish);
+
+        controlKit = GetNode<Control>(controlKitGames);
+        gamePlayController.controlKit = controlKit;
     }
     private void SetMainGamePlayEvents()
     {
@@ -681,6 +741,15 @@ public partial class GameplayView : Control
             int count = i;
             gamePlayController.GetSetKitTeam1[i].Pressed += () => { SetIceHockeyKitEvent(count, 0); };
             gamePlayController.GetSetKitTeam2[i].Pressed += () => { SetIceHockeyKitEvent(count, 1); };
+        }
+    }
+    private void SetIceHockeyKitEventsGames()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            int count = i;
+            gamePlayController.GetSetKitTeam1Games[i].Pressed += () => { SetIceHockeyKitEventGames(count, 0); };
+            gamePlayController.GetSetKitTeam2Games[i].Pressed += () => { SetIceHockeyKitEventGames(count, 1); };
         }
     }
     private void InitKit()
@@ -777,6 +846,15 @@ public partial class GameplayView : Control
     {
         gamePlayController.SetIceHockeyKit(jersey1_1, jersey1_2, short1_1, jersey2_1, jersey2_2, short2_1);
     }
+
+    public void SetIceHockeyKitButtonGames(List<Button> kitTeam1, List<Button> kitTeam2)
+    {
+        gamePlayController.SetIceHockeyKitButtonGames(kitTeam1, kitTeam2);
+    }
+    public void SetIceHockeyKitGames(CanvasItem jersey1_1, CanvasItem jersey1_2, CanvasItem short1_1, CanvasItem jersey2_1, CanvasItem jersey2_2, CanvasItem short2_1)
+    {
+        gamePlayController.SetIceHockeyKitGames(jersey1_1, jersey1_2, short1_1, jersey2_1, jersey2_2, short2_1);
+    }
     #endregion
     #region Events
     private void QuitToMainMenu()
@@ -848,15 +926,33 @@ public partial class GameplayView : Control
     {
         gamePlayController.SetIceHockeyKitEvent(kitId, teamId);
     }
-
+    private void SetIceHockeyKitEventGames(int kitId, int teamId)
+    {
+        gamePlayController.SetIceHockeyKitEventGames(kitId, teamId);
+    }
     private void SetIceButtonsEvent()
     {        
         quitButtonIceHockey.Pressed += () => { QuitToMainMenu(); };
         playButtonIceHockey.Pressed += () => { PlayIceHockey(); };
+        playButtonIceHockeyGames.Pressed += () => { PlayIceHockey(); };
     }
+
+    private void PlayButtonIceHockeyGames_Pressed()
+    {
+        throw new NotImplementedException();
+    }
+
     private void PlayIceHockey()
     {
-        gamePlayController.PlayIceHockey();
+        if (GameModeSingleton.gameMode == 1)
+        {
+            if (gamePlayController.GetGamePlayModel.iceHockeyRound != 4)
+                gamePlayController.PlayIceHockey();
+            else
+                BackToGamesMenu();
+        }
+        else
+            gamePlayController.PlayIceHockey();
     }
     private void ResetIceHockey()
     {

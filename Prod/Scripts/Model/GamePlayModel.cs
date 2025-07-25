@@ -27,6 +27,7 @@ namespace WinterSports.Scripts.Model
         public List<CountryDTO> pot3 = new List<CountryDTO>();
         public List<List<Bracket>> bracketList = new List<List<Bracket>>();
         public int iceHockeyRound = 0;
+        public int iceHockeyplayerBracket = -1;
     }
     public class Bracket
     {

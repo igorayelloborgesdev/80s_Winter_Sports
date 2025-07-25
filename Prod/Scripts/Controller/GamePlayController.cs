@@ -130,6 +130,25 @@ namespace WinterSports.Scripts.Controller
         private Button backGamesMenuButtonFinish = null;
         public List<CountryResultDTO> countryResultDTOList = new List<CountryResultDTO>();
         public List<List<TextureRect>> flagsIceHockeyBracket = new List<List<TextureRect>>();
+        public TextureRect countryFlagGold = null;
+        public TextureRect countryFlagBronze = null;
+
+        public Control controlKit = null;
+        private TextureRect texture2DCountry1Games = null;
+        private TextureRect texture2DCountry2Games = null;
+        private Label countryCode1Games = null;
+        private Label countryCode2Games = null;
+        private Toggle toggleIceHockeyKitTeam1Games = new Toggle();
+        private Toggle toggleIceHockeyKitTeam2Games = new Toggle();
+        private List<Button> kitTeam1Games = new List<Button>();
+        private List<Button> kitTeam2Games = new List<Button>();
+        private CanvasItem jersey1_1Games = null;
+        private CanvasItem jersey1_2Games = null;
+        private CanvasItem short1_1Games = null;
+        private CanvasItem jersey2_1Games = null;
+        private CanvasItem jersey2_2Games = null;
+        private CanvasItem short2_1Games = null;
+        private bool isPlayerQualified = false;
         #endregion
         #region const
         private const float rectXSize = 225.0f;
@@ -147,7 +166,8 @@ namespace WinterSports.Scripts.Controller
         private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);
         private double[] skillArray = new double[] { 0, 10, 8, 6, 4, 2 };
         private double[] skillDifficultArray = new double[] { 5, 3, 1 };
-
+        //private const float iceHockeyMaxTimer = 120.0f;//<-
+        private const float iceHockeyMaxTimer = 1.0f;//<-
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -1762,6 +1782,15 @@ namespace WinterSports.Scripts.Controller
             this.countryCode1 = countryCode1;
             this.countryCode2 = countryCode2;
         }
+
+        public void SetSelectionFlagsTextsGames(TextureRect texture2DCountry1, TextureRect texture2DCountry2, Label countryCode1, Label countryCode2)
+        {
+            this.texture2DCountry1Games = texture2DCountry1;
+            this.texture2DCountry2Games = texture2DCountry2;
+            this.countryCode1Games = countryCode1;
+            this.countryCode2Games = countryCode2;
+        }
+
         public void InitIceHockey()
         {
             InitTimer();
@@ -1856,8 +1885,7 @@ namespace WinterSports.Scripts.Controller
                     gamePlayModel.pot3.RemoveAt(index);
                 }
 
-                SetIceHockeyBracket();//<-PAREI AQUI
-
+                SetIceHockeyBracket();//<-
                 ShowHideSelectTeamSessionControlIceHockey(false);
                 ShowHideiceHockeyControl(true);
             }
@@ -1889,32 +1917,183 @@ namespace WinterSports.Scripts.Controller
         }
 
         private void SetIceHockeyBracket()
-        {
-            //for(int i = 0; i < gamePlayModel.bracketList[gamePlayModel.iceHockeyRound].Count; i++)
-            //{
-            //    this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound]
-            //    gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i]
-            //}                    
-
-            int count = 0;
-            int countbracket = 0;
-            for (int i = 0; i < this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound].Count; i++)
+        {                        
+            try
             {
-                Texture textureResource1 = GD.Load<Texture>(flagResource + 
-                    CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][countbracket].team1 - 1].Code + ".png");
-                Texture2D texture2D1 = textureResource1 as Texture2D;
-                this.countryFlag1TextureRect.Texture = texture2D1;
-                this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound][count].Texture = this.countryFlag1TextureRect.Texture;
-                count++;
-
-                Texture textureResource2 = GD.Load<Texture>(flagResource +
-                    CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][countbracket].team2 - 1].Code + ".png");
-                Texture2D texture2D2 = textureResource2 as Texture2D;
-                this.countryFlag2TextureRect.Texture = texture2D2;
-                this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound][count].Texture = this.countryFlag2TextureRect.Texture;
-                count++;
-                countbracket++;
+                SetFlagsToBrackets();
+                ShowHideBracket();
+                SimulateIceHockeyScore();
             }
+            catch (Exception ex)
+            {                
+            }            
+        }
+        private void SetIceHockeyStandings()
+        {
+            var index = GamesSingleton.sportSingleton.FindIndex(x => x.id == GameModeSingleton.sport);
+            GamesSingleton.sportSingleton[index].isFinished = true;
+            GamesSingleton.sportSingleton[index].results[0] = gamePlayModel.bracketList[3][0].teamWinner;
+            GamesSingleton.sportSingleton[index].results[1] = gamePlayModel.bracketList[3][0].teamWinner == gamePlayModel.bracketList[3][0].team1 ? gamePlayModel.bracketList[3][0].team2 : gamePlayModel.bracketList[3][0].team1;
+            GamesSingleton.sportSingleton[index].results[2] = gamePlayModel.bracketList[3][1].teamWinner;
+        }
+
+        private void SetFlagsToBrackets()
+        {
+            if (gamePlayModel.iceHockeyRound == 4)
+            {
+                countryFlagGold.Show();
+                Texture textureResourceGold = GD.Load<Texture>(flagResource +
+                    CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[3][0].teamWinner - 1].Code + ".png");
+                Texture2D texture2DGold = textureResourceGold as Texture2D;
+                this.countryFlagGold.Texture = texture2DGold;
+
+                countryFlagBronze.Show();
+                Texture textureResourceBronze = GD.Load<Texture>(flagResource +
+                    CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[3][1].teamWinner - 1].Code + ".png");
+                Texture2D texture2DBronze = textureResourceBronze as Texture2D;
+                this.countryFlagBronze.Texture = texture2DBronze;
+
+                ShowHideControlKit(false);
+                SetIceHockeyStandings();
+            }
+            else
+            {
+                int count = 0;
+                int countbracket = 0;
+                for (int i = 0; i < this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound].Count; i++)
+                {
+                    Texture textureResource1 = GD.Load<Texture>(flagResource +
+                        CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][countbracket].team1 - 1].Code + ".png");
+                    Texture2D texture2D1 = textureResource1 as Texture2D;
+                    this.countryFlag1TextureRect.Texture = texture2D1;
+                    this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound][count].Texture = this.countryFlag1TextureRect.Texture;
+                    count++;
+
+                    Texture textureResource2 = GD.Load<Texture>(flagResource +
+                        CountrySingleton.countryObjDTO.countryList[gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][countbracket].team2 - 1].Code + ".png");
+                    Texture2D texture2D2 = textureResource2 as Texture2D;
+                    this.countryFlag2TextureRect.Texture = texture2D2;
+                    this.flagsIceHockeyBracket[gamePlayModel.iceHockeyRound][count].Texture = this.countryFlag2TextureRect.Texture;
+                    count++;
+                    countbracket++;
+                }
+            }                        
+        }
+        private void SimulateIceHockeyScore()
+        {
+            if (gamePlayModel.iceHockeyRound < 4)
+            {
+                isPlayerQualified = false;
+                for (int i = 0; i < this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound].Count; i++)
+                {
+                    if (GameModeSingleton.country != this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team1 &&
+                        GameModeSingleton.country != this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team2)
+                    {
+                        var team1Skill = CountrySingleton.countryObjDTO.countryList.Where
+                            (x => x.Id == this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team1).First().sportSkill[GameModeSingleton.sport - 1];
+
+                        var team2Skill = CountrySingleton.countryObjDTO.countryList.Where
+                            (x => x.Id == this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team2).First().sportSkill[GameModeSingleton.sport - 1];
+
+                        Random rand = new Random();
+                        float randomFloat1 = (float)(rand.NextDouble() * (float)team1Skill);
+                        float randomFloat2 = (float)(rand.NextDouble() * (float)team2Skill);
+                        var idWinner = randomFloat1 > randomFloat2 ?
+                            this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team1 : this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team2;
+
+                        this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].teamWinner = idWinner;
+
+                        if (gamePlayModel.iceHockeyRound < 4)
+                        {
+                            if (gamePlayModel.iceHockeyRound == 2)
+                            {
+                                var idLoser = randomFloat1 < randomFloat2 ?
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team1 : this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team2;
+
+                                if (this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].id % 2 == 0)
+                                {
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][0].team1 = idWinner;
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][1].team1 = idLoser;
+                                }
+                                else
+                                {
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][0].team2 = idWinner;
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][1].team2 = idLoser;
+                                }
+                            }
+                            else if (gamePlayModel.iceHockeyRound < 2)
+                            {
+                                if (this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].id % 2 == 0)
+                                {
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][
+                                        this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].nextBracketId].team1 = idWinner;
+                                }
+                                else
+                                {
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][
+                                        this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].nextBracketId].team2 = idWinner;
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        this.gamePlayModel.iceHockeyplayerBracket = i;
+                        GameModeSingleton.countryOppositeHockeyTeam = GameModeSingleton.country == this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team1 ?
+                                this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team2 : this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][i].team1;
+                        SetIceHockeyGamesUniformSetUp();
+                        isPlayerQualified = true;
+                    }
+
+                }
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void SetIceHockeyGamesUniformSetUp()
+        {            
+            Texture textureResource1 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
+            Texture2D texture2D1 = textureResource1 as Texture2D;
+            this.texture2DCountry1Games.Texture = texture2D1;
+            countryCode1Games.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
+            SetIceHockeyKitEventGames(0, 0);
+
+            Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].Code + ".png");
+            Texture2D texture2D2 = textureResource2 as Texture2D;
+            this.texture2DCountry2Games.Texture = texture2D2;
+            countryCode2Games.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].Code;
+            SetIceHockeyKitEventGames(0, 1);            
+        }
+
+        private void ShowHideBracket()
+        {
+            if (gamePlayModel.iceHockeyRound < 4)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i > gamePlayModel.iceHockeyRound)
+                    {
+                        for (int j = 0; j < this.flagsIceHockeyBracket[i].Count; j++)
+                        {
+                            this.flagsIceHockeyBracket[i][j].Hide();
+                        }
+                    }
+                    else
+                    {
+                        for (int j = 0; j < this.flagsIceHockeyBracket[i].Count; j++)
+                        {
+                            this.flagsIceHockeyBracket[i][j].Show();
+                        }
+                    }
+
+                }
+                countryFlagGold.Hide();
+                countryFlagBronze.Hide();
+            }                    
         }
 
         private void SetIceHockeyInitPosition()
@@ -1974,6 +2153,26 @@ namespace WinterSports.Scripts.Controller
             this.jersey2_2 = jersey2_2;
             this.short2_1 = short2_1;
         }
+
+        public void SetIceHockeyKitButtonGames(List<Button> kitTeam1, List<Button> kitTeam2)
+        {
+            this.kitTeam1Games = kitTeam1;
+            this.kitTeam2Games = kitTeam2;
+            toggleIceHockeyKitTeam1Games.SetButtonsListBuilder(this.kitTeam1Games);
+            toggleIceHockeyKitTeam2Games.SetButtonsListBuilder(this.kitTeam2Games);
+
+            toggleIceHockeyKitTeam1Games.ToggleButton(0);
+            toggleIceHockeyKitTeam2Games.ToggleButton(0);
+        }
+        public void SetIceHockeyKitGames(CanvasItem jersey1_1, CanvasItem jersey1_2, CanvasItem short1_1, CanvasItem jersey2_1, CanvasItem jersey2_2, CanvasItem short2_1)
+        {
+            this.jersey1_1Games = jersey1_1;
+            this.jersey1_2Games = jersey1_2;
+            this.short1_1Games = short1_1;
+            this.jersey2_1Games = jersey2_1;
+            this.jersey2_2Games = jersey2_2;
+            this.short2_1Games = short2_1;
+        }
         public void SetIceHockeyKitEvent(int kitId, int teamId)
         {
             if (teamId == 0)
@@ -1986,6 +2185,34 @@ namespace WinterSports.Scripts.Controller
                 toggleIceHockeyKitTeam2.ToggleButton(kitId);
                 SetKitColor(kitId, teamId);
             }            
+        }
+        public void SetIceHockeyKitEventGames(int kitId, int teamId)
+        {
+            if (teamId == 0)
+            {
+                toggleIceHockeyKitTeam1Games.ToggleButton(kitId);
+                SetKitColorGames(kitId, teamId);
+            }
+            else
+            {
+                toggleIceHockeyKitTeam2Games.ToggleButton(kitId);
+                SetKitColorGames(kitId, teamId);
+            }
+        }
+        private void SetKitColorGames(int kitId, int teamId)
+        {
+            if (teamId == 0)
+            {
+                jersey1_1Games.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit2BodyColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit3BodyColor);
+                jersey1_2Games.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit2ArmsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit3ArmsColor);
+                short1_1Games.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit2LegsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].kit3LegsColor);
+            }
+            else
+            {
+                jersey2_1Games.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].kit2BodyColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].kit3BodyColor);
+                jersey2_2Games.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].kit2ArmsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].kit3ArmsColor);
+                short2_1Games.Modulate = new Color(kitId == 0 ? CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].kit2LegsColor : CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].kit3LegsColor);
+            }
         }
         private void SetKitColor(int kitId, int teamId)
         {
@@ -2086,7 +2313,10 @@ namespace WinterSports.Scripts.Controller
         public void PlayIceHockey()
         {
             SetIceHockeyPlayerColors();
-            ShowHideSelectTeamSessionControlIceHockey(false);
+            if (GameModeSingleton.gameMode == 0)
+                ShowHideSelectTeamSessionControlIceHockey(false);
+            else
+                ShowHideiceHockeyControl(false);
             IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Init;
             IceHockeySelectedPlayer();
             ShowHidehockeyScoreControl(true);
@@ -2094,17 +2324,35 @@ namespace WinterSports.Scripts.Controller
         }
         private void SetIceHockeyScoreBoard()
         {
-            Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
-            Texture2D texture2D = textureResource as Texture2D;
-            this.countryFlagIceHockey1TextureRect.Texture = texture2D;
-            Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code + ".png");
-            Texture2D texture2D2 = textureResource2 as Texture2D;
-            this.countryFlagIceHockey2TextureRect.Texture = texture2D2;
+            if (GameModeSingleton.gameMode == 0)
+            {
+                Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
+                Texture2D texture2D = textureResource as Texture2D;
+                this.countryFlagIceHockey1TextureRect.Texture = texture2D;
+                Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code + ".png");
+                Texture2D texture2D2 = textureResource2 as Texture2D;
+                this.countryFlagIceHockey2TextureRect.Texture = texture2D2;
 
-            this.countryIceHockey1CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
-            this.countryIceHockey2CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
-            this.countryIceHockey1ScoreLabel.Text = (0).ToString();
-            this.countryIceHockey2ScoreLabel.Text = (0).ToString();            
+                this.countryIceHockey1CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
+                this.countryIceHockey2CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam].Code;
+                this.countryIceHockey1ScoreLabel.Text = (0).ToString();
+                this.countryIceHockey2ScoreLabel.Text = (0).ToString();
+            }
+            else
+            {
+                Texture textureResource = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code + ".png");
+                Texture2D texture2D = textureResource as Texture2D;
+                this.countryFlagIceHockey1TextureRect.Texture = texture2D;
+                Texture textureResource2 = GD.Load<Texture>(flagResource + CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].Code + ".png");
+                Texture2D texture2D2 = textureResource2 as Texture2D;
+                this.countryFlagIceHockey2TextureRect.Texture = texture2D2;
+
+                this.countryIceHockey1CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.country - 1].Code;
+                this.countryIceHockey2CodeLabel.Text = CountrySingleton.countryObjDTO.countryList[GameModeSingleton.countryOppositeHockeyTeam - 1].Code;
+                this.countryIceHockey1ScoreLabel.Text = (0).ToString();
+                this.countryIceHockey2ScoreLabel.Text = (0).ToString();
+            }
+            
         }
         private void SetIceHockeyFinalBoard()
         {
@@ -2133,7 +2381,7 @@ namespace WinterSports.Scripts.Controller
             else
                 this.selectTeamSessionControlIceHockey.Hide();
         }
-        public void ShowHideiceHockeyControl(bool isShow)//<- PAREI AQUI
+        public void ShowHideiceHockeyControl(bool isShow)
         {
             if (isShow)
                 this.iceHockeyControl.Show();
@@ -2142,10 +2390,21 @@ namespace WinterSports.Scripts.Controller
         }
         private void SetIceHockeyPlayerColors()
         {
-            SetIceHockeyPlayerColorsTeams(iceHockeyTeam1, CountrySingleton.countryObjDTO, GameModeSingleton.country - 1,
-                jersey1_1.Modulate, jersey1_2.Modulate, short1_1.Modulate);
-            SetIceHockeyPlayerColorsTeams(iceHockeyTeam2, CountrySingleton.countryObjDTO, GameModeSingleton.countryOppositeHockeyTeam,
-                jersey2_1.Modulate, jersey2_2.Modulate, short2_1.Modulate);
+            if (GameModeSingleton.gameMode == 0)
+            {
+                SetIceHockeyPlayerColorsTeams(iceHockeyTeam1, CountrySingleton.countryObjDTO, GameModeSingleton.country - 1,
+                    jersey1_1.Modulate, jersey1_2.Modulate, short1_1.Modulate);
+                SetIceHockeyPlayerColorsTeams(iceHockeyTeam2, CountrySingleton.countryObjDTO, GameModeSingleton.countryOppositeHockeyTeam,
+                    jersey2_1.Modulate, jersey2_2.Modulate, short2_1.Modulate);
+            }
+            else
+            {
+                SetIceHockeyPlayerColorsTeams(iceHockeyTeam1, CountrySingleton.countryObjDTO, GameModeSingleton.country - 1,
+                        jersey1_1Games.Modulate, jersey1_2Games.Modulate, short1_1Games.Modulate);
+                SetIceHockeyPlayerColorsTeams(iceHockeyTeam2, CountrySingleton.countryObjDTO, GameModeSingleton.countryOppositeHockeyTeam - 1,
+                    jersey2_1Games.Modulate, jersey2_2Games.Modulate, short2_1Games.Modulate);
+            }
+            
         }
         private void SetIceHockeyPlayerColorsTeams(List<Character> characters, CountryObjDTO countryObjDTO, int id, Color jersey1, Color jersey2, Color short1)
         {
@@ -2166,6 +2425,16 @@ namespace WinterSports.Scripts.Controller
         }
         private void UpdateSkiIcehockey(double delta)
         {
+
+            if (GameModeSingleton.gameMode == 1 && gamePlayModel.iceHockeyRound == 0)//<-
+            {
+                IceHockeyStatic.score1 = 1;
+            }            
+            else if (GameModeSingleton.gameMode == 1 && gamePlayModel.iceHockeyRound == 3)//<-
+            {
+                IceHockeyStatic.score1 = 1;
+                IceHockeyStatic.score2 = 0;
+            }
 
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Select)
             {
@@ -2203,11 +2472,65 @@ namespace WinterSports.Scripts.Controller
                     SetIceHockeyTeams();
                     DefineWhoIsControllingThePuck();
                     timerController.TimerRunning(delta);
-                    var regressiveTimer = 120.0f - timerController.GetTimer();
+                    var regressiveTimer = iceHockeyMaxTimer - timerController.GetTimer();
                     if (regressiveTimer <= 0.0f && IceHockeyStatic.score1 != IceHockeyStatic.score2)
                     {
                         IceHockeyStatic.statesIceHockey = IceHockeyStatic.StatesIceHockey.Finish;
-                        SetIceHockeyFinalBoard();
+                        if (GameModeSingleton.gameMode == 0)
+                            SetIceHockeyFinalBoard();
+                        else
+                        {
+                            var idWinner = IceHockeyStatic.score1 > IceHockeyStatic.score2 ? GameModeSingleton.country : GameModeSingleton.countryOppositeHockeyTeam;
+                            if (gamePlayModel.iceHockeyRound == 2)
+                            {
+                                var idLoser = IceHockeyStatic.score1 < IceHockeyStatic.score2 ? GameModeSingleton.country : GameModeSingleton.countryOppositeHockeyTeam;
+
+                                if (this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][this.gamePlayModel.iceHockeyplayerBracket].id % 2 == 0)
+                                {
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][0].team1 = idWinner;
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][1].team1 = idLoser;
+                                }
+                                else
+                                {
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][0].team2 = idWinner;
+                                    this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][1].team2 = idLoser;
+                                }
+
+                            }
+                            else if (gamePlayModel.iceHockeyRound < 2)
+                            {
+                                this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][this.gamePlayModel.iceHockeyplayerBracket].teamWinner = idWinner;
+                                if (gamePlayModel.iceHockeyRound < 4)
+                                {
+                                    if (this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][this.gamePlayModel.iceHockeyplayerBracket].id % 2 == 0)
+                                    {
+                                        this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][
+                                            this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][this.gamePlayModel.iceHockeyplayerBracket].nextBracketId].team1 = idWinner;
+                                    }
+                                    else
+                                    {
+                                        this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound + 1][
+                                            this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][this.gamePlayModel.iceHockeyplayerBracket].nextBracketId].team2 = idWinner;
+                                    }
+                                }
+                            }
+                            else if (gamePlayModel.iceHockeyRound == 3)
+                            {
+                                var idLoser = IceHockeyStatic.score1 < IceHockeyStatic.score2 ? GameModeSingleton.country : GameModeSingleton.countryOppositeHockeyTeam;                                
+                                this.gamePlayModel.bracketList[gamePlayModel.iceHockeyRound][this.gamePlayModel.iceHockeyplayerBracket].teamWinner = idWinner;                                                                    
+                            }
+
+                            gamePlayModel.iceHockeyRound++;                            
+                            SimulateIceHockeyScore();
+                            SetFlagsToBrackets();
+                            while (!isPlayerQualified && gamePlayModel.iceHockeyRound != 4)
+                            {
+                                gamePlayModel.iceHockeyRound++;
+                                SimulateIceHockeyScore();//<-
+                                ShowHideBracket();
+                                SetFlagsToBrackets();
+                            }                            
+                        }
                     }                        
                     this.timerIceHockeyLabel.Text = regressiveTimer >= 0.0f ? TimeSpan.FromSeconds(regressiveTimer).ToString("mm':'ss") : "G.Goal";
                 }
@@ -2251,7 +2574,13 @@ namespace WinterSports.Scripts.Controller
                 timerController.ResetTimer();
                 timerController.StartTimer();
                 ShowHidehockeyScoreControl(false);
-                ShowHideIceHockeyEndGameControl(true);
+                if (GameModeSingleton.gameMode == 0)
+                    ShowHideIceHockeyEndGameControl(true);
+                else
+                {
+                    ShowHideBracket();
+                    ShowHideiceHockeyControl(true);//<-                    
+                }                
                 ResetIceHockeyAfterGoal();
             }
             
@@ -2485,6 +2814,13 @@ namespace WinterSports.Scripts.Controller
                 }
             }
         }
+        public void ShowHideControlKit(bool isShow)
+        { 
+            if(isShow)
+                controlKit.Show();
+            else
+                controlKit.Hide();
+        }
 
         #endregion
         #region Get Set
@@ -2565,7 +2901,7 @@ namespace WinterSports.Scripts.Controller
                 gamePlayModel.returnFinishButtonStandings = value;
             }
         }
-        public Button GetSetReturnBackGamesMenuButtonFinish//<-
+        public Button GetSetReturnBackGamesMenuButtonFinish
         {
             get
             {
@@ -2609,7 +2945,28 @@ namespace WinterSports.Scripts.Controller
                 kitTeam2 = value;
             }
         }
-
+        public List<Button> GetSetKitTeam1Games
+        {
+            get
+            {
+                return kitTeam1Games;
+            }
+            set
+            {
+                kitTeam1Games = value;
+            }
+        }
+        public List<Button> GetSetKitTeam2Games
+        {
+            get
+            {
+                return kitTeam2Games;
+            }
+            set
+            {
+                kitTeam2Games = value;
+            }
+        }
         public Button GetSetPlayMenuButtonFinish
         {
             get
@@ -2619,6 +2976,14 @@ namespace WinterSports.Scripts.Controller
             set
             {
                 playMenuButtonFinish = value;
+            }
+        }
+
+        public GamePlayModel GetGamePlayModel
+        {
+            get 
+            {
+                return gamePlayModel;
             }
         }
         #endregion

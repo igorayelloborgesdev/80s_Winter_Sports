@@ -3122,6 +3122,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MedalTableControl" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
