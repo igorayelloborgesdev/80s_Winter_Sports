@@ -432,50 +432,6 @@ text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SaveControl" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -640.0
-offset_right = 640.0
-offset_bottom = 720.0
-grow_horizontal = 2
-
-[node name="BG" type="TextureRect" parent="SaveControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_vmu4k")
-expand_mode = 1
-
-[node name="SaveWarningControl" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -640.0
-offset_right = 640.0
-offset_bottom = 720.0
-grow_horizontal = 2
-
-[node name="BG" type="TextureRect" parent="SaveWarningControl"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_vmu4k")
-expand_mode = 1
-
 [node name="SportsControl" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -4984,6 +4940,471 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_rxvo7")
 text = "Loading"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SaveControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="BG" type="TextureRect" parent="SaveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vmu4k")
+expand_mode = 1
+
+[node name="MainScreenTitle" type="NinePatchRect" parent="SaveControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 49.0
+offset_right = 393.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("2_0s3on")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="MainScreenTitleLabel" type="Label" parent="SaveControl/MainScreenTitle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312121
+anchor_top = 0.5
+anchor_right = 0.687879
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_b40ck")
+text = "Save"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitButton" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 404.0
+offset_top = 48.0
+offset_right = 470.0
+offset_bottom = 112.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/ExitButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ExitTitleLabel" type="Label" parent="SaveControl/ExitButton/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 45
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot1" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 184.0
+offset_right = 470.0
+offset_bottom = 248.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot1/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot2" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 264.0
+offset_right = 470.0
+offset_bottom = 328.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot2/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot3" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 344.0
+offset_right = 470.0
+offset_bottom = 408.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot3/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot4" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 424.0
+offset_right = 470.0
+offset_bottom = 488.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot4"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot4/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot5" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 504.0
+offset_right = 470.0
+offset_bottom = 568.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot5"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot5/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveWarningControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="BG" type="TextureRect" parent="SaveWarningControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vmu4k")
+expand_mode = 1
+
+[node name="MainScreenTitle" type="NinePatchRect" parent="SaveWarningControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 49.0
+offset_right = 393.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("2_0s3on")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="MainScreenTitleLabel" type="Label" parent="SaveWarningControl/MainScreenTitle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312121
+anchor_top = 0.5
+anchor_right = 0.687879
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_b40ck")
+text = "Save Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitButton" type="Button" parent="SaveWarningControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 404.0
+offset_top = 48.0
+offset_right = 470.0
+offset_bottom = 112.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveWarningControl/ExitButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ExitTitleLabel" type="Label" parent="SaveWarningControl/ExitButton/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 45
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveConfirmLabel" type="Label" parent="SaveWarningControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312121
+anchor_top = 0.5
+anchor_right = 0.687879
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_b40ck")
+theme_override_colors/font_color = Color(0, 0.52549, 0.811765, 1)
+text = "Save label"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

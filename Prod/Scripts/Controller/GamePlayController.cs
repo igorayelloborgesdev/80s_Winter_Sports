@@ -166,8 +166,7 @@ namespace WinterSports.Scripts.Controller
         private Vector3 iceHockeyInitRotation = new Vector3(0.0f, 0.07f, 0.0f);
         private double[] skillArray = new double[] { 0, 10, 8, 6, 4, 2 };
         private double[] skillDifficultArray = new double[] { 5, 3, 1 };
-        //private const float iceHockeyMaxTimer = 120.0f;//<-
-        private const float iceHockeyMaxTimer = 1.0f;//<-
+        private const float iceHockeyMaxTimer = 120.0f;        
         #endregion
         #region Methods
         public void Init(string prefabName)
@@ -1885,7 +1884,7 @@ namespace WinterSports.Scripts.Controller
                     gamePlayModel.pot3.RemoveAt(index);
                 }
 
-                SetIceHockeyBracket();//<-
+                SetIceHockeyBracket();
                 ShowHideSelectTeamSessionControlIceHockey(false);
                 ShowHideiceHockeyControl(true);
             }
@@ -2425,17 +2424,6 @@ namespace WinterSports.Scripts.Controller
         }
         private void UpdateSkiIcehockey(double delta)
         {
-
-            if (GameModeSingleton.gameMode == 1 && gamePlayModel.iceHockeyRound == 0)//<-
-            {
-                IceHockeyStatic.score1 = 1;
-            }            
-            else if (GameModeSingleton.gameMode == 1 && gamePlayModel.iceHockeyRound == 3)//<-
-            {
-                IceHockeyStatic.score1 = 1;
-                IceHockeyStatic.score2 = 0;
-            }
-
             if (IceHockeyStatic.statesIceHockey == IceHockeyStatic.StatesIceHockey.Select)
             {
 
@@ -2526,7 +2514,7 @@ namespace WinterSports.Scripts.Controller
                             while (!isPlayerQualified && gamePlayModel.iceHockeyRound != 4)
                             {
                                 gamePlayModel.iceHockeyRound++;
-                                SimulateIceHockeyScore();//<-
+                                SimulateIceHockeyScore();
                                 ShowHideBracket();
                                 SetFlagsToBrackets();
                             }                            
@@ -2579,7 +2567,7 @@ namespace WinterSports.Scripts.Controller
                 else
                 {
                     ShowHideBracket();
-                    ShowHideiceHockeyControl(true);//<-                    
+                    ShowHideiceHockeyControl(true);              
                 }                
                 ResetIceHockeyAfterGoal();
             }
@@ -2806,7 +2794,7 @@ namespace WinterSports.Scripts.Controller
                             obj.score = score - randomScore;
                         }
                     }
-                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();//<-
+                    countryResultDTOList = countryResultDTOList.OrderByDescending(x => x.isFinished).ThenBy(x => x.score).ToList();
                 }
                 else if (GameModeSingleton.sport == 11)
                 {
