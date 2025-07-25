@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dugoqdlo4ij7e"]
+[gd_scene load_steps=28 format=3 uid="uid://dugoqdlo4ij7e"]
 
 [ext_resource type="Script" path="res://Scripts/View/GamesView.cs" id="1_bq5n5"]
 [ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="1_vmu4k"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cspxgjep7t0jt" path="res://Art/2d/Pictograms/SkiJjumping.png" id="17_4gjr6"]
 [ext_resource type="Texture2D" uid="uid://bd7112mo8b5gh" path="res://Art/2d/Pictograms/IceHockey.png" id="18_ir7bk"]
 [ext_resource type="Texture2D" uid="uid://c81vqhtoi36ye" path="res://Art/2d/Pictograms/CrossCountry.png" id="19_yvk4u"]
+[ext_resource type="AudioStream" uid="uid://obk27pju5rmv" path="res://Sounds/2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com.mp3" id="20_fqdft"]
 
 [sub_resource type="Theme" id="Theme_b40ck"]
 default_font = ExtResource("3_uxeih")
@@ -5049,7 +5050,7 @@ text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SaveSlot1" type="Button" parent="SaveControl"]
+[node name="SaveSlot0" type="Button" parent="SaveControl"]
 modulate = Color(0.862745, 0.862745, 0.862745, 1)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -5060,6 +5061,55 @@ offset_left = -457.0
 offset_top = 184.0
 offset_right = 470.0
 offset_bottom = 248.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot0"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rk6ok")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot0/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -25.0
+offset_right = 461.5
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8davc")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot1" type="Button" parent="SaveControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 264.0
+offset_right = 470.0
+offset_bottom = 328.0
 grow_horizontal = 2
 
 [node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot1"]
@@ -5104,9 +5154,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -457.0
-offset_top = 264.0
+offset_top = 344.0
 offset_right = 470.0
-offset_bottom = 328.0
+offset_bottom = 408.0
 grow_horizontal = 2
 
 [node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot2"]
@@ -5151,9 +5201,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -457.0
-offset_top = 344.0
+offset_top = 424.0
 offset_right = 470.0
-offset_bottom = 408.0
+offset_bottom = 488.0
 grow_horizontal = 2
 
 [node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot3"]
@@ -5198,9 +5248,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -457.0
-offset_top = 424.0
+offset_top = 504.0
 offset_right = 470.0
-offset_bottom = 488.0
+offset_bottom = 568.0
 grow_horizontal = 2
 
 [node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot4"]
@@ -5219,53 +5269,6 @@ patch_margin_right = 7
 patch_margin_bottom = 9
 
 [node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot4/ExitNinePatchRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -454.5
-offset_top = -21.0
-offset_right = 461.5
-offset_bottom = 27.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_8davc")
-theme_override_font_sizes/font_size = 20
-text = "Empty"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SaveSlot5" type="Button" parent="SaveControl"]
-modulate = Color(0.862745, 0.862745, 0.862745, 1)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -457.0
-offset_top = 504.0
-offset_right = 470.0
-offset_bottom = 568.0
-grow_horizontal = 2
-
-[node name="ExitNinePatchRect" type="NinePatchRect" parent="SaveControl/SaveSlot5"]
-modulate = Color(0, 0.607843, 0.941176, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_rk6ok")
-region_rect = Rect2(0, 0, 31, 31)
-patch_margin_left = 10
-patch_margin_top = 8
-patch_margin_right = 7
-patch_margin_bottom = 9
-
-[node name="SaveTitleLabel" type="Label" parent="SaveControl/SaveSlot5/ExitNinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -5408,3 +5411,8 @@ text = "Save label"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_fqdft")
+volume_db = 5.0
+autoplay = true

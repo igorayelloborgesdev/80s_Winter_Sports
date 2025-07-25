@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinterSports.Scripts.DTO;
 
 public class MainModel
 {
@@ -41,5 +42,8 @@ public class MainModel
     public Button backToSportButtonButton = null;
     public List<Button> difficultButtonButtonsList = null;
     public Control loadingControl = null;
+    public List<Button> menuLoadButtonsList = null;
+    public List<Label> menuLoadLabelList = null;
+    public List<SaveGameDTO> saveGameDTOList = new List<SaveGameDTO>();
     #endregion
 }

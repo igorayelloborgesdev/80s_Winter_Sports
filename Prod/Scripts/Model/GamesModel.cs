@@ -20,7 +20,9 @@ namespace WinterSports.Scripts.Model
         public List<Label> sportGoldLabel = new List<Label>();
         public List<Label> sportSilverLabel = new List<Label>();
         public List<Label> sportBronzeLabel = new List<Label>();
-        public List<Label> sportTotalLabel = new List<Label>();        
+        public List<Label> sportTotalLabel = new List<Label>();
+        public List<Label> saveLabel = new List<Label>();
+        public List<Button> saveButton = new List<Button>();
     }
     public class CountryMedalTableModel
     {

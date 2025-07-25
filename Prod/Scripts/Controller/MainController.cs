@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Model;
+using WinterSports.Scripts.Singleton;
 
 public class MainController
 {
@@ -284,6 +286,30 @@ public class MainController
             mainModel.loadingControl = value;
         }
     }
+
+    public List<Button> GetSetmenuLoadButtonsList
+    {
+        get 
+        {
+            return mainModel.menuLoadButtonsList;
+        }
+        set 
+        {
+            mainModel.menuLoadButtonsList = value;
+        }
+    }
+    public List<Label> GetSetmenuLoadLabelList
+    {
+        get
+        {
+            return mainModel.menuLoadLabelList;
+        }
+        set
+        {
+            mainModel.menuLoadLabelList = value;
+        }
+    }
+
     #endregion
     #region Methods
     public void Init()
@@ -319,6 +345,32 @@ public class MainController
         else
             mainModel.loadingControl.Hide();
     }
+    public void InitSaveGame()
+    {
+        mainModel.saveGameDTOList = SaveLoad.CheckSaveGameFile<SaveGameDTO>();
+        for (int i = 0; i < mainModel.menuLoadLabelList.Count; i++)
+        {
+            mainModel.menuLoadLabelList[i].Text = "EMPTY";
+        }
+        foreach (var obj in mainModel.saveGameDTOList)
+        {
+            mainModel.menuLoadLabelList[obj.id].Text = obj.dateTime.ToString();
+        }
+    }
+    public bool LoadGame(int id)
+    {
+        var loaded = mainModel.saveGameDTOList.Where(x => x.id == id).FirstOrDefault();
+        if (loaded is not null)
+        {
+            GameModeSingleton.gameMode = 1;
+            GameModeSingleton.difficult = loaded.difficult;
+            GameModeSingleton.country = loaded.country;
+            GamesSingleton.sportSingleton = loaded.sportSingleton;
+            return true;
+        }
+        return false;
+    }
+
     #endregion
     #region Events
     public void SelectCountry(int id)

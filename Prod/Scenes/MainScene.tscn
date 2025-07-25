@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cvt13fj8ep34n"]
+[gd_scene load_steps=45 format=3 uid="uid://cvt13fj8ep34n"]
 
 [ext_resource type="Script" path="res://Scripts/View/MainView.cs" id="1_istfm"]
 [ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="2_1bj0c"]
@@ -41,8 +41,13 @@
 [ext_resource type="Texture2D" uid="uid://ce3dj8mnuj23q" path="res://Art/2d/bronzeMedal.png" id="39_j5ng1"]
 [ext_resource type="Texture2D" uid="uid://cqwhklgi5b4qn" path="res://Art/2d/silverMedal.png" id="40_vmft2"]
 [ext_resource type="Texture2D" uid="uid://df1bp5hxc4dyl" path="res://Art/2d/goldMedal.png" id="41_aobop"]
+[ext_resource type="AudioStream" uid="uid://n1ducl4vptew" path="res://Sounds/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3" id="42_8x23d"]
 
 [sub_resource type="Theme" id="Theme_y0ds6"]
+default_font = ExtResource("4_sy45q")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_sqhxa"]
 default_font = ExtResource("4_sy45q")
 default_font_size = 24
 
@@ -487,7 +492,11 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
 theme_override_fonts/font = ExtResource("4_sy45q")
 theme_override_font_sizes/font_size = 25
-text = "Created by Igor Ayello Borges"
+text = "Created by Igor Ayello Borges
+
+Music by fesliyanstudios
+
+https://www.FesliyanStudios.com"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -503,24 +512,240 @@ offset_right = 442.0
 offset_bottom = 633.0
 grow_horizontal = 2
 
-[node name="LoadLabel" type="Label" parent="LoadControl"]
+[node name="SaveSlot0" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 8.0
+offset_right = 461.0
+offset_bottom = 72.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot0"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot0/ExitNinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -375.0
-offset_top = -14.0
-offset_right = 375.0
-offset_bottom = 14.0
+offset_left = -454.5
+offset_top = -25.0
+offset_right = 461.5
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
-theme_override_fonts/font = ExtResource("4_sy45q")
-theme_override_font_sizes/font_size = 25
-text = "Load panel"
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot1" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 88.0
+offset_right = 461.0
+offset_bottom = 152.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot1/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot2" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 168.0
+offset_right = 461.0
+offset_bottom = 232.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot2/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot3" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 248.0
+offset_right = 461.0
+offset_bottom = 312.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot3/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot4" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 328.0
+offset_right = 461.0
+offset_bottom = 392.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot4"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot4/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1247,18 +1472,71 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -375.0
-offset_top = -14.0
-offset_right = 375.0
-offset_bottom = 14.0
+offset_left = -541.0
+offset_top = -222.0
+offset_right = -21.0
+offset_bottom = 221.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
 theme_override_fonts/font = ExtResource("4_sy45q")
-theme_override_font_sizes/font_size = 25
-text = "Tutorial panel"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 10
+text = "
+.Downhill, Slalom, Giant slalom and Super G 
+Press the right or left button to move
+Press button 1 to accelerate
+Press button 2 to brake
+
+.Speed skating 500 metres and 1500 metres 
+When the blue target is over one of the arrows, 
+press the corresponding arrow on the controller.
+
+.Biathlon 
+During the race, when the blue target is over
+ one of the arrows, press the corresponding arrow
+ on the controller.
+During the shooting part, position the target in the
+ black circle and press button 1 to shoot.
+
+.Luge and Bobsleigh
+Press button 1 to set the momentum
+Press the right or left button to move"
+vertical_alignment = 1
+
+[node name="TutorialLabel2" type="Label" parent="TutorialControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -222.0
+offset_right = 525.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 10
+text = ".Ski jumping 
+Press button 1 to set the boost.
+Press the right or left button to move.
+Try to keep the arrow in the middle of the bar graph.
+
+.Ice Hockey 
+Press the directional pad to move.
+On offense, press button 1 to shoot at goal.
+On offense, press button 2 to pass the puck.
+On defense, press button 2 to switch players.
+
+.Cross Country
+Press the directional pad to move
+Press button 1 to accelerate
+Press button 2 to brake
+If the energy drops, the speed will also drop."
 vertical_alignment = 1
 
 [node name="MainMenuControl" type="Control" parent="."]
@@ -2570,6 +2848,7 @@ texture = ExtResource("30_yoygm")
 expand_mode = 1
 
 [node name="SportSelectControl" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3777,3 +4056,8 @@ text = "Loading"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("42_8x23d")
+volume_db = 5.0
+autoplay = true

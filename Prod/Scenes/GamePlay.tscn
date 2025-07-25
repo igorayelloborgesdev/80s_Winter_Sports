@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b25qr0ntq7ns2"]
+[gd_scene load_steps=41 format=3 uid="uid://b25qr0ntq7ns2"]
 
 [ext_resource type="PackedScene" uid="uid://dyc2ihlu1s18b" path="res://Prefab/sky.tscn" id="1_356u1"]
 [ext_resource type="Script" path="res://Scripts/View/GameplayView.cs" id="1_p3jv1"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://cpd6wc4xwp001" path="res://Art/2d/flags/URS.png" id="28_fluo7"]
 [ext_resource type="Texture2D" uid="uid://cmgm45fj7wu1w" path="res://Art/2d/flags/USA.png" id="29_yplj1"]
 [ext_resource type="Texture2D" uid="uid://dnoiqjcw6vu83" path="res://Art/UI/Bracket.png" id="36_hmjjd"]
+[ext_resource type="AudioStream" uid="uid://cjraf5lxl34nf" path="res://Sounds/2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.mp3" id="37_ukba3"]
 
 [sub_resource type="Theme" id="Theme_l04wb"]
 default_font = ExtResource("10_kdmjr")
@@ -5757,3 +5758,8 @@ grow_vertical = 2
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("15_sg524")
 expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("37_ukba3")
+volume_db = 5.0
+autoplay = true

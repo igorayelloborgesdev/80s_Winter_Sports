@@ -33,6 +33,7 @@ public partial class GamesView : Control
         AssignInput();
         gamesController.ShowScreen(3);
         timerController.Init();
+        gamesController.InitSaveGame();
     }
          
     private void AssignControls()
@@ -54,6 +55,8 @@ public partial class GamesView : Control
             GetNode<Button>("QuitControl/QuitButton"),
             GetNode<Button>("QuitControl/BackButton")
             );
+
+        gamesController.GetSetsaveExitButton = GetNode<Button>("SaveControl/ExitButton");
 
         for (int i = 1; i < 13; i++)
         {
@@ -87,6 +90,15 @@ public partial class GamesView : Control
         gamesController.GetSetLoadingControl = GetNode<Control>("LoadingControl");
         gamesController.ShowHideLoadingControl(false);
 
+        for (int i = 0; i < 5; i++)
+        {
+            gamesModel.saveButton.Add(GetNode<Button>("SaveControl/SaveSlot" + i.ToString()));
+            gamesModel.saveLabel.Add(GetNode<Label>("SaveControl/SaveSlot" + i.ToString() + "/ExitNinePatchRect/SaveTitleLabel"));
+        }
+
+        gamesController.GetSetsaveWarnExitButton = GetNode<Button>("SaveWarningControl/ExitButton");
+        gamesController.GetSetsaveWarnExitLabel = GetNode<Label>("SaveWarningControl/SaveConfirmLabel");        
+
     }
     private void AssignInput()
     {
@@ -103,6 +115,17 @@ public partial class GamesView : Control
             obj.Pressed += () => { GoToGamePlay(countP); };
             count++;
         }
+        gamesController.GetSetsaveExitButton.Pressed += () => { CloseSaveMenuScreen(); };
+        gamesController.GetSetsaveWarnExitButton.Pressed += () => { CloseSaveMenuScreen(); };
+
+        int countSave = 0;
+        foreach (var obj in gamesModel.saveButton)
+        {
+            var countP = countSave;
+            obj.Pressed += () => { SaveGame(countP); };
+            countSave++;
+        }
+
     }
     #endregion
     #region Event
@@ -146,6 +169,14 @@ public partial class GamesView : Control
         {
             GetTree().ChangeSceneToFile("res://Scenes/GamePlay.tscn");
         }
+    }
+    private void CloseSaveMenuScreen()
+    {
+        gamesController.ShowScreen(3);
+    }
+    public void SaveGame(int id)
+    {
+        gamesController.SaveGame(id);
     }
     #endregion
 }

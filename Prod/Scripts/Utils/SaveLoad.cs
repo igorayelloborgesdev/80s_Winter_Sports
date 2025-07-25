@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System;
 using System.Text;
+using System.Collections.Generic;
 
 public class SaveLoad
 {
@@ -11,6 +12,7 @@ public class SaveLoad
     private static string configFileName = "config.json";
     private static string pathData = ProjectSettings.GlobalizePath("res://");
     private static string pathDataName = "Data\\country.json";
+    private static string saveFileName = "saveGame";
     #endregion
 
     public static bool SaveConfig<T>(T configObj)
@@ -137,6 +139,44 @@ public class SaveLoad
             return default(T);
         }
 
+    }
+
+    public static List<T> CheckSaveGameFile<T>()
+    {
+        try
+        {      
+            List<T> list = new List<T>();
+            for (int i = 0; i < 5; i++)
+            {
+                var loadPath = Path.Join(path, (saveFileName + i.ToString() + ".json"));
+                if (File.Exists(loadPath))
+                {
+                    var file = File.ReadAllText(loadPath);
+                    var fileLoaded = JsonConvert.DeserializeObject<T>(file);
+                    list.Add(fileLoaded);
+                }
+            }            
+            return list;
+        }
+        catch (Exception ex)
+        {
+            return default(List<T>);
+        }
+    }
+
+    public static bool SaveGameData<T>(T dataObj, string saveFileId)
+    {
+        var json = JsonConvert.SerializeObject(dataObj);
+        var savePath = Path.Join(path, (saveFileName + saveFileId + ".json"));
+        try
+        {
+            File.WriteAllText(savePath, json);
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+        return true;
     }
 
 }

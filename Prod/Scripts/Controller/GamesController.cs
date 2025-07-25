@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinterSports.Scripts.DTO;
 using WinterSports.Scripts.Model;
 using WinterSports.Scripts.Singleton;
 
@@ -27,6 +28,10 @@ namespace WinterSports.Scripts.Controller
         private Button backButton = null;
         private GamesModel gamesModel = null;
         public Control loadingControl = null;
+        private Button saveExitButton = null;
+        private List<SaveGameDTO> saveGameDTOList = new List<SaveGameDTO>();
+        private Button saveWarnExitButton = null;
+        private Label saveWarnExitLabel = null;
         #endregion
         #region const
         private const string flagResource = "res://Art//2d//flags//";
@@ -170,6 +175,48 @@ namespace WinterSports.Scripts.Controller
             else
                 this.loadingControl.Hide();
         }
+
+        public void InitSaveGame()
+        {
+            saveGameDTOList = SaveLoad.CheckSaveGameFile<SaveGameDTO>();
+            for (int i = 0; i < gamesModel.saveLabel.Count; i++)
+            {
+                gamesModel.saveLabel[i].Text = "EMPTY";
+            }
+            foreach (var obj in saveGameDTOList)
+            {
+                gamesModel.saveLabel[obj.id].Text = obj.dateTime.ToString();
+            }
+        }
+
+        public bool SaveGame(int id)
+        {
+            try
+            {
+                var saveGameDTO = new SaveGameDTO();
+                saveGameDTO.id = id;
+                saveGameDTO.difficult = GameModeSingleton.difficult;
+                saveGameDTO.country = GameModeSingleton.country;
+                saveGameDTO.dateTime = DateTime.Now.ToString();
+                saveGameDTO.sportSingleton = GamesSingleton.sportSingleton;
+                var result = SaveLoad.SaveGameData<SaveGameDTO>(saveGameDTO, id.ToString());
+                if (result)
+                {
+                    InitSaveGame();
+                    this.saveWarnExitLabel.Text = "Game saved";
+                }
+                else 
+                {
+                    this.saveWarnExitLabel.Text = "ERROR!";
+                }
+                ShowScreen(2);
+                return result;
+            }catch (Exception e)
+            {
+                return false;
+            }            
+        }
+
         #endregion
         #region Get Set
         public Button GetExitButton
@@ -213,6 +260,39 @@ namespace WinterSports.Scripts.Controller
                 this.loadingControl = value;
             }
         }
+        public Button GetSetsaveExitButton
+        {
+            get 
+            { 
+                return this.saveExitButton; 
+            }
+            set 
+            { 
+                this.saveExitButton = value; 
+            }
+        }
+
+        public Button GetSetsaveWarnExitButton
+        {
+            set { 
+                this.saveWarnExitButton = value;
+            }
+            get {
+                return saveWarnExitButton;
+            }
+        }
+        public Label GetSetsaveWarnExitLabel
+        {
+            set
+            {
+                this.saveWarnExitLabel = value;
+            }
+            get
+            {
+                return saveWarnExitLabel;
+            }
+        }
+        
         #endregion
     }
 }

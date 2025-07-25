@@ -1146,7 +1146,7 @@ namespace WinterSports.Scripts.Events
                                 }
                                 else
                                 {
-                                    //GD.Print("C");
+                                 
                                 }
 
                             }
@@ -1334,7 +1334,7 @@ namespace WinterSports.Scripts.Events
                                 }
                                 else
                                 {
-                                    //GD.Print("C");
+                                 
                                 }
                             }
                         }

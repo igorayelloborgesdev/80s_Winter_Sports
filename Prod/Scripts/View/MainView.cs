@@ -35,6 +35,10 @@ public partial class MainView : Control
         mainController.GetSetMenuModeSportButtonsList = SetAllMenuButtons(mainController.GetSportButtonName, 13);
         mainController.GetSetGoToGamePlayButton = SetMenuButtons(mainController.GetGoToGamePlayButtonName);
         mainController.GetSetBackToSportButtonButton = SetMenuButtons(mainController.GetBackToSportButtonButtonName);
+
+        mainController.GetSetmenuLoadButtonsList = SetLoadMenuButtons();
+        mainController.GetSetmenuLoadLabelList = SetLoadMenuLabels();
+
         SetAllMenuModeSportEvents();
         mainController.GetSetDifficultButtonButtonsList = SetAllMenuButtons(mainController.GetDifficultButtonName, 4);
         SetAllDifficultButtonsEvents();        
@@ -54,6 +58,8 @@ public partial class MainView : Control
         SetConfigMenuButtonsEvents();        
         configController.Init();
         timerController.Init();
+        mainController.InitSaveGame();
+        SetLoadMenuButtonsEvents();
     }
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -105,6 +111,17 @@ public partial class MainView : Control
             count++;            
         }        
     }
+    private void SetLoadMenuButtonsEvents()
+    {
+        int count = 0;
+        foreach (var item in mainController.GetSetmenuLoadButtonsList)
+        {
+            int countNew = count;
+            item.Pressed += () => { LoadGame(countNew); };
+            count++;
+        }
+    }
+
     private void SetAllDifficultButtonsEvents()
     {
         int count = 0;
@@ -176,6 +193,25 @@ public partial class MainView : Control
             );        
         configController.ModalSimpleBuilder(modalSimple);
     }
+
+    private List<Button> SetLoadMenuButtons()
+    {
+        var buttonList = new List<Button>();
+        for (int i = 0; i < 5; i++)
+        {
+            buttonList.Add(GetNode<Button>("LoadControl/SaveSlot" + i.ToString()));
+        }
+        return buttonList;
+    }
+    private List<Label> SetLoadMenuLabels()
+    {
+        var buttonList = new List<Label>();
+        for (int i = 0; i < 5; i++)
+        {
+            buttonList.Add(GetNode<Label>("LoadControl/SaveSlot" + i.ToString() + "/ExitNinePatchRect/SaveTitleLabel"));
+        }
+        return buttonList;
+    }
     #endregion
     #region Events
     private void SetMainMenuButtonEvents()
@@ -214,6 +250,15 @@ public partial class MainView : Control
         mainController.SetTitleText(id);
         configController.DismissAssign();
     }
+    private void LoadGame(int id)
+    {
+        var result = mainController.LoadGame(id);
+        if (GameModeSingleton.gameMode == 1)
+        {        
+            GetTree().ChangeSceneToFile("res://Scenes/Games.tscn");
+        }
+    }
+
     private void AssignControl(int id)
     {        
         configController.AssignControl(id);
