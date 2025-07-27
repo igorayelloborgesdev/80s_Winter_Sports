@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b88p3uaaunm0o"]
-
-[ext_resource type="PackedScene" uid="uid://ffhi7tm23rlv" path="res://Art/3d/puck.gltf" id="1_a0klo"]
-
-[node name="puck" instance=ExtResource("1_a0klo")]
-
-[node name="puck2" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
