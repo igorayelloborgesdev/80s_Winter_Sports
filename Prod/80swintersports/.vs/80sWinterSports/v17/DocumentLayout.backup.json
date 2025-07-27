@@ -1,0 +1,199 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\utils\\saveload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\utils\\saveload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\controller\\splashcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\controller\\splashcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\controller\\timercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\controller\\timercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\view\\splashview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\view\\splashview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\controller\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\controller\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\view\\gamesview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\view\\gamesview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\view\\gameplayview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\view\\gameplayview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\events\\playerinputski.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\events\\playerinputski.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\controller\\gameplaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\controller\\gameplaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\prefabs\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\prefabs\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\interfaces\\iplayerinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\interfaces\\iplayerinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SaveLoad.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Utils\\SaveLoad.cs",
+              "RelativeDocumentMoniker": "Scripts\\Utils\\SaveLoad.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Utils\\SaveLoad.cs",
+              "RelativeToolTip": "Scripts\\Utils\\SaveLoad.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAEwF8AAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T17:01:14.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SplashView.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\SplashView.cs",
+              "RelativeDocumentMoniker": "Scripts\\View\\SplashView.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\SplashView.cs",
+              "RelativeToolTip": "Scripts\\View\\SplashView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T16:58:25.051Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SplashController.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\SplashController.cs",
+              "RelativeDocumentMoniker": "Scripts\\Controller\\SplashController.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\SplashController.cs",
+              "RelativeToolTip": "Scripts\\Controller\\SplashController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA0wB0AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T16:57:18.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GamesController.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\GamesController.cs",
+              "RelativeDocumentMoniker": "Scripts\\Controller\\GamesController.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\GamesController.cs",
+              "RelativeToolTip": "Scripts\\Controller\\GamesController.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAawFwAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T16:47:44.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GamesView.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\GamesView.cs",
+              "RelativeDocumentMoniker": "Scripts\\View\\GamesView.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\GamesView.cs",
+              "RelativeToolTip": "Scripts\\View\\GamesView.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAIwFcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T16:34:26.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TimerController.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\TimerController.cs",
+              "RelativeDocumentMoniker": "Scripts\\Controller\\TimerController.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\TimerController.cs",
+              "RelativeToolTip": "Scripts\\Controller\\TimerController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAowCMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T16:33:43.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerInputSki.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Events\\PlayerInputSki.cs",
+              "RelativeDocumentMoniker": "Scripts\\Events\\PlayerInputSki.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Events\\PlayerInputSki.cs",
+              "RelativeToolTip": "Scripts\\Events\\PlayerInputSki.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAIwGQAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T15:41:40.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Character.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Prefabs\\Character.cs",
+              "RelativeDocumentMoniker": "Scripts\\Prefabs\\Character.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Prefabs\\Character.cs",
+              "RelativeToolTip": "Scripts\\Prefabs\\Character.cs",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAowJUBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T15:41:26.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IPlayerInput.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Interfaces\\IPlayerInput.cs",
+              "RelativeDocumentMoniker": "Scripts\\Interfaces\\IPlayerInput.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Interfaces\\IPlayerInput.cs",
+              "RelativeToolTip": "Scripts\\Interfaces\\IPlayerInput.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T15:41:18.713Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GameplayView.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\GameplayView.cs",
+              "RelativeDocumentMoniker": "Scripts\\View\\GameplayView.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\GameplayView.cs",
+              "RelativeToolTip": "Scripts\\View\\GameplayView.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAQwKkAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T05:21:35.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GamePlayController.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\GamePlayController.cs",
+              "RelativeDocumentMoniker": "Scripts\\Controller\\GamePlayController.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\GamePlayController.cs",
+              "RelativeToolTip": "Scripts\\Controller\\GamePlayController.cs",
+              "ViewState": "AgIAAEkEAAAAAAAAAAAIwFYEAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T05:18:01.768Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

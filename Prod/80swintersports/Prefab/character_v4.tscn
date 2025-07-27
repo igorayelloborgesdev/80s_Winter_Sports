@@ -1,0 +1,407 @@
+[gd_scene load_steps=29 format=3 uid="uid://c7unrelaoyecc"]
+
+[ext_resource type="PackedScene" uid="uid://bawsmwduw46t3" path="res://Art/3d/Character.gltf" id="1_7hd1l"]
+[ext_resource type="Script" uid="uid://banf14oto4cjh" path="res://Scripts/Prefabs/Character.cs" id="2_51ifc"]
+[ext_resource type="PackedScene" uid="uid://bcfwttoknloqc" path="res://Prefab/ski.tscn" id="3_dumya"]
+[ext_resource type="PackedScene" uid="uid://dyfd7slcdw18v" path="res://Prefab/rifle.tscn" id="3_qx02e"]
+[ext_resource type="PackedScene" uid="uid://jjt4bb3yxqed" path="res://Prefab/ski_pole.tscn" id="4_hs4ql"]
+[ext_resource type="Script" uid="uid://f1xiwm04t2gl" path="res://Scripts/Prefabs/CharacterCollision.cs" id="5_c3bqr"]
+[ext_resource type="Script" uid="uid://b7e42x3ri0fnf" path="res://Scripts/Prefabs/SpeedContact.cs" id="5_mmw4u"]
+[ext_resource type="PackedScene" uid="uid://d7cyh0sulhqp" path="res://Prefab/stick.tscn" id="6_684bu"]
+[ext_resource type="PackedScene" uid="uid://cfbcl1augt02l" path="res://Prefab/speed_box.tscn" id="6_nx70h"]
+[ext_resource type="PackedScene" uid="uid://bqh5fojhfjttr" path="res://Prefab/GKPadHand.tscn" id="7_082o6"]
+[ext_resource type="PackedScene" uid="uid://top6nh8cy5an" path="res://Prefab/GKPadFoot.tscn" id="8_ewul6"]
+[ext_resource type="PackedScene" uid="uid://bnir71w3nswcj" path="res://Prefab/target.tscn" id="9_m4ora"]
+[ext_resource type="Script" uid="uid://doanhm1lksted" path="res://Scripts/Prefabs/SkiCollision.cs" id="10_d4d4k"]
+[ext_resource type="Script" uid="uid://bkkgptbj31otv" path="res://Scripts/Prefabs/CrossCountryOvertake.cs" id="11_w80qr"]
+[ext_resource type="Script" uid="uid://bbliysl73jb7p" path="res://Prefab/IceHockeyPlayerCollision.cs" id="15_ibjdi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wter0"]
+shading_mode = 0
+albedo_color = Color(1, 0.376471, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbluo"]
+shading_mode = 0
+albedo_color = Color(0.188235, 0.105882, 0.0666667, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_50ng8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nnynp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k83uh"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r4wmt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_504mm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_554qy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_guigk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_foyeu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2lxn"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gebid"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vwqi7"]
+
+[node name="Character" node_paths=PackedStringArray("animationPlayer", "bodyMeshInstance3D", "armsMeshInstance3D", "handsAndHeadMeshInstance3D", "legsMeshInstance3D", "bootsMeshInstance3D", "hairMeshInstance3D", "cameraRef", "camera3D", "skiPole", "ski", "speedBox", "target", "armature", "skiCollision", "crossCountryOvertakeFM", "crossCountryOvertakeMR", "crossCountryOvertakeML", "stick", "goalKeeperItems", "iceHockeySelect", "puckRef", "rayCast3D", "rifle", "skiPoleBiathlon") instance=ExtResource("1_7hd1l")]
+script = ExtResource("2_51ifc")
+animationPlayer = NodePath("AnimationPlayer")
+bodyMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Body_004")]
+armsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LArm_028"), NodePath("Armature_002/Skeleton3D/LArm_029"), NodePath("Armature_002/Skeleton3D/LArm_030"), NodePath("Armature_002/Skeleton3D/LArm_033"), NodePath("Armature_002/Skeleton3D/LArm_034"), NodePath("Armature_002/Skeleton3D/LArm_035"), NodePath("Armature_002/Skeleton3D/LSholder_007"), NodePath("Armature_002/Skeleton3D/LSholder_008")]
+handsAndHeadMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LHand"), NodePath("Armature_002/Skeleton3D/RHand"), NodePath("Armature_002/Skeleton3D/Skin_002")]
+legsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LLeg_036"), NodePath("Armature_002/Skeleton3D/LLeg_037"), NodePath("Armature_002/Skeleton3D/LLeg_038"), NodePath("Armature_002/Skeleton3D/LLeg_039"), NodePath("Armature_002/Skeleton3D/LLeg_040"), NodePath("Armature_002/Skeleton3D/LLeg_041"), NodePath("Armature_002/Skeleton3D/LLeg_042"), NodePath("Armature_002/Skeleton3D/LLeg_043"), NodePath("Armature_002/Skeleton3D/LLeg_035"), NodePath("Armature_002/Skeleton3D/LLeg_044"), NodePath("Armature_002/Skeleton3D/Hip_004")]
+bootsMeshInstance3D = [NodePath("Armature_002/Skeleton3D/LFoot_007"), NodePath("Armature_002/Skeleton3D/LFoot_008")]
+hairMeshInstance3D = [NodePath("Armature_002/Skeleton3D/Hair_004")]
+cameraRef = [NodePath("CameraRef1"), NodePath("CameraRef2"), NodePath("CameraRef3"), NodePath("CameraRef4")]
+camera3D = NodePath("Camera3D")
+skiPole = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D6/SkiPole"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D7/SkiPole")]
+ski = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D4/Ski"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D3/Ski")]
+speedBox = NodePath("SpeedBox")
+target = NodePath("Camera3D/Target")
+armature = NodePath("Armature_002")
+skiCollision = NodePath("SkiCollision/Area3D")
+crossCountryOvertakeFM = NodePath("CrossCountryCollisionF/Area3D")
+crossCountryOvertakeMR = NodePath("CrossCountryCollisionMR/Area3D")
+crossCountryOvertakeML = NodePath("CrossCountryCollisionML/Area3D")
+stick = NodePath("Armature_002/Skeleton3D/BoneAttachment3D8/Stick")
+goalKeeperItems = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D9/Stick"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D10/GKPadHand"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D11/GKPadFoot"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D12/GKPadFoot")]
+iceHockeySelect = NodePath("SelectBox")
+puckRef = NodePath("puckRef")
+rayCast3D = NodePath("Camera3D/Target/RayCast3D")
+rifle = NodePath("Armature_002/Skeleton3D/BoneAttachment3D5/Rifle")
+skiPoleBiathlon = [NodePath("Armature_002/Skeleton3D/BoneAttachment3D2/SkiPole2"), NodePath("Armature_002/Skeleton3D/BoneAttachment3D/SkiPole2")]
+
+[node name="Armature_002" parent="." index="0"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.04, 0)
+
+[node name="Skeleton3D" parent="Armature_002" index="0"]
+bones/0/position = Vector3(0.282026, -0.267163, 0.218266)
+bones/0/rotation = Quaternion(-0.0446426, 1.1909e-07, -5.32182e-09, 0.999003)
+bones/1/rotation = Quaternion(0.107028, 0.0387879, 0.011024, 0.993438)
+bones/2/position = Vector3(1.11332, -0.472572, 0.13738)
+bones/2/rotation = Quaternion(0.978806, -0.0434672, -0.0115453, 0.199792)
+bones/3/rotation = Quaternion(0.364298, 0.00178564, -0.0277241, 0.930868)
+bones/5/position = Vector3(-0.428042, -0.500053, 0.152018)
+bones/5/rotation = Quaternion(0.984099, -0.0384886, 0.00385964, 0.173358)
+bones/6/rotation = Quaternion(0.341663, 0.00556953, -0.0516675, 0.938385)
+bones/7/position = Vector3(-0.492435, -4.69021, 0.0189136)
+bones/7/rotation = Quaternion(0.816249, -0.0132141, 0.0503639, 0.575349)
+bones/10/position = Vector3(0.252561, 4.03504, 0.335673)
+bones/10/rotation = Quaternion(0.0231582, 0.0388443, 0.0108232, 0.998918)
+bones/11/rotation = Quaternion(0.00920191, -0.0621795, -0.0114931, 0.997956)
+bones/12/position = Vector3(2.17861, 3.44438, 0.228076)
+bones/12/rotation = Quaternion(0.141433, -0.286737, -0.909956, 0.26412)
+bones/13/rotation = Quaternion(0.409513, 0.072734, -0.213438, 0.883998)
+bones/14/position = Vector3(2.15903, 1.29492, 3.2312)
+bones/14/rotation = Quaternion(-0.303992, -0.355624, -0.855608, -0.221485)
+bones/15/position = Vector3(-1.67922, 3.51999, 0.436307)
+bones/15/rotation = Quaternion(0.0747562, 0.212651, 0.951101, 0.211183)
+bones/16/rotation = Quaternion(0.482981, -0.0812431, 0.281014, 0.825324)
+bones/17/position = Vector3(-1.47363, 1.19144, 2.98621)
+bones/17/rotation = Quaternion(-0.167761, 0.288579, 0.908994, -0.249617)
+bones/20/position = Vector3(1.95858, 1.19095, 3.07701)
+bones/20/rotation = Quaternion(0.732391, 0.0366761, 0.122801, -0.668714)
+bones/21/position = Vector3(-1.53806, 1.23384, 2.89705)
+bones/21/rotation = Quaternion(-0.0989008, -0.639927, 0.739725, 0.18308)
+bones/22/position = Vector3(5.98897, 5.52295, 2.75809)
+bones/23/position = Vector3(-4.88187, 4.96855, -0.711122)
+bones/23/rotation = Quaternion(0.0349339, 0.000846065, -0.00783889, 0.999359)
+
+[node name="Body_004" parent="Armature_002/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="Hair_004" parent="Armature_002/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="Hip_004" parent="Armature_002/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LArm_028" parent="Armature_002/Skeleton3D" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LArm_029" parent="Armature_002/Skeleton3D" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LArm_030" parent="Armature_002/Skeleton3D" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LArm_033" parent="Armature_002/Skeleton3D" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LArm_034" parent="Armature_002/Skeleton3D" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LArm_035" parent="Armature_002/Skeleton3D" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LEye_007" parent="Armature_002/Skeleton3D" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hbluo")
+
+[node name="LEye_008" parent="Armature_002/Skeleton3D" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hbluo")
+
+[node name="LFoot_007" parent="Armature_002/Skeleton3D" index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LFoot_008" parent="Armature_002/Skeleton3D" index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LHand" parent="Armature_002/Skeleton3D" index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_035" parent="Armature_002/Skeleton3D" index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_036" parent="Armature_002/Skeleton3D" index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_037" parent="Armature_002/Skeleton3D" index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_038" parent="Armature_002/Skeleton3D" index="17"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_039" parent="Armature_002/Skeleton3D" index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_040" parent="Armature_002/Skeleton3D" index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_041" parent="Armature_002/Skeleton3D" index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_042" parent="Armature_002/Skeleton3D" index="21"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_043" parent="Armature_002/Skeleton3D" index="22"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LLeg_044" parent="Armature_002/Skeleton3D" index="23"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LSholder_007" parent="Armature_002/Skeleton3D" index="24"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="LSholder_008" parent="Armature_002/Skeleton3D" index="25"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="RHand" parent="Armature_002/Skeleton3D" index="26"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="Skin_002" parent="Armature_002/Skeleton3D" index="27"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wter0")
+
+[node name="BoneAttachment3D6" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="28"]
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 1.19095, 3.07701)
+bone_name = "LArmSkiPoleREF"
+bone_idx = 20
+
+[node name="SkiPole" parent="Armature_002/Skeleton3D/BoneAttachment3D6" index="0" instance=ExtResource("4_hs4ql")]
+transform = Transform3D(1.19768, -0.31452, -0.170739, 0.253889, 1.16704, -0.368871, 0.252221, 0.318752, 1.18207, -0.00801849, -0.148504, -0.00412369)
+
+[node name="BoneAttachment3D7" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="29"]
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 1.23384, 2.89705)
+bone_name = "RArmSkiPoleREF"
+bone_idx = 21
+
+[node name="SkiPole" parent="Armature_002/Skeleton3D/BoneAttachment3D7" index="0" instance=ExtResource("4_hs4ql")]
+transform = Transform3D(1.09548, 0.250242, 0.547533, 0.462362, -1.07782, -0.432485, 0.385529, 0.581553, -1.03715, 0.056942, 0.193757, -0.0186019)
+
+[node name="BoneAttachment3D5" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="30"]
+transform = Transform3D(0.996748, -0.0136005, 0.0794267, 0.0234221, 0.991997, -0.124068, -0.0771037, 0.125524, 0.98909, 0.282026, 1.78859, 0.0341671)
+bone_name = "Spine"
+bone_idx = 1
+
+[node name="Rifle" parent="Armature_002/Skeleton3D/BoneAttachment3D5" index="0" instance=ExtResource("3_qx02e")]
+transform = Transform3D(0.0284631, 0.953198, 0.300999, -0.146026, 0.301855, -0.942104, -0.988873, -0.017139, 0.147784, 0.22944, 0.425279, -1.13563)
+
+[node name="BoneAttachment3D4" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="31"]
+transform = Transform3D(0.994578, -0.0795256, 0.0670137, 0.0363816, -0.337598, -0.94059, 0.0974244, 0.937925, -0.332875, -0.492435, -4.69021, 0.0189136)
+bone_name = "RFoot"
+bone_idx = 7
+
+[node name="Ski" parent="Armature_002/Skeleton3D/BoneAttachment3D4" index="0" instance=ExtResource("3_dumya")]
+transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
+
+[node name="BoneAttachment3D3" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="32"]
+transform = Transform3D(1, -2.27374e-13, 1.43052e-06, 1.40932e-06, -0.171493, -0.985189, 2.45323e-07, 0.985185, -0.171493, 0.867876, -4.64695, 0.104795)
+bone_name = "LFoot"
+bone_idx = 4
+
+[node name="Ski" parent="Armature_002/Skeleton3D/BoneAttachment3D3" index="0" instance=ExtResource("3_dumya")]
+transform = Transform3D(1, 1.40932e-06, 2.45323e-07, -2.4286e-13, -0.171493, 0.985185, 1.43051e-06, -0.985182, -0.171492, -0.0433632, 0.128991, 0.457484)
+
+[node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="33"]
+transform = Transform3D(0.96715, 0.21796, 0.130825, -0.110515, -0.102953, 0.988528, 0.228928, -0.970512, -0.0754832, 1.95858, 1.19095, 3.07701)
+bone_name = "LArmSkiPoleREF"
+bone_idx = 20
+
+[node name="SkiPole2" parent="Armature_002/Skeleton3D/BoneAttachment3D2" index="0" instance=ExtResource("4_hs4ql")]
+transform = Transform3D(1.22197, -0.213849, 0.153498, 0.185196, 0.180408, -1.22297, 0.187071, 1.21829, 0.208045, -0.00801873, -0.148504, -0.00412369)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="34"]
+transform = Transform3D(-0.913401, -0.144279, -0.380635, 0.397437, -0.11395, -0.910527, 0.087997, -0.982954, 0.161423, -1.53806, 1.23384, 2.89705)
+bone_name = "RArmSkiPoleREF"
+bone_idx = 21
+
+[node name="SkiPole2" parent="Armature_002/Skeleton3D/BoneAttachment3D" index="0" instance=ExtResource("4_hs4ql")]
+transform = Transform3D(1.2064, -0.168214, 0.280711, 0.262805, -0.140942, -1.21391, 0.195008, 1.23059, -0.10066, 0.0569417, 0.193758, -0.0186019)
+
+[node name="BoneAttachment3D8" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="35"]
+transform = Transform3D(0.999965, 0.00834847, 3.48955e-07, -0.00832947, 0.997692, -0.0673949, -0.000562993, 0.0673926, 0.997726, 5.98897, 5.52295, 2.75809)
+bone_name = "StickREF"
+bone_idx = 22
+
+[node name="Stick" parent="Armature_002/Skeleton3D/BoneAttachment3D8" index="0" instance=ExtResource("6_684bu")]
+transform = Transform3D(-0.743208, 0.13579, 0.655134, -0.264828, -0.95892, -0.101676, 0.614416, -0.249065, 0.748638, 0.480024, -1.70118, -0.925542)
+
+[node name="BoneAttachment3D9" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="36"]
+transform = Transform3D(0.999876, 0.0157268, 0.00114336, -0.0156086, 0.997436, -0.0698362, -0.00223873, 0.0698097, 0.997558, -4.88187, 4.96855, -0.711122)
+bone_name = "StickREFGK"
+bone_idx = 23
+
+[node name="Stick" parent="Armature_002/Skeleton3D/BoneAttachment3D9" index="0" instance=ExtResource("6_684bu")]
+transform = Transform3D(0.999999, 1.95578e-08, 6.51926e-09, 9.77889e-09, -0.990369, 0.138447, 6.51926e-09, -0.138448, -0.990369, -0.123122, -1.95075, -0.272703)
+
+[node name="BoneAttachment3D10" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="37"]
+transform = Transform3D(-0.739966, -0.412671, -0.531181, -0.41912, -0.334787, 0.843953, -0.526108, 0.847124, 0.0747722, 3.01422, 1.98874, 1.47563)
+bone_name = "LArm.001"
+bone_idx = 13
+
+[node name="GKPadHand" parent="Armature_002/Skeleton3D/BoneAttachment3D10" index="0" instance=ExtResource("7_082o6")]
+transform = Transform3D(-0.987584, 0.101996, -0.119487, -0.0789148, -0.979741, -0.184072, -0.135841, -0.172357, 0.975623, 0.0305576, 2.01614, 1.2069)
+
+[node name="BoneAttachment3D11" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="38"]
+transform = Transform3D(0.999407, -0.0333966, 0.008423, -0.0342826, -0.941038, 0.33656, -0.0033136, -0.336649, -0.941625, 0.950029, -2.33192, 0.93299)
+bone_name = "LLeg1"
+bone_idx = 3
+
+[node name="GKPadFoot" parent="Armature_002/Skeleton3D/BoneAttachment3D11" index="0" instance=ExtResource("8_ewul6")]
+transform = Transform3D(0.979669, 0.0572874, 0.192269, 0.0736583, -0.994141, -0.0791045, 0.186611, 0.0916579, -0.978149, 0.197275, 0.948272, -0.870787)
+
+[node name="BoneAttachment3D12" type="BoneAttachment3D" parent="Armature_002/Skeleton3D" index="39"]
+transform = Transform3D(0.999068, 0.0381082, 0.0202927, 0.0289, -0.939466, 0.34142, 0.0320753, -0.340516, -0.939692, -0.585019, -2.40787, 0.846185)
+bone_name = "RLeg.001"
+bone_idx = 6
+
+[node name="GKPadFoot" parent="Armature_002/Skeleton3D/BoneAttachment3D12" index="0" instance=ExtResource("8_ewul6")]
+transform = Transform3D(0.959103, 0.0572873, -0.277199, 0.0293111, -0.994141, -0.104038, -0.281535, 0.0916579, -0.955163, 0.0213459, 0.935044, -0.904299)
+
+[node name="Camera3D" type="Camera3D" parent="." index="2"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -2.06225e-07, 0.0740601, 0.287838)
+
+[node name="Target" parent="Camera3D" index="0" instance=ExtResource("9_m4ora")]
+transform = Transform3D(-0.1, -1.50996e-08, -6.60024e-16, 0, -4.37114e-09, 0.1, -1.50996e-08, 0.1, 4.37114e-09, -6.58559e-09, -5.99995e-05, -1.32215)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D/Target" index="1"]
+target_position = Vector3(0, -50, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.00783124, -0.0602488, -0.00763742)
+shape = SubResource("CylinderShape3D_50ng8")
+
+[node name="Area3D" type="Area3D" parent="CollisionShape3D" index="0"]
+script = ExtResource("5_c3bqr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_nnynp")
+
+[node name="CameraRef1" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(-0.05, -7.05298e-10, 7.34617e-09, 1.00832e-09, 0.0486515, 0.0115339, -7.31074e-09, 0.0115339, -0.0486515, 0, 0.132272, -0.419788)
+visible = false
+mesh = SubResource("BoxMesh_k83uh")
+
+[node name="CameraRef2" type="MeshInstance3D" parent="." index="5"]
+transform = Transform3D(-0.05, 2.76859e-09, -3.38256e-09, 0, 0.038692, 0.031669, 4.37114e-09, 0.031669, -0.038692, 0, 0.589131, -0.399083)
+visible = false
+mesh = SubResource("BoxMesh_k83uh")
+
+[node name="CameraRef3" type="MeshInstance3D" parent="." index="6"]
+transform = Transform3D(-0.0025, 0, -2.18557e-10, 0, 0.0025, 0, 2.18557e-10, 0, -0.0025, -2.06225e-07, 0.0740601, 0.287838)
+visible = false
+mesh = SubResource("BoxMesh_k83uh")
+skeleton = NodePath("../CameraRef1")
+
+[node name="CameraRef4" type="MeshInstance3D" parent="." index="7"]
+transform = Transform3D(-0.05, 7.31376e-10, -4.30952e-09, 0, 0.0492951, 0.00836597, 4.37114e-09, 0.00836597, -0.0492951, -5.58863e-09, 0.142859, -0.78407)
+visible = false
+mesh = SubResource("BoxMesh_k83uh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="8"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.0554028, 0.71321)
+visible = false
+mesh = SubResource("CylinderMesh_r4wmt")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" index="0"]
+script = ExtResource("5_mmw4u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_504mm")
+
+[node name="SpeedBox" parent="." index="9" instance=ExtResource("6_nx70h")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.135981, 0.71321)
+
+[node name="SelectBox" parent="." index="10" instance=ExtResource("6_nx70h")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.146111, 0.0235905)
+
+[node name="SkiCollision" type="MeshInstance3D" parent="." index="11"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.0553554, -0.000210673)
+visible = false
+mesh = SubResource("CylinderMesh_554qy")
+
+[node name="Area3D" type="Area3D" parent="SkiCollision" index="0"]
+script = ExtResource("10_d4d4k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SkiCollision/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_guigk")
+
+[node name="CrossCountryCollisionF" type="MeshInstance3D" parent="." index="12"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, -0.0748925, 0.29143)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionF" index="0"]
+script = ExtResource("11_w80qr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionF/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionML" type="MeshInstance3D" parent="." index="13"]
+transform = Transform3D(0.3, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.25, -0.075, 0.001)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionML" index="0"]
+script = ExtResource("11_w80qr")
+colliderTypes = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionML/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="CrossCountryCollisionMR" type="MeshInstance3D" parent="." index="14"]
+transform = Transform3D(0.3, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.25, -0.075, 0.001)
+visible = false
+mesh = SubResource("BoxMesh_foyeu")
+
+[node name="Area3D" type="Area3D" parent="CrossCountryCollisionMR" index="0"]
+script = ExtResource("11_w80qr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrossCountryCollisionMR/Area3D" index="0"]
+shape = SubResource("BoxShape3D_d2lxn")
+
+[node name="puckRef" type="Node3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.136105, 0.115)
+
+[node name="MeshInstance3DIceHockey" type="MeshInstance3D" parent="." index="16"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.0361696, 0.0202809)
+visible = false
+mesh = SubResource("CylinderMesh_gebid")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3DIceHockey" index="0"]
+script = ExtResource("15_ibjdi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3DIceHockey/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_vwqi7")

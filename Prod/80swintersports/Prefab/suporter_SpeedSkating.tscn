@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdfwvxn7ilqfy"]
+
+[ext_resource type="PackedScene" uid="uid://b1auudni3a0tp" path="res://Art/3d/Suporter.glb" id="1_p2s0d"]
+[ext_resource type="Script" uid="uid://cds011o7uflxs" path="res://Scripts/Prefabs/Supporter.cs" id="2_r57mf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ty6ya"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.345098, 0.176471, 0.34902, 1)
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slmqh"]
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.34902, 0.270588, 0.188235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykgqr"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.937255, 0.662745, 0.568627, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh4qj"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="Suporter" instance=ExtResource("1_p2s0d")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("2_r57mf")
+colorsList = PackedColorArray(0.760784, 0, 0, 1, 0.87451, 0.717647, 0, 1, 0.976471, 0.560784, 0.0941176, 1, 0.0901961, 0.329412, 1, 1, 0, 0.639216, 0, 1, 0.729412, 0.0666667, 0.454902, 1)
+
+[node name="Body" parent="." index="0"]
+transform = Transform3D(0.842686, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_ty6ya")
+
+[node name="Hair" parent="." index="1"]
+transform = Transform3D(1.10521, 0, 0, 0, 1, 0, 0, 0, -1.10075, 0, 3.69765, 0.224274)
+material_override = SubResource("StandardMaterial3D_slmqh")
+
+[node name="Head" parent="." index="2"]
+transform = Transform3D(1.00945, 0, 0, 0, 1, 0, 0, 0, -1.10075, 0, 2.25999, 0.224274)
+material_override = SubResource("StandardMaterial3D_ykgqr")
+
+[node name="LEye" parent="." index="3"]
+transform = Transform3D(0.213047, 0, 0, 0, 0.304854, 0, 0, 0, -0.271597, 0.546309, 2.27092, 1.17255)
+material_override = SubResource("StandardMaterial3D_oh4qj")
+
+[node name="Neck" parent="." index="4"]
+transform = Transform3D(0.863855, 0, 0, 0, -0.361829, 0, 0, 0, 0.755038, 0, 1.0054, 0)
+material_override = SubResource("StandardMaterial3D_ykgqr")
+
+[node name="REye" parent="." index="5"]
+transform = Transform3D(0.213047, 0, 0, 0, 0.304854, 0, 0, 0, -0.271597, -0.546309, 2.27092, 1.17255)
+material_override = SubResource("StandardMaterial3D_oh4qj")

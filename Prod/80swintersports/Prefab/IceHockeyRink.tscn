@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://w87r4jynko7u"]
+
+[ext_resource type="PackedScene" uid="uid://d2nkp02hqv55g" path="res://Prefab/hockey_rink.tscn" id="1_43vbw"]
+[ext_resource type="Script" uid="uid://bojnby6o0v7vi" path="res://Scripts/Prefabs/IceHockey.cs" id="1_mjrgn"]
+[ext_resource type="PackedScene" uid="uid://c64vk2op5xnh" path="res://Prefab/hockey_goal.tscn" id="2_duurg"]
+[ext_resource type="PackedScene" uid="uid://cisv43q421rkp" path="res://Prefab/grandstand.tscn" id="3_0q4y3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l8r34"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vg7v"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.0352941, 0.133333, 0.294118, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_whbwv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kcpwp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qag5v"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("initPoint", "camera3D", "Goal1", "Goal2")]
+script = ExtResource("1_mjrgn")
+initPoint = NodePath("InitPoint")
+camera3D = NodePath("Camera3D")
+Goal1 = NodePath("HockeyGoal1")
+Goal2 = NodePath("HockeyGoal2")
+
+[node name="HockeyGoal1" parent="." instance=ExtResource("2_duurg")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, -9.41238)
+
+[node name="HockeyGoal2" parent="." instance=ExtResource("2_duurg")]
+transform = Transform3D(-10, 0, -1.50996e-06, 0, 10, 0, 1.50996e-06, 0, -10, 0, 0, 9.412)
+
+[node name="HockeyRink" parent="." instance=ExtResource("1_43vbw")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="Background" type="MeshInstance3D" parent="."]
+transform = Transform3D(25.632, 0, 0, 0, 10, 0, 0, 0, 40.534, 0, 3.07769, 0)
+mesh = SubResource("BoxMesh_l8r34")
+surface_material_override/0 = SubResource("StandardMaterial3D_5vg7v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 4.522, 3.5)
+fov = 60.0
+
+[node name="RefereeStart" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0.0475279, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_whbwv")
+
+[node name="Goalkeeper1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0, -0.925)
+visible = false
+mesh = SubResource("BoxMesh_whbwv")
+
+[node name="Goalkeeper2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.025, 0, -2.18557e-09, 0, 0.025, 0, 2.18557e-09, 0, -0.025, 0, 0, 0.925)
+visible = false
+mesh = SubResource("BoxMesh_whbwv")
+
+[node name="InitPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
+visible = false
+mesh = SubResource("BoxMesh_kcpwp")
+
+[node name="MeshInstance3DREF" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.421, 0.105, -9.47823)
+visible = false
+mesh = SubResource("BoxMesh_qag5v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.26, 0.129946, -8.0039)
+visible = false
+mesh = SubResource("BoxMesh_qag5v")
+
+[node name="Grandstand" parent="." instance=ExtResource("3_0q4y3")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -12.0651)
+
+[node name="Grandstand2" parent="." instance=ExtResource("3_0q4y3")]
+transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -6.27241, 0, -10.9779)
+
+[node name="Grandstand3" parent="." node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("3_0q4y3")]
+transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -6.27241, 0, 0.105053)
+pointsList1 = [NodePath("../Grandstand2/p0"), NodePath("../Grandstand2/p1"), NodePath("../Grandstand2/p2")]
+pointsList2 = [NodePath("../Grandstand2/p3"), NodePath("../Grandstand2/p4"), NodePath("../Grandstand2/p5")]
+pointsList3 = [NodePath("../Grandstand2/p6"), NodePath("../Grandstand2/p7"), NodePath("../Grandstand2/p8")]
+pointsList4 = [NodePath("../Grandstand2/p9"), NodePath("../Grandstand2/p10"), NodePath("../Grandstand2/p11")]
+pointsList5 = [NodePath("../Grandstand2/p12"), NodePath("../Grandstand2/p13"), NodePath("../Grandstand2/p14")]
+pointsList6 = [NodePath("../Grandstand2/p15"), NodePath("../Grandstand2/p16"), NodePath("../Grandstand2/p17")]
+pointsList7 = [NodePath("../Grandstand2/p18"), NodePath("../Grandstand2/p19"), NodePath("../Grandstand2/p20")]
+pointsList8 = [NodePath("../Grandstand2/p21"), NodePath("../Grandstand2/p22"), NodePath("../Grandstand2/p23")]
+
+[node name="Grandstand4" parent="." node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("3_0q4y3")]
+transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -6.27241, 0, 11.2531)
+pointsList1 = [NodePath("../Grandstand2/p0"), NodePath("../Grandstand2/p1"), NodePath("../Grandstand2/p2")]
+pointsList2 = [NodePath("../Grandstand2/p3"), NodePath("../Grandstand2/p4"), NodePath("../Grandstand2/p5")]
+pointsList3 = [NodePath("../Grandstand2/p6"), NodePath("../Grandstand2/p7"), NodePath("../Grandstand2/p8")]
+pointsList4 = [NodePath("../Grandstand2/p9"), NodePath("../Grandstand2/p10"), NodePath("../Grandstand2/p11")]
+pointsList5 = [NodePath("../Grandstand2/p12"), NodePath("../Grandstand2/p13"), NodePath("../Grandstand2/p14")]
+pointsList6 = [NodePath("../Grandstand2/p15"), NodePath("../Grandstand2/p16"), NodePath("../Grandstand2/p17")]
+pointsList7 = [NodePath("../Grandstand2/p18"), NodePath("../Grandstand2/p19"), NodePath("../Grandstand2/p20")]
+pointsList8 = [NodePath("../Grandstand2/p21"), NodePath("../Grandstand2/p22"), NodePath("../Grandstand2/p23")]
+
+[node name="Grandstand5" parent="." node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("3_0q4y3")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 6.19963, 0, -10.9779)
+pointsList1 = [NodePath("../Grandstand2/p0"), NodePath("../Grandstand2/p1"), NodePath("../Grandstand2/p2")]
+pointsList2 = [NodePath("../Grandstand2/p3"), NodePath("../Grandstand2/p4"), NodePath("../Grandstand2/p5")]
+pointsList3 = [NodePath("../Grandstand2/p6"), NodePath("../Grandstand2/p7"), NodePath("../Grandstand2/p8")]
+pointsList4 = [NodePath("../Grandstand2/p9"), NodePath("../Grandstand2/p10"), NodePath("../Grandstand2/p11")]
+pointsList5 = [NodePath("../Grandstand2/p12"), NodePath("../Grandstand2/p13"), NodePath("../Grandstand2/p14")]
+pointsList6 = [NodePath("../Grandstand2/p15"), NodePath("../Grandstand2/p16"), NodePath("../Grandstand2/p17")]
+pointsList7 = [NodePath("../Grandstand2/p18"), NodePath("../Grandstand2/p19"), NodePath("../Grandstand2/p20")]
+pointsList8 = [NodePath("../Grandstand2/p21"), NodePath("../Grandstand2/p22"), NodePath("../Grandstand2/p23")]
+
+[node name="Grandstand6" parent="." node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("3_0q4y3")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 6.19963, 0, 0.14123)
+pointsList1 = [NodePath("../Grandstand2/p0"), NodePath("../Grandstand2/p1"), NodePath("../Grandstand2/p2")]
+pointsList2 = [NodePath("../Grandstand2/p3"), NodePath("../Grandstand2/p4"), NodePath("../Grandstand2/p5")]
+pointsList3 = [NodePath("../Grandstand2/p6"), NodePath("../Grandstand2/p7"), NodePath("../Grandstand2/p8")]
+pointsList4 = [NodePath("../Grandstand2/p9"), NodePath("../Grandstand2/p10"), NodePath("../Grandstand2/p11")]
+pointsList5 = [NodePath("../Grandstand2/p12"), NodePath("../Grandstand2/p13"), NodePath("../Grandstand2/p14")]
+pointsList6 = [NodePath("../Grandstand2/p15"), NodePath("../Grandstand2/p16"), NodePath("../Grandstand2/p17")]
+pointsList7 = [NodePath("../Grandstand2/p18"), NodePath("../Grandstand2/p19"), NodePath("../Grandstand2/p20")]
+pointsList8 = [NodePath("../Grandstand2/p21"), NodePath("../Grandstand2/p22"), NodePath("../Grandstand2/p23")]
+
+[node name="Grandstand7" parent="." node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("3_0q4y3")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 6.19963, 0, 11.2604)
+pointsList1 = [NodePath("../Grandstand2/p0"), NodePath("../Grandstand2/p1"), NodePath("../Grandstand2/p2")]
+pointsList2 = [NodePath("../Grandstand2/p3"), NodePath("../Grandstand2/p4"), NodePath("../Grandstand2/p5")]
+pointsList3 = [NodePath("../Grandstand2/p6"), NodePath("../Grandstand2/p7"), NodePath("../Grandstand2/p8")]
+pointsList4 = [NodePath("../Grandstand2/p9"), NodePath("../Grandstand2/p10"), NodePath("../Grandstand2/p11")]
+pointsList5 = [NodePath("../Grandstand2/p12"), NodePath("../Grandstand2/p13"), NodePath("../Grandstand2/p14")]
+pointsList6 = [NodePath("../Grandstand2/p15"), NodePath("../Grandstand2/p16"), NodePath("../Grandstand2/p17")]
+pointsList7 = [NodePath("../Grandstand2/p18"), NodePath("../Grandstand2/p19"), NodePath("../Grandstand2/p20")]
+pointsList8 = [NodePath("../Grandstand2/p21"), NodePath("../Grandstand2/p22"), NodePath("../Grandstand2/p23")]

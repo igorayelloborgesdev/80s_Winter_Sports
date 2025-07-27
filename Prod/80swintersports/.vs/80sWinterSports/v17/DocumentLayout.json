@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\view\\gameplayview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\view\\gameplayview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|d:\\igor\\igor\\igorayelloborges\\projetos\\80s_winter_sports\\prod\\80swintersports\\scripts\\controller\\gameplaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D9EE8B2B-D5D9-464C-BCCC-8C8EAD3A06EB}|80sWinterSports.csproj|solutionrelative:scripts\\controller\\gameplaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameplayView.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\GameplayView.cs",
+              "RelativeDocumentMoniker": "Scripts\\View\\GameplayView.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\View\\GameplayView.cs",
+              "RelativeToolTip": "Scripts\\View\\GameplayView.cs",
+              "ViewState": "AgIAAK8DAAAAAAAAAAAtwLcDAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T02:33:50.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GamePlayController.cs",
+              "DocumentMoniker": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\GamePlayController.cs",
+              "RelativeDocumentMoniker": "Scripts\\Controller\\GamePlayController.cs",
+              "ToolTip": "D:\\IGOR\\IGOR\\IgorAyelloBorges\\PROJETOS\\80s_Winter_Sports\\Prod\\80swintersports\\Scripts\\Controller\\GamePlayController.cs",
+              "RelativeToolTip": "Scripts\\Controller\\GamePlayController.cs",
+              "ViewState": "AgIAADUJAAAAAAAAAAAawEUJAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-26T05:18:01.768Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

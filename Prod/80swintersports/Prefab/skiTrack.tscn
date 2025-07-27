@@ -1,0 +1,559 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6cjftgn674tx"]
+
+[ext_resource type="Script" uid="uid://bixfg0j0173a0" path="res://Scripts/Prefabs/Ski.cs" id="1_ob0bs"]
+[ext_resource type="PackedScene" uid="uid://cd3ik7gdxghn7" path="res://Prefab/cross_country_ai_track.tscn" id="2_eis50"]
+[ext_resource type="PackedScene" uid="uid://c2umsr43sib1b" path="res://Prefab/ski_down_hill_cross_country.tscn" id="2_t3vt4"]
+[ext_resource type="PackedScene" uid="uid://n852lgio0j6" path="res://Prefab/donwhill_track.tscn" id="2_vr3bs"]
+[ext_resource type="PackedScene" uid="uid://emem201u3ntr" path="res://Prefab/gate_start.tscn" id="3_trrsa"]
+[ext_resource type="PackedScene" uid="uid://nj3mjr6c218v" path="res://Prefab/gate_finish.tscn" id="4_eyh8u"]
+[ext_resource type="PackedScene" uid="uid://38fa6sdnivp1" path="res://Prefab/gate.tscn" id="5_50lcy"]
+[ext_resource type="PackedScene" uid="uid://nykf32k8y48x" path="res://Prefab/gateBlue.tscn" id="5_hogku"]
+[ext_resource type="PackedScene" uid="uid://dax5thrlkvfpg" path="res://Prefab/gateRed.tscn" id="6_ek2ia"]
+[ext_resource type="PackedScene" uid="uid://c6h01naksw0h8" path="res://Prefab/gate2.tscn" id="6_kpprj"]
+[ext_resource type="PackedScene" uid="uid://cisv43q421rkp" path="res://Prefab/grandstand.tscn" id="7_37jcm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ib4q7"]
+
+[node name="Ski" type="Node3D" node_paths=PackedStringArray("gateStart", "gateFinish", "initPoint", "gates", "initPointCrossCountry", "skiCrossCountry", "skiCrossCountryAI")]
+script = ExtResource("1_ob0bs")
+gateStart = [NodePath("GateStart"), NodePath("GateStart3"), NodePath("GateStart2"), NodePath("GateStart"), NodePath("GateStartCrossCountry")]
+gateFinish = [NodePath("GateFinish"), NodePath("GateFinish3"), NodePath("GateFinish2"), NodePath("GateFinish"), NodePath("GateFinishCrossCountry")]
+initPoint = [NodePath("InitPoint"), NodePath("InitPoint3"), NodePath("InitPoint2"), NodePath("InitPoint")]
+gates = [NodePath("SkiDownhillGates"), NodePath("SkiSlalomGates"), NodePath("SkiGiantSlalomGates"), NodePath("SkiSuperGGates")]
+initPointCrossCountry = [NodePath("InitPoint00"), NodePath("InitPoint01"), NodePath("InitPoint02"), NodePath("InitPoint03"), NodePath("InitPoint04"), NodePath("InitPoint05"), NodePath("InitPoint06"), NodePath("InitPoint07"), NodePath("InitPoint08"), NodePath("InitPoint09"), NodePath("InitPoint10"), NodePath("InitPoint11"), NodePath("InitPoint12"), NodePath("InitPoint13"), NodePath("InitPoint14"), NodePath("InitPoint15")]
+skiCrossCountry = NodePath("SkiDownHillCrossCountry")
+skiCrossCountryAI = NodePath("CrossCountryAITrack")
+
+[node name="CrossCountryAITrack" parent="." instance=ExtResource("2_eis50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.266, 0, -0.119819)
+visible = false
+
+[node name="SkiDownHillCrossCountry" parent="." instance=ExtResource("2_t3vt4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.499, 0.00724279, -0.125)
+visible = false
+
+[node name="DonwhillTrack" parent="." instance=ExtResource("2_vr3bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.494, 0, -0.118046)
+
+[node name="SkiDownhillGates" type="Node3D" parent="."]
+
+[node name="Gate2" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0475778, 0, -0.0879565, 0, 0.1, 0, 0.0879565, 0, -0.0475778, -782.875, 0.0704571, 1.3724)
+
+[node name="Gate5" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00251126, 0, -0.0999684, 0, 0.1, 0, 0.0999684, 0, -0.00251126, -763.586, 0.0704571, 0.165172)
+
+[node name="Gate6" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0225121, 0, -0.0974331, 0, 0.1, 0, 0.0974331, 0, -0.0225121, -754.127, 0.0704571, 1.81897)
+
+[node name="Gate7" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0133986, 0, -0.0990983, 0, 0.1, 0, 0.0990983, 0, -0.0133986, -744.301, 0.0704571, 3.65885)
+
+[node name="Gate8" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00630344, 0, -0.0998011, 0, 0.1, 0, 0.0998011, 0, 0.00630344, -734.016, 0.0704571, 4.64677)
+
+[node name="Gate9" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00248509, 0, -0.0999691, 0, 0.1, 0, 0.0999691, 0, -0.00248509, -720.281, 0.0704571, 2.29431)
+
+[node name="Gate10" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0298258, 0, -0.0954485, 0, 0.1, 0, 0.0954485, 0, -0.0298258, -708.254, 0.0704571, 5.25109)
+
+[node name="Gate11" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00357019, 0, -0.0999362, 0, 0.1, 0, 0.0999362, 0, 0.00357019, -696.489, 0.0704571, 7.24477)
+
+[node name="Gate21" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00357019, 0, -0.0999362, 0, 0.1, 0, 0.0999362, 0, 0.00357019, -688.318, 0.0704571, 7.23184)
+
+[node name="Gate12" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00357019, 0, -0.0999362, 0, 0.1, 0, 0.0999362, 0, 0.00357019, -675.902, 0.0704571, 5.00352)
+
+[node name="Gate13" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.028537, 0, -0.0958417, 0, 0.1, 0, 0.0958417, 0, -0.028537, -660.534, 0.0704571, 7.73453)
+
+[node name="Gate14" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0132637, 0, -0.0991164, 0, 0.1, 0, 0.0991164, 0, -0.0132637, -647.218, 0.0704571, 10.558)
+
+[node name="Gate15" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0260757, 0, -0.0965404, 0, 0.1, 0, 0.0965404, 0, 0.0260757, -634.509, 0.0704571, 10.0488)
+
+[node name="Gate16" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0337358, 0, -0.0941376, 0, 0.1, 0, 0.0941376, 0, 0.0337358, -616.975, 0.0704571, 2.18714)
+
+[node name="Gate22" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0337358, 0, -0.0941376, 0, 0.1, 0, 0.0941376, 0, 0.0337358, -609.971, 0.0704571, 0.669407)
+
+[node name="Gate17" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00701045, 0, -0.0997539, 0, 0.1, 0, 0.0997539, 0, -0.00701045, -599.347, 0.0704571, -1.17967)
+
+[node name="Gate18" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0234514, 0, -0.0972112, 0, 0.1, 0, 0.0972112, 0, -0.0234514, -584.761, 0.0704571, 2.20955)
+
+[node name="Gate23" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0234514, 0, -0.0972112, 0, 0.1, 0, 0.0972112, 0, -0.0234514, -574.415, 0.0704571, 4.65113)
+
+[node name="Gate19" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0350861, 0, -0.0936427, 0, 0.1, 0, 0.0936427, 0, -0.0350861, -559.624, 0.0704571, 11.1025)
+
+[node name="Gate20" parent="SkiDownhillGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0257908, 0, -0.0966169, 0, 0.1, 0, 0.0966169, 0, -0.0257908, -547.477, 0.0704571, 14.4793)
+
+[node name="SkiSuperGGates" type="Node3D" parent="."]
+
+[node name="Gate2" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0261987, 0, -0.0965071, 0, 0.1, 0, 0.0965071, 0, -0.0261987, -785.04, 0.0704571, 0.531318)
+
+[node name="Gate5" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.030247, 0, -0.0953158, 0, 0.1, 0, 0.0953158, 0, 0.030247, -767.59, 0.0704571, 1.56751)
+
+[node name="Gate6" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0225121, 0, -0.0974331, 0, 0.1, 0, 0.0974331, 0, -0.0225121, -754.127, 0.0704571, 1.81897)
+
+[node name="Gate8" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00630344, 0, -0.0998011, 0, 0.1, 0, 0.0998011, 0, 0.00630344, -734.016, 0.0704571, 4.64677)
+
+[node name="Gate10" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0425685, 0, -0.0904871, 0, 0.1, 0, 0.0904871, 0, -0.0425685, -708.254, 0.0704571, 5.25109)
+
+[node name="Gate21" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00357019, 0, -0.0999362, 0, 0.1, 0, 0.0999362, 0, 0.00357019, -681.158, 0.0704571, 6.18565)
+
+[node name="Gate14" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0284752, 0, -0.0958601, 0, 0.1, 0, 0.0958601, 0, -0.0284752, -654.955, 0.0704571, 9.4108)
+
+[node name="Gate16" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0337358, 0, -0.0941376, 0, 0.1, 0, 0.0941376, 0, 0.0337358, -621.184, 0.0704571, 4.57588)
+
+[node name="Gate18" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0215195, 0, -0.0976571, 0, 0.1, 0, 0.0976571, 0, 0.0215195, -637.829, 0.0704571, 10.8533)
+
+[node name="Gate17" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00701045, 0, -0.0997539, 0, 0.1, 0, 0.0997539, 0, -0.00701045, -599.396, 0.0704571, -0.485826)
+
+[node name="Gate19" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0350861, 0, -0.0936427, 0, 0.1, 0, 0.0936427, 0, -0.0350861, -559.624, 0.0704571, 11.1025)
+
+[node name="Gate20" parent="SkiSuperGGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0350861, 0, -0.0936427, 0, 0.1, 0, 0.0936427, 0, -0.0350861, -577.876, 0.0704571, 4.23429)
+
+[node name="Gate" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0558846, 0, -0.0829272, 0, 0.1, 0, 0.0829272, 0, -0.0558846, -778.196, 0.07, 3.66192)
+
+[node name="Gate24" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0055717, 0, -0.0998446, 0, 0.1, 0, 0.0998446, 0, -0.0055717, -761.17, 0.07, -0.0894747)
+
+[node name="Gate25" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0273086, 0, -0.0961989, 0, 0.1, 0, 0.0961989, 0, -0.0273086, -745.886, 0.07, 3.47822)
+
+[node name="Gate28" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.000530582, 0, -0.0999986, 0, 0.1, 0, 0.0999986, 0, -0.000530582, -720.82, 0.07, 2.33327)
+
+[node name="Gate30" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.00246764, 0, -0.0999695, 0, 0.1, 0, 0.0999695, 0, 0.00246764, -693.773, 0.07, 7.02595)
+
+[node name="Gate32" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0071689, 0, -0.0997427, 0, 0.1, 0, 0.0997427, 0, -0.0071689, -667.797, 0.07, 5.11771)
+
+[node name="Gate34" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.00358767, 0, -0.0999356, 0, 0.1, 0, 0.0999356, 0, -0.00358767, -642.62, 0.07, 10.8271)
+
+[node name="Gate35" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0297258, 0, -0.0954797, 0, 0.1, 0, 0.0954797, 0, 0.0297258, -630.519, 0.07, 7.81765)
+
+[node name="Gate36" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0209124, 0, -0.0977889, 0, 0.1, 0, 0.0977889, 0, 0.0209124, -613.314, 0.07, 0.847611)
+
+[node name="Gate38" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.022068, 0, -0.0975346, 0, 0.1, 0, 0.0975346, 0, -0.022068, -589.431, 0.07, 0.251613)
+
+[node name="Gate40" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.03708, 0, -0.0928712, 0, 0.1, 0, 0.0928712, 0, -0.03708, -569.108, 0.07, 6.46462)
+
+[node name="Gate39" parent="SkiSuperGGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0222519, 0, -0.0974928, 0, 0.1, 0, 0.0974928, 0, -0.0222519, -542.001, 0.07, 15.4762)
+
+[node name="SkiGiantSlalomGates" type="Node3D" parent="."]
+
+[node name="Gate2" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00335564, 0, -0.0999436, 0, 0.1, 0, 0.0999436, 0, -0.00335564, -391.954, 0.0704571, 40.0719)
+
+[node name="Gate" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.00471067, 0, -0.099889, 0, 0.1, 0, 0.099889, 0, -0.00471067, -385.414, 0.07, 39.6301)
+
+[node name="Gate3" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0036696, 0, -0.0999326, 0, 0.1, 0, 0.0999326, 0, 0.0036696, -377.186, 0.0704571, 40.0875)
+
+[node name="Gate4" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.00231408, 0, -0.0999733, 0, 0.1, 0, 0.0999733, 0, 0.00231408, -370.698, 0.07, 38.9876)
+
+[node name="Gate5" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00629821, 0, -0.0998014, 0, 0.1, 0, 0.0998014, 0, 0.00629821, -360.698, 0.0704571, 39.1731)
+
+[node name="Gate6" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.00494423, 0, -0.0998777, 0, 0.1, 0, 0.0998777, 0, 0.00494423, -354.245, 0.07, 37.8367)
+
+[node name="Gate7" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0132896, 0, -0.099113, 0, 0.1, 0, 0.099113, 0, 0.0132896, -345.984, 0.0704571, 37.8527)
+
+[node name="Gate8" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0119444, 0, -0.0992841, 0, 0.1, 0, 0.0992841, 0, 0.0119444, -339.624, 0.07, 36.2173)
+
+[node name="Gate9" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.00629821, 0, -0.0998014, 0, 0.1, 0, 0.0998014, 0, 0.00629821, -330.965, 0.0704571, 36.1599)
+
+[node name="Gate10" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.00494423, 0, -0.0998777, 0, 0.1, 0, 0.0998777, 0, 0.00494423, -324.51, 0.07, 34.4593)
+
+[node name="Gate11" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0132896, 0, -0.099113, 0, 0.1, 0, 0.099113, 0, 0.0132896, -316.267, 0.0704571, 34.4646)
+
+[node name="Gate12" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0119444, 0, -0.0992841, 0, 0.1, 0, 0.0992841, 0, 0.0119444, -309.903, 0.07, 32.8456)
+
+[node name="Gate13" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00997887, 0, -0.0995008, 0, 0.1, 0, 0.0995008, 0, -0.00997887, -304.02, 0.0704571, 33.2698)
+
+[node name="Gate14" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0108537, 0, -0.0994093, 0, 0.1, 0, 0.0994093, 0, -0.0108537, -297.369, 0.07, 32.7404)
+
+[node name="Gate15" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0238296, 0, -0.0971192, 0, 0.1, 0, 0.0971192, 0, -0.0238296, -289.429, 0.0704571, 34.8352)
+
+[node name="Gate16" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0255328, 0, -0.0966855, 0, 0.1, 0, 0.0966855, 0, -0.0255328, -282.842, 0.07, 35.3719)
+
+[node name="Gate17" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0319571, 0, -0.0947562, 0, 0.1, 0, 0.0947562, 0, -0.0319571, -276.171, 0.0704571, 38.2018)
+
+[node name="Gate18" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0376516, 0, -0.0926411, 0, 0.1, 0, 0.0926411, 0, -0.0376516, -269.558, 0.07, 39.4205)
+
+[node name="Gate19" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.0318413, 0, -0.0947952, 0, 0.1, 0, 0.0947952, 0, -0.0318413, -262.254, 0.0704571, 42.7944)
+
+[node name="Gate20" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.0287896, 0, -0.0957662, 0, 0.1, 0, 0.0957662, 0, -0.0287896, -255.933, 0.07, 43.8002)
+
+[node name="Gate21" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.00970271, 0, -0.0995281, 0, 0.1, 0, 0.0995281, 0, -0.00970271, -248.593, 0.0704571, 46.3681)
+
+[node name="Gate22" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.00186566, 0, -0.0999826, 0, 0.1, 0, 0.0999826, 0, -0.00186566, -241.896, 0.07, 45.7877)
+
+[node name="Gate23" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0097826, 0, -0.0995203, 0, 0.1, 0, 0.0995203, 0, 0.0097826, -234.009, 0.0704571, 45.4562)
+
+[node name="Gate24" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0212655, 0, -0.0977128, 0, 0.1, 0, 0.0977128, 0, 0.0212655, -227.696, 0.07, 42.8141)
+
+[node name="Gate25" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0252778, 0, -0.0967524, 0, 0.1, 0, 0.0967524, 0, 0.0252778, -219.42, 0.0704571, 41.1803)
+
+[node name="Gate26" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0325981, 0, -0.0945377, 0, 0.1, 0, 0.0945377, 0, 0.0325981, -213.142, 0.07, 37.9941)
+
+[node name="Gate27" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0254788, 0, -0.0966997, 0, 0.1, 0, 0.0966997, 0, 0.0254788, -205.517, 0.0704571, 36.0743)
+
+[node name="Gate28" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0338032, 0, -0.0941135, 0, 0.1, 0, 0.0941135, 0, 0.0338032, -199.941, 0.07, 32.9154)
+
+[node name="Gate29" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0324891, 0, -0.0945751, 0, 0.1, 0, 0.0945751, 0, 0.0324891, -191.125, 0.0704571, 30.5466)
+
+[node name="Gate30" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0294858, 0, -0.0955542, 0, 0.1, 0, 0.0955542, 0, 0.0294858, -184.86, 0.07, 27.3641)
+
+[node name="Gate31" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0295808, 0, -0.0955247, 0, 0.1, 0, 0.0955247, 0, 0.0295808, -177.204, 0.0704571, 25.9649)
+
+[node name="Gate32" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.0157314, 0, -0.0987549, 0, 0.1, 0, 0.0987549, 0, 0.0157314, -171.619, 0.07, 23.5298)
+
+[node name="Gate33" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(0.0130215, 0, -0.0991485, 0, 0.1, 0, 0.0991485, 0, 0.0130215, -163.384, 0.0704571, 22.8297)
+
+[node name="Gate34" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(0.00745262, 0, -0.0997219, 0, 0.1, 0, 0.0997219, 0, 0.00745262, -156.991, 0.07, 21.0291)
+
+[node name="Gate35" parent="SkiGiantSlalomGates" instance=ExtResource("5_50lcy")]
+transform = Transform3D(-0.000659732, 0, -0.0999978, 0, 0.1, 0, 0.0999978, 0, -0.000659732, -149.477, 0.0704571, 21.4669)
+
+[node name="Gate36" parent="SkiGiantSlalomGates" instance=ExtResource("6_kpprj")]
+transform = Transform3D(-0.00395913, 0, -0.0999216, 0, 0.1, 0, 0.0999216, 0, -0.00395913, -143.855, 0.07, 20.4494)
+
+[node name="SkiSlalomGates" type="Node3D" parent="."]
+
+[node name="GateBlue11" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.020077, 0, -0.0979638, 0, 0.1, 0, 0.0979638, 0, -0.020077, 314.112, 0.0292903, 16.1415)
+
+[node name="GateRed11" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0311323, 0, 0.0950304, 0, 0.1, 0, -0.0950304, 0, 0.0311323, 315.927, 0.0292903, 16.3299)
+
+[node name="GateBlue12" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0123411, 0, -0.0992355, 0, 0.1, 0, 0.0992355, 0, -0.0123411, 317.724, 0.0292903, 16.8158)
+
+[node name="GateRed12" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0143752, 0, 0.0989614, 0, 0.1, 0, -0.0989614, 0, 0.0143752, 319.555, 0.0292903, 16.9436)
+
+[node name="GateBlue13" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0172376, 0, -0.0985031, 0, 0.1, 0, 0.0985031, 0, -0.0172376, 321.724, 0.0292903, 17.4207)
+
+[node name="GateRed13" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0283731, -0.000450198, 0.0958893, 0, 0.0999989, 0.000469492, -0.0958904, -0.000133209, 0.0283728, 323.534, 0.0292903, 17.5831)
+
+[node name="GateBlue14" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0172376, 0, -0.0985031, 0, 0.1, 0, 0.0985031, 0, -0.0172376, 325.39, 0.0292903, 18.0643)
+
+[node name="GateRed14" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0283731, 0, 0.0958904, 0, 0.1, 0, -0.0958904, 0, 0.0283731, 327.212, 0.0292903, 18.1513)
+
+[node name="GateBlue15" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0194491, 0, -0.0980904, 0, 0.1, 0, 0.0980904, 0, -0.0194491, 329.206, 0.0292903, 18.5568)
+
+[node name="GateRed15" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.030523, 0, 0.0952279, 0, 0.1, 0, -0.0952279, 0, 0.030523, 331.056, 0.0292903, 18.6968)
+
+[node name="GateBlue16" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0194491, 0, -0.0980904, 0, 0.1, 0, 0.0980904, 0, -0.0194491, 332.851, 0.0292903, 19.2094)
+
+[node name="GateRed16" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.030523, 0, 0.0952279, 0, 0.1, 0, -0.0952279, 0, 0.030523, 334.693, 0.0292903, 19.3942)
+
+[node name="GateBlue17" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0155452, 0, -0.0987843, 0, 0.1, 0, 0.0987843, 0, -0.0155452, 336.915, 0.0292903, 19.9256)
+
+[node name="GateRed17" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0267238, 0, 0.096363, 0, 0.1, 0, -0.096363, 0, 0.0267238, 338.764, 0.0292903, 20.0057)
+
+[node name="GateBlue18" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.00937782, 0, -0.0995593, 0, 0.1, 0, 0.0995593, 0, -0.00937782, 340.595, 0.0292903, 20.4698)
+
+[node name="GateRed18" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0114191, 0, 0.0993458, 0, 0.1, 0, -0.0993458, 0, 0.0114191, 342.438, 0.0292903, 20.4604)
+
+[node name="GateBlue19" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0210403, 0, -0.0977615, 0, 0.1, 0, 0.0977615, 0, -0.0210403, 344.095, 0.0292903, 20.9752)
+
+[node name="GateRed19" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0320662, 0, 0.0947194, 0, 0.1, 0, -0.0947194, 0, 0.0320662, 345.945, 0.0292903, 21.0113)
+
+[node name="GateBlue20" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0210403, 0, -0.0977615, 0, 0.1, 0, 0.0977615, 0, -0.0210403, 347.731, 0.0292903, 21.5877)
+
+[node name="GateRed20" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0320662, 0, 0.0947194, 0, 0.1, 0, -0.0947194, 0, 0.0320662, 349.572, 0.0292903, 21.5913)
+
+[node name="GateBlue21" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0171482, 0, -0.0985187, 0, 0.1, 0, 0.0985187, 0, -0.0171482, 351.784, 0.0292903, 22.2875)
+
+[node name="GateRed21" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.028286, 0, 0.0959161, 0, 0.1, 0, -0.0959161, 0, 0.028286, 353.634, 0.0292903, 22.2558)
+
+[node name="GateBlue22" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.00937782, 0, -0.0995593, 0, 0.1, 0, 0.0995593, 0, -0.00937782, 355.44, 0.0292903, 22.7819)
+
+[node name="GateRed22" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0114191, 0, 0.0993458, 0, 0.1, 0, -0.0993458, 0, 0.0114191, 357.282, 0.0292903, 22.8527)
+
+[node name="GateBlue23" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0172376, 0, -0.0985031, 0, 0.1, 0, 0.0985031, 0, -0.0172376, 359.273, 0.0292903, 23.352)
+
+[node name="GateRed23" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0283731, 0, 0.0958904, 0, 0.1, 0, -0.0958904, 0, 0.0283731, 361.125, 0.0292903, 23.3476)
+
+[node name="GateBlue24" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0172376, 0, -0.0985031, 0, 0.1, 0, 0.0985031, 0, -0.0172376, 362.942, 0.0292903, 23.9812)
+
+[node name="GateRed24" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0283731, 0, 0.0958904, 0, 0.1, 0, -0.0958904, 0, 0.0283731, 364.785, 0.0292903, 23.9783)
+
+[node name="GateBlue25" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0194491, 0, -0.0980904, 0, 0.1, 0, 0.0980904, 0, -0.0194491, 366.764, 0.0292903, 24.4327)
+
+[node name="GateRed25" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.030523, 0, 0.0952279, 0, 0.1, 0, -0.0952279, 0, 0.030523, 368.615, 0.0292903, 24.5728)
+
+[node name="GateBlue26" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0194491, 0, -0.0980904, 0, 0.1, 0, 0.0980904, 0, -0.0194491, 370.409, 0.0292903, 25.0853)
+
+[node name="GateRed26" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.00931524, 0, 0.0995652, 0, 0.1, 0, -0.0995652, 0, 0.00931524, 372.252, 0.0292903, 25.068)
+
+[node name="GateBlue27" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0155452, 0, -0.0987843, 0, 0.1, 0, 0.0987843, 0, -0.0155452, 374.474, 0.0292903, 25.6455)
+
+[node name="GateRed27" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0267238, 0, 0.096363, 0, 0.1, 0, -0.096363, 0, 0.0267238, 376.322, 0.0292903, 25.7023)
+
+[node name="GateBlue28" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.00937782, 0, -0.0995593, 0, 0.1, 0, 0.0995593, 0, -0.00937782, 378.154, 0.0292903, 26.1525)
+
+[node name="GateRed28" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0114191, 0, 0.0993458, 0, 0.1, 0, -0.0993458, 0, 0.0114191, 379.996, 0.0292903, 26.1723)
+
+[node name="GateBlue29" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0138361, 0, -0.0990382, 0, 0.1, 0, 0.0990382, 0, -0.0138361, 381.653, 0.0292903, 26.7158)
+
+[node name="GateRed29" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0064863, 0, 0.0997894, 0, 0.1, 0, -0.0997894, 0, 0.0064863, 383.503, 0.0292903, 26.6618)
+
+[node name="GateBlue30" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.00923705, 0, -0.0995725, 0, 0.1, 0, 0.0995725, 0, -0.00923705, 385.289, 0.0292903, 27.2259)
+
+[node name="GateRed30" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.00806858, 0, 0.099674, 0, 0.1, 0, -0.099674, 0, 0.00806858, 387.131, 0.0292903, 27.1992)
+
+[node name="GateBlue31" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.00755356, 0, -0.0997143, 0, 0.1, 0, 0.0997143, 0, -0.00755356, 389.342, 0.0292903, 27.8263)
+
+[node name="GateRed31" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.00303465, 0, 0.0999539, 0, 0.1, 0, -0.0999539, 0, 0.00303465, 391.192, 0.0292903, 27.8385)
+
+[node name="GateBlue32" parent="SkiSlalomGates" instance=ExtResource("5_hogku")]
+transform = Transform3D(-0.0128899, 0, -0.0991658, 0, 0.1, 0, 0.0991658, 0, -0.0128899, 392.998, 0.0292903, 28.4258)
+
+[node name="GateRed32" parent="SkiSlalomGates" instance=ExtResource("6_ek2ia")]
+transform = Transform3D(0.0114191, 0, 0.0993458, 0, 0.1, 0, -0.0993458, 0, 0.0114191, 394.841, 0.0292903, 28.2996)
+
+[node name="Grandstand2" parent="." instance=ExtResource("7_37jcm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 734.886, -0.0511432, 28.6261)
+
+[node name="InitPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0102095, 0, 0.499896, 0, 0.5, 0, -0.499896, 0, -0.0102095, -794.621, 0.14881, -0.0389264)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0541471, 0, 0.497059, 0, 0.5, 0, -0.497059, 0, 0.0541471, -397.447, 0.149, 39.3039)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0943677, 0, 0.491014, 0, 0.5, 0, -0.491014, 0, 0.0943677, 304.87, 0.149, 14.5188)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="GateStart" parent="." instance=ExtResource("3_trrsa")]
+transform = Transform3D(-0.0019414, 0, -0.0635427, 0, 0.0635724, 0, 0.0635427, 0, -0.0019414, -793.371, -0.0869575, 0.490724)
+
+[node name="GateFinish" parent="." instance=ExtResource("4_eyh8u")]
+transform = Transform3D(0.0118272, 0, -0.0624625, 0, 0.0635724, 0, 0.0624625, 0, 0.0118272, -520.917, 0.0199574, 13.8761)
+
+[node name="GateStart2" parent="." instance=ExtResource("3_trrsa")]
+transform = Transform3D(-0.00972484, 0, -0.0632568, 0, 0.064, 0, 0.0632568, 0, -0.00972484, -396.457, -0.0924856, 40.0819)
+
+[node name="GateFinish2" parent="." instance=ExtResource("4_eyh8u")]
+transform = Transform3D(-0.0156359, 0, -0.0620606, 0, 0.064, 0, 0.0620606, 0, -0.0156359, -120.131, 0.0212261, 25.7205)
+
+[node name="GateStart3" parent="." instance=ExtResource("3_trrsa")]
+transform = Transform3D(-0.0122403, 0, -0.0628186, 0, 0.064, 0, 0.0628186, 0, -0.0122403, 307.812, -0.0924856, 15.5366)
+
+[node name="GateFinish3" parent="." instance=ExtResource("4_eyh8u")]
+transform = Transform3D(-0.0111719, 0, -0.0630174, 0, 0.064, 0, 0.0630174, 0, -0.0111719, 407.517, 0.0212261, 30.9295)
+
+[node name="GateStartCrossCountry" parent="." node_paths=PackedStringArray("area3D") instance=ExtResource("3_trrsa")]
+transform = Transform3D(-0.0017937, 0, -0.0639749, 0, 0.064, 0, 0.0639749, 0, -0.0017937, -791.312, -0.0924856, 0.494802)
+area3D = NodePath("../GateStart3/GateStartArea3D")
+
+[node name="GateFinishCrossCountry" parent="." node_paths=PackedStringArray("area3D") instance=ExtResource("4_eyh8u")]
+transform = Transform3D(0.004725, 0, -0.0638253, 0, 0.064, 0, 0.0638253, 0, 0.004725, -324.329, 0.0212261, 35.4881)
+area3D = NodePath("../GateFinish3/GateFinishMeshInstance3D/GateFinishArea3D")
+
+[node name="InitPoint00" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.064, 0.14881, 0.377363)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint01" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -792.064, 0.149, 0.0773557)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint02" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -792.064, 0.149, -0.222644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint03" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -792.064, 0.149, -0.522644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint04" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.687, 0.14881, 0.377363)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint05" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.687, 0.149, 0.0773557)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint06" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.687, 0.149, -0.222644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint07" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -792.687, 0.149, -0.522644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint08" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.368, 0.14881, 0.377363)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint09" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.368, 0.149, 0.0773557)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint10" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.368, 0.149, -0.222644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint11" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.368, 0.149, -0.522644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint12" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.967, 0.14881, 0.377363)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint13" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.967, 0.149, 0.0773557)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint14" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.967, 0.149, -0.222644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")
+
+[node name="InitPoint15" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00168427, 0, 0.499997, 0, 0.5, 0, -0.499997, 0, -0.00168427, -793.967, 0.149, -0.522644)
+visible = false
+mesh = SubResource("BoxMesh_ib4q7")
+skeleton = NodePath("../DonwhillTrack")

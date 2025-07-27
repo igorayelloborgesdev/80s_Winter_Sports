@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2umsr43sib1b"]
+
+[ext_resource type="PackedScene" uid="uid://b1hphgjrfhu2h" path="res://Art/3d/SkiDownHillCrossCountry.glb" id="1_ghh6t"]
+[ext_resource type="Script" uid="uid://cu62trasdfyax" path="res://Scripts/Prefabs/SkiCrossCountry.cs" id="2_8lpu7"]
+
+[node name="SkiDownHillCrossCountry" instance=ExtResource("1_ghh6t")]
+script = ExtResource("2_8lpu7")

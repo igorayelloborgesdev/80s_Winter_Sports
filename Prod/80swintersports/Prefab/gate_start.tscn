@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=4 uid="uid://emem201u3ntr"]
+
+[ext_resource type="Texture2D" uid="uid://c1y615gyshvbl" path="res://Art/3d/DonwhillTrack_GateStart.png" id="1_7mc2m"]
+[ext_resource type="Script" uid="uid://l522sihgbgjs" path="res://Scripts/Prefabs/GateStartFinish.cs" id="2_e2ny5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l82hu"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.835294, 0.835294, 0.835294, 1)
+albedo_texture = ExtResource("1_7mc2m")
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dliqy"]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_7mc2m")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j6b5h"]
+_surfaces = [{
+"aabb": AABB(-24.1644, -1, -1.64066, 30.0289, 14.3492, 3.33062),
+"format": 34359742465,
+"index_count": 120,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEABQAKAAcABQALAAoACgAIAAkACgALAAgAFQADAAkAFQAPAAMAAQALAAUAAQAIAAsABwAJAAMABwAKAAkADQAIAAEADQAUAAgAFAAJAAgAFAAVAAkADAAPAA4ADAANAA8ADgATABIADgAPABMAEgARABAAEgATABEAEAANAAwAEAARAA0AEQAWABcAEQATABYAFgAUABcAFgAVABQADQAXABQADQARABcAEwAVABYAEwAPABUADwABAAMADwANAAEA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("kKvAP/j/f78oUNg/kKvAP8VuEkEmUNg/kKvAP/j/f79KAdK/kKvAP8VuEkFOAdK/eqm7QPj/f78nUNg/eqm7QMVuEkElUNg/eqm7QPj/f79LAdK/eqm7QMVuEkFPAdK/sly6P2SWVUElUNg/sly6P2SWVUFOAdK/whW6QGSWVUFPAdK/whW6QGSWVUEkUNg/Ogyewfj/f78qUNg/OgyewcVuEkEoUNg/Ogyewfj/f79IAdK/OgyewcVuEkFMAdK/0uvAwfj/f78rUNg/0uvAwcVuEkEpUNg/0uvAwfj/f79HAdK/0uvAwcVuEkFLAdK/KHGewWSWVUEnUNg/KHGewWSWVUFMAdK/wFDBwWSWVUFLAdK/wFDBwWSWVUEoUNg/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lwfa1"]
+resource_name = "DonwhillTrack_Cube"
+_surfaces = [{
+"aabb": AABB(-24.1644, -1, -1.64066, 30.0289, 14.3492, 3.33062),
+"attribute_data": PackedByteArray("FwRPPzRQvz67s04/WDVCPlcLYj80UL8+VwtiPzRQvz4DD1M/Ht83P/u6YT9YNUI+FwRPP7RBmT4XBE8/tEGZPlcLYj+0QZk+VwtiP7RBmT5PbTc+ekE3P1cLYj+0QZk+u7NOPzAphz4XBE8/YEkaPvu6YT8wKYc+LB51Px7fNz9XC2I/YEkaPlcLYj9gSRo+FwRPP2hmZj4XBE8/aGZmPiXEQj16QTc/VwtiP2hmZj5XC2I/aGZmPlcLYj9oZmY+Aw9TP8BBkD6YEnU/YEkaPk9tNz4IfZE+mBJ1P2hmZj4lxEI9CH2RPlcLYj9oZmY+VwtiP2hmZj4sHnU/wEGQPlcLYj9gSRo+VwtiP2BJGj4XBE8/wFicPRcETz80UL8+VwtiPzRQvz60wzM+Ht83P1cLYj/AWJw9VwtiPzRQvz4XBE8/tEGZPhcETz+0QZk+VwtiP7RBmT67JFI/ekE3P1cLYj+0QZk+VwtiP7RBmT4XBE8/YEkaPhcETz9gSRo+VwtiP2BJGj5XC2I/YEkaPigdLj0e3zc/VwtiP2BJGj4XBE8/aGZmPhcETz9oZmY+VwtiP2hmZj5XC2I/aGZmPlcLYj9oZmY+vdNzP3pBNz+0wzM+wEGQPpgSdT9gSRo+uyRSPwh9kT6YEnU/aGZmPlcLYj9oZmY+vdNzPwh9kT5XC2I/aGZmPlcLYj9gSRo+KB0uPcBBkD5XC2I/YEkaPg=="),
+"format": 34359742487,
+"index_count": 120,
+"index_data": PackedByteArray("AAAIAAIAAAAGAAgABwAVAAsABwASABUAEwARABcAEwANABEADAAFAA4ADAABAAUAEAAeABYAEAAhAB4AHQAZABsAHQAgABkAPAAKABoAPAArAAoABAAfAA8ABAAYAB8AFAAaAAoAFAAcABoAJQAYAAQAJQA6ABgAOwAbABkAOwA9ABsAIwAtACkAIwAnAC0AKAA4ADUAKAAsADgANAAwAC4ANAA2ADAALwAmACIALwAzACYAMQA+AEEAMQA3AD4AQAA7AEMAQAA9ADsAJQBCADoAJQAyAEIAOQA8AD8AOQArADwAKgADAAkAKgAkAAMA"),
+"material": SubResource("StandardMaterial3D_dliqy"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 68,
+"vertex_data": PackedByteArray("kKvAP/j/f78oUNg/kKvAP/j/f78oUNg/kKvAP8VuEkEmUNg/kKvAP8VuEkEmUNg/kKvAP8VuEkEmUNg/kKvAP8VuEkEmUNg/kKvAP/j/f79KAdK/kKvAP/j/f79KAdK/kKvAP8VuEkFOAdK/kKvAP8VuEkFOAdK/kKvAP8VuEkFOAdK/kKvAP8VuEkFOAdK/eqm7QPj/f78nUNg/eqm7QPj/f78nUNg/eqm7QMVuEkElUNg/eqm7QMVuEkElUNg/eqm7QMVuEkElUNg/eqm7QMVuEkElUNg/eqm7QPj/f79LAdK/eqm7QPj/f79LAdK/eqm7QMVuEkFPAdK/eqm7QMVuEkFPAdK/eqm7QMVuEkFPAdK/eqm7QMVuEkFPAdK/sly6P2SWVUElUNg/sly6P2SWVUElUNg/sly6P2SWVUFOAdK/sly6P2SWVUFOAdK/whW6QGSWVUFPAdK/whW6QGSWVUFPAdK/whW6QGSWVUFPAdK/whW6QGSWVUEkUNg/whW6QGSWVUEkUNg/whW6QGSWVUEkUNg/Ogyewfj/f78qUNg/Ogyewfj/f78qUNg/OgyewcVuEkEoUNg/OgyewcVuEkEoUNg/OgyewcVuEkEoUNg/OgyewcVuEkEoUNg/Ogyewfj/f79IAdK/Ogyewfj/f79IAdK/OgyewcVuEkFMAdK/OgyewcVuEkFMAdK/OgyewcVuEkFMAdK/OgyewcVuEkFMAdK/0uvAwfj/f78rUNg/0uvAwfj/f78rUNg/0uvAwcVuEkEpUNg/0uvAwcVuEkEpUNg/0uvAwcVuEkEpUNg/0uvAwcVuEkEpUNg/0uvAwfj/f79HAdK/0uvAwfj/f79HAdK/0uvAwcVuEkFLAdK/0uvAwcVuEkFLAdK/0uvAwcVuEkFLAdK/0uvAwcVuEkFLAdK/KHGewWSWVUEnUNg/KHGewWSWVUEnUNg/KHGewWSWVUFMAdK/KHGewWSWVUFMAdK/wFDBwWSWVUFLAdK/wFDBwWSWVUFLAdK/wFDBwWSWVUFLAdK/wFDBwWSWVUEoUNg/wFDBwWSWVUEoUNg/wFDBwWSWVUEoUNg/AAD/f/9/////f/9//3///wAA/3//f////38AAP///7//f/9/////v/9//3//f///AAD/f/9//////////3///wAA/3//f////38AAP///7//////AAD/v///////f////3//f/9///////9//3////9//3//f////3//f////7+E/nqB////v////3//f/////////9///////9//3////////8AAP+///////9///+E/nqB////v////3//f////3//f////7//f///AAD/v/////8AAP+//3///wAA/7//////AAD/v/9///8AAP+/hP56gf///7//f/9/////v/9///8AAP+/hP56gf///7//f/9//38AAP///3//fwAA/38AAP///7//f/9/////v/9//3//fwAA////f/9/AAD//////38AAP///3//fwAA/38AAP///7//////AAD/v///////fwAA////f/9/AAAAAP9//38AAP9//3//fwAAAAD/f/9/AAB6AYR+////v/9//3////+//3//f/9/AAAAAP9//38AAP//////fwAAAAD/f/9/AAB6AYR+////v///////fwAA/////wAA/7//f/9/////v/9///////8//////wAA/7//f///////P3oBhH7///+//////wAA/7//f///////P3oBhH7///+//3//f////7//f///////Pw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_j6b5h")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mhln"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wkdg4"]
+
+[node name="GateStart" type="MeshInstance3D" node_paths=PackedStringArray("area3D")]
+transform = Transform3D(0.0635724, 0, 0, 0, 0.0635724, 0, 0, 0, 0.0635724, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_l82hu")
+mesh = SubResource("ArrayMesh_lwfa1")
+skeleton = NodePath("")
+script = ExtResource("2_e2ny5")
+area3D = NodePath("GateStartArea3D")
+
+[node name="GateStartArea3D" type="Area3D" parent="."]
+transform = Transform3D(32, 0, 0, 0, 10, 0, 0, 0, 4.765, -8.93039, 3.97932, -0.921679)
+
+[node name="GateStartCollisionShape3D" type="CollisionShape3D" parent="GateStartArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0685869)
+shape = SubResource("BoxShape3D_7mhln")
+
+[node name="GateStartMeshInstance3D" type="MeshInstance3D" parent="GateStartArea3D/GateStartCollisionShape3D"]
+visible = false
+mesh = SubResource("BoxMesh_wkdg4")

@@ -1,0 +1,4063 @@
+[gd_scene load_steps=45 format=3 uid="uid://cvt13fj8ep34n"]
+
+[ext_resource type="Script" uid="uid://brld6y3s4jpu8" path="res://Scripts/View/MainView.cs" id="1_istfm"]
+[ext_resource type="Texture2D" uid="uid://c254sfvmgh1jq" path="res://Art/UI/BG.png" id="2_1bj0c"]
+[ext_resource type="Texture2D" uid="uid://doi6vrcax7sc2" path="res://Art/UI/Label.png" id="3_vjuws"]
+[ext_resource type="FontFile" uid="uid://7shuky40lf4s" path="res://Art/Fonts/PressStart2P-Regular.ttf" id="4_sy45q"]
+[ext_resource type="Texture2D" uid="uid://thh7lmu18w55" path="res://Art/UI/Button.png" id="6_ifwt7"]
+[ext_resource type="Texture2D" uid="uid://rwsqsrkrafw6" path="res://Art/UI/MainMenuIco.png" id="6_pygop"]
+[ext_resource type="Texture2D" uid="uid://c26cepyvmgsqu" path="res://Art/UI/ConfigIco.png" id="7_u4phv"]
+[ext_resource type="Texture2D" uid="uid://co8qwwx5h41gp" path="res://Art/UI/LoadIco.png" id="8_vwqyd"]
+[ext_resource type="Texture2D" uid="uid://xl2i1nfydbi" path="res://Art/UI/ConfirmCheckIco.png" id="9_ng8ny"]
+[ext_resource type="Texture2D" uid="uid://csa838503ighy" path="res://Art/UI/SaveIco.png" id="10_h5xw5"]
+[ext_resource type="Texture2D" uid="uid://dg308ii25bqsr" path="res://Art/UI/RestoreIco.png" id="11_yglgc"]
+[ext_resource type="Texture2D" uid="uid://dale2bv6v4la" path="res://Art/UI/TrainningIco.png" id="12_ou8p2"]
+[ext_resource type="Texture2D" uid="uid://bi2mw0t2x644e" path="res://Art/UI/GamesIco.png" id="13_it64b"]
+[ext_resource type="Texture2D" uid="uid://bk2csh7gf8tsr" path="res://Art/2d/flags/AUT.png" id="14_84m37"]
+[ext_resource type="Texture2D" uid="uid://un4pbc7jsdjn" path="res://Art/2d/flags/CAN.png" id="15_vubng"]
+[ext_resource type="Texture2D" uid="uid://ce1u37jq4nqjm" path="res://Art/2d/flags/FIN.png" id="16_8a11g"]
+[ext_resource type="Texture2D" uid="uid://c7oqe2cd7ew7l" path="res://Art/2d/flags/FRA.png" id="17_cno66"]
+[ext_resource type="Texture2D" uid="uid://d3jjh8ob1h24g" path="res://Art/2d/flags/FRG.png" id="18_fwfas"]
+[ext_resource type="Texture2D" uid="uid://cqyxbjnba7d0a" path="res://Art/2d/flags/GBR.png" id="19_uweaa"]
+[ext_resource type="Texture2D" uid="uid://b1p0nwp67ow1w" path="res://Art/2d/flags/GDR.png" id="20_7glwd"]
+[ext_resource type="Texture2D" uid="uid://b2xmo4s62qm5h" path="res://Art/2d/flags/ITA.png" id="21_24ut7"]
+[ext_resource type="Texture2D" uid="uid://cypcx5p4sj3jr" path="res://Art/2d/flags/JPN.png" id="22_varay"]
+[ext_resource type="Texture2D" uid="uid://bilbgx6kn2nj5" path="res://Art/2d/flags/NED.png" id="23_e0g5m"]
+[ext_resource type="Texture2D" uid="uid://n4j4ep3uscjs" path="res://Art/2d/flags/NOR.png" id="24_aaf5q"]
+[ext_resource type="Texture2D" uid="uid://c0prxmoh1e2fp" path="res://Art/2d/flags/SUI.png" id="25_kkns8"]
+[ext_resource type="Texture2D" uid="uid://e5d78os1kuh3" path="res://Art/2d/flags/SWE.png" id="26_e7bij"]
+[ext_resource type="Texture2D" uid="uid://g8k4gaqgdqas" path="res://Art/2d/flags/TCH.png" id="27_geprv"]
+[ext_resource type="Texture2D" uid="uid://cpd6wc4xwp001" path="res://Art/2d/flags/URS.png" id="28_7571r"]
+[ext_resource type="Texture2D" uid="uid://cmgm45fj7wu1w" path="res://Art/2d/flags/USA.png" id="29_2dpoh"]
+[ext_resource type="Texture2D" uid="uid://d0o6d60h1hihb" path="res://Art/UI/ArrowIco.png" id="30_yoygm"]
+[ext_resource type="Texture2D" uid="uid://c0piryd85hoom" path="res://Art/2d/Pictograms/ski.png" id="31_bswxb"]
+[ext_resource type="Texture2D" uid="uid://bngnclb0xajuo" path="res://Art/2d/Pictograms/SpeedSkating.png" id="32_a76n8"]
+[ext_resource type="Texture2D" uid="uid://dhtss4vcxfvnx" path="res://Art/2d/Pictograms/Biathlon.png" id="33_ccgkv"]
+[ext_resource type="Texture2D" uid="uid://clv12fd31cbt6" path="res://Art/2d/Pictograms/Luge.png" id="34_0v6uh"]
+[ext_resource type="Texture2D" uid="uid://c4rveud80mw4a" path="res://Art/2d/Pictograms/Bobsleigh.png" id="35_21jka"]
+[ext_resource type="Texture2D" uid="uid://cspxgjep7t0jt" path="res://Art/2d/Pictograms/SkiJjumping.png" id="36_nv4wm"]
+[ext_resource type="Texture2D" uid="uid://bd7112mo8b5gh" path="res://Art/2d/Pictograms/IceHockey.png" id="37_lor7b"]
+[ext_resource type="Texture2D" uid="uid://c81vqhtoi36ye" path="res://Art/2d/Pictograms/CrossCountry.png" id="38_8rle7"]
+[ext_resource type="Texture2D" uid="uid://ce3dj8mnuj23q" path="res://Art/2d/bronzeMedal.png" id="39_j5ng1"]
+[ext_resource type="Texture2D" uid="uid://cqwhklgi5b4qn" path="res://Art/2d/silverMedal.png" id="40_vmft2"]
+[ext_resource type="Texture2D" uid="uid://df1bp5hxc4dyl" path="res://Art/2d/goldMedal.png" id="41_aobop"]
+[ext_resource type="AudioStream" uid="uid://n1ducl4vptew" path="res://Sounds/2019-12-11_-_Retro_Platforming_-_David_Fesliyan.mp3" id="42_8x23d"]
+
+[sub_resource type="Theme" id="Theme_y0ds6"]
+default_font = ExtResource("4_sy45q")
+default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_sqhxa"]
+default_font = ExtResource("4_sy45q")
+default_font_size = 24
+
+[node name="MainScene" type="Control" node_paths=PackedStringArray("loadingControl")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_istfm")
+loadingControl = NodePath("LoadingControl")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1bj0c")
+expand_mode = 1
+
+[node name="MainScreenTitle" type="NinePatchRect" parent="."]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -499.0
+offset_top = 49.0
+offset_right = 16.0
+offset_bottom = 113.0
+grow_horizontal = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="MainScreenTitleLabel" type="Label" parent="MainScreenTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 36.0
+offset_top = 49.0
+offset_right = 102.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="MainMenuNinePatchRect" type="NinePatchRect" parent="MainMenuButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="MainMenuTextureRect" type="TextureRect" parent="MainMenuButton/MainMenuNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_pygop")
+expand_mode = 1
+
+[node name="TutorialButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 111.0
+offset_top = 49.0
+offset_right = 177.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="TutorialNinePatchRect" type="NinePatchRect" parent="TutorialButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="TutorialTitleLabel" type="Label" parent="TutorialButton/TutorialNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 45
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 186.0
+offset_top = 49.0
+offset_right = 252.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="ConfigNinePatchRect" type="NinePatchRect" parent="ConfigButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigTextureRect" type="TextureRect" parent="ConfigButton/ConfigNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -22.0
+offset_right = 24.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_u4phv")
+expand_mode = 1
+
+[node name="LoadButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 260.0
+offset_top = 49.0
+offset_right = 326.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="LoadNinePatchRect" type="NinePatchRect" parent="LoadButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="LoadTextureRect" type="TextureRect" parent="LoadButton/LoadNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -23.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_vwqyd")
+expand_mode = 1
+
+[node name="CreditsButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 334.0
+offset_top = 49.0
+offset_right = 400.0
+offset_bottom = 113.0
+grow_horizontal = 2
+
+[node name="CreditsNinePatchRect" type="NinePatchRect" parent="CreditsButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CreditsTitleLabel" type="Label" parent="CreditsButton/CreditsNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 45
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="."]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 407.0
+offset_top = 48.0
+offset_right = 473.0
+offset_bottom = 112.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="ExitButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ExitTitleLabel" type="Label" parent="ExitButton/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 26.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 45
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -441.0
+offset_top = 173.0
+offset_right = 443.0
+offset_bottom = 633.0
+grow_horizontal = 2
+
+[node name="QuitLabel" type="Label" parent="QuitControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -46.0
+offset_right = 375.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 25
+text = "Are you sure you want to quit?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="QuitControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = 72.0
+offset_right = 33.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuitNinePatchRect" type="NinePatchRect" parent="QuitControl/QuitButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="QuitTextureRect" type="TextureRect" parent="QuitControl/QuitButton/QuitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ng8ny")
+expand_mode = 1
+
+[node name="CreditsControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -442.0
+offset_top = 173.0
+offset_right = 442.0
+offset_bottom = 633.0
+grow_horizontal = 2
+
+[node name="CreditsLabel" type="Label" parent="CreditsControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -14.0
+offset_right = 375.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 25
+text = "Created by Igor Ayello Borges
+
+Music by fesliyanstudios
+
+https://www.FesliyanStudios.com"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -442.0
+offset_top = 173.0
+offset_right = 442.0
+offset_bottom = 633.0
+grow_horizontal = 2
+
+[node name="SaveSlot0" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 8.0
+offset_right = 461.0
+offset_bottom = 72.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot0"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot0/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -25.0
+offset_right = 461.5
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot1" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 88.0
+offset_right = 461.0
+offset_bottom = 152.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot1/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot2" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 168.0
+offset_right = 461.0
+offset_bottom = 232.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot2/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot3" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 248.0
+offset_right = 461.0
+offset_bottom = 312.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot3/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveSlot4" type="Button" parent="LoadControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -466.0
+offset_top = 328.0
+offset_right = 461.0
+offset_bottom = 392.0
+grow_horizontal = 2
+
+[node name="ExitNinePatchRect" type="NinePatchRect" parent="LoadControl/SaveSlot4"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SaveTitleLabel" type="Label" parent="LoadControl/SaveSlot4/ExitNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -454.5
+offset_top = -21.0
+offset_right = 461.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sqhxa")
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -442.0
+offset_top = 173.0
+offset_right = 442.0
+offset_bottom = 633.0
+grow_horizontal = 2
+
+[node name="ConfigPause" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.5
+offset_top = -161.0
+offset_right = -12.5
+offset_bottom = -111.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigPauseLabel" type="Label" parent="ConfigControl/ConfigPause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigPauseButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -2.0
+offset_top = 69.0
+offset_right = 233.0
+offset_bottom = 119.0
+grow_horizontal = 2
+
+[node name="ConfigPauseNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigPauseButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigPauseTitleLabel" type="Label" parent="ConfigControl/ConfigPauseButton/ConfigPauseNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigUp" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -490.5
+offset_top = -95.0
+offset_right = -255.5
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigUpLabel" type="Label" parent="ConfigControl/ConfigUp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "UP"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ConfigUpButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -245.0
+offset_top = 134.0
+offset_right = -10.0
+offset_bottom = 184.0
+grow_horizontal = 2
+
+[node name="ConfigUpNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigUpButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigUpTitleLabel" type="Label" parent="ConfigControl/ConfigUpButton/ConfigUpNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigDown" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -490.5
+offset_top = -33.0
+offset_right = -255.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigDownLabel" type="Label" parent="ConfigControl/ConfigDown"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "DOWN"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ConfigDownButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -245.0
+offset_top = 197.0
+offset_right = -10.0
+offset_bottom = 247.0
+grow_horizontal = 2
+
+[node name="ConfigDownNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigDownButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigDownTitleLabel" type="Label" parent="ConfigControl/ConfigDownButton/ConfigDownNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigLeft" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -97.0
+offset_right = 233.5
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigLeftLabel" type="Label" parent="ConfigControl/ConfigLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "LEFT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigLeftButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 244.0
+offset_top = 133.0
+offset_right = 479.0
+offset_bottom = 183.0
+grow_horizontal = 2
+
+[node name="ConfigLeftNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigLeftButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigLeftTitleLabel" type="Label" parent="ConfigControl/ConfigLeftButton/ConfigLeftNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigRight" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -33.0
+offset_right = 233.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigRightLabel" type="Label" parent="ConfigControl/ConfigRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "RIGHT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigRightButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 244.0
+offset_top = 197.0
+offset_right = 479.0
+offset_bottom = 247.0
+grow_horizontal = 2
+
+[node name="ConfigRightNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigRightButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigRightTitleLabel" type="Label" parent="ConfigControl/ConfigRightButton/ConfigRightNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButton1" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -490.5
+offset_top = 31.0
+offset_right = -255.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigButton1Label" type="Label" parent="ConfigControl/ConfigButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "BUTTON 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButton1Button" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -245.0
+offset_top = 261.0
+offset_right = -10.0
+offset_bottom = 311.0
+grow_horizontal = 2
+
+[node name="ConfigButton1NinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigButton1Button"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigButton1TitleLabel" type="Label" parent="ConfigControl/ConfigButton1Button/ConfigButton1NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButton2" type="NinePatchRect" parent="ConfigControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = 31.0
+offset_right = 233.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="ConfigButton2Label" type="Label" parent="ConfigControl/ConfigButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "BUTTON 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButton2Button" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 244.0
+offset_top = 262.0
+offset_right = 479.0
+offset_bottom = 312.0
+grow_horizontal = 2
+
+[node name="ConfigButton2NinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigButton2Button"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigButton2TitleLabel" type="Label" parent="ConfigControl/ConfigButton2Button/ConfigButton2NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 18
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButtonKeyboard" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -306.0
+offset_top = 341.0
+offset_right = -71.0
+offset_bottom = 391.0
+grow_horizontal = 2
+
+[node name="ConfigButtonKeyboardNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigButtonKeyboard"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigButtonKeyboardTitleLabel" type="Label" parent="ConfigControl/ConfigButtonKeyboard/ConfigButtonKeyboardNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "Keyboard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigButtonJoystick" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 341.0
+offset_right = 175.0
+offset_bottom = 391.0
+grow_horizontal = 2
+
+[node name="ConfigButtonJoystickNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigButtonJoystick"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigButtonJoystickTitleLabel" type="Label" parent="ConfigControl/ConfigButtonJoystick/ConfigButtonJoystickNinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "Joystick"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfigSaveButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 186.0
+offset_top = 341.0
+offset_right = 236.0
+offset_bottom = 391.0
+grow_horizontal = 2
+
+[node name="ConfigSaveNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigSaveButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigSaveTextureRect" type="TextureRect" parent="ConfigControl/ConfigSaveButton/ConfigSaveNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_h5xw5")
+expand_mode = 1
+
+[node name="ConfigRestoreButton" type="Button" parent="ConfigControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 244.0
+offset_top = 341.0
+offset_right = 294.0
+offset_bottom = 391.0
+grow_horizontal = 2
+
+[node name="ConfigRestoreNinePatchRect" type="NinePatchRect" parent="ConfigControl/ConfigRestoreButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="ConfigRestoreTextureRect" type="TextureRect" parent="ConfigControl/ConfigRestoreButton/ConfigRestoreNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_yglgc")
+expand_mode = 1
+
+[node name="TutorialControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -442.0
+offset_top = 173.0
+offset_right = 442.0
+offset_bottom = 633.0
+grow_horizontal = 2
+
+[node name="TutorialLabel" type="Label" parent="TutorialControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -541.0
+offset_top = -222.0
+offset_right = -21.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 10
+text = "
+.Downhill, Slalom, Giant slalom and Super G 
+Press the right or left button to move
+Press button 1 to accelerate
+Press button 2 to brake
+
+.Speed skating 500 metres and 1500 metres 
+When the blue target is over one of the arrows, 
+press the corresponding arrow on the controller.
+
+.Biathlon 
+During the race, when the blue target is over
+ one of the arrows, press the corresponding arrow
+ on the controller.
+During the shooting part, position the target in the
+ black circle and press button 1 to shoot.
+
+.Luge and Bobsleigh
+Press button 1 to set the momentum
+Press the right or left button to move"
+vertical_alignment = 1
+
+[node name="TutorialLabel2" type="Label" parent="TutorialControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -222.0
+offset_right = 525.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 10
+text = ".Ski jumping 
+Press button 1 to set the boost.
+Press the right or left button to move.
+Try to keep the arrow in the middle of the bar graph.
+
+.Ice Hockey 
+Press the directional pad to move.
+On offense, press button 1 to shoot at goal.
+On offense, press button 2 to pass the puck.
+On defense, press button 2 to switch players.
+
+.Cross Country
+Press the directional pad to move
+Press button 1 to accelerate
+Press button 2 to brake
+If the energy drops, the speed will also drop."
+vertical_alignment = 1
+
+[node name="MainMenuControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -442.0
+offset_top = 173.0
+offset_right = 442.0
+offset_bottom = 633.0
+grow_horizontal = 2
+
+[node name="MainMenuModeTrainningButton" type="Button" parent="MainMenuControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -305.0
+offset_top = 40.0
+offset_right = -5.0
+offset_bottom = 390.0
+grow_horizontal = 2
+
+[node name="MainMenuModeTrainningNinePatchRect" type="NinePatchRect" parent="MainMenuControl/MainMenuModeTrainningButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="MainMenuModeTrainningTextureRect" type="TextureRect" parent="MainMenuControl/MainMenuModeTrainningButton/MainMenuModeTrainningNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -142.0
+offset_right = 121.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ou8p2")
+expand_mode = 1
+
+[node name="MainMenuModeTrainningLabel" type="Label" parent="MainMenuControl/MainMenuModeTrainningButton/MainMenuModeTrainningNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = 130.0
+offset_right = 150.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 25
+text = "Trainning"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuModeGamesButton" type="Button" parent="MainMenuControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 39.0
+offset_top = 40.0
+offset_right = 339.0
+offset_bottom = 390.0
+grow_horizontal = 2
+
+[node name="MainMenuModeGamesNinePatchRect" type="NinePatchRect" parent="MainMenuControl/MainMenuModeGamesButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="MainMenuModeGamesTextureRect" type="TextureRect" parent="MainMenuControl/MainMenuModeGamesButton/MainMenuModeGamesNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -142.0
+offset_right = 121.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_it64b")
+expand_mode = 1
+
+[node name="MainMenuModeGamesLabel" type="Label" parent="MainMenuControl/MainMenuModeGamesButton/MainMenuModeGamesNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = 130.0
+offset_right = 150.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_sy45q")
+theme_override_font_sizes/font_size = 25
+text = "Games"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SimpleModalControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 720.0
+grow_horizontal = 2
+
+[node name="SimpleModalBG" type="TextureRect" parent="SimpleModalControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1bj0c")
+expand_mode = 1
+
+[node name="SimpleModalTitle" type="NinePatchRect" parent="SimpleModalControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -259.0
+offset_top = 57.0
+offset_right = 256.0
+offset_bottom = 121.0
+grow_horizontal = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="SimpleModalTitleLabel" type="Label" parent="SimpleModalControl/SimpleModalTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SimpleModalContextLabel" type="Label" parent="SimpleModalControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -249.5
+offset_top = 328.0
+offset_right = 265.5
+offset_bottom = 392.0
+grow_horizontal = 2
+theme = SubResource("Theme_y0ds6")
+theme_override_colors/font_color = Color(0, 0.498039, 0.776471, 1)
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SimpleModalButton" type="Button" parent="SimpleModalControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 585.0
+offset_right = 46.0
+offset_bottom = 649.0
+grow_horizontal = 2
+
+[node name="SimpleModalNinePatchRect" type="NinePatchRect" parent="SimpleModalControl/SimpleModalButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SimpleModalTextureRect" type="TextureRect" parent="SimpleModalControl/SimpleModalButton/SimpleModalNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ng8ny")
+expand_mode = 1
+
+[node name="CountryControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -441.0
+offset_top = 174.0
+offset_right = 443.0
+offset_bottom = 634.0
+grow_horizontal = 2
+
+[node name="CountryButton1" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -577.0
+offset_top = 31.0
+offset_right = -443.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect1" type="NinePatchRect" parent="CountryControl/CountryButton1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel1" type="Label" parent="CountryControl/CountryButton1/CountryNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "AUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect1" type="TextureRect" parent="CountryControl/CountryButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_84m37")
+expand_mode = 1
+
+[node name="CountryButton2" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -433.0
+offset_top = 31.0
+offset_right = -299.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect2" type="NinePatchRect" parent="CountryControl/CountryButton2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel2" type="Label" parent="CountryControl/CountryButton2/CountryNinePatchRect2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "CAN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect2" type="TextureRect" parent="CountryControl/CountryButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_vubng")
+expand_mode = 1
+
+[node name="CountryButton3" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -289.0
+offset_top = 31.0
+offset_right = -155.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect3" type="NinePatchRect" parent="CountryControl/CountryButton3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel3" type="Label" parent="CountryControl/CountryButton3/CountryNinePatchRect3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "FIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect3" type="TextureRect" parent="CountryControl/CountryButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_8a11g")
+expand_mode = 1
+
+[node name="CountryButton4" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.0
+offset_top = 31.0
+offset_right = -11.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect4" type="NinePatchRect" parent="CountryControl/CountryButton4"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel4" type="Label" parent="CountryControl/CountryButton4/CountryNinePatchRect4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "FRA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect4" type="TextureRect" parent="CountryControl/CountryButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_cno66")
+expand_mode = 1
+
+[node name="CountryButton5" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 31.0
+offset_right = 133.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect5" type="NinePatchRect" parent="CountryControl/CountryButton5"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel5" type="Label" parent="CountryControl/CountryButton5/CountryNinePatchRect5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "FRG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect5" type="TextureRect" parent="CountryControl/CountryButton5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_fwfas")
+expand_mode = 1
+
+[node name="CountryButton6" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 143.0
+offset_top = 31.0
+offset_right = 277.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect6" type="NinePatchRect" parent="CountryControl/CountryButton6"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel6" type="Label" parent="CountryControl/CountryButton6/CountryNinePatchRect6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "GBR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect6" type="TextureRect" parent="CountryControl/CountryButton6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_uweaa")
+expand_mode = 1
+
+[node name="CountryButton7" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 287.0
+offset_top = 31.0
+offset_right = 421.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect7" type="NinePatchRect" parent="CountryControl/CountryButton7"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel7" type="Label" parent="CountryControl/CountryButton7/CountryNinePatchRect7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "GDR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect7" type="TextureRect" parent="CountryControl/CountryButton7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_7glwd")
+expand_mode = 1
+
+[node name="CountryButton8" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 431.0
+offset_top = 31.0
+offset_right = 565.0
+offset_bottom = 149.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect8" type="NinePatchRect" parent="CountryControl/CountryButton8"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel8" type="Label" parent="CountryControl/CountryButton8/CountryNinePatchRect8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "ITA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect8" type="TextureRect" parent="CountryControl/CountryButton8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_24ut7")
+expand_mode = 1
+
+[node name="CountryButton9" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -577.0
+offset_top = 167.0
+offset_right = -443.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect9" type="NinePatchRect" parent="CountryControl/CountryButton9"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel9" type="Label" parent="CountryControl/CountryButton9/CountryNinePatchRect9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "JPN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect9" type="TextureRect" parent="CountryControl/CountryButton9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_varay")
+expand_mode = 1
+
+[node name="CountryButton10" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -433.0
+offset_top = 167.0
+offset_right = -299.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect10" type="NinePatchRect" parent="CountryControl/CountryButton10"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel10" type="Label" parent="CountryControl/CountryButton10/CountryNinePatchRect10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "NED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect10" type="TextureRect" parent="CountryControl/CountryButton10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_e0g5m")
+expand_mode = 1
+
+[node name="CountryButton11" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -289.0
+offset_top = 167.0
+offset_right = -155.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect11" type="NinePatchRect" parent="CountryControl/CountryButton11"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel11" type="Label" parent="CountryControl/CountryButton11/CountryNinePatchRect11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "NOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect11" type="TextureRect" parent="CountryControl/CountryButton11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_aaf5q")
+expand_mode = 1
+
+[node name="CountryButton12" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.0
+offset_top = 167.0
+offset_right = -11.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect12" type="NinePatchRect" parent="CountryControl/CountryButton12"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel12" type="Label" parent="CountryControl/CountryButton12/CountryNinePatchRect12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "SUI"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect12" type="TextureRect" parent="CountryControl/CountryButton12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_kkns8")
+expand_mode = 1
+
+[node name="CountryButton13" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 167.0
+offset_right = 133.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect13" type="NinePatchRect" parent="CountryControl/CountryButton13"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel13" type="Label" parent="CountryControl/CountryButton13/CountryNinePatchRect13"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "SWE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect13" type="TextureRect" parent="CountryControl/CountryButton13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_e7bij")
+expand_mode = 1
+
+[node name="CountryButton14" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 143.0
+offset_top = 167.0
+offset_right = 277.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect14" type="NinePatchRect" parent="CountryControl/CountryButton14"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel14" type="Label" parent="CountryControl/CountryButton14/CountryNinePatchRect14"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "TCH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect14" type="TextureRect" parent="CountryControl/CountryButton14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_geprv")
+expand_mode = 1
+
+[node name="CountryButton15" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 287.0
+offset_top = 167.0
+offset_right = 421.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect15" type="NinePatchRect" parent="CountryControl/CountryButton15"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel15" type="Label" parent="CountryControl/CountryButton15/CountryNinePatchRect15"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "URS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect15" type="TextureRect" parent="CountryControl/CountryButton15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_7571r")
+expand_mode = 1
+
+[node name="CountryButton16" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 431.0
+offset_top = 167.0
+offset_right = 565.0
+offset_bottom = 285.0
+grow_horizontal = 2
+
+[node name="CountryNinePatchRect16" type="NinePatchRect" parent="CountryControl/CountryButton16"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="CountryTitleLabel16" type="Label" parent="CountryControl/CountryButton16/CountryNinePatchRect16"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -39.0
+offset_right = 58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 22
+text = "USA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountryTextureRect16" type="TextureRect" parent="CountryControl/CountryButton16"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -49.0
+offset_right = 58.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_2dpoh")
+expand_mode = 1
+
+[node name="GoToSportsButton" type="Button" parent="CountryControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.0
+offset_top = 368.0
+offset_right = 33.0
+offset_bottom = 432.0
+grow_horizontal = 2
+
+[node name="GoToSportsNinePatchRect" type="NinePatchRect" parent="CountryControl/GoToSportsButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="GoToSportsTextureRect" type="TextureRect" parent="CountryControl/GoToSportsButton/GoToSportsNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_yoygm")
+expand_mode = 1
+
+[node name="SportSelectControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -441.0
+offset_top = 174.0
+offset_right = 443.0
+offset_bottom = 634.0
+grow_horizontal = 2
+
+[node name="GoToDifficultButton" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 370.0
+offset_right = 65.0
+offset_bottom = 434.0
+grow_horizontal = 2
+
+[node name="GoToDifficultNinePatchRect" type="NinePatchRect" parent="SportSelectControl/GoToDifficultButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="GoToDifficultTextureRect" type="TextureRect" parent="SportSelectControl/GoToDifficultButton/GoToDifficultNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_yoygm")
+expand_mode = 1
+
+[node name="BackToCountryButton" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 371.0
+offset_right = -15.0
+offset_bottom = 435.0
+grow_horizontal = 2
+
+[node name="BackToCountryNinePatchRect" type="NinePatchRect" parent="SportSelectControl/BackToCountryButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToCountryTextureRect" type="TextureRect" parent="SportSelectControl/BackToCountryButton/BackToCountryNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 60.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+texture = ExtResource("30_yoygm")
+expand_mode = 1
+
+[node name="SportButton1" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -529.0
+offset_top = -1.0
+offset_right = -369.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect1" type="NinePatchRect" parent="SportSelectControl/SportButton1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel1" type="Label" parent="SportSelectControl/SportButton1/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 14
+text = "Downhill"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect1" type="TextureRect" parent="SportSelectControl/SportButton1/SportNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_bswxb")
+expand_mode = 1
+
+[node name="SportButton2" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -353.0
+offset_top = -1.0
+offset_right = -193.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect2" type="NinePatchRect" parent="SportSelectControl/SportButton2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel2" type="Label" parent="SportSelectControl/SportButton2/SportNinePatchRect2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 14
+text = "Slalom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect2" type="TextureRect" parent="SportSelectControl/SportButton2/SportNinePatchRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_bswxb")
+expand_mode = 1
+
+[node name="SportButton3" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -177.0
+offset_top = -1.0
+offset_right = -17.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect3" type="NinePatchRect" parent="SportSelectControl/SportButton3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel3" type="Label" parent="SportSelectControl/SportButton3/SportNinePatchRect3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -36.0
+offset_right = 79.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 12
+text = "Giant
+ slalom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect3" type="TextureRect" parent="SportSelectControl/SportButton3/SportNinePatchRect3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_bswxb")
+expand_mode = 1
+
+[node name="SportButton4" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 159.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect4" type="NinePatchRect" parent="SportSelectControl/SportButton4"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel4" type="Label" parent="SportSelectControl/SportButton4/SportNinePatchRect4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 14
+text = "Super G "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect4" type="TextureRect" parent="SportSelectControl/SportButton4/SportNinePatchRect4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_bswxb")
+expand_mode = 1
+
+[node name="SportButton5" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 175.0
+offset_top = -1.0
+offset_right = 335.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect5" type="NinePatchRect" parent="SportSelectControl/SportButton5"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel5" type="Label" parent="SportSelectControl/SportButton5/SportNinePatchRect5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -36.0
+offset_right = 79.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 10
+text = "Speed skating
+500 metres "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect5" type="TextureRect" parent="SportSelectControl/SportButton5/SportNinePatchRect5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_a76n8")
+expand_mode = 1
+
+[node name="SportButton6" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 351.0
+offset_top = -1.0
+offset_right = 511.0
+offset_bottom = 154.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect6" type="NinePatchRect" parent="SportSelectControl/SportButton6"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel6" type="Label" parent="SportSelectControl/SportButton6/SportNinePatchRect6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 10
+text = "Speed skating
+1500 metres "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect6" type="TextureRect" parent="SportSelectControl/SportButton6/SportNinePatchRect6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_a76n8")
+expand_mode = 1
+
+[node name="SportButton7" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -529.0
+offset_top = 167.0
+offset_right = -369.0
+offset_bottom = 322.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect7" type="NinePatchRect" parent="SportSelectControl/SportButton7"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel7" type="Label" parent="SportSelectControl/SportButton7/SportNinePatchRect7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 14
+text = "Biathlon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect7" type="TextureRect" parent="SportSelectControl/SportButton7/SportNinePatchRect7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_ccgkv")
+expand_mode = 1
+
+[node name="SportButton8" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -353.0
+offset_top = 167.0
+offset_right = -193.0
+offset_bottom = 322.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect8" type="NinePatchRect" parent="SportSelectControl/SportButton8"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel8" type="Label" parent="SportSelectControl/SportButton8/SportNinePatchRect8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 14
+text = "Luge"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect8" type="TextureRect" parent="SportSelectControl/SportButton8/SportNinePatchRect8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("34_0v6uh")
+expand_mode = 1
+
+[node name="SportButton9" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -177.0
+offset_top = 167.0
+offset_right = -17.0
+offset_bottom = 322.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect9" type="NinePatchRect" parent="SportSelectControl/SportButton9"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel9" type="Label" parent="SportSelectControl/SportButton9/SportNinePatchRect9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -36.0
+offset_right = 79.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 12
+text = "Bobsleigh"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect9" type="TextureRect" parent="SportSelectControl/SportButton9/SportNinePatchRect9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("35_21jka")
+expand_mode = 1
+
+[node name="SportButton10" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 167.0
+offset_right = 159.0
+offset_bottom = 322.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect10" type="NinePatchRect" parent="SportSelectControl/SportButton10"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel10" type="Label" parent="SportSelectControl/SportButton10/SportNinePatchRect10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 12
+text = "Ski
+ jumping "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect10" type="TextureRect" parent="SportSelectControl/SportButton10/SportNinePatchRect10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_nv4wm")
+expand_mode = 1
+
+[node name="SportButton11" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 175.0
+offset_top = 167.0
+offset_right = 335.0
+offset_bottom = 322.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect11" type="NinePatchRect" parent="SportSelectControl/SportButton11"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel11" type="Label" parent="SportSelectControl/SportButton11/SportNinePatchRect11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -36.0
+offset_right = 79.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 13
+text = "Ice Hockey"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect11" type="TextureRect" parent="SportSelectControl/SportButton11/SportNinePatchRect11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("37_lor7b")
+expand_mode = 1
+
+[node name="SportButton12" type="Button" parent="SportSelectControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 351.0
+offset_top = 167.0
+offset_right = 511.0
+offset_bottom = 322.0
+grow_horizontal = 2
+
+[node name="SportNinePatchRect12" type="NinePatchRect" parent="SportSelectControl/SportButton12"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="SportTitleLabel12" type="Label" parent="SportSelectControl/SportButton12/SportNinePatchRect12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -39.0
+offset_right = 79.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 10
+text = "Cross 
+Country"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SportTextureRect12" type="TextureRect" parent="SportSelectControl/SportButton12/SportNinePatchRect12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.5
+offset_right = 58.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("38_8rle7")
+expand_mode = 1
+
+[node name="DifficultControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -441.0
+offset_top = 174.0
+offset_right = 443.0
+offset_bottom = 634.0
+grow_horizontal = 2
+
+[node name="DifficultButton1" type="Button" parent="DifficultControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -353.0
+offset_top = 31.0
+offset_right = -135.0
+offset_bottom = 296.0
+grow_horizontal = 2
+
+[node name="DifficultNinePatchRect1" type="NinePatchRect" parent="DifficultControl/DifficultButton1"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="DifficultTitleLabel1" type="Label" parent="DifficultControl/DifficultButton1/DifficultNinePatchRect1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -55.0
+offset_right = 110.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 20
+text = "Easy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultTextureRect1" type="TextureRect" parent="DifficultControl/DifficultButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -89.5
+offset_right = 85.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("39_j5ng1")
+expand_mode = 1
+
+[node name="DifficultButton2" type="Button" parent="DifficultControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_top = 31.0
+offset_right = 107.0
+offset_bottom = 296.0
+grow_horizontal = 2
+
+[node name="DifficultNinePatchRect2" type="NinePatchRect" parent="DifficultControl/DifficultButton2"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="DifficultTitleLabel2" type="Label" parent="DifficultControl/DifficultButton2/DifficultNinePatchRect2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -55.0
+offset_right = 110.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 20
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultTextureRect2" type="TextureRect" parent="DifficultControl/DifficultButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -89.5
+offset_right = 85.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("40_vmft2")
+expand_mode = 1
+
+[node name="DifficultButton3" type="Button" parent="DifficultControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 137.0
+offset_top = 31.0
+offset_right = 355.0
+offset_bottom = 296.0
+grow_horizontal = 2
+
+[node name="DifficultNinePatchRect2" type="NinePatchRect" parent="DifficultControl/DifficultButton3"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="DifficultTitleLabel2" type="Label" parent="DifficultControl/DifficultButton3/DifficultNinePatchRect2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -55.0
+offset_right = 110.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_y0ds6")
+theme_override_font_sizes/font_size = 20
+text = "Hard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultTextureRect2" type="TextureRect" parent="DifficultControl/DifficultButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -89.5
+offset_right = 85.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("41_aobop")
+expand_mode = 1
+
+[node name="GoToGamePlay" type="Button" parent="DifficultControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 370.0
+offset_right = 65.0
+offset_bottom = 434.0
+grow_horizontal = 2
+
+[node name="GoToGamePlayNinePatchRect" type="NinePatchRect" parent="DifficultControl/GoToGamePlay"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="GoToDifficultTextureRect" type="TextureRect" parent="DifficultControl/GoToGamePlay/GoToGamePlayNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_yoygm")
+expand_mode = 1
+
+[node name="BackToSportButton" type="Button" parent="DifficultControl"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 369.0
+offset_right = -15.0
+offset_bottom = 433.0
+grow_horizontal = 2
+
+[node name="BackToSportNinePatchRect" type="NinePatchRect" parent="DifficultControl/BackToSportButton"]
+modulate = Color(0, 0.607843, 0.941176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ifwt7")
+region_rect = Rect2(0, 0, 31, 31)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 7
+patch_margin_bottom = 9
+
+[node name="BackToSportTextureRect" type="TextureRect" parent="DifficultControl/BackToSportButton/BackToSportNinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 60.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+texture = ExtResource("30_yoygm")
+expand_mode = 1
+
+[node name="LoadingControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="LoadingControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1bj0c")
+expand_mode = 1
+
+[node name="LoadingScreenTitle" type="NinePatchRect" parent="LoadingControl"]
+modulate = Color(0, 0.509804, 0.796078, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vjuws")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="LoadingScreenTitleLabel" type="Label" parent="LoadingControl/LoadingScreenTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -32.0
+offset_right = 257.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y0ds6")
+text = "Loading"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("42_8x23d")
+volume_db = 5.0
+autoplay = true

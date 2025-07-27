@@ -1,0 +1,84 @@
+Países
+
+.Austria
+.Italy
+.France
+.Netherlands
+.Sweden
+.Finland
+.Norway
+.Switzerland
+.West Germany	
+.Japan
+.East Germany
+.Czechoslovakia	
+.Great Britain
+.United States
+.Canada
+.Soviet Union
+
+Esportes
+
+.Downhill 
+.Slalom
+.Giant slalom 
+.Super G 
+.Speed skating 500 metres 
+.Speed skating 1500 metres 
+.Biathlon 
+.Luge 
+.Bobsleigh 
+.Ski jumping 
+.Ice Hockey 
+.Cross Country
+
+------------------------------------------------
+
+.Downhill, Slalom, Giant slalom and Super G 
+Press the right or left button to move
+Press button 1 to accelerate
+Press button 2 to brake
+
+.Speed skating 500 metres and 1500 metres 
+When the blue target is over one of the arrows, press the corresponding arrow on the controller.
+
+.Biathlon 
+During the race, when the blue target is over one of the arrows, press the corresponding arrow on the controller.
+During the shooting part, position the target in the black circle and press button 1 to shoot.
+
+.Luge and Bobsleigh
+Press button 1 to set the momentum
+Press the right or left button to move
+
+.Ski jumping 
+Press button 1 to set the boost.
+Press the right or left button to move.
+Try to keep the arrow in the middle of the bar graph.
+
+.Ice Hockey 
+Press the directional pad to move.
+On offense, press button 1 to shoot at goal.
+On offense, press button 2 to pass the puck.
+On defense, press button 2 to switch players.
+
+.Cross Country
+Press the directional pad to move
+Press button 1 to accelerate
+Press button 2 to brake
+If the energy drops, the speed will also drop.
+
+------------------------------------------------
+
+.Atualizar repositório
+.Gravar video
+.Itch.io
+.Linkedin
+.Discord Godot
+.Facebook Godot
+.Redit Godot
+
+Meu terceiro jogo lançado e primeiro utilizando a Godot Engine em C#, para os gráficos usei Blender, Gimp e InkScape.
+Existem alguns bugs que pretendo corrigir no fututro principalmente na modalidade Hockey no gelo.
+
+My third game released and the first using Godot Engine in C#. For the graphics, I used Blender, Gimp, and InkScape.
+There are some bugs intend to fix, especially in the Ice Hockey mode.

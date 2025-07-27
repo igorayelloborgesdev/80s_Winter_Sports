@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cftadwrrnjq7"]
+
+[ext_resource type="PackedScene" uid="uid://b1auudni3a0tp" path="res://Art/3d/Suporter.glb" id="1_jjujy"]
+[ext_resource type="Script" uid="uid://cds011o7uflxs" path="res://Scripts/Prefabs/Supporter.cs" id="2_y1ifo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ty6ya"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.345098, 0.176471, 0.34902, 1)
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slmqh"]
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.34902, 0.270588, 0.188235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykgqr"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.937255, 0.662745, 0.568627, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh4qj"]
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="Suporter" instance=ExtResource("1_jjujy")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+script = ExtResource("2_y1ifo")
+colorsList = PackedColorArray(0.760784, 0, 0, 1, 0.87451, 0.717647, 0, 1, 0.976471, 0.560784, 0.0941176, 1, 0.0901961, 0.329412, 1, 1, 0, 0.639216, 0, 1, 0.729412, 0.0666667, 0.454902, 1)
+
+[node name="Body" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ty6ya")
+
+[node name="Hair" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_slmqh")
+
+[node name="Head" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_ykgqr")
+
+[node name="LEye" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_oh4qj")
+
+[node name="Neck" parent="." index="4"]
+material_override = SubResource("StandardMaterial3D_ykgqr")
+
+[node name="REye" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_oh4qj")

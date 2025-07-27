@@ -1,0 +1,159 @@
+[gd_scene load_steps=14 format=3 uid="uid://f8pv5bxlrnrk"]
+
+[ext_resource type="PackedScene" uid="uid://bluig42ne3jqo" path="res://Art/3d/SkiJumpTrack.glb" id="1_6rm0f"]
+[ext_resource type="Script" uid="uid://bm04ybvdddjvn" path="res://Scripts/Prefabs/SkiJump.cs" id="2_h6tdl"]
+[ext_resource type="Texture2D" uid="uid://dwlvxquxshfgg" path="res://Art/3d/DonwhillTrack_DownhillFloor.png" id="3_56n4v"]
+[ext_resource type="PackedScene" uid="uid://cisv43q421rkp" path="res://Prefab/grandstand.tscn" id="4_us84p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ensp"]
+shading_mode = 0
+albedo_color = Color(0.823529, 0.823529, 0.823529, 1)
+albedo_texture = ExtResource("3_56n4v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ok18t"]
+shading_mode = 0
+albedo_color = Color(0.0980392, 0.392157, 0.843137, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eq20u"]
+shading_mode = 0
+albedo_color = Color(0.0980392, 0.392157, 0.843137, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iit1g"]
+shading_mode = 0
+albedo_color = Color(0.823529, 0.823529, 0.823529, 1)
+albedo_texture = ExtResource("3_56n4v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_td500"]
+shading_mode = 0
+albedo_color = Color(0.796078, 0.176471, 0.0862745, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xhfxv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pybo7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kdsjf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyimx"]
+shading_mode = 0
+albedo_color = Color(0.498039, 0.717647, 0.952941, 1)
+
+[node name="SkiJumpTrack" node_paths=PackedStringArray("track", "initPoint") instance=ExtResource("1_6rm0f")]
+script = ExtResource("2_h6tdl")
+track = NodePath("Track")
+initPoint = NodePath("InitPoint1")
+
+[node name="SkiJumpRamp_002" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1ensp")
+
+[node name="SkiJumpRamp_003" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04825, -0.0445196, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_ok18t")
+
+[node name="SkiJumpRamp_004" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04825, -0.0445196, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_eq20u")
+
+[node name="SkiJumpLand_003" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_iit1g")
+
+[node name="SkiJumpLand_004" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20416, -1.72202, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_td500")
+
+[node name="Grandstand" parent="." index="7" instance=ExtResource("4_us84p")]
+transform = Transform3D(-1.07093e-08, 0, -0.245, 0, 0.245, 0, 0.245, 0, -1.07093e-08, 13.501, -3.29137, -0.0669854)
+
+[node name="Grandstand2" parent="." index="8" node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("4_us84p")]
+transform = Transform3D(0.245, 0, 0, 0, 0.245, 0, 0, 0, 0.245, 10.9578, -3.29137, -1.31746)
+pointsList1 = [NodePath("../Grandstand/p0"), NodePath("../Grandstand/p1"), NodePath("../Grandstand/p2")]
+pointsList2 = [NodePath("../Grandstand/p3"), NodePath("../Grandstand/p4"), NodePath("../Grandstand/p5")]
+pointsList3 = [NodePath("../Grandstand/p6"), NodePath("../Grandstand/p7"), NodePath("../Grandstand/p8")]
+pointsList4 = [NodePath("../Grandstand/p9"), NodePath("../Grandstand/p10"), NodePath("../Grandstand/p11")]
+pointsList5 = [NodePath("../Grandstand/p12"), NodePath("../Grandstand/p13"), NodePath("../Grandstand/p14")]
+pointsList6 = [NodePath("../Grandstand/p15"), NodePath("../Grandstand/p16"), NodePath("../Grandstand/p17")]
+pointsList7 = [NodePath("../Grandstand/p18"), NodePath("../Grandstand/p19"), NodePath("../Grandstand/p20")]
+pointsList8 = [NodePath("../Grandstand/p21"), NodePath("../Grandstand/p22"), NodePath("../Grandstand/p23")]
+
+[node name="Grandstand3" parent="." index="9" node_paths=PackedStringArray("pointsList1", "pointsList2", "pointsList3", "pointsList4", "pointsList5", "pointsList6", "pointsList7", "pointsList8") instance=ExtResource("4_us84p")]
+transform = Transform3D(-0.245, 0, -2.14186e-08, 0, 0.245, 0, 2.14186e-08, 0, -0.245, 10.9599, -3.29137, 1.32281)
+pointsList1 = [NodePath("../Grandstand/p0"), NodePath("../Grandstand/p1"), NodePath("../Grandstand/p2")]
+pointsList2 = [NodePath("../Grandstand/p3"), NodePath("../Grandstand/p4"), NodePath("../Grandstand/p5")]
+pointsList3 = [NodePath("../Grandstand/p6"), NodePath("../Grandstand/p7"), NodePath("../Grandstand/p8")]
+pointsList4 = [NodePath("../Grandstand/p9"), NodePath("../Grandstand/p10"), NodePath("../Grandstand/p11")]
+pointsList5 = [NodePath("../Grandstand/p12"), NodePath("../Grandstand/p13"), NodePath("../Grandstand/p14")]
+pointsList6 = [NodePath("../Grandstand/p15"), NodePath("../Grandstand/p16"), NodePath("../Grandstand/p17")]
+pointsList7 = [NodePath("../Grandstand/p18"), NodePath("../Grandstand/p19"), NodePath("../Grandstand/p20")]
+pointsList8 = [NodePath("../Grandstand/p21"), NodePath("../Grandstand/p22"), NodePath("../Grandstand/p23")]
+
+[node name="Track" type="Node3D" parent="." index="10"]
+visible = false
+
+[node name="p00" type="MeshInstance3D" parent="Track" index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.536893, 0.148574, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p01" type="MeshInstance3D" parent="Track" index="1"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.337684, -0.522111, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p02" type="MeshInstance3D" parent="Track" index="2"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 0.958241, -1.12349, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p03" type="MeshInstance3D" parent="Track" index="3"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 0.994586, -1.14772, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p04" type="MeshInstance3D" parent="Track" index="4"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 1.26112, -1.34832, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p05" type="MeshInstance3D" parent="Track" index="5"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 1.66091, -1.4203, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p06" type="MeshInstance3D" parent="Track" index="6"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 1.69725, -1.4203, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p07" type="MeshInstance3D" parent="Track" index="7"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 4.64283, -1.4203, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p08" type="MeshInstance3D" parent="Track" index="8"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 7.14206, -3.09286, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p09" type="MeshInstance3D" parent="Track" index="9"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 7.17032, -3.09286, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p10" type="MeshInstance3D" parent="Track" index="10"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 10.0212, -3.09286, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="p11" type="MeshInstance3D" parent="Track" index="11"]
+transform = Transform3D(0.249996, -0.00133081, 0, 0.00133081, 0.249996, 0, 0, 0, 0.25, 12.4144, -3.09286, 0)
+mesh = SubResource("BoxMesh_xhfxv")
+skeleton = NodePath("../..")
+
+[node name="InitPoint1" type="MeshInstance3D" parent="." index="11"]
+transform = Transform3D(-1.09278e-08, 0.094864, 0.231302, 0, 0.231302, -0.094864, -0.25, -4.14664e-09, -1.01105e-08, -0.477232, 0.095827, -7.37469e-10)
+visible = false
+mesh = SubResource("BoxMesh_pybo7")
+
+[node name="Floor" type="MeshInstance3D" parent="." index="12"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 6.71146, -3.78369, 0)
+mesh = SubResource("PlaneMesh_kdsjf")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyimx")
